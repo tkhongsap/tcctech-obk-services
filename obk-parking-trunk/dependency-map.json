@@ -4,7 +4,7 @@
     "path": "obk-parking-trunk",
     "framework": "Express.js",
     "language": "JavaScript/TypeScript",
-    "analyzed_at": "2025-07-22T13:43:51.218Z"
+    "analyzed_at": "2025-07-22T22:19:55.200Z"
   },
   "api_inventory": {
     "endpoints": [
@@ -29,9 +29,245 @@
     }
   },
   "dependencies": {
-    "total": 0,
+    "total": 47,
     "external_apis": [],
-    "packages": []
+    "packages": [
+      {
+        "name": "@openapitools/openapi-generator-cli",
+        "version": "^2.7.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "@prisma/client",
+        "version": "5.4.2",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/axios",
+        "version": "^0.14.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/better-queue",
+        "version": "^3.8.6",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/lodash",
+        "version": "^4.14.200",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/multer",
+        "version": "^1.4.9",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/swagger-ui-express",
+        "version": "^4.1.5",
+        "type": "npm_package"
+      },
+      {
+        "name": "aws-sdk",
+        "version": "^2.1481.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "axios",
+        "version": "^1.6.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "better-queue",
+        "version": "^3.8.12",
+        "type": "npm_package"
+      },
+      {
+        "name": "cors",
+        "version": "^2.8.5",
+        "type": "npm_package"
+      },
+      {
+        "name": "dayjs",
+        "version": "^1.11.10",
+        "type": "npm_package"
+      },
+      {
+        "name": "express",
+        "version": "^4.18.2",
+        "type": "npm_package"
+      },
+      {
+        "name": "jest",
+        "version": "^29.7.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "kafkajs",
+        "version": "^2.2.4",
+        "type": "npm_package"
+      },
+      {
+        "name": "minio",
+        "version": "^8.0.5",
+        "type": "npm_package"
+      },
+      {
+        "name": "multer",
+        "version": "^1.4.5-lts.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "ob-bms-sdk",
+        "version": "0.0.120",
+        "type": "npm_package"
+      },
+      {
+        "name": "ob-iam-sdk",
+        "version": "0.0.30",
+        "type": "npm_package"
+      },
+      {
+        "name": "prisma",
+        "version": "^5.4.2",
+        "type": "npm_package"
+      },
+      {
+        "name": "redis",
+        "version": "^5.1.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "swagger-ui-express",
+        "version": "^5.0.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "tsoa",
+        "version": "^5.1.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "uuid",
+        "version": "^11.1.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "winston",
+        "version": "^3.11.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "yup",
+        "version": "^1.6.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/cors",
+        "version": "^2.8.16",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/express",
+        "version": "^4.17.20",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/jest",
+        "version": "^29.5.6",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/node",
+        "version": "^20.8.7",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/supertest",
+        "version": "^2.0.15",
+        "type": "npm_package"
+      },
+      {
+        "name": "@typescript-eslint/eslint-plugin",
+        "version": "^6.8.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "@typescript-eslint/parser",
+        "version": "^6.8.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "concurrently",
+        "version": "^8.2.2",
+        "type": "npm_package"
+      },
+      {
+        "name": "dotenv",
+        "version": "^16.3.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint",
+        "version": "^8.51.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint-config-prettier",
+        "version": "^9.0.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint-plugin-prettier",
+        "version": "^5.0.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "husky",
+        "version": "^8.0.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "lint-staged",
+        "version": "^15.0.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "nodemon",
+        "version": "^3.0.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "prettier",
+        "version": "^3.0.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "supertest",
+        "version": "^6.3.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "ts-jest",
+        "version": "^29.1.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "ts-node",
+        "version": "^10.9.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "ts-node-dev",
+        "version": "^2.0.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "typescript",
+        "version": "^5.2.2",
+        "type": "npm_package"
+      }
+    ]
   },
-  "generated_at": "2025-07-22T13:43:51.424Z"
+  "generated_at": "2025-07-22T22:20:04.924Z"
 }
