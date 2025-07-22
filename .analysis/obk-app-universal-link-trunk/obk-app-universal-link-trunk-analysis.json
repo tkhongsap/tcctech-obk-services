@@ -4,7 +4,7 @@
     "path": "obk-app-universal-link-trunk",
     "framework": "Next.js",
     "language": "JavaScript/TypeScript",
-    "analyzed_at": "2025-07-22T14:03:42.749Z"
+    "analyzed_at": "2025-07-22T22:25:07.096Z"
   },
   "api": {
     "total_endpoints": 0,
@@ -12,9 +12,85 @@
     "schemas": []
   },
   "dependencies": {
-    "total": 0,
+    "total": 15,
     "external_apis": [],
-    "packages": []
+    "packages": [
+      {
+        "name": "dotenv",
+        "version": "^16.4.5",
+        "type": "npm_package"
+      },
+      {
+        "name": "next",
+        "version": "15.0.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "react",
+        "version": "19.0.0-rc-69d4b800-20241021",
+        "type": "npm_package"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.0.0-rc-69d4b800-20241021",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/node",
+        "version": "^20",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/react",
+        "version": "^18",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/react-dom",
+        "version": "^18",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint",
+        "version": "^8",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint-config-next",
+        "version": "15.0.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "postcss",
+        "version": "^8",
+        "type": "npm_package"
+      },
+      {
+        "name": "prettier",
+        "version": "^3.3.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "sass",
+        "version": "^1.80.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "sass-embedded",
+        "version": "^1.80.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "tailwindcss",
+        "version": "^3.4.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "typescript",
+        "version": "^5",
+        "type": "npm_package"
+      }
+    ]
   },
   "summary": {
     "methods": {},
