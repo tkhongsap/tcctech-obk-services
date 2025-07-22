@@ -342,7 +342,17 @@ class OutputGenerator {
         fs.writeFileSync(jsonPath, outputs.json);
         console.log(`  ✅ Saved: ${jsonPath}`);
         
-        // Also save to output directory
+        // Also save to .analysis directory (primary location)
+        const analysisDir = path.join(process.cwd(), '.analysis', this.serviceName);
+        fs.mkdirSync(analysisDir, { recursive: true });
+        
+        fs.writeFileSync(path.join(analysisDir, 'api-inventory.md'), outputs.markdown);
+        fs.writeFileSync(path.join(analysisDir, 'openapi.yaml'), outputs.openapi);
+        fs.writeFileSync(path.join(analysisDir, 'dependency-map.json'), outputs.json);
+        
+        console.log(`  ✅ Copied to: ${analysisDir}`);
+        
+        // Also save to legacy output directory for backward compatibility
         const outputDir = path.join(process.cwd(), 'output', this.serviceName);
         fs.mkdirSync(outputDir, { recursive: true });
         
@@ -350,7 +360,7 @@ class OutputGenerator {
         fs.writeFileSync(path.join(outputDir, 'openapi.yaml'), outputs.openapi);
         fs.writeFileSync(path.join(outputDir, 'dependency-map.json'), outputs.json);
         
-        console.log(`  ✅ Copied to: ${outputDir}`);
+        console.log(`  ✅ Legacy backup: ${outputDir}`);
     }
 }
 

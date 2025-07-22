@@ -12,7 +12,11 @@
 - `data/dependency-map.json` - Complete service dependency mapping data
 - `dashboard/index.html` - Interactive API explorer dashboard interface
 - `dashboard/assets/dependency-graph.js` - Dependency visualization component
-- `output/` - Directory containing all generated documentation files organized by service
+- `.analysis/` - **Primary analysis directory organized by service**
+  - `.analysis/azure-ocr-trunk/` - Complete analysis results for azure-ocr-trunk service
+  - `.analysis/obk-mtel-bms-trunk/` - Complete analysis results for obk-mtel-bms-trunk service
+  - `.analysis/[service-name]/` - Analysis results for each corresponding service
+- `output/` - **Legacy/backup directory** containing generated documentation files
 
 ### Notes
 
@@ -23,6 +27,7 @@
 - Use structured JSON/YAML for data interchange between analysis components
 - Maintain strict folder processing checklist to ensure all 37+ folders are covered
 - Each folder should have its own api-inventory.md, openapi.yaml, and dependency-map.json files
+- **Analysis Organization**: All analysis results stored in `.analysis/[service-name]/` directory structure for easy future reference
 - Progress tracking is essential: always know which folder is currently being processed and how many remain
 - **READ-ONLY OPERATION**: No code execution, no testing, no service startup - only file reading and analysis
 - All scripts are simple file readers and parsers - no complex execution required
@@ -30,8 +35,8 @@
 ### Processing Protocol (Per @process-api-tasks.mdc Rule)
 
 **For Each Service Processing:**
-1. **Run Analysis**: `node scripts/api-analyzer.js [service-name]`
-2. **Generate Documentation**: `node scripts/output-generator.js output/[service-name]-analysis.json [service-name]`
+1. **Run Analysis**: `node scripts/api-analyzer.js [service-name]` (saves to `.analysis/[service-name]/`)
+2. **Generate Documentation**: `node scripts/output-generator.js .analysis/[service-name]/[service-name]-analysis.json [service-name]`
 3. **Immediate Commit**: `git add . && git commit -m "docs: API analysis for [service-name]" && git push`
 4. **Update Task List**: Mark service as `[x]` with metrics
 5. **Update Progress Counter**: Increment completion count (e.g., 2/37 COMPLETED)
@@ -46,7 +51,11 @@
 **Quality Validation Per Service:**
 - Verify all endpoints discovered and documented
 - Confirm schemas and dependencies extracted
-- Validate generated files exist (api-inventory.md, openapi.yaml, dependency-map.json)
+- Validate generated files exist in `.analysis/[service-name]/` directory:
+  - `[service-name]-analysis.json` (raw analysis data)
+  - `api-inventory.md` (human-readable documentation)
+  - `openapi.yaml` (API specification)
+  - `dependency-map.json` (dependency tracking)
 - Ensure git commit successful before proceeding
 
 ## Tasks
@@ -101,7 +110,7 @@
 ```bash
 # For each service in the checklist below:
 node scripts/api-analyzer.js [service-name]
-node scripts/output-generator.js output/[service-name]-analysis.json [service-name]
+node scripts/output-generator.js .analysis/[service-name]/[service-name]-analysis.json [service-name]
 git add . && git commit -m "docs: API analysis for [service-name]" && git push
 # Update task list: Mark service as [x] with endpoint/schema/dependency counts
 # Update progress counter (e.g., 2/37 COMPLETED)
@@ -117,7 +126,7 @@ git add . && git commit -m "docs: API analysis for [service-name]" && git push
 ### 5.2 Service Processing Checklist - Complete Analysis for Each Service (1/37 Completed)
 
 #### ✅ **COMPLETED SERVICES (1/37):**
-- [x] **azure-ocr-trunk** - FastAPI/Python - 7 endpoints, 2 schemas, 11 dependencies ✓
+- [x] **azure-ocr-trunk** - FastAPI/Python - 7 endpoints, 2 schemas, 11 dependencies ✓ [REVALIDATED]
 
 #### 🚧 **PENDING SERVICES (36/37):**
 

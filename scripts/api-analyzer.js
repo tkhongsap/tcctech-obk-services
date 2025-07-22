@@ -497,10 +497,11 @@ if (require.main === module) {
     
     analyzer.analyze().then(report => {
         if (report) {
-            // Save report
-            const outputPath = path.join(process.cwd(), 'output', `${report.service.name}-analysis.json`);
-            fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-            fs.writeFileSync(outputPath, JSON.stringify(report, null, 2));
+                    // Save report to .analysis directory
+        const analysisDir = path.join(process.cwd(), '.analysis', report.service.name);
+        fs.mkdirSync(analysisDir, { recursive: true });
+        const outputPath = path.join(analysisDir, `${report.service.name}-analysis.json`);
+        fs.writeFileSync(outputPath, JSON.stringify(report, null, 2));
             
             console.log('\n📊 Analysis Summary:');
             console.log(`  Service: ${report.service.name} (${report.service.framework})`);
