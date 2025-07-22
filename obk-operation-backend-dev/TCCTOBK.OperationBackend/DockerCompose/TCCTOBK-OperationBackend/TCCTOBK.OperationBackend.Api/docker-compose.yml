@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  # tcctobk.operationbackend.api:
+  #   container_name: tcctobk.operationbackend.api
+  #   image: ${DOCKER_REGISTRY-}tcctobkoperationbackendapi
+  #   depends_on:
+  #     - tcctobk.operationbackend.database
+  #   build:
+  #     context: ../../..
+  #     dockerfile: TCCTOBK.OperationBackend.Api/Dockerfile
+  #   networks:
+  #     - tcctobk-network
+
+  tcctobk.operationbackend.database:
+    container_name: tcctobk.operationbackend.database
+    image: postgres:16.2
+    environment:
+      POSTGRES_DB: tcctobk_operation_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mW5zEP4vKIa89dy7
+    volumes:
+      - ../../../.containers/tcctobk_operation_db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - tcctobk-network
+
+networks:
+  tcctobk-network:
+    driver: bridge

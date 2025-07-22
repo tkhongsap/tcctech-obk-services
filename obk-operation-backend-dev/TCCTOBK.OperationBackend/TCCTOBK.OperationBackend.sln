@@ -1,0 +1,97 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCCTOBK.OperationBackend.Api", "TCCTOBK.OperationBackend.Api\TCCTOBK.OperationBackend.Api.csproj", "{03461809-14FC-4039-9C84-6F2CE40348F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCCTOBK.OperationBackend.Application", "TCCTOBK.OperationBackend.Application\TCCTOBK.OperationBackend.Application.csproj", "{53F8B8EA-909B-453E-A4B0-D1E8F7640165}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCCTOBK.OperationBackend.Domain", "TCCTOBK.OperationBackend.Domain\TCCTOBK.OperationBackend.Domain.csproj", "{44C7C52A-40F9-4364-A8C4-83046F046DDC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCCTOBK.OperationBackend.Infrastructure", "TCCTOBK.OperationBackend.Infrastructure\TCCTOBK.OperationBackend.Infrastructure.csproj", "{D0035111-39D4-499F-8A22-C547D7699F90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Docker compose", "02.Docker compose", "{4B88B7A9-8F47-4825-9657-2107FC0C003C}"
+	ProjectSection(SolutionItems) = preProject
+		..\Makefile = ..\Makefile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{04930E6B-98C5-4E69-941C-A609CDCD2497}"
+	ProjectSection(SolutionItems) = preProject
+		DockerCompose\Testing\docker-compose.yml = DockerCompose\Testing\docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCCTOBK.OperationBackend.Testing", "TCCTOBK.OperationBackend.Testing\TCCTOBK.OperationBackend.Testing.csproj", "{8FC647EC-56FE-4090-B06E-A7DA29B86A5F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TCCTOBK-OperationBackend", "TCCTOBK-OperationBackend", "{A474BFF5-2FFA-4BFA-8DEC-32F37EF3ED1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Solution Items", "00.Solution Items", "{C2EE1F1D-DB7C-45CF-AAC0-6A53FB0AEF7D}"
+	ProjectSection(SolutionItems) = preProject
+		..\.dockerignore = ..\.dockerignore
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TCCTOBK.OperationBackend.Api", "TCCTOBK.OperationBackend.Api", "{104EF7DF-3379-499D-9F3B-F32EC24971BB}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "DockerCompose\TCCTOBK-OperationBackend\TCCTOBK.OperationBackend.Api\docker-compose.dcproj", "{FF08E905-7BC5-4EED-9D2B-A3B9307B4192}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Pipeline", "01.Pipeline", "{707E6AC9-DA0C-4012-9FC4-86C8AB3CAF35}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitlab-ci.yml = ..\.gitlab-ci.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{6250D91B-7F9B-4C11-8883-372E03D75DD2}"
+	ProjectSection(SolutionItems) = preProject
+		DockerCompose\Production\docker-compose.yml = DockerCompose\Production\docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Staging", "Staging", "{05CA1AEF-E845-4E74-941B-05FA2E0B0693}"
+	ProjectSection(SolutionItems) = preProject
+		DockerCompose\Staging\docker-compose.yml = DockerCompose\Staging\docker-compose.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03461809-14FC-4039-9C84-6F2CE40348F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03461809-14FC-4039-9C84-6F2CE40348F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03461809-14FC-4039-9C84-6F2CE40348F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03461809-14FC-4039-9C84-6F2CE40348F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53F8B8EA-909B-453E-A4B0-D1E8F7640165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F8B8EA-909B-453E-A4B0-D1E8F7640165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F8B8EA-909B-453E-A4B0-D1E8F7640165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F8B8EA-909B-453E-A4B0-D1E8F7640165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44C7C52A-40F9-4364-A8C4-83046F046DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44C7C52A-40F9-4364-A8C4-83046F046DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44C7C52A-40F9-4364-A8C4-83046F046DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44C7C52A-40F9-4364-A8C4-83046F046DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0035111-39D4-499F-8A22-C547D7699F90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0035111-39D4-499F-8A22-C547D7699F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0035111-39D4-499F-8A22-C547D7699F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0035111-39D4-499F-8A22-C547D7699F90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FC647EC-56FE-4090-B06E-A7DA29B86A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC647EC-56FE-4090-B06E-A7DA29B86A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC647EC-56FE-4090-B06E-A7DA29B86A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC647EC-56FE-4090-B06E-A7DA29B86A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF08E905-7BC5-4EED-9D2B-A3B9307B4192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF08E905-7BC5-4EED-9D2B-A3B9307B4192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF08E905-7BC5-4EED-9D2B-A3B9307B4192}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{04930E6B-98C5-4E69-941C-A609CDCD2497} = {4B88B7A9-8F47-4825-9657-2107FC0C003C}
+		{A474BFF5-2FFA-4BFA-8DEC-32F37EF3ED1D} = {4B88B7A9-8F47-4825-9657-2107FC0C003C}
+		{104EF7DF-3379-499D-9F3B-F32EC24971BB} = {A474BFF5-2FFA-4BFA-8DEC-32F37EF3ED1D}
+		{FF08E905-7BC5-4EED-9D2B-A3B9307B4192} = {104EF7DF-3379-499D-9F3B-F32EC24971BB}
+		{6250D91B-7F9B-4C11-8883-372E03D75DD2} = {4B88B7A9-8F47-4825-9657-2107FC0C003C}
+		{05CA1AEF-E845-4E74-941B-05FA2E0B0693} = {4B88B7A9-8F47-4825-9657-2107FC0C003C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1BBDACF-1B68-4A54-A3CA-4785141F3FFA}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+
+  seq:
+    container_name: dev-obkservice-seq
+    image: datalust/seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "580:80"
+      - "5341:5341"
+    restart: always

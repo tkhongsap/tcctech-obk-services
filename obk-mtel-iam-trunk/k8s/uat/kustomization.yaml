@@ -1,0 +1,64 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+- ./ing.yaml
+commonLabels:
+  app: ob-iam
+namePrefix: ob-iam-
+namespace: default
+
+configMapGenerator:
+- literals:
+  - DATABASE_URL=postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@pgcat/ob_iam_uat?connect_timeout=10
+  - REPLICA_DATABASE_URL=postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@pgcat/ob_iam_uat?connect_timeout=10
+  - AWS_REGION=ap-southeast-1
+  - AWS_ACCESS_KEY_ID=AKIAWDAGLFTEC3EVLYNN
+  - AWS_SECRET_ACCESS_KEY=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
+  - EMAIL_SENDER_PROVIDER=SES
+  - EMAIL_SOURCE=sittitep.tosuwan@mtel.co.th
+  - SMS_SENDER_PROVIDER=SNS
+  - SLACK_OAUTH_TOKEN=xoxb-2523263893682-5967783408147-KauLenA2D3yOFnvjRtlYPFPf
+  - OTP_SLACK_CHANNEL_ID=C05UCUQE0LD
+  - JWT_SECRET_KEY=-----BEGIN OPENSSH PRIVATE KEY----- [KEY CONTENTS] -----END OPENSSH
+    PRIVATE KEY-----
+  - OB_EVENT_CONFIG_PATH=event.config.uat.json
+  - ENABLE_DEVICE_STORING=true
+  - OB_BMS_URL=http://uat.glorymtel.xyz/ob-bms
+  - ENABLE_REGISTRATION_WHITELIST=false
+  - TCC_API_URL=https://ec2-18-142-55-130.ap-southeast-1.compute.amazonaws.com
+  - TCC_CLIENT_ID=qAVBaRmQdzK2PMptwXKJlGOKlbYGeMV2
+  - TCC_CLIENT_SECRET=AKiMukKt9kDMXG6XBk1ST68M6L5lmmyd
+  - CACHE_REDIS=true
+  - CACHE_REDIS_URL=redis://obk-uat.gr1rpl.0001.apse1.cache.amazonaws.com:6379
+  - JWT_ISSUER=OneBangkok
+  - LOG_URL=172.22.17.44
+  - LOG_PORT=5170
+  - LOG_PATH=/ob_iam
+  - ENABLE_SHOPPER=false
+  name: configmap
+
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/image
+      value: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-iam/uat:latest
+    - op: replace
+      path: /spec/replicas
+      value: 1
+  target:
+    kind: Deployment
+- patch: |-
+    - op: replace
+      path: /spec/ports/0/port
+      value: 3000
+    - op: replace
+      path: /spec/ports/0/targetPort
+      value: 3000
+  target:
+    kind: Service
+commonAnnotations:
+  deploy-timestamp: "1733065890"
+images:
+- name: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-iam/uat
+  newTag: latest

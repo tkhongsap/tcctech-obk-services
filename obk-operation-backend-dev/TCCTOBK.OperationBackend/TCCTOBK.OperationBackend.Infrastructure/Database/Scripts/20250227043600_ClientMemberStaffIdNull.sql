@@ -1,0 +1,12 @@
+﻿START TRANSACTION;
+
+ALTER TABLE "ClientMember" ALTER COLUMN "StaffId" DROP NOT NULL;
+
+UPDATE "Location" SET "CreatedDate" = TIMESTAMP '2025-02-27T11:35:59.529439', "UpdatedDate" = TIMESTAMP '2025-02-27T11:35:59.529439'
+WHERE "LID" = '2c055101-2271-44e0-95fe-bcf2c59a459a';
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250227043600_ClientMemberStaffIdNull', '8.0.4');
+
+COMMIT;
+

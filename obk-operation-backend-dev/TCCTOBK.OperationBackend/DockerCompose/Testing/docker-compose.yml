@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+
+#  tcct.serviceabstraction.api:
+#    container_name: tcct-serviceabstraction-api
+#    image: 
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=testing
+#      - ASPNETCORE_URLS=http://+:80
+#    ports:
+#      - "8000:80"
+#    networks:
+#      - test-backend
+
+  tcct.serviceabstraction.api:
+    container_name: tcct-serviceabstraction-api
+    image: 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=testing
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "8000:80"
+    networks:
+      - test-backend
+
+
+networks:
+  test-backend:
+    name: test-backend
+    driver: bridge
+
+volumes:
+  seq_data:
+  mssql_data:
+  mssql_log:
+  mssql_backup:

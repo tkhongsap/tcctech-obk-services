@@ -1,0 +1,48 @@
+﻿namespace TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.PPMWO.Command;
+public class PPMWOResult
+{
+	public Result Result { get; set; } = new Result();
+	public int Id { get; set; }
+	public int Status { get; set; }
+	public bool IsCanceled { get; set; }
+	public bool IsCompleted { get; set; }
+	public bool IsCompletedSuccessfully { get; set; }
+	public int CreationOptions { get; set; }
+	public bool IsFaulted { get; set; }
+}
+
+public class Result
+{
+	public int Id { get; set; }
+	public string Name { get; set; } = null!;
+	public int MWOId { get; set; }
+	public int LocationId { get; set; }
+	public int ChecklistId { get; set; }
+	public int ServiceCategoryId { get; set; }
+	public int ServiceProviderId { get; set; }
+	public int ServicingGroupId { get; set; }
+	public ServicingGroup ServicingGroup { get; set; } = new ServicingGroup();
+	public int EstimatedTotalDuration { get; set; }
+	public DateTime TargetStart { get; set; }
+	public DateTime TargetCompletion { get; set; }
+	public int StatusId { get; set; }
+	public string CreatedBy { get; set; } = null!;
+	public DateTime CreatedOn { get; set; }
+	public DateTime ModifiedOn { get; set; }
+	public bool IsActive { get; set; }
+	public bool IsReworkRequested { get; set; }
+	public bool IsTechniciansAssigned { get; set; }
+	public bool IsCancelled { get; set; }
+	public int WorkflowId { get; set; }
+	public bool IsAdhoc { get; set; }
+	public bool IsPrevSupervisorRejected { get; set; }
+	public bool IsPrevTechnicianRejected { get; set; }
+}
+
+public class ServicingGroup
+{
+	public int Id { get; set; }
+	public string Name { get; set; } = null!;
+	public int ServicingGroupTypeId { get; set; }
+	public int LocationId { get; set; }
+}

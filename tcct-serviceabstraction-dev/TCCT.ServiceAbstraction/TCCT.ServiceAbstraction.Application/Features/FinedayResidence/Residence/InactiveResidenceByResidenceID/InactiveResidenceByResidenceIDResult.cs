@@ -1,0 +1,3 @@
+﻿namespace TCCT.ServiceAbstraction.Application.Features.FinedayResidence.Residence.InactiveResidenceByResidenceID;
+public class InactiveResidenceByResidenceIDResult {
+}

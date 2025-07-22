@@ -1,0 +1,87 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCCT.ServiceAbstraction.Api", "TCCT.ServiceAbstraction.Api\TCCT.ServiceAbstraction.Api.csproj", "{096FCC51-9EEE-4115-8793-EBED0F624046}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCCT.ServiceAbstraction.Application", "TCCT.ServiceAbstraction.Application\TCCT.ServiceAbstraction.Application.csproj", "{D4F8F744-4C60-4F64-B033-3D4CAF279465}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCCT.ServiceAbstraction.Domain", "TCCT.ServiceAbstraction.Domain\TCCT.ServiceAbstraction.Domain.csproj", "{5A41C12B-30B7-4EB2-A983-79ED587D9FC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCCT.ServiceAbstraction.Infrastructure", "TCCT.ServiceAbstraction.Infrastructure\TCCT.ServiceAbstraction.Infrastructure.csproj", "{E59EE077-032F-4223-8A26-67C78C20B330}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Docker compose", "02.Docker compose", "{BEBF3C2F-2C08-4E8D-8B02-4DDBDF9FBCA7}"
+	ProjectSection(SolutionItems) = preProject
+		..\Makefile = ..\Makefile
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCCT.ServiceAbstraction.Testing", "TCCT.ServiceAbstraction.Testing\TCCT.ServiceAbstraction.Testing.csproj", "{189D931C-2D3E-434E-A9BD-AB3BD3640610}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Solution Items", "00.Solution Items", "{1DBF1305-3F7C-40F9-B7C9-46E09F9DB351}"
+	ProjectSection(SolutionItems) = preProject
+		..\.dockerignore = ..\.dockerignore
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{727C74B6-24B9-4C43-A0B7-0CA99B88BA6F}"
+	ProjectSection(SolutionItems) = preProject
+		DockerCompose\Production\docker-compose.yml = DockerCompose\Production\docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Pipeline", "01.Pipeline", "{08EEB2D3-E40B-44C4-94C4-EB4E1757D580}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitlab-ci.yml = ..\.gitlab-ci.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Development", "Development", "{A40236EC-1533-4C0F-9CD2-A67F459E335C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Seq", "Seq", "{F69335F8-EF6B-46F5-A35A-C71D4BE0C69B}"
+	ProjectSection(SolutionItems) = preProject
+		DockerCompose\Development\Seq\docker-compose.yml = DockerCompose\Development\Seq\docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Staging", "Staging", "{9E0B1822-753F-4A30-BA3E-C405E905636A}"
+	ProjectSection(SolutionItems) = preProject
+		DockerCompose\Staging\docker-compose.yml = DockerCompose\Staging\docker-compose.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{096FCC51-9EEE-4115-8793-EBED0F624046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{096FCC51-9EEE-4115-8793-EBED0F624046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{096FCC51-9EEE-4115-8793-EBED0F624046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{096FCC51-9EEE-4115-8793-EBED0F624046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F8F744-4C60-4F64-B033-3D4CAF279465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F8F744-4C60-4F64-B033-3D4CAF279465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F8F744-4C60-4F64-B033-3D4CAF279465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F8F744-4C60-4F64-B033-3D4CAF279465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A41C12B-30B7-4EB2-A983-79ED587D9FC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A41C12B-30B7-4EB2-A983-79ED587D9FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A41C12B-30B7-4EB2-A983-79ED587D9FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A41C12B-30B7-4EB2-A983-79ED587D9FC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E59EE077-032F-4223-8A26-67C78C20B330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E59EE077-032F-4223-8A26-67C78C20B330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E59EE077-032F-4223-8A26-67C78C20B330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E59EE077-032F-4223-8A26-67C78C20B330}.Release|Any CPU.Build.0 = Release|Any CPU
+		{189D931C-2D3E-434E-A9BD-AB3BD3640610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{189D931C-2D3E-434E-A9BD-AB3BD3640610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{189D931C-2D3E-434E-A9BD-AB3BD3640610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{189D931C-2D3E-434E-A9BD-AB3BD3640610}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{727C74B6-24B9-4C43-A0B7-0CA99B88BA6F} = {BEBF3C2F-2C08-4E8D-8B02-4DDBDF9FBCA7}
+		{A40236EC-1533-4C0F-9CD2-A67F459E335C} = {BEBF3C2F-2C08-4E8D-8B02-4DDBDF9FBCA7}
+		{F69335F8-EF6B-46F5-A35A-C71D4BE0C69B} = {A40236EC-1533-4C0F-9CD2-A67F459E335C}
+		{9E0B1822-753F-4A30-BA3E-C405E905636A} = {BEBF3C2F-2C08-4E8D-8B02-4DDBDF9FBCA7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2AD31ED5-A0D0-4633-86BC-B68A76166F0B}
+	EndGlobalSection
+EndGlobal

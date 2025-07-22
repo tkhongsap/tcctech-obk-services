@@ -1,0 +1,35 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-iam-cronjob-clear-catch-marcom
+  labels:
+    app: ob-iam-cronjob-clear-catch-marcom
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  schedule: "0 * * * *" # Run at end of hour
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ob-iam-cronjob-clear-catch-marcom
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: bash
+              image: curlimages/curl:7.70.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  TOKEN=$(curl -X POST https://uat-obk-gateway.tccproptech.com/obk/marcom/api/oauth2/token \
+                  -d '{"client_id": "KeCI52KeztKeN7SwPmBtk5C1Tkem5MVo", "client_secret": "FohYitRxV5wGlWBCKyu5RVxW8B5k6gBO", "grant_type": "client_credentials"}' \
+                  -H "Content-Type: application/json" | jq -r '.access_token') &&
+                  curl -X POST https://uat-obk-gateway.tccproptech.com/obk/marcom/api/ClearCache \
+                  -d "{}" \
+                  -H "Content-Type: application/json" \
+                  -H "accept: application/json" \
+                  -H "Authorization: $TOKEN"

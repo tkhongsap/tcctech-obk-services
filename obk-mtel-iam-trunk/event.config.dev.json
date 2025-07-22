@@ -1,0 +1,8 @@
+{
+  "clientId": "ob-iam",
+  "brokers": ["ob-kafka:9092"],
+  "retry": {
+    "retries": 30,
+    "initialRetryTime": 1000
+  }
+}

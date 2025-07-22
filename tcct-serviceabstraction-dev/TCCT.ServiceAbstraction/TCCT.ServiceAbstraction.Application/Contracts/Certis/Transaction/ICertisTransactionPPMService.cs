@@ -1,0 +1,51 @@
+﻿using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.AcknowledgeAssignment;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.AssignSupervisor;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.AssignTechnician;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.CheckListMaps;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.ClientVerify;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.Close;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.Comment.Command;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.Comment.Query;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.Complete;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.ConfirmTaskCompletion;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.DocumentsRelatedById;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.PPMMasterWorkOrder;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.PPMWO.Command;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.PPMWO.Query;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.Rework;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.ServicingObject;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.SupervisorReject;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.Task;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.TechnicianReject;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.Technicians;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.Transactions;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.UpdateTask;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.PPM.PPMUpdate;
+
+namespace TCCT.ServiceAbstraction.Application.Contracts.Certis.Transaction;
+public interface ICertisTransactionPPMService
+{
+	Task<PPMWOResult> PPMWO(int mwoId, int checklistMapId);
+	Task<AcknowledgeAssignmentResult> AcknowledgeAssignment(int woId, Guid ackedBy, string acknowledgementSignature);
+	Task<AssignSupervisorResult> AssignSupervisor(int woId, Guid supervisorId, Guid assignedBy);
+	Task<AssignTechnicianResult> AssignTechnician(int woId, string technicianIds, Guid assignedBy);
+	Task<ClientVerifyResult> ClientVerify(int woId, string clientVerificationComment, string clientVerifiedBy, string clientVerificationSignature, Guid clientVerificationSubmittedBy);
+	Task<CloseResult> CloseResult(int woId, string closureComment, string completionVerifiedBy, string closureSignature, Guid closedBy);
+	Task<CommentResult> Comment(int woId, int commentTypeId, string comment, DateTime commentedOn, Guid commentedBy);
+	Task<CompleteResult> Complete(int woId, string completionComment, string completionSignature, Guid completedBy);
+	Task<ConfirmTaskCompletionResult> ConfirmTaskCompletion(int objectId, Guid confirmedBy);
+	Task<ReworkResult> Rework(int woId, string reasonToRework, Guid reworkRequestedBy);
+	Task<SupervisorRejectResult> SupervisorReject(int woId, Guid rejectedBy);
+	Task<TechnicianRejectResult> TechnicianReject(int woId, Guid rejectedBy, Guid technicianId);
+	Task<UpdateTaskResult> UpdateTask(int id, string taskStatus, string remarks, string reading, Guid updatedBy, DateTime updatedOn, string documentId);
+	Task<List<PPMMasterResult>> Master();
+	Task<List<PPMMasterWorkOrderResult>> MasterWorkOrder();
+	Task<List<CheckListMapsResult>> CheckListMap();
+	Task<List<TechniciansResult>> Technicians(string id);
+	Task<List<CommentsResult>> Comments(string woid);
+	Task<List<TransactionsResult>> Transactions(string woid);
+	Task<List<TaskResult>> GetTask(string workOrderId);
+	Task<List<ServicingObjectResult>> GetServicingObject(string workOrderId);
+	Task<List<PPMDocumentsRelatedByIdResult>> DocumentsRelatedById(string id);
+	Task<List<PPMUpdateResult>> PPMUpdate(string? fromDate, string? toDate, string? countData, string? skipData);
+}

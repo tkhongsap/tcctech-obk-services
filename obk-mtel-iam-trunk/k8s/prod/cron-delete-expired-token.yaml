@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-iam-delete-expired-token
+  labels:
+    app: ob-iam-delete-expired-token
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  schedule: '0 */4 * * *'  # Run every 4 hours
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ob-iam-delete-expired-token
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: delete-expired-token
+              image: postgres:latest
+              imagePullPolicy: IfNotPresent
+              command: ["/bin/sh", "-c"]
+              args:
+                - >
+                  psql postgresql://postgres:yourpassword@obk-uat-ob-iam.c70qsyku4z3y.ap-southeast-1.rds.amazonaws.com/ob_iam_uat
+                  -c "DELETE from token WHERE type='qr' and expired_date < CURRENT_TIMESTAMP and active = false;"

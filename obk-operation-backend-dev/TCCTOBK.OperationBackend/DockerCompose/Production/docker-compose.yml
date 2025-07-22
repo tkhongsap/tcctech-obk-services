@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+
+  tcctobk.operationbackend.api:
+    container_name: prod-tcctobk-operationbackend-api
+    image: registry.lab.tcctech.app/obk/obk-operation-backend/tcctobk.operationbackend.api:production
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - SERILOG_SEQ_ENDPOINT=x
+      - SERILOG_SEQ_APIKEY=x
+      - KONG_CONSUMERKEY=x
+      - KONG_CONSUMERSECRET=x 
+      - MAILSETTINGS_HOST=x
+      - MAILSETTINGS_PORT=0
+      - MAILSETTINGS_DISPLAYNAME=x
+      - MAILSETTINGS_MAIL=x
+      - MAILSETTINGS_USERNAME=x
+      - MAILSETTINGS_PASSWORD=x
+      - CMSDB_HOST=x
+      - CMSDB_PORT=0
+      - CMSDB_USERNAME=x
+      - CMSDB_PASSWORD=x
+      - CMSDB_DATABASE=x
+    ports:
+      - "7002:80"
+    networks:
+      - prod-operationbackend
+    restart: always
+
+networks:
+  prod-operationbackend:
+    name: prod-operationbackend
+    driver: bridge

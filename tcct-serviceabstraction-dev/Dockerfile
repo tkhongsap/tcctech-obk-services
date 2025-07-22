@@ -1,0 +1,17 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+COPY . .
+WORKDIR "/app/TCCT.ServiceAbstraction/TCCT.ServiceAbstraction.Api"
+RUN dotnet publish "TCCT.ServiceAbstraction.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+
+ARG GIT_COMMIT_HASH
+RUN echo "$GIT_COMMIT_HASH" > version.txt
+
+EXPOSE 80
+ENV ASPNETCORE_URLS=http://+:80
+ENV TZ="Asia/Bangkok"
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "TCCT.ServiceAbstraction.Api.dll"]

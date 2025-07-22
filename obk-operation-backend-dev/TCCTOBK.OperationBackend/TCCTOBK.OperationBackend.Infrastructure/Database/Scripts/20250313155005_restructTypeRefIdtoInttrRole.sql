@@ -1,0 +1,15 @@
+﻿START TRANSACTION;
+
+ALTER TABLE "trRole" ALTER COLUMN "RefId" TYPE integer USING 0;
+UPDATE "trRole" SET "RefId" = 0 WHERE "RefId" IS NULL;
+ALTER TABLE "trRole" ALTER COLUMN "RefId" SET NOT NULL;
+ALTER TABLE "trRole" ALTER COLUMN "RefId" SET DEFAULT 0;
+
+-- UPDATE "Location" SET "CreatedDate" = TIMESTAMP '2025-03-13T22:50:04.408411', "UpdatedDate" = TIMESTAMP '2025-03-13T22:50:04.408411'
+-- WHERE "LID" = '2c055101-2271-44e0-95fe-bcf2c59a459a';
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250313155005_restructTypeRefIdtoInttrRole', '8.0.4');
+
+COMMIT;
+

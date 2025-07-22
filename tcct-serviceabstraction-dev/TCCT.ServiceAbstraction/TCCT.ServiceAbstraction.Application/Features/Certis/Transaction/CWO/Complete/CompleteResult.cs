@@ -1,0 +1,113 @@
+﻿using TCCT.ServiceAbstraction.Application.Configuration.Commands;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.Utils;
+
+namespace TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.Complete;
+public class CompleteResult : ICommand<CompleteResult>
+{
+	public Result Result { get; set; } = new Result();
+	public int Id { get; set; }
+	public int Status { get; set; }
+	public bool IsCanceled { get; set; }
+	public bool IsCompleted { get; set; }
+	public bool IsCompletedSuccessfully { get; set; }
+	public int CreationOptions { get; set; }
+	public bool IsFaulted { get; set; }
+}
+
+public class CommentType
+{
+	public int Id { get; set; }
+	public string Name { get; set; } = null!;
+}
+
+public class CwoComment
+{
+	public int Id { get; set; }
+	public int CommentTypeId { get; set; }
+	public CommentType CommentType { get; set; } = new CommentType();
+	public int CwoId { get; set; }
+	public string Comment { get; set; } = null!;
+	public bool IsSynced { get; set; }
+	public string CreatedBy { get; set; } = null!;
+	public DateTime CreatedOn { get; set; }
+}
+
+public class CwoTaskMap
+{
+	public int Id { get; set; }
+	public int CwoId { get; set; }
+	public int TaskId { get; set; }
+	public string TaskStatus { get; set; } = null!;
+	public string Remarks { get; set; } = null!;
+	public string Reading { get; set; } = null!;
+	public int TaskNo { get; set; }
+	public string Description { get; set; } = null!;
+	public int ChecklistId { get; set; }
+	public bool IsMandatory { get; set; }
+	public bool IsAttachmentRequired { get; set; }
+	public bool IsReadingRequired { get; set; }
+	public bool IsRatingRequired { get; set; }
+	public string CreatedBy { get; set; } = null!;
+	public DateTime CreatedOn { get; set; } = new DateTime();
+	public string ModifiedBy { get; set; } = null!;
+	public DateTime ModifiedOn { get; set; } = new DateTime();
+}
+
+public class Result
+{
+	public int Id { get; set; }
+	public string Name { get; set; } = null!;
+	public int CwoTypeId { get; set; }
+	public int ProblemTypeId { get; set; }
+	public int PriorityId { get; set; }
+	public int ServiceCategoryId { get; set; }
+	public int LocationId { get; set; }
+	public string Description { get; set; } = null!;
+	public string CreatedBy { get; set; } = null!;
+	public DateTime CreatedOn { get; set; } = new DateTime();
+	public string ModifiedBy { get; set; } = null!;
+	public DateTime ModifiedOn { get; set; }
+	public int RequesterId { get; set; }
+	public DateTime RequestedOn { get; set; }
+	public bool IsActive { get; set; }
+	public int StatusId { get; set; }
+	public int AssetId { get; set; }
+	public DateTime AckedOn { get; set; }
+	public string AckedBy { get; set; } = null!;
+	public DateTime SlaStartDateTime { get; set; }
+	public DateTime SlatoResolve { get; set; }
+	public DateTime SlatoRespond { get; set; }
+	public int EstimatedTotalDuration { get; set; }
+	public DateTime EstimatedCompletion { get; set; }
+	public string SupervisorId { get; set; } = null!;
+	public DateTime SupervisorAssignedOn { get; set; }
+	public string SupervisorAssignedBy { get; set; } = null!;
+	public string TechnicianId { get; set; } = null!;
+	public DateTime TechnicianAssignedOn { get; set; }
+	public string TechnicianAssignedBy { get; set; } = null!;
+	public string OperatorNote { get; set; } = null!;
+	public DateTime ActualStartDateTime { get; set; }
+	public DateTime ActualCompletionDateTime { get; set; }
+	public string CompletedBy { get; set; } = null!;
+	public bool IsTaskCompletionConfirmed { get; set; }
+	public string TaskCompletionConfirmedBy { get; set; } = null!;
+	public DateTime TaskCompletionConfirmedOn { get; set; }
+	public bool IsCancelled { get; set; }
+	public int ServiceProviderId { get; set; }
+	public string CompletionComment { get; set; } = null!;
+	public int SlaTriggerPoint { get; set; }
+	public bool IsReworkRequested { get; set; }
+	public bool IsPrevSupervisorRejected { get; set; }
+	public bool IsPrevTechnicianRejected { get; set; }
+	public string AcknowledgementVerifiedBy { get; set; } = null!;
+	public string CompletionAckedBy { get; set; } = null!;
+	public bool IsWorkingOffline { get; set; }
+	public bool IsPaused { get; set; }
+	public string AcknowledgementSignature { get; set; } = null!;
+	public string CompletionSignature { get; set; } = null!;
+	public bool IsSynced { get; set; }
+	public int ParentId { get; set; }
+	public List<CwoComment> CwoComments { get; set; } = new List<CwoComment>();
+	public List<CwoTaskMap> CwoTaskMaps { get; set; } = new List<CwoTaskMap>();
+	public List<CwoTransaction> CwoTransactions { get; set; } = new List<CwoTransaction>();
+}

@@ -1,0 +1,55 @@
+﻿using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.AcknowledgeAssignment;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.AssignSupervisor;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.AssignTechnician;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.ClientVerify;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.Close;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.CommentById;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.Complete;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.ConfirmTaskCompletion;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.CWO;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.DocumentsRelatedById;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.Master;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.Pause;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.Resume;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.Rework;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.SupervisorReject;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.SupportiveTeam;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.Task;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.TechnicianReject;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.Transactions;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.UpdateTask;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.WorkOffline;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.WorkOnline;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.CWOUpdate;
+using TCCT.ServiceAbstraction.Application.Features.Certis.Transaction.CWO.CreateCWOExternal;
+
+namespace TCCT.ServiceAbstraction.Application.Contracts.Certis.Transaction;
+public interface ICertisTransactionCWOService
+{
+	Task<AcknowledgeAssignmentResult> AcknowledgeAssignment(int cwoId, Guid ackedBy, string ackVerifiedBy, string acknowledgementSignature, string supportiveTechnicianIds, bool isWorkingOffline, string workOfflineReason, int locationId, string description, int requesterId, int assetId);
+	Task<AssignSupervisorResult> AssignSupervisor(int cwoId, Guid supervisorId, Guid assignedBy, int locationId, string description, int requesterId, int asset);
+	Task<AssignTechnicianResult> AssignTechnician(int cwoId, Guid assignedBy, Guid technicianId, string operatorNote, int locationId, string description, int requesterId, int asset);
+	Task<ClientVerifyResult> ClientVerify(int cwoId, string clientVerificationComment, string clientVerifiedBy, string clientVerificationSignature, Guid clientVerificationSubmittedBy);
+	Task<CloseResult> Close(int cwoId, string closureComment, string completionVerifiedBy, string closureSignature, Guid closedBy);
+	Task<Features.Certis.Transaction.CWO.Comment.Command.CommentResult> Comment(int cwoId, int commentTypeId, string comment, DateTime commentedOn, Guid commentedBy);
+	Task<CompleteResult> Complete(int cwoId, string completionComment, string completionAckedBy, string completionSignature, Guid completedBy, int locationId, string description, int requesterId, int? assetId);
+	Task<ConfirmTaskCompletionResult> ConfirmTaskCompletion(int cwoId, Guid confirmedBy);
+	Task<CWOResult> CWO(DateTime requestedOn, int requesterId, int cwoTypeId, int problemTypeId, int priorityId, int serviceCategoryId, int locationId, Guid createdBy, string description, int assetId);
+	Task<PauseResult> Pause(int cwoId, Guid pausedBy, string reason);
+	Task<ResumeResult> Resume(int cwoId, Guid resumedBy);
+	Task<ReworkResult> Rework(int cwoId, string reasonToRework, Guid reworkRequestedBy);
+	Task<SupervisorRejectResult> SupervisorReject(int cwoId, Guid rejectedBy, int locationId, string description, int requesterId, int assetId);
+	Task<TechnicianRejectResult> TechnicianReject(int cwoId, Guid rejectedBy, Guid technicianId, string operatorNote, int locationId, string description, int requesterId, int assetId);
+	Task<UpdateTaskResult> UpdateTask(int id, string taskStatus, string remark, string reading, Guid updatedBy, DateTime updatedOn);
+	Task<WorkOfflineResult> WorkOffline(int cwoId, Guid workOfflineBy, string reason);
+	Task<WorkOnlineResult> WorkOnline(int cwoId, Guid reactivatedBy);
+	Task<List<TaskResult>> Task(string cwoIdsCsv);
+	Task<List<Features.Certis.Transaction.CWO.Comment.Query.CommentResult>> GetComments(string cwoIdCsv);
+	Task<List<CWOMasterResult>> Master();
+	Task<List<CWOUpdateResult>> CWOUpdate(string? fromDate, string? toDate, string? countData, string? skipData);
+	Task<List<SupportiveTeamResult>> SupportiveTeam(string id);
+	Task<List<TransactionsResult>> Transactions(string id);
+	Task<List<CommentByIdResult>> CommentById(string id);
+	Task<List<DocumentsRelatedByIdResult>> DocumentsRelatedById(string id);
+	Task<CreateCWOExternalResult> CWOExternal(CreateCWOExternalCommand data);
+}

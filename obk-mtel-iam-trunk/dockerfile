@@ -1,0 +1,36 @@
+# Stage 1: Build Stage
+FROM node:20.8.1-alpine3.17
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Accept the NODE_ENV build argument and default it to dev
+ARG NODE_ENV=dev
+ENV NODE_ENV=${NODE_ENV}
+
+# Only copy the package.json and yarn.lock to optimize Docker caching
+COPY package.json yarn.lock ./
+
+# Install dependencies, including dev dependencies
+RUN yarn install --frozen-lockfile --production
+
+# Add TypeScript
+RUN yarn add typescript
+
+# Copy the local code to the container
+COPY . .
+
+# Compile TypeScript to JavaScript
+RUN npx prisma generate
+RUN yarn build
+
+# Stage 2: Production Stage
+RUN mkdir -p ./dist/db && cp -R ./db/client ./dist/db/client
+
+# Set the working directory
+RUN yarn build
+# Expose the application port
+EXPOSE 3000
+
+# Run the application using PM2 in cluster mode
+CMD ["node", "./dist/src/server.js"]

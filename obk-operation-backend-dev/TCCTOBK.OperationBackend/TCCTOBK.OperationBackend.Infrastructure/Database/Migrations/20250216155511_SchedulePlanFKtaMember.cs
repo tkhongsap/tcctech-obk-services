@@ -1,0 +1,161 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace TCCTOBK.OperationBackend.Infrastructure.Database.Migrations
+{
+    /// <inheritdoc />
+    public partial class SchedulePlanFKtaMember : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AddColumn<Guid>(
+                name: "MID",
+                table: "trSchedulePlan",
+                type: "uuid",
+                nullable: true);
+
+            migrationBuilder.UpdateData(
+                table: "Tenant",
+                keyColumn: "TID",
+                keyValue: new Guid("4199e4de-bdf8-48f8-a8a8-a5b31756a748"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 55, 10, 911, DateTimeKind.Local).AddTicks(880), new DateTime(2025, 2, 16, 22, 55, 10, 933, DateTimeKind.Local).AddTicks(3470) });
+
+            migrationBuilder.UpdateData(
+                table: "Tenant",
+                keyColumn: "TID",
+                keyValue: new Guid("caa4ebec-15c8-4d6b-9985-6d6b66f94e63"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 55, 10, 933, DateTimeKind.Local).AddTicks(3810), new DateTime(2025, 2, 16, 22, 55, 10, 933, DateTimeKind.Local).AddTicks(3810) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("18a79217-9fa7-460d-bccc-e74285b07531"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1560), new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1560) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("bd69a88e-d6c1-42a1-8a3a-628843459909"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1580), new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1580) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("c01c5086-cfa5-44ca-89d7-baa2c1accea6"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1570), new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1570) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("d6016437-8b0f-4b0e-8175-5a11ffc480f5"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1570), new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1570) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("f2cf879b-34f3-41da-9445-ee3bc590f224"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1560), new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1560) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("fcddbf6b-88b8-4fae-ade7-63150ce1f1ec"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1530), new DateTime(2025, 2, 16, 22, 55, 10, 940, DateTimeKind.Local).AddTicks(1540) });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_trSchedulePlan_MID",
+                table: "trSchedulePlan",
+                column: "MID");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_trSchedulePlan_taMember_MID",
+                table: "trSchedulePlan",
+                column: "MID",
+                principalTable: "taMember",
+                principalColumn: "MID");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_trSchedulePlan_taMember_MID",
+                table: "trSchedulePlan");
+
+            migrationBuilder.DropIndex(
+                name: "IX_trSchedulePlan_MID",
+                table: "trSchedulePlan");
+
+            migrationBuilder.DropColumn(
+                name: "MID",
+                table: "trSchedulePlan");
+
+            migrationBuilder.UpdateData(
+                table: "Tenant",
+                keyColumn: "TID",
+                keyValue: new Guid("4199e4de-bdf8-48f8-a8a8-a5b31756a748"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 30, 52, 931, DateTimeKind.Local).AddTicks(5470), new DateTime(2025, 2, 16, 22, 30, 52, 943, DateTimeKind.Local).AddTicks(2120) });
+
+            migrationBuilder.UpdateData(
+                table: "Tenant",
+                keyColumn: "TID",
+                keyValue: new Guid("caa4ebec-15c8-4d6b-9985-6d6b66f94e63"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 30, 52, 943, DateTimeKind.Local).AddTicks(2440), new DateTime(2025, 2, 16, 22, 30, 52, 943, DateTimeKind.Local).AddTicks(2440) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("18a79217-9fa7-460d-bccc-e74285b07531"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1590), new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1590) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("bd69a88e-d6c1-42a1-8a3a-628843459909"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1610), new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1610) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("c01c5086-cfa5-44ca-89d7-baa2c1accea6"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1600), new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1610) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("d6016437-8b0f-4b0e-8175-5a11ffc480f5"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1600), new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1600) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("f2cf879b-34f3-41da-9445-ee3bc590f224"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1590), new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1590) });
+
+            migrationBuilder.UpdateData(
+                table: "trRole",
+                keyColumn: "RID",
+                keyValue: new Guid("fcddbf6b-88b8-4fae-ade7-63150ce1f1ec"),
+                columns: new[] { "CreatedDate", "UpdatedDate" },
+                values: new object[] { new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1570), new DateTime(2025, 2, 16, 22, 30, 52, 949, DateTimeKind.Local).AddTicks(1580) });
+        }
+    }
+}

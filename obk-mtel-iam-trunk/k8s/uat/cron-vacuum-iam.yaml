@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-iam-vacuum
+  labels:
+    app: ob-iam-vacuum
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  schedule: '0 1 * * *' # Run daily at 1 AM
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ob-iam-vacuum
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: vacuum-iam
+              image: postgres:latest
+              imagePullPolicy: IfNotPresent
+              command: ["/bin/sh", "-c"]
+              args:
+                - >
+                  psql postgresql://postgres:yourpassword@obk-uat-ob-iam.c70qsyku4z3y.ap-southeast-1.rds.amazonaws.com/ob_iam_uat
+                  -c "VACUUM;"

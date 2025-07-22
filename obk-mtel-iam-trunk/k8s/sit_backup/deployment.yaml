@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ob-iam
+spec:
+  selector:
+    matchLabels:
+      name: ob-iam
+  template:
+    metadata:
+      labels:
+        name: ob-iam
+    spec:
+      containers:
+        - name: ob-iam
+          image: 418772626632.dkr.ecr.ap-southeast-1.amazonaws.com/one-bangkok-sit:ob-iam_latest
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+          env:
+            - name: DATABASE_URL
+              value: postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@ob-iam-sit.caktmhpgapyr.ap-southeast-1.rds.amazonaws.com/ob_iam_development
+            - name: AWS_REGION
+              value: ap-southeast-1
+            - name: AWS_ACCESS_KEY_ID
+              value: AKIAWDAGLFTEC3EVLYNN
+            - name: AWS_SECRET_ACCESS_KEY
+              value: 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
+            - name: EMAIL_SENDER_PROVIDER
+              value: MOCK
+            - name: EMAIL_SOURCE
+              value: sittitep.tosuwan@mtel.co.th
+            - name: SMS_SENDER_PROVIDER
+              value: MOCK
+            - name: SLACK_OAUTH_TOKEN
+              value: xoxb-2523263893682-5967783408147-KauLenA2D3yOFnvjRtlYPFPf
+            - name: OTP_SLACK_CHANNEL_ID
+              value: C05UCUQE0LD
+            - name: JWT_SECRET_KEY
+              value: '-----BEGIN OPENSSH PRIVATE KEY----- b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW QyNTUxOQAAACDrkLDew441tWN/byoGGnBXXYZ6+8lWhO3Z2+9D/BK8lAAAAKD4p+dF+Kfn RQAAAAtzc2gtZWQyNTUxOQAAACDrkLDew441tWN/byoGGnBXXYZ6+8lWhO3Z2+9D/BK8lA AAAEC6Cjjwi3vzArlO0C2HkQR9KyLBM1MCBxwGGRyPAtKuo+uQsN7DjjW1Y39vKgYacFdd hnr7yVaE7dnb70P8EryUAAAAF3BhbmlzYXJhLnNvckBtdGVsLmNvLnRoAQIDBAUG -----END OPENSSH PRIVATE KEY-----'
+            - name: OB_EVENT_CONFIG_PATH
+              value: event.config.sit.json
+            - name: ENABLE_DEVICE_STORING
+              value: 'true'
+            - name: OB_BMS_URL
+              value: https://dev.glorymtel.xyz/ob-bms
+            - name: ENABLE_REGISTRATION_WHITELIST
+              value: 'false'
+            - name: REGISTRATION_WHITELIST_EMAIL_DOMAIN
+              value: ''
+            - name: REGISTRATION_WHITELIST_EMAIL
+              value: ''
+            - name: REGISTRATION_WHITELIST_PHONE_NUMBER
+              value: ''
+            - name: TCC_API_URL
+              value: https://ec2-18-142-55-130.ap-southeast-1.compute.amazonaws.com
+            - name: TCC_CLIENT_ID
+              value: qAVBaRmQdzK2PMptwXKJlGOKlbYGeMV2
+            - name: TCC_CLIENT_SECRET
+              value: AKiMukKt9kDMXG6XBk1ST68M6L5lmmyd
+            - name: CACHE_REDIS
+              value: false
+            - name: CACHE_REDIS_URL
+              value: redis://localhost:6379

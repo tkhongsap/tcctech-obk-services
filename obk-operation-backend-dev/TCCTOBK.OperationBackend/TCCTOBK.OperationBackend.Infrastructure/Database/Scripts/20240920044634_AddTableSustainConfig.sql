@@ -1,0 +1,150 @@
+﻿START TRANSACTION;
+
+CREATE TABLE "trSustainabilityConfig" (
+    "Id" uuid NOT NULL,
+    "Type" integer NOT NULL,
+    "ValueInt" integer,
+    "ValueString" character varying,
+    "CreatedBy" character varying NOT NULL,
+    "CreatedByName" character varying NOT NULL,
+    "CreatedDate" timestamp without time zone NOT NULL,
+    "UpdatedBy" character varying NOT NULL,
+    "UpdatedByName" character varying NOT NULL,
+    "UpdatedDate" timestamp without time zone NOT NULL,
+    CONSTRAINT "PK_trSustainabilityConfig" PRIMARY KEY ("Id")
+);
+
+UPDATE "Location" SET "CreatedDate" = TIMESTAMP '2024-09-20T11:46:33.692193', "UpdatedDate" = TIMESTAMP '2024-09-20T11:46:33.692193'
+WHERE "LID" = '2c055101-2271-44e0-95fe-bcf2c59a459a';
+
+UPDATE "Tenant" SET "CreatedDate" = TIMESTAMP '2024-09-20T11:46:33.687285', "UpdatedDate" = TIMESTAMP '2024-09-20T11:46:33.687759'
+WHERE "TID" = '4199e4de-bdf8-48f8-a8a8-a5b31756a748';
+
+UPDATE "Tenant" SET "CreatedDate" = TIMESTAMP '2024-09-20T11:46:33.687797', "UpdatedDate" = TIMESTAMP '2024-09-20T11:46:33.687797'
+WHERE "TID" = 'caa4ebec-15c8-4d6b-9985-6d6b66f94e63';
+
+UPDATE "mtActionType" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691594', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691601'
+WHERE "Id" = 'e8eb7171-de01-4a85-a955-711b211eecc2';
+
+UPDATE "mtActionType" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691604', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691604'
+WHERE "Id" = 'e8eb7171-de01-4a85-a955-711b211eecc3';
+
+UPDATE "mtActionType" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691604', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691604'
+WHERE "Id" = 'e8eb7171-de01-4a85-a955-711b211eecc4';
+
+UPDATE "mtActionType" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691605', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691605'
+WHERE "Id" = 'e8eb7171-de01-4a85-a955-711b211eecc5';
+
+UPDATE "mtShiftManPowerRequest" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.693551', "StartDateTime" = TIMESTAMP '2024-08-20T11:46:33.693533', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.693551'
+WHERE "Id" = 1;
+
+UPDATE "mtShiftManPowerRequest" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.693552', "StartDateTime" = TIMESTAMP '2024-08-20T11:46:33.693552', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.693552'
+WHERE "Id" = 2;
+
+UPDATE "mtShiftManPowerRequest" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.693553', "StartDateTime" = TIMESTAMP '2024-08-20T11:46:33.693553', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.693553'
+WHERE "Id" = 3;
+
+UPDATE "mtShiftManPowerRequest" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.693553', "StartDateTime" = TIMESTAMP '2024-08-20T11:46:33.693553', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.693553'
+WHERE "Id" = 4;
+
+UPDATE "trAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691716', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691717'
+WHERE "Id" = '2aa84ed4-a495-47c8-913f-fa5928c1b4b8';
+
+UPDATE "trAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691719', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691719'
+WHERE "Id" = '3ff4f468-53ef-48a3-8781-61a8a053fa99';
+
+UPDATE "trAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691719', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691719'
+WHERE "Id" = '564d0272-92c8-4108-82b2-0f98882058d4';
+
+UPDATE "trAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.69172', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.69172'
+WHERE "Id" = '6d174fd6-b597-4b16-a117-08b7a84be839';
+
+UPDATE "trAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.69172', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.69172'
+WHERE "Id" = 'c1cb273c-570a-42f5-b563-66bac08911cc';
+
+UPDATE "trAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691722', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691722'
+WHERE "Id" = 'c1cb273c-570a-42f5-b563-66bac08911cd';
+
+UPDATE "trAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691721', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691721'
+WHERE "Id" = 'e8eb7171-de01-4a85-a955-711b211eecc1';
+
+UPDATE "trRole" SET "CreatedDate" = TIMESTAMP '2024-09-20T11:46:33.694122', "UpdatedDate" = TIMESTAMP '2024-09-20T11:46:33.694123'
+WHERE "RID" = '18a79217-9fa7-460d-bccc-e74285b07531';
+
+UPDATE "trRole" SET "CreatedDate" = TIMESTAMP '2024-09-20T11:46:33.694123', "UpdatedDate" = TIMESTAMP '2024-09-20T11:46:33.694123'
+WHERE "RID" = 'f2cf879b-34f3-41da-9445-ee3bc590f224';
+
+UPDATE "trRole" SET "CreatedDate" = TIMESTAMP '2024-09-20T11:46:33.694122', "UpdatedDate" = TIMESTAMP '2024-09-20T11:46:33.694122'
+WHERE "RID" = 'fcddbf6b-88b8-4fae-ade7-63150ce1f1ec';
+
+UPDATE "trSubtask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691831', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691832'
+WHERE "Id" = '1a157bf0-4748-4589-91cc-1450e0c06596';
+
+UPDATE "trSubtask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691833', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691833'
+WHERE "Id" = '35d4cfa7-04ea-473a-9b50-c9751843ead5';
+
+UPDATE "trSubtask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691832', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691832'
+WHERE "Id" = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+
+UPDATE "trSubtask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691827', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691828'
+WHERE "Id" = '77e2f48c-8178-4df5-9b84-48bfd253a496';
+
+UPDATE "trSubtask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691831', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691831'
+WHERE "Id" = 'eaab304c-89e1-484c-aefe-0e4e3e27e911';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.692057', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.692057'
+WHERE "Action" = '3ff4f468-53ef-48a3-8781-61a8a053fa99' AND "Subtask" = '1a157bf0-4748-4589-91cc-1450e0c06596';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.692059', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.692059'
+WHERE "Action" = '564d0272-92c8-4108-82b2-0f98882058d4' AND "Subtask" = '1a157bf0-4748-4589-91cc-1450e0c06596';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.692059', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.692059'
+WHERE "Action" = '6d174fd6-b597-4b16-a117-08b7a84be839' AND "Subtask" = '1a157bf0-4748-4589-91cc-1450e0c06596';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.69206', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.69206'
+WHERE "Action" = '564d0272-92c8-4108-82b2-0f98882058d4' AND "Subtask" = '35d4cfa7-04ea-473a-9b50-c9751843ead5';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.69206', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.69206'
+WHERE "Action" = '6d174fd6-b597-4b16-a117-08b7a84be839' AND "Subtask" = '35d4cfa7-04ea-473a-9b50-c9751843ead5';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.692062', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.692062'
+WHERE "Action" = 'e8eb7171-de01-4a85-a955-711b211eecc1' AND "Subtask" = '35d4cfa7-04ea-473a-9b50-c9751843ead5';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.692064', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.692064'
+WHERE "Action" = 'c1cb273c-570a-42f5-b563-66bac08911cc' AND "Subtask" = '77e2f48c-8178-4df5-9b84-48bfd253a496';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.692065', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.692065'
+WHERE "Action" = 'c1cb273c-570a-42f5-b563-66bac08911cd' AND "Subtask" = '77e2f48c-8178-4df5-9b84-48bfd253a496';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.692062', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.692063'
+WHERE "Action" = '2aa84ed4-a495-47c8-913f-fa5928c1b4b8' AND "Subtask" = 'eaab304c-89e1-484c-aefe-0e4e3e27e911';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.692063', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.692063'
+WHERE "Action" = '564d0272-92c8-4108-82b2-0f98882058d4' AND "Subtask" = 'eaab304c-89e1-484c-aefe-0e4e3e27e911';
+
+UPDATE "trSubtaskAction" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.692064', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.692064'
+WHERE "Action" = '6d174fd6-b597-4b16-a117-08b7a84be839' AND "Subtask" = 'eaab304c-89e1-484c-aefe-0e4e3e27e911';
+
+UPDATE "trTask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691935', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691935'
+WHERE "Id" = '2c055101-2271-44e0-95fe-bcf2c59a459b';
+
+UPDATE "trTask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691937', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691937'
+WHERE "Id" = '4422cc3c-0ea5-4d73-a31e-a42485a81003';
+
+UPDATE "trTaskSubtask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691986', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.691986'
+WHERE "Subtask" = '1a157bf0-4748-4589-91cc-1450e0c06596' AND "Task" = '2c055101-2271-44e0-95fe-bcf2c59a459b';
+
+UPDATE "trTaskSubtask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.691987', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.69199'
+WHERE "Subtask" = '35d4cfa7-04ea-473a-9b50-c9751843ead5' AND "Task" = '2c055101-2271-44e0-95fe-bcf2c59a459b';
+
+UPDATE "trTaskSubtask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.69199', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.69199'
+WHERE "Subtask" = 'eaab304c-89e1-484c-aefe-0e4e3e27e911' AND "Task" = '2c055101-2271-44e0-95fe-bcf2c59a459b';
+
+UPDATE "trTaskSubtask" SET "CreatedDate" = TIMESTAMP '2024-08-20T11:46:33.69199', "UpdatedDate" = TIMESTAMP '2024-08-20T11:46:33.69199'
+WHERE "Subtask" = '77e2f48c-8178-4df5-9b84-48bfd253a496' AND "Task" = '4422cc3c-0ea5-4d73-a31e-a42485a81003';
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20240920044634_AddTableSustainConfig', '8.0.1');
+
+COMMIT;
+

@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Database\Models\**" />
+    <EmbeddedResource Remove="Database\Models\**" />
+    <None Remove="Database\Models\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="CarparkPayment\Resources\obk-logo.png" />
+    <None Remove="CarparkPayment\Resources\OneBangkok-Bold.ttf" />
+    <None Remove="CarparkPayment\Resources\OneBangkok-BoldItalic.ttf" />
+    <None Remove="CarparkPayment\Resources\OneBangkok-Italic.ttf" />
+    <None Remove="CarparkPayment\Resources\OneBangkok-Light.ttf" />
+    <None Remove="CarparkPayment\Resources\OneBangkok-LightItalic.ttf" />
+    <None Remove="CarparkPayment\Resources\OneBangkok-Medium.ttf" />
+    <None Remove="CarparkPayment\Resources\OneBangkok-MediumItalic.ttf" />
+    <None Remove="CarparkPayment\Resources\OneBangkok-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CarparkPayment\Resources\obk-logo.png" />
+    <EmbeddedResource Include="CarparkPayment\Resources\OneBangkok-Bold.ttf" />
+    <EmbeddedResource Include="CarparkPayment\Resources\OneBangkok-BoldItalic.ttf" />
+    <EmbeddedResource Include="CarparkPayment\Resources\OneBangkok-Italic.ttf" />
+    <EmbeddedResource Include="CarparkPayment\Resources\OneBangkok-Light.ttf" />
+    <EmbeddedResource Include="CarparkPayment\Resources\OneBangkok-LightItalic.ttf" />
+    <EmbeddedResource Include="CarparkPayment\Resources\OneBangkok-Medium.ttf" />
+    <EmbeddedResource Include="CarparkPayment\Resources\OneBangkok-MediumItalic.ttf" />
+    <EmbeddedResource Include="CarparkPayment\Resources\OneBangkok-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+	<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+	<PackageReference Include="SkiaSharp" Version="2.88.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TCCT.ServiceAbstraction.Application\TCCT.ServiceAbstraction.Application.csproj" />
+    <ProjectReference Include="..\TCCT.ServiceAbstraction.Domain\TCCT.ServiceAbstraction.Domain.csproj" />
+  </ItemGroup>
+</Project>

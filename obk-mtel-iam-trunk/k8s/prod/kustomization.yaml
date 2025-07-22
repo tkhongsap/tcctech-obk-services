@@ -1,0 +1,61 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+  - ./ing.yaml
+commonLabels:
+  app: ob-iam
+namePrefix: ob-iam-
+namespace: default
+configMapGenerator:
+  - literals:
+      - DATABASE_URL=postgresql://obkDbAdmin:Z3YSa0bl92299byCkJiQGClsh9zL@pgcat/ob_iam_prod?connection_limit=3200&connect_timeout=10
+      - REPLICA_DATABASE_URL=postgresql://obkDbAdmin:Z3YSa0bl92299byCkJiQGClsh9zL@pgcat/ob_iam_prod?connection_limit=3200&connect_timeout=10
+      - ENABLE_MAGIC_OTP='false'
+      - AWS_REGION=ap-southeast-1
+      - AWS_ACCESS_KEY_ID=AKIA2UC3CDGQONFWRE4F
+      - AWS_SECRET_ACCESS_KEY=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
+      - EMAIL_SENDER_PROVIDER=SES
+      - EMAIL_SOURCE=no-reply@onebangkok.com
+      - SMS_SENDER_PROVIDER=SNS
+      - JWT_SECRET_KEY='-----BEGIN OPENSSH PRIVATE KEY----- [KEY CONTENTS] -----END OPENSSH
+        PRIVATE KEY-----'
+      - OB_EVENT_CONFIG_PATH=event.config.prod.json
+      - ENABLE_DEVICE_STORING='true'
+      - OB_BMS_URL='https://obk-prod.tccproptech.com/ob-bms'
+      - ENABLE_REGISTRATION_WHITELIST='false'
+      - TCC_API_URL='https://obkservice.tccproptech.com'
+      - TCC_CLIENT_ID=kZGAdPU2lDLju135AEcz9u9GbP6w92O3
+      - TCC_CLIENT_SECRET=SO5w0AJgRJQyoz4q6Y8aqsy42BHwNV0V
+      - CACHE_REDIS='true'
+      - CACHE_REDIS_URL=redis://obk-prod.gr1rpl.0001.apse1.cache.amazonaws.com:6379
+      - LOG_URL=172.25.16.46
+      - LOG_PORT=5170
+      - LOG_PATH=/ob_iam
+      - JWT_ISSUER=OneBangkok
+      - ENABLE_SHOPPER=false
+    name: configmap
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-iam/production:latest
+      - op: replace
+        path: /spec/replicas
+        value: 5
+    target:
+      kind: Deployment
+  - patch: |-
+      - op: replace
+        path: /spec/ports/0/port
+        value: 3000
+      - op: replace
+        path: /spec/ports/0/targetPort
+        value: 3000
+    target:
+      kind: Service
+commonAnnotations:
+  deploy-timestamp: '1726604169'
+images:
+  - name: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-iam/production
+    newTag: latest
