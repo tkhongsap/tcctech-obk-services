@@ -14,7 +14,143 @@
       "description": "Development server"
     }
   ],
-  "paths": {},
+  "paths": {
+    "/get-object/{...slug}": {
+      "get": {
+        "summary": "GET /get-object/{...slug}",
+        "description": "GET /get-object/{...slug}",
+        "operationId": "get_get-object_{...slug}",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "POST /get-object/{...slug}",
+        "description": "POST /get-object/{...slug}",
+        "operationId": "post_get-object_{...slug}",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get-object-preview/{...slug}": {
+      "get": {
+        "summary": "GET /get-object-preview/{...slug}",
+        "description": "GET /get-object-preview/{...slug}",
+        "operationId": "get_get-object-preview_{...slug}",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "POST /get-object-preview/{...slug}",
+        "description": "POST /get-object-preview/{...slug}",
+        "operationId": "post_get-object-preview_{...slug}",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/upload/": {
+      "get": {
+        "summary": "GET /upload/",
+        "description": "GET /upload/",
+        "operationId": "get_upload_",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "POST /upload/",
+        "description": "POST /upload/",
+        "operationId": "post_upload_",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "components": {
     "schemas": {}
   }

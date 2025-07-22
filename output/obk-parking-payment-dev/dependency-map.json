@@ -4,7 +4,7 @@
     "path": "obk-parking-payment-dev",
     "framework": "Next.js",
     "language": "JavaScript/TypeScript",
-    "analyzed_at": "2025-07-22T14:03:49.715Z"
+    "analyzed_at": "2025-07-22T22:25:34.064Z"
   },
   "api_inventory": {
     "endpoints": [],
@@ -16,9 +16,85 @@
     }
   },
   "dependencies": {
-    "total": 0,
+    "total": 15,
     "external_apis": [],
-    "packages": []
+    "packages": [
+      {
+        "name": "date-fns",
+        "version": "^3.6.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "firebase",
+        "version": "^11.2.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "next",
+        "version": "^14.2.5",
+        "type": "npm_package"
+      },
+      {
+        "name": "react",
+        "version": "^18",
+        "type": "npm_package"
+      },
+      {
+        "name": "react-dom",
+        "version": "^18",
+        "type": "npm_package"
+      },
+      {
+        "name": "react-timer-hook",
+        "version": "^3.0.7",
+        "type": "npm_package"
+      },
+      {
+        "name": "swr",
+        "version": "^2.2.5",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/node",
+        "version": "^20",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/react",
+        "version": "^18",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/react-dom",
+        "version": "^18",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint",
+        "version": "^8",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint-config-next",
+        "version": "14.2.4",
+        "type": "npm_package"
+      },
+      {
+        "name": "postcss",
+        "version": "^8",
+        "type": "npm_package"
+      },
+      {
+        "name": "tailwindcss",
+        "version": "^3.4.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "typescript",
+        "version": "^5",
+        "type": "npm_package"
+      }
+    ]
   },
-  "generated_at": "2025-07-22T14:03:50.027Z"
+  "generated_at": "2025-07-22T22:27:06.449Z"
 }

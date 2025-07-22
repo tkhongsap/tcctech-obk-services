@@ -2,9 +2,9 @@
   "service": {
     "name": "obk-art-culture-api-trunk",
     "path": "obk-art-culture-api-trunk",
-    "framework": "unknown",
-    "language": "unknown",
-    "analyzed_at": "2025-07-22T14:04:52.560Z"
+    "framework": "Fiber",
+    "language": "Go",
+    "analyzed_at": "2025-07-22T22:27:18.759Z"
   },
   "api": {
     "total_endpoints": 0,
@@ -12,9 +12,230 @@
     "schemas": []
   },
   "dependencies": {
-    "total": 0,
+    "total": 44,
     "external_apis": [],
-    "packages": []
+    "packages": [
+      {
+        "name": "module",
+        "version": "example.com/art-culture-api",
+        "type": "go_module"
+      },
+      {
+        "name": "go",
+        "version": "1.21",
+        "type": "go_module"
+      },
+      {
+        "name": "toolchain",
+        "version": "go1.22.5",
+        "type": "go_module"
+      },
+      {
+        "name": "require",
+        "version": "(",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/expr-lang/expr",
+        "version": "v1.16.9",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/go-redis/redis/v8",
+        "version": "v8.11.5",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/gofiber/fiber/v2",
+        "version": "v2.52.5",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/golang-jwt/jwt/v5",
+        "version": "v5.2.1",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/google/uuid",
+        "version": "v1.6.0",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/joho/godotenv",
+        "version": "v1.5.1",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/jonboulle/clockwork",
+        "version": "v0.4.0",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/sqids/sqids-go",
+        "version": "v0.4.1",
+        "type": "go_module"
+      },
+      {
+        "name": "gorm.io/driver/postgres",
+        "version": "v1.5.9",
+        "type": "go_module"
+      },
+      {
+        "name": "gorm.io/gorm",
+        "version": "v1.25.12",
+        "type": "go_module"
+      },
+      {
+        "name": ")",
+        "version": "require",
+        "type": "go_module"
+      },
+      {
+        "name": "filippo.io/edwards25519",
+        "version": "v1.1.0",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/andybalholm/brotli",
+        "version": "v1.1.0",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/cespare/xxhash/v2",
+        "version": "v2.1.2",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/davecgh/go-spew",
+        "version": "v1.1.1",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/dgryski/go-rendezvous",
+        "version": "v0.0.0-20200823014737-9f7001d12a5f",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/go-redis/redismock/v8",
+        "version": "v8.11.5",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/jackc/pgpassfile",
+        "version": "v1.0.0",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/jackc/pgservicefile",
+        "version": "v0.0.0-20240606120523-5a60cdf6a761",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/jackc/pgx/v5",
+        "version": "v5.7.1",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/jackc/puddle/v2",
+        "version": "v2.2.2",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/jinzhu/inflection",
+        "version": "v1.0.0",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/jinzhu/now",
+        "version": "v1.1.5",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/klauspost/compress",
+        "version": "v1.17.9",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/mattn/go-colorable",
+        "version": "v0.1.13",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/mattn/go-isatty",
+        "version": "v0.0.20",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/mattn/go-runewidth",
+        "version": "v0.0.15",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/pmezard/go-difflib",
+        "version": "v1.0.0",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/rivo/uniseg",
+        "version": "v0.4.7",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/stretchr/objx",
+        "version": "v0.5.2",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/stretchr/testify",
+        "version": "v1.9.0",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/valyala/bytebufferpool",
+        "version": "v1.0.0",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/valyala/fasthttp",
+        "version": "v1.55.0",
+        "type": "go_module"
+      },
+      {
+        "name": "github.com/valyala/tcplisten",
+        "version": "v1.0.0",
+        "type": "go_module"
+      },
+      {
+        "name": "golang.org/x/crypto",
+        "version": "v0.27.0",
+        "type": "go_module"
+      },
+      {
+        "name": "golang.org/x/sync",
+        "version": "v0.8.0",
+        "type": "go_module"
+      },
+      {
+        "name": "golang.org/x/sys",
+        "version": "v0.25.0",
+        "type": "go_module"
+      },
+      {
+        "name": "golang.org/x/text",
+        "version": "v0.18.0",
+        "type": "go_module"
+      },
+      {
+        "name": "gopkg.in/yaml.v3",
+        "version": "v3.0.1",
+        "type": "go_module"
+      },
+      {
+        "name": "gorm.io/datatypes",
+        "version": "v1.2.1",
+        "type": "go_module"
+      }
+    ]
   },
   "summary": {
     "methods": {},

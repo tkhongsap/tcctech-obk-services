@@ -4,7 +4,7 @@
     "path": "obk-wifi-auth-web-trunk",
     "framework": "Next.js",
     "language": "JavaScript/TypeScript",
-    "analyzed_at": "2025-07-22T14:03:52.629Z"
+    "analyzed_at": "2025-07-22T22:25:34.766Z"
   },
   "api": {
     "total_endpoints": 0,
@@ -12,9 +12,190 @@
     "schemas": []
   },
   "dependencies": {
-    "total": 0,
+    "total": 36,
     "external_apis": [],
-    "packages": []
+    "packages": [
+      {
+        "name": "@emotion/react",
+        "version": "^11.11.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "@emotion/styled",
+        "version": "^11.11.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "@mui/icons-material",
+        "version": "^5.16.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "@mui/material",
+        "version": "^5.14.18",
+        "type": "npm_package"
+      },
+      {
+        "name": "@tsparticles/engine",
+        "version": "^3.4.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "@tsparticles/react",
+        "version": "^3.0.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "@tsparticles/slim",
+        "version": "^3.4.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/node",
+        "version": "20.10.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/react",
+        "version": "18.2.38",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/react-dom",
+        "version": "18.2.17",
+        "type": "npm_package"
+      },
+      {
+        "name": "axios",
+        "version": "^1.7.2",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint",
+        "version": "8.54.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint-config-next",
+        "version": "14.0.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "framer-motion",
+        "version": "^9.1.7",
+        "type": "npm_package"
+      },
+      {
+        "name": "lodash",
+        "version": "^4.17.21",
+        "type": "npm_package"
+      },
+      {
+        "name": "next",
+        "version": "14.2.5",
+        "type": "npm_package"
+      },
+      {
+        "name": "overlayscrollbars-react",
+        "version": "^0.5.6",
+        "type": "npm_package"
+      },
+      {
+        "name": "react",
+        "version": "18.3.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "react-dom",
+        "version": "18.3.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "react-hook-form",
+        "version": "^7.48.2",
+        "type": "npm_package"
+      },
+      {
+        "name": "sharp",
+        "version": "^0.33.4",
+        "type": "npm_package"
+      },
+      {
+        "name": "typescript",
+        "version": "5.3.2",
+        "type": "npm_package"
+      },
+      {
+        "name": "zustand",
+        "version": "^4.5.4",
+        "type": "npm_package"
+      },
+      {
+        "name": "@commitlint/cli",
+        "version": "^18.4.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "@commitlint/config-conventional",
+        "version": "^18.4.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "@million/lint",
+        "version": "^1.0.0-rc.84",
+        "type": "npm_package"
+      },
+      {
+        "name": "@tanstack/react-query",
+        "version": "^4.36.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "@tanstack/react-query-devtools",
+        "version": "^4.36.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/lodash",
+        "version": "^4.17.7",
+        "type": "npm_package"
+      },
+      {
+        "name": "@typescript-eslint/eslint-plugin",
+        "version": "^6.12.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint-config-prettier",
+        "version": "^8.10.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "eslint-plugin-prettier",
+        "version": "^5.0.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "husky",
+        "version": "^8.0.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "lint-staged",
+        "version": "^15.1.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "prettier",
+        "version": "^3.1.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "react-icons",
+        "version": "^4.12.0",
+        "type": "npm_package"
+      }
+    ]
   },
   "summary": {
     "methods": {},

@@ -4,21 +4,186 @@
     "path": "resize-service-trunk",
     "framework": "Next.js",
     "language": "JavaScript/TypeScript",
-    "analyzed_at": "2025-07-22T14:03:55.282Z"
+    "analyzed_at": "2025-07-22T22:25:35.448Z"
   },
   "api": {
-    "total_endpoints": 0,
-    "endpoints": [],
+    "total_endpoints": 6,
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/get-object/{...slug}",
+        "description": "GET /get-object/{...slug}",
+        "file": "src/pages/api/get-object/[...slug].ts",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "POST",
+        "path": "/get-object/{...slug}",
+        "description": "POST /get-object/{...slug}",
+        "file": "src/pages/api/get-object/[...slug].ts",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "GET",
+        "path": "/get-object-preview/{...slug}",
+        "description": "GET /get-object-preview/{...slug}",
+        "file": "src/pages/api/get-object-preview/[...slug].ts",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "POST",
+        "path": "/get-object-preview/{...slug}",
+        "description": "POST /get-object-preview/{...slug}",
+        "file": "src/pages/api/get-object-preview/[...slug].ts",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "GET",
+        "path": "/upload/",
+        "description": "GET /upload/",
+        "file": "src/pages/api/upload/index.ts",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "POST",
+        "path": "/upload/",
+        "description": "POST /upload/",
+        "file": "src/pages/api/upload/index.ts",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      }
+    ],
     "schemas": []
   },
   "dependencies": {
-    "total": 0,
+    "total": 14,
     "external_apis": [],
-    "packages": []
+    "packages": [
+      {
+        "name": "@aws-sdk/client-s3",
+        "version": "^3.758.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "dotenv",
+        "version": "^16.4.7",
+        "type": "npm_package"
+      },
+      {
+        "name": "lodash",
+        "version": "^4.17.21",
+        "type": "npm_package"
+      },
+      {
+        "name": "minio",
+        "version": "^8.0.5",
+        "type": "npm_package"
+      },
+      {
+        "name": "next",
+        "version": "15.2.3",
+        "type": "npm_package"
+      },
+      {
+        "name": "react",
+        "version": "^19.0.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "react-dom",
+        "version": "^19.0.0",
+        "type": "npm_package"
+      },
+      {
+        "name": "sharp",
+        "version": "^0.33.5",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/lodash",
+        "version": "^4.17.16",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/node",
+        "version": "^20",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/react",
+        "version": "^19",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/react-dom",
+        "version": "^19",
+        "type": "npm_package"
+      },
+      {
+        "name": "@types/sharp",
+        "version": "^0.31.1",
+        "type": "npm_package"
+      },
+      {
+        "name": "typescript",
+        "version": "^5",
+        "type": "npm_package"
+      }
+    ]
   },
   "summary": {
-    "methods": {},
+    "methods": {
+      "GET": 3,
+      "POST": 3
+    },
     "has_authentication": false,
-    "has_documentation": false
+    "has_documentation": true
   }
 }

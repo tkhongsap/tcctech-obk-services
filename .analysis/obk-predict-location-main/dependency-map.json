@@ -2,9 +2,9 @@
   "service": {
     "name": "obk-predict-location-main",
     "path": "obk-predict-location-main",
-    "framework": "unknown",
+    "framework": "Python",
     "language": "Python",
-    "analyzed_at": "2025-07-22T14:04:21.565Z"
+    "analyzed_at": "2025-07-22T22:25:43.634Z"
   },
   "api_inventory": {
     "endpoints": [],
@@ -16,45 +16,9 @@
     }
   },
   "dependencies": {
-    "total": 7,
+    "total": 0,
     "external_apis": [],
-    "packages": [
-      {
-        "name": "Flask>=3.0.3",
-        "version": "latest",
-        "type": "python_package"
-      },
-      {
-        "name": "pandas>=2.2.2",
-        "version": "latest",
-        "type": "python_package"
-      },
-      {
-        "name": "tensorflow>=2.17.0",
-        "version": "latest",
-        "type": "python_package"
-      },
-      {
-        "name": "numpy>=1.26.4",
-        "version": "latest",
-        "type": "python_package"
-      },
-      {
-        "name": "joblib>=1.4.2",
-        "version": "latest",
-        "type": "python_package"
-      },
-      {
-        "name": "gunicorn",
-        "version": "latest",
-        "type": "python_package"
-      },
-      {
-        "name": "scikit-learn>=1.5.1",
-        "version": "latest",
-        "type": "python_package"
-      }
-    ]
+    "packages": []
   },
-  "generated_at": "2025-07-22T14:04:21.797Z"
+  "generated_at": "2025-07-22T22:27:07.351Z"
 }
