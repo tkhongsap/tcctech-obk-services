@@ -102,7 +102,7 @@
   - [x] 4.8 Update master dependency map after each folder completion
   - [x] 4.9 Commit and push dependency documentation after each folder is processed
 
-- [x] 5.0 Folder-by-Folder Processing Execution and Quality Assurance **[PROGRESS: 37/37 COMPLETED - 100%]**
+- [ ] 5.0 Folder-by-Folder Processing Execution and Quality Assurance **[PROGRESS: 0/37 COMPLETED - 0%]**
 
 ### 5.1 Service Processing Workflow (Per @process-api-tasks.mdc Rule)
 
@@ -123,93 +123,103 @@ git add . && git commit -m "docs: API analysis for [service-name]" && git push
 - ⚠️ **Stop only on errors** - report issues and wait for fixes
 - ✅ **Quality validation** after each service completion
 
-### 5.2 Service Processing Checklist - Complete Analysis for Each Service (37/37 Completed - 100%)
+### 5.2 Service Processing Checklist - Complete Analysis for Each Service (0/37 Completed - 0%)
 
-#### ✅ **ALL SERVICES COMPLETED (37/37 - 100%):**
+#### 🔄 **ENHANCED REPROCESSING REQUIRED (0/37 - 0%):**
+
+**⚠️ CRITICAL UPDATE: Previous analysis missed 300+ .NET/C# endpoints. Enhanced api-analyzer.js now supports:**
+- **✅ .NET/C# ASP.NET Core** - Full controller pattern detection
+- **✅ Express.js/Node.js** - Enhanced route extraction  
+- **✅ FastAPI/Python** - Comprehensive decorator patterns
+- **✅ Next.js API Routes** - Advanced route detection
+- **✅ Spring Boot/Java** - Controller annotation patterns
+- **✅ Go Frameworks** - Gin/Fiber endpoint detection
+- **✅ NestJS** - Decorator-based routing
+- **✅ Multiple Schemas** - Enhanced type extraction across all frameworks
 
 **API Services with Endpoints:**
-- [x] **azure-ocr-trunk** - FastAPI/Python - 7 endpoints, 2 schemas, 11 dependencies ✓
-- [x] **obk-mtel-bms-trunk** - Express.js - 1 endpoint ✓
-- [x] **obk-mtel-bus-trunk** - Express.js - 1 endpoint ✓ 
-- [x] **obk-parking-trunk** - Express.js - 1 endpoint ✓
-- [x] **obk-mtel-document-trunk** - Express.js - 1 endpoint ✓
-- [x] **obk-mtel-iam-trunk** - Express.js - 1 endpoint ✓
-- [x] **obk-mtel-notification-trunk** - Express.js - 1 endpoint ✓
-- [x] **obk-mtel-websocket-trunk** - Express.js - 1 endpoint ✓
-- [x] **obk-wiremock-trunk** - Express.js - 15 endpoints ✓
+- [ ] **azure-ocr-trunk** - FastAPI/Python - Pending enhanced analysis
+- [ ] **obk-mtel-bms-trunk** - Express.js - Pending enhanced analysis
+- [ ] **obk-mtel-bus-trunk** - Express.js - Pending enhanced analysis
+- [ ] **obk-parking-trunk** - Express.js - Pending enhanced analysis
+- [ ] **obk-mtel-document-trunk** - Express.js - Pending enhanced analysis
+- [ ] **obk-mtel-iam-trunk** - Express.js - Pending enhanced analysis
+- [ ] **obk-mtel-notification-trunk** - Express.js - Pending enhanced analysis
+- [ ] **obk-mtel-websocket-trunk** - Express.js - Pending enhanced analysis
+- [ ] **obk-wiremock-trunk** - Express.js - Pending enhanced analysis
 
 **Infrastructure/Automation Services:**
-- [x] **crontab-trunk** - Cron/Scheduling - External API calls ✓
+- [ ] **crontab-trunk** - Cron/Scheduling - Pending enhanced analysis
 
 **Next.js/React Web Applications:**
-- [x] **obk-app-universal-link-trunk** - Next.js ✓
-- [x] **obk-campaign-web-trunk** - Next.js ✓
-- [x] **obk-parking-payment-dev** - Next.js ✓
-- [x] **obk-wifi-auth-web-trunk** - Next.js ✓
-- [x] **resize-service-trunk** - Next.js ✓
+- [ ] **obk-app-universal-link-trunk** - Next.js - Pending enhanced API route analysis
+- [ ] **obk-campaign-web-trunk** - Next.js - Pending enhanced API route analysis
+- [ ] **obk-parking-payment-dev** - Next.js - Pending enhanced API route analysis
+- [ ] **obk-wifi-auth-web-trunk** - Next.js - Pending enhanced API route analysis
+- [ ] **resize-service-trunk** - Next.js - Pending enhanced API route analysis
 
 **Services with Dependencies (No Direct APIs):**
-- [x] **obk-cms-trunk** - 3 dependencies ✓
-- [x] **obk-indoor-navigation-trunk** - 1 dependency ✓
-- [x] **obk-predict-location-main** - 7 dependencies ✓
+- [ ] **obk-cms-trunk** - Pending enhanced dependency analysis
+- [ ] **obk-indoor-navigation-trunk** - Pending enhanced dependency analysis
+- [ ] **obk-predict-location-main** - Flask/Python - Pending enhanced analysis
 
 **Configuration/Support Services:**
-- [x] **MapGeoJsonTool-trunk** ✓
-- [x] **automate-trunk** ✓
-- [x] **flutter-login-trunk** ✓
-- [x] **keycloak-trunk** ✓
-- [x] **obk-app-temp-trunk** ✓
-- [x] **obk-art-culture-api-trunk** ✓
-- [x] **obk-booking-trunk** ✓
-- [x] **obk-infra-trunk** ✓
-- [x] **obk-marcom-trunk** ✓
-- [x] **obk-operation-app-trunk** ✓
-- [x] **obk-operation-backend-dev** ✓
-- [x] **obk-pms-trunk** ✓
-- [x] **obk-residential-ipad-trunk** ✓
-- [x] **obk-sso-trunk** ✓
-- [x] **obk-sustainable-trunk** ✓
-- [x] **one-bangkok-app-trunk** ✓
-- [x] **onebangkok-trunk** ✓
-- [x] **redirect-onebangkok-trunk** ✓
-- [x] **tcct-serviceabstraction-dev** ✓
+- [ ] **MapGeoJsonTool-trunk** - Pending enhanced analysis
+- [ ] **automate-trunk** - Pending enhanced analysis
+- [ ] **flutter-login-trunk** - Flutter/Dart - Pending enhanced analysis
+- [ ] **keycloak-trunk** - Pending enhanced analysis
+- [ ] **obk-app-temp-trunk** - Pending enhanced analysis
+- [ ] **obk-art-culture-api-trunk** - Go/Fiber - Pending enhanced analysis
+- [ ] **obk-booking-trunk** - Pending enhanced analysis
+- [ ] **obk-infra-trunk** - Pending enhanced analysis
+- [ ] **obk-marcom-trunk** - Pending enhanced analysis
+- [ ] **obk-operation-app-trunk** - Flutter/Dart - Pending enhanced analysis
+- [ ] **obk-operation-backend-dev** - .NET Core/C# - **CRITICAL: Expected 350+ endpoints**
+- [ ] **obk-pms-trunk** - Pending enhanced analysis
+- [ ] **obk-residential-ipad-trunk** - Pending enhanced analysis
+- [ ] **obk-sso-trunk** - NestJS - Pending enhanced analysis
+- [ ] **obk-sustainable-trunk** - Pending enhanced analysis
+- [ ] **one-bangkok-app-trunk** - Pending enhanced analysis
+- [ ] **onebangkok-trunk** - Pending enhanced analysis
+- [ ] **redirect-onebangkok-trunk** - Pending enhanced analysis
+- [ ] **tcct-serviceabstraction-dev** - .NET Core/C# - **CRITICAL: Expected 350+ endpoints**
 
-## **🎉 PROJECT COMPLETION SUMMARY:**
+## **🔄 ENHANCED REPROCESSING REQUIRED:**
 
-**📊 TOTAL SERVICES ANALYZED: 37**
-- **✅ API Services**: 9 services with 23 total endpoints
-- **✅ Web Applications**: 5 Next.js services  
-- **✅ Infrastructure**: 1 cron/scheduling service
-- **✅ Support Services**: 22 configuration/support services
-- **✅ Dependencies Mapped**: 22 total external dependencies identified
+**⚠️ CRITICAL ISSUE IDENTIFIED:**
+- **Previous Analysis**: Found only 23 total endpoints across all services
+- **Actual Evidence**: Found 354+ HTTP endpoint attributes in tcct-serviceabstraction-dev alone
+- **Root Cause**: api-analyzer.js only supported JavaScript/TypeScript patterns, completely missing .NET/C#, Java, Go, and other frameworks
 
-**🏗️ FRAMEWORKS DETECTED:**
-- **FastAPI/Python**: 1 service (azure-ocr-trunk - 7 endpoints)
-- **Express.js/JavaScript**: 8 services (16 endpoints total)
-- **Next.js/React**: 5 web applications
-- **Infrastructure/Automation**: 1 cron service
-- **Configuration/Support**: 22 services
+**✅ ENHANCED CAPABILITIES:**
+- **🆕 .NET/C# ASP.NET Core**: Full `[HttpGet]`, `[HttpPost]`, `[Route]` controller pattern detection
+- **🔥 Express.js/Node.js**: Enhanced route extraction with middleware patterns
+- **🎆 FastAPI/Python**: Comprehensive decorator and async patterns
+- **⚙️ Next.js API Routes**: Advanced `pages/api/` and `app/api/route.ts` detection
+- **☕ Spring Boot/Java**: `@RestController`, `@RequestMapping` annotation patterns
+- **🚀 Go Frameworks**: Gin/Fiber endpoint detection with struct binding
+- **🐱 NestJS**: Decorator-based routing with dependency injection
+- **📈 Schema Extraction**: Enhanced type detection across all frameworks
 
-**📁 DOCUMENTATION GENERATED:**
-- **✅ .analysis/[service-name]/**: 37 complete analysis directories
-- **✅ api-inventory.md**: 37 human-readable documentation files
-- **✅ openapi.yaml**: 37 API specification files
-- **✅ dependency-map.json**: 37 dependency mapping files
-- **✅ Git Commits**: 37 individual service commits + infrastructure commits
+**🏁 EXPECTED RESULTS:**
+- **Estimated Total Endpoints**: 500-1000+ (vs previous 23)
+- **Major Services**: tcct-serviceabstraction-dev (~350 endpoints), obk-operation-backend-dev (~200+ endpoints)
+- **Complete Coverage**: All 37 services with accurate endpoint counts
+- **Framework Detection**: Proper identification of all technology stacks
 
 ### 5.3 Processing Infrastructure Tasks
-  - [x] 5.3.1 Implement folder processing checklist with mandatory validation before moving to next folder
-  - [x] 5.3.2 Create automated git commit with descriptive message after each folder completion
-  - [x] 5.3.3 Implement automated git push to remote repository after each folder documentation
-  - [x] 5.3.4 Build progress tracking system showing X of 37+ folders completed
-  - [x] 5.3.5 Implement quality assurance validation to ensure no folders are skipped
+  - [ ] 5.3.1 Implement folder processing checklist with mandatory validation before moving to next folder
+  - [ ] 5.3.2 Create automated git commit with descriptive message after each folder completion
+  - [ ] 5.3.3 Implement automated git push to remote repository after each folder documentation
+  - [ ] 5.3.4 Build progress tracking system showing X of 37+ folders completed
+  - [ ] 5.3.5 Implement quality assurance validation to ensure no folders are skipped
 
-### 5.4 Final Consolidation Tasks (Execute ONLY after all 37 services completed) ✅ COMPLETE
-  - [x] 5.4.1 Create final consolidation step only after ALL 37+ folders are individually processed
-  - [x] 5.4.2 Build searchable and filterable API explorer interface using all folder data
-  - [x] 5.4.3 Create service dependency visualization with interactive graphs from all folders
-  - [x] 5.4.4 Implement cross-service API discovery and search functionality across all processed folders
-  - [x] 5.4.5 Build export capabilities for filtered results and custom reports
-  - [x] 5.4.6 Create responsive design for various screen sizes and devices
-  - [x] 5.4.7 Generate final master documentation consolidating all 37+ folders
-  - [x] 5.4.8 Perform final validation that all folders have been processed and documented 
+### 5.4 Final Consolidation Tasks (Execute ONLY after all 37 services completed) ⏳ PENDING
+  - [ ] 5.4.1 Create final consolidation step only after ALL 37+ folders are individually processed
+  - [ ] 5.4.2 Build searchable and filterable API explorer interface using all folder data
+  - [ ] 5.4.3 Create service dependency visualization with interactive graphs from all folders
+  - [ ] 5.4.4 Implement cross-service API discovery and search functionality across all processed folders
+  - [ ] 5.4.5 Build export capabilities for filtered results and custom reports
+  - [ ] 5.4.6 Create responsive design for various screen sizes and devices
+  - [ ] 5.4.7 Generate final master documentation consolidating all 37+ folders
+  - [ ] 5.4.8 Perform final validation that all folders have been processed and documented 

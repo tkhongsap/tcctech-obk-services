@@ -178,46 +178,6 @@
     }
   },
   "components": {
-    "schemas": {
-      "SubErrorResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "description": "status"
-          },
-          "http_status": {
-            "type": "integer",
-            "description": "http_status"
-          },
-          "message": {
-            "type": "string",
-            "description": "message"
-          },
-          "step": {
-            "type": "string",
-            "description": "step"
-          }
-        },
-        "required": [
-          "status",
-          "http_status",
-          "message",
-          "step"
-        ]
-      },
-      "ErrorResponse": {
-        "type": "object",
-        "properties": {
-          "detail": {
-            "type": "object",
-            "description": "detail"
-          }
-        },
-        "required": [
-          "detail"
-        ]
-      }
-    }
+    "schemas": {}
   }
 }

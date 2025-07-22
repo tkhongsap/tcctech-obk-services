@@ -35,7 +35,7 @@ class APIAnalyzer {
             await this.extractEndpoints();
             
             // Extract schemas and models
-            await this.extractSchemas();
+            // await this.extractSchemas(); // Skip for performance - focus on endpoint detection
             
             // Detect external dependencies
             await this.extractDependencies();
@@ -50,41 +50,201 @@ class APIAnalyzer {
     }
 
     /**
-     * Detect framework and language from configuration files
+     * Detect framework and language from configuration files and project structure
      */
     async detectFramework() {
-        const configFiles = ['package.json', 'requirements.txt', 'pom.xml'];
+        // .NET/C# Detection
+        if (await this.detectDotNetFramework()) {
+            console.log(`🏗️  Framework: ${this.framework} (${this.language})`);
+            return;
+        }
         
-        for (const configFile of configFiles) {
-            const configPath = path.join(this.servicePath, configFile);
-            
-            if (fs.existsSync(configPath)) {
-                console.log(`📋 Found config: ${configFile}`);
-                
-                if (configFile === 'requirements.txt') {
-                    const content = fs.readFileSync(configPath, 'utf8');
-                    this.language = 'Python';
-                    
-                    if (content.includes('fastapi')) {
-                        this.framework = 'FastAPI';
-                    } else if (content.includes('flask')) {
-                        this.framework = 'Flask';
-                    } else if (content.includes('django')) {
-                        this.framework = 'Django';
-                    }
-                } else if (configFile === 'package.json') {
-                    const packageJson = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-                    this.language = 'JavaScript/TypeScript';
-                    
-                    const deps = { ...packageJson.dependencies, ...packageJson.devDependencies };
-                    if (deps.express) this.framework = 'Express.js';
-                    else if (deps.fastify) this.framework = 'Fastify';
-                    else if (deps.next) this.framework = 'Next.js';
-                }
-            }
+        // Java Detection
+        if (await this.detectJavaFramework()) {
+            console.log(`🏗️  Framework: ${this.framework} (${this.language})`);
+            return;
+        }
+        
+        // Go Detection
+        if (await this.detectGoFramework()) {
+            console.log(`🏗️  Framework: ${this.framework} (${this.language})`);
+            return;
+        }
+        
+        // Node.js/JavaScript/TypeScript Detection
+        if (await this.detectNodeFramework()) {
+            console.log(`🏗️  Framework: ${this.framework} (${this.language})`);
+            return;
+        }
+        
+        // Python Detection
+        if (await this.detectPythonFramework()) {
+            console.log(`🏗️  Framework: ${this.framework} (${this.language})`);
+            return;
+        }
+        
+        // Flutter/Dart Detection
+        if (await this.detectFlutterFramework()) {
+            console.log(`🏗️  Framework: ${this.framework} (${this.language})`);
+            return;
         }
         
         console.log(`🏗️  Framework: ${this.framework} (${this.language})`);
+    }
+
+    /**
+     * Detect .NET/C# ASP.NET Core framework
+     */
+    async detectDotNetFramework() {
+        // Look for .csproj files
+        const csprojFiles = this.findFiles(this.servicePath, /\.csproj$/);
+        if (csprojFiles.length > 0) {
+            console.log(`📋 Found config: .csproj files (${csprojFiles.length})`);
+            this.language = 'C#';
+            
+            // Check for Controllers directory
+            const controllersDir = path.join(this.servicePath, 'Controllers');
+            const hasControllers = fs.existsSync(controllersDir) || this.findFiles(this.servicePath, /Controllers/i).length > 0;
+            
+            if (hasControllers) {
+                this.framework = 'ASP.NET Core';
+                return true;
+            }
+            
+            // Check for Program.cs or Startup.cs
+            const programCs = path.join(this.servicePath, 'Program.cs');
+            const startupCs = path.join(this.servicePath, 'Startup.cs');
+            if (fs.existsSync(programCs) || fs.existsSync(startupCs)) {
+                this.framework = 'ASP.NET Core';
+                return true;
+            }
+            
+            this.framework = '.NET';
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Detect Java Spring Boot framework
+     */
+    async detectJavaFramework() {
+        const pomXml = path.join(this.servicePath, 'pom.xml');
+        const buildGradle = path.join(this.servicePath, 'build.gradle');
+        
+        if (fs.existsSync(pomXml) || fs.existsSync(buildGradle)) {
+            console.log(`📋 Found config: ${fs.existsSync(pomXml) ? 'pom.xml' : 'build.gradle'}`);
+            this.language = 'Java';
+            
+            // Check for Spring Boot indicators
+            if (fs.existsSync(pomXml)) {
+                const content = fs.readFileSync(pomXml, 'utf8');
+                if (content.includes('spring-boot-starter-web')) {
+                    this.framework = 'Spring Boot';
+                    return true;
+                }
+            }
+            
+            this.framework = 'Java';
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Detect Go framework
+     */
+    async detectGoFramework() {
+        const goMod = path.join(this.servicePath, 'go.mod');
+        if (fs.existsSync(goMod)) {
+            console.log(`📋 Found config: go.mod`);
+            this.language = 'Go';
+            
+            const content = fs.readFileSync(goMod, 'utf8');
+            if (content.includes('gin-gonic/gin')) {
+                this.framework = 'Gin';
+            } else if (content.includes('gofiber/fiber')) {
+                this.framework = 'Fiber';
+            } else if (content.includes('echo')) {
+                this.framework = 'Echo';
+            } else {
+                this.framework = 'Go';
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Detect Node.js frameworks
+     */
+    async detectNodeFramework() {
+        const packageJson = path.join(this.servicePath, 'package.json');
+        if (fs.existsSync(packageJson)) {
+            console.log(`📋 Found config: package.json`);
+            const packageData = JSON.parse(fs.readFileSync(packageJson, 'utf8'));
+            this.language = 'JavaScript/TypeScript';
+            
+            const deps = { ...packageData.dependencies, ...packageData.devDependencies };
+            
+            // Check for Next.js API routes
+            if (deps.next) {
+                const hasApiDir = fs.existsSync(path.join(this.servicePath, 'pages', 'api')) ||
+                                 fs.existsSync(path.join(this.servicePath, 'app', 'api')) ||
+                                 fs.existsSync(path.join(this.servicePath, 'src', 'pages', 'api')) ||
+                                 fs.existsSync(path.join(this.servicePath, 'src', 'app', 'api'));
+                
+                this.framework = hasApiDir ? 'Next.js' : 'Next.js';
+                return true;
+            }
+            
+            if (deps.express) this.framework = 'Express.js';
+            else if (deps['@nestjs/core']) this.framework = 'NestJS';
+            else if (deps.fastify) this.framework = 'Fastify';
+            else if (deps.koa) this.framework = 'Koa';
+            else this.framework = 'Node.js';
+            
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Detect Python frameworks
+     */
+    async detectPythonFramework() {
+        const requirementsTxt = path.join(this.servicePath, 'requirements.txt');
+        if (fs.existsSync(requirementsTxt)) {
+            console.log(`📋 Found config: requirements.txt`);
+            const content = fs.readFileSync(requirementsTxt, 'utf8');
+            this.language = 'Python';
+            
+            if (content.includes('fastapi')) {
+                this.framework = 'FastAPI';
+            } else if (content.includes('flask')) {
+                this.framework = 'Flask';
+            } else if (content.includes('django')) {
+                this.framework = 'Django';
+            } else {
+                this.framework = 'Python';
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Detect Flutter framework
+     */
+    async detectFlutterFramework() {
+        const pubspecYaml = path.join(this.servicePath, 'pubspec.yaml');
+        if (fs.existsSync(pubspecYaml)) {
+            console.log(`📋 Found config: pubspec.yaml`);
+            this.language = 'Dart';
+            this.framework = 'Flutter';
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -93,13 +253,561 @@ class APIAnalyzer {
     async extractEndpoints() {
         console.log('🔎 Extracting API endpoints...');
         
-        if (this.framework === 'FastAPI') {
+        if (this.framework === 'ASP.NET Core' || this.framework === '.NET') {
+            await this.extractDotNetEndpoints();
+        } else if (this.framework === 'Spring Boot') {
+            await this.extractSpringBootEndpoints();
+        } else if (this.framework === 'FastAPI') {
             await this.extractFastAPIEndpoints();
         } else if (this.framework === 'Express.js') {
             await this.extractExpressEndpoints();
+        } else if (this.framework === 'NestJS') {
+            await this.extractNestJSEndpoints();
+        } else if (this.framework === 'Next.js') {
+            await this.extractNextJSEndpoints();
+        } else if (this.framework === 'Gin' || this.framework === 'Fiber' || this.framework === 'Go') {
+            await this.extractGoEndpoints();
         }
         
         console.log(`📊 Found ${this.endpoints.length} endpoints`);
+    }
+
+    /**
+     * Extract .NET/C# ASP.NET Core endpoints from controller files
+     */
+    async extractDotNetEndpoints() {
+        const csFiles = this.findFiles(this.servicePath, /\.(cs)$/);
+        for (const filePath of csFiles) {
+            try {
+                const content = fs.readFileSync(filePath, 'utf8');
+                const relativePath = path.relative(this.servicePath, filePath);
+                
+                // Skip if not a controller file
+                if (!content.includes('[ApiController]') && !content.includes(': ControllerBase') && 
+                    !content.includes(': Controller') && !relativePath.includes('Controller')) {
+                    continue;
+                }
+                
+                
+                // Extract controller-level route
+                const controllerRouteMatch = content.match(/\[Route\(\s*"([^"]+)"\s*\)\]/);
+                const controllerRoute = controllerRouteMatch ? controllerRouteMatch[1] : '';
+                
+                // Extract controller name
+                const controllerMatch = content.match(/class\s+(\w+)(?:Controller)?/);
+                const controllerName = controllerMatch ? controllerMatch[1] : 'Unknown';
+                
+                // HTTP method patterns with optional route paths - handle multiple lines between attribute and method
+                const httpPatterns = [
+                    /\[Http(Get|Post|Put|Delete|Patch)\][\s\S]*?public\s+(?:async\s+)?(?:[^\s(]+\s+)*(\w+)\s*\(/g,
+                    /\[Http(Get|Post|Put|Delete|Patch)\(\s*"([^"]+)"\s*\)\][\s\S]*?public\s+(?:async\s+)?(?:[^\s(]+\s+)*(\w+)\s*\(/g
+                ];
+                
+                for (const pattern of httpPatterns) {
+                    pattern.lastIndex = 0; // Reset regex state for each file
+                    let match;
+                    while ((match = pattern.exec(content)) !== null) {
+                        let method, actionRoute, actionName;
+                        
+                        if (match.length === 3) {
+                            // Pattern without route path
+                            [, method, actionName] = match;
+                            actionRoute = '';
+                        } else {
+                            // Pattern with route path
+                            [, method, actionRoute, actionName] = match;
+                            if (!actionName) {
+                                actionName = actionRoute;
+                                actionRoute = '';
+                            }
+                        }
+                        
+                        // Build full path
+                        let fullPath = controllerRoute;
+                        if (actionRoute) {
+                            fullPath += (fullPath.endsWith('/') || actionRoute.startsWith('/')) ? actionRoute : `/${actionRoute}`;
+                        }
+                        
+                        if (!fullPath) {
+                            fullPath = `/${controllerName.toLowerCase()}/${actionName.toLowerCase()}`;
+                        }
+                        
+                        // Extract parameters from method signature
+                        const methodContent = content.substring(match.index, match.index + 500);
+                        const parameters = this.extractDotNetParameters(methodContent);
+                        
+                        // Extract response types
+                        const responses = this.extractDotNetResponses(methodContent);
+                        
+                        const endpoint = {
+                            method: method.toUpperCase(),
+                            path: fullPath,
+                            actionName: actionName,
+                            controllerName: controllerName,
+                            description: `${method.toUpperCase()} ${fullPath}`,
+                            file: relativePath,
+                            parameters: parameters,
+                            responses: responses,
+                            middleware: [],
+                            authentication: this.detectDotNetAuthentication(methodContent)
+                        };
+                        
+                        this.endpoints.push(endpoint);
+                        console.log(`  ✅ ${method.toUpperCase()} ${fullPath} (${actionName})`);
+                    }
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error reading ${filePath}:`, error.message);
+            }
+        }
+    }
+
+    /**
+     * Extract parameters from .NET method signature
+     */
+    extractDotNetParameters(methodContent) {
+        const parameters = [];
+        
+        // Route parameters from path like {id}, {userId:int}
+        const routeParams = methodContent.match(/\{(\w+)(?::[\w]+)?\}/g);
+        if (routeParams) {
+            for (const param of routeParams) {
+                const name = param.replace(/[{}:]/g, '').split(':')[0];
+                parameters.push({
+                    name: name,
+                    type: 'string',
+                    required: true,
+                    location: 'path'
+                });
+            }
+        }
+        
+        // FromBody parameters
+        const fromBodyMatch = methodContent.match(/\[FromBody\]\s*(\w+)\s+(\w+)/);
+        if (fromBodyMatch) {
+            parameters.push({
+                name: fromBodyMatch[2],
+                type: fromBodyMatch[1],
+                required: true,
+                location: 'body'
+            });
+        }
+        
+        // FromQuery parameters
+        const fromQueryMatches = methodContent.match(/\[FromQuery\]\s*(\w+)\s+(\w+)/g);
+        if (fromQueryMatches) {
+            for (const match of fromQueryMatches) {
+                const parts = match.match(/\[FromQuery\]\s*(\w+)\s+(\w+)/);
+                if (parts) {
+                    parameters.push({
+                        name: parts[2],
+                        type: parts[1],
+                        required: false,
+                        location: 'query'
+                    });
+                }
+            }
+        }
+        
+        return parameters;
+    }
+
+    /**
+     * Extract .NET response information
+     */
+    extractDotNetResponses(methodContent) {
+        const responses = [];
+        
+        // ProducesResponseType attributes
+        const responseMatches = methodContent.match(/\[ProducesResponseType\((\d+)(?:,\s*Type\s*=\s*typeof\(([^)]+)\))?\)\]/g);
+        if (responseMatches) {
+            for (const match of responseMatches) {
+                const parts = match.match(/\[ProducesResponseType\((\d+)(?:,\s*Type\s*=\s*typeof\(([^)]+)\))?\)\]/);
+                if (parts) {
+                    responses.push({
+                        status: parseInt(parts[1]),
+                        description: this.getHttpStatusDescription(parseInt(parts[1])),
+                        type: parts[2] || null
+                    });
+                }
+            }
+        } else {
+            // Default response
+            responses.push({
+                status: 200,
+                description: 'Success response'
+            });
+        }
+        
+        return responses;
+    }
+
+    /**
+     * Detect .NET authentication requirements
+     */
+    detectDotNetAuthentication(methodContent) {
+        const authPatterns = [
+            '[Authorize]',
+            '[RequireAuth]',
+            '[JwtBearer]'
+        ];
+        
+        for (const pattern of authPatterns) {
+            if (methodContent.includes(pattern)) {
+                return { type: 'bearer_token', description: pattern };
+            }
+        }
+        
+        return null;
+    }
+
+    /**
+     * Get HTTP status description
+     */
+    getHttpStatusDescription(status) {
+        const descriptions = {
+            200: 'OK',
+            201: 'Created',
+            204: 'No Content',
+            400: 'Bad Request',
+            401: 'Unauthorized',
+            403: 'Forbidden',
+            404: 'Not Found',
+            409: 'Conflict',
+            422: 'Unprocessable Entity',
+            500: 'Internal Server Error'
+        };
+        
+        return descriptions[status] || 'Response';
+    }
+
+    /**
+     * Extract Next.js API routes
+     */
+    async extractNextJSEndpoints() {
+        // Look for pages/api and app/api directories
+        const apiDirs = [
+            path.join(this.servicePath, 'pages', 'api'),
+            path.join(this.servicePath, 'app', 'api'),
+            path.join(this.servicePath, 'src', 'pages', 'api'),
+            path.join(this.servicePath, 'src', 'app', 'api')
+        ];
+        
+        for (const apiDir of apiDirs) {
+            if (fs.existsSync(apiDir)) {
+                await this.extractNextJSFromDirectory(apiDir, apiDir);
+            }
+        }
+    }
+
+    /**
+     * Extract Next.js endpoints from directory
+     */
+    async extractNextJSFromDirectory(baseDir, currentDir) {
+        const entries = fs.readdirSync(currentDir, { withFileTypes: true });
+        
+        for (const entry of entries) {
+            const fullPath = path.join(currentDir, entry.name);
+            
+            if (entry.isDirectory()) {
+                await this.extractNextJSFromDirectory(baseDir, fullPath);
+            } else if (entry.isFile() && (entry.name.endsWith('.js') || entry.name.endsWith('.ts'))) {
+                const content = fs.readFileSync(fullPath, 'utf8');
+                const relativePath = path.relative(this.servicePath, fullPath);
+                
+                // Convert file path to API route
+                const apiPath = path.relative(baseDir, fullPath)
+                    .replace(/\.(js|ts)$/, '')
+                    .replace(/\\/g, '/')
+                    .replace(/index$/, '')
+                    .replace(/\[(.+)\]/g, '{$1}');  // Convert [id] to {id}
+                
+                const routePath = apiPath.startsWith('/') ? apiPath : `/${apiPath}`;
+                
+                // Check for handler methods
+                const methods = [];
+                if (content.includes('export default function') || content.includes('export default async function')) {
+                    methods.push('GET', 'POST');  // Default handler can handle multiple methods
+                }
+                if (content.includes('export async function GET')) methods.push('GET');
+                if (content.includes('export async function POST')) methods.push('POST');
+                if (content.includes('export async function PUT')) methods.push('PUT');
+                if (content.includes('export async function DELETE')) methods.push('DELETE');
+                if (content.includes('export async function PATCH')) methods.push('PATCH');
+                
+                // Check for method filtering in handler
+                const methodChecks = content.match(/req\.method\s*===\s*['"](\w+)['"]/g);
+                if (methodChecks) {
+                    for (const check of methodChecks) {
+                        const method = check.match(/['"](\w+)['"]/)[1];
+                        if (!methods.includes(method)) {
+                            methods.push(method);
+                        }
+                    }
+                }
+                
+                if (methods.length === 0) {
+                    methods.push('GET');  // Default method
+                }
+                
+                for (const method of methods) {
+                    const endpoint = {
+                        method: method,
+                        path: routePath,
+                        description: `${method} ${routePath}`,
+                        file: relativePath,
+                        parameters: this.extractNextJSParameters(content, routePath),
+                        responses: [{ status: 200, description: 'Success response' }],
+                        middleware: [],
+                        authentication: null
+                    };
+                    
+                    this.endpoints.push(endpoint);
+                    console.log(`  ✅ ${method} ${routePath}`);
+                }
+            }
+        }
+    }
+
+    /**
+     * Extract Next.js parameters
+     */
+    extractNextJSParameters(content, routePath) {
+        const parameters = [];
+        
+        // Path parameters from route like {id}
+        const pathParams = routePath.match(/\{(\w+)\}/g);
+        if (pathParams) {
+            for (const param of pathParams) {
+                const name = param.replace(/[{}]/g, '');
+                parameters.push({
+                    name: name,
+                    type: 'string',
+                    required: true,
+                    location: 'path'
+                });
+            }
+        }
+        
+        // Query parameters from req.query usage
+        const queryMatches = content.match(/req\.query\.(\w+)/g);
+        if (queryMatches) {
+            for (const match of queryMatches) {
+                const name = match.replace('req.query.', '');
+                if (!parameters.find(p => p.name === name)) {
+                    parameters.push({
+                        name: name,
+                        type: 'string',
+                        required: false,
+                        location: 'query'
+                    });
+                }
+            }
+        }
+        
+        return parameters;
+    }
+
+    /**
+     * Extract NestJS endpoints from TypeScript files
+     */
+    async extractNestJSEndpoints() {
+        const tsFiles = this.findFiles(this.servicePath, /\.(ts)$/);
+        
+        for (const filePath of tsFiles) {
+            try {
+                const content = fs.readFileSync(filePath, 'utf8');
+                const relativePath = path.relative(this.servicePath, filePath);
+                
+                // Skip if not a controller file
+                if (!content.includes('@Controller') && !relativePath.includes('controller')) {
+                    continue;
+                }
+                
+                // Extract controller route prefix
+                const controllerMatch = content.match(/@Controller\(\s*["']([^"']*)["']\s*\)/);
+                const controllerPrefix = controllerMatch ? controllerMatch[1] : '';
+                
+                // HTTP method decorators
+                const methodPatterns = [
+                    /@(Get|Post|Put|Delete|Patch)\(\s*["']([^"']*)["']\s*\)\s*(?:\n\s*)?(\w+)\s*\(/g,
+                    /@(Get|Post|Put|Delete|Patch)\(\)\s*(?:\n\s*)?(\w+)\s*\(/g
+                ];
+                
+                for (const pattern of methodPatterns) {
+                    let match;
+                    while ((match = pattern.exec(content)) !== null) {
+                        let method, actionRoute, actionName;
+                        
+                        if (match.length === 3) {
+                            // Pattern without route
+                            [, method, actionName] = match;
+                            actionRoute = '';
+                        } else {
+                            // Pattern with route
+                            [, method, actionRoute, actionName] = match;
+                        }
+                        
+                        // Build full path
+                        let fullPath = '';
+                        if (controllerPrefix) fullPath += `/${controllerPrefix}`;
+                        if (actionRoute) fullPath += `/${actionRoute}`;
+                        if (!fullPath) fullPath = `/${actionName.toLowerCase()}`;
+                        
+                        const endpoint = {
+                            method: method.toUpperCase(),
+                            path: fullPath,
+                            actionName: actionName,
+                            description: `${method.toUpperCase()} ${fullPath}`,
+                            file: relativePath,
+                            parameters: [],
+                            responses: [{ status: 200, description: 'Success response' }],
+                            middleware: [],
+                            authentication: null
+                        };
+                        
+                        this.endpoints.push(endpoint);
+                        console.log(`  ✅ ${method.toUpperCase()} ${fullPath} (${actionName})`);
+                    }
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error reading ${filePath}:`, error.message);
+            }
+        }
+    }
+
+    /**
+     * Extract Spring Boot endpoints from Java files
+     */
+    async extractSpringBootEndpoints() {
+        const javaFiles = this.findFiles(this.servicePath, /\.(java)$/);
+        
+        for (const filePath of javaFiles) {
+            try {
+                const content = fs.readFileSync(filePath, 'utf8');
+                const relativePath = path.relative(this.servicePath, filePath);
+                
+                // Skip if not a controller file
+                if (!content.includes('@RestController') && !content.includes('@Controller')) {
+                    continue;
+                }
+                
+                // Extract base request mapping
+                const baseMapping = content.match(/@RequestMapping\(\s*"([^"]+)"\s*\)/);
+                const basePath = baseMapping ? baseMapping[1] : '';
+                
+                // Spring mapping annotations
+                const mappingPatterns = [
+                    /@(Get|Post|Put|Delete|Patch)Mapping\(\s*"([^"]+)"\s*\)\s*(?:\n\s*)?public\s+\w+\s+(\w+)\s*\(/g,
+                    /@(Get|Post|Put|Delete|Patch)Mapping\s*(?:\n\s*)?public\s+\w+\s+(\w+)\s*\(/g,
+                    /@RequestMapping\(value\s*=\s*"([^"]+)".*?method\s*=\s*RequestMethod\.(\w+).*?\)\s*(?:\n\s*)?public\s+\w+\s+(\w+)\s*\(/g
+                ];
+                
+                for (const pattern of mappingPatterns) {
+                    let match;
+                    while ((match = pattern.exec(content)) !== null) {
+                        let method, actionPath, actionName;
+                        
+                        if (match.length === 3) {
+                            // Pattern without path
+                            [, method, actionName] = match;
+                            actionPath = '';
+                        } else if (match.length === 4) {
+                            if (pattern.toString().includes('RequestMapping')) {
+                                // RequestMapping pattern
+                                [, actionPath, method, actionName] = match;
+                            } else {
+                                // Mapping with path
+                                [, method, actionPath, actionName] = match;
+                            }
+                        }
+                        
+                        // Build full path
+                        let fullPath = basePath;
+                        if (actionPath) {
+                            fullPath += (fullPath.endsWith('/') || actionPath.startsWith('/')) ? actionPath : `/${actionPath}`;
+                        }
+                        
+                        const endpoint = {
+                            method: method.toUpperCase(),
+                            path: fullPath || `/${actionName.toLowerCase()}`,
+                            actionName: actionName,
+                            description: `${method.toUpperCase()} ${fullPath || actionName}`,
+                            file: relativePath,
+                            parameters: [],
+                            responses: [{ status: 200, description: 'Success response' }],
+                            middleware: [],
+                            authentication: null
+                        };
+                        
+                        this.endpoints.push(endpoint);
+                        console.log(`  ✅ ${method.toUpperCase()} ${endpoint.path} (${actionName})`);
+                    }
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error reading ${filePath}:`, error.message);
+            }
+        }
+    }
+
+    /**
+     * Extract Go framework endpoints
+     */
+    async extractGoEndpoints() {
+        const goFiles = this.findFiles(this.servicePath, /\.(go)$/);
+        
+        for (const filePath of goFiles) {
+            try {
+                const content = fs.readFileSync(filePath, 'utf8');
+                const relativePath = path.relative(this.servicePath, filePath);
+                
+                // Go framework patterns
+                const patterns = [
+                    // Gin framework
+                    /r\.(GET|POST|PUT|DELETE|PATCH)\(\s*"([^"]+)"\s*,\s*(\w+)\)/g,
+                    // Fiber framework  
+                    /app\.(Get|Post|Put|Delete|Patch)\(\s*"([^"]+)"\s*,\s*(\w+)\)/g,
+                    // Native http
+                    /http\.HandleFunc\(\s*"([^"]+)"\s*,\s*(\w+)\)/g
+                ];
+                
+                for (const pattern of patterns) {
+                    let match;
+                    while ((match = pattern.exec(content)) !== null) {
+                        let method, path, handler;
+                        
+                        if (match.length === 3) {
+                            // Native http pattern
+                            [, path, handler] = match;
+                            method = 'GET';  // Default method
+                        } else {
+                            [, method, path, handler] = match;
+                        }
+                        
+                        const endpoint = {
+                            method: method.toUpperCase(),
+                            path: path,
+                            handler: handler,
+                            description: `${method.toUpperCase()} ${path}`,
+                            file: relativePath,
+                            parameters: [],
+                            responses: [{ status: 200, description: 'Success response' }],
+                            middleware: [],
+                            authentication: null
+                        };
+                        
+                        this.endpoints.push(endpoint);
+                        console.log(`  ✅ ${method.toUpperCase()} ${path} (${handler})`);
+                    }
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error reading ${filePath}:`, error.message);
+            }
+        }
     }
 
     /**
@@ -314,7 +1022,262 @@ class APIAnalyzer {
         
         if (this.framework === 'FastAPI') {
             await this.extractPydanticModels();
+        } else if (this.framework === 'ASP.NET Core' || this.framework === '.NET') {
+            await this.extractDotNetModels();
+        } else if (this.framework === 'Express.js' || this.framework === 'NestJS' || this.framework === 'Next.js') {
+            await this.extractTypeScriptModels();
+        } else if (this.framework === 'Spring Boot') {
+            await this.extractJavaModels();
         }
+    }
+
+    /**
+     * Extract .NET DTOs and models
+     */
+    async extractDotNetModels() {
+        const csFiles = this.findFiles(this.servicePath, /\.(cs)$/);
+        
+        for (const filePath of csFiles) {
+            try {
+                const content = fs.readFileSync(filePath, 'utf8');
+                const relativePath = path.relative(this.servicePath, filePath);
+                
+                // Skip controller files
+                if (relativePath.includes('Controller')) continue;
+                
+                // Look for classes (DTOs, Models, Entities)
+                const classPattern = /public\s+class\s+(\w+)\s*(?::\s*([^{]+))?\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)*}/g;
+                let match;
+                
+                while ((match = classPattern.exec(content)) !== null) {
+                    const [fullMatch, className, baseClass, classBody] = match;
+                    
+                    const fields = this.extractDotNetFields(classBody);
+                    
+                    if (fields.length > 0) {
+                        const schema = {
+                            name: className,
+                            type: 'csharp_class',
+                            file: relativePath,
+                            baseClass: baseClass ? baseClass.trim() : null,
+                            fields: fields,
+                            description: this.extractDotNetClassDocstring(content, match.index)
+                        };
+                        
+                        this.schemas.push(schema);
+                        console.log(`  📄 Schema: ${className} (${fields.length} fields)`);
+                    }
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error extracting schemas from ${filePath}:`, error.message);
+            }
+        }
+    }
+
+    /**
+     * Extract .NET class fields (properties)
+     */
+    extractDotNetFields(classBody) {
+        const fields = [];
+        
+        // Public properties pattern
+        const propPattern = /public\s+([^?\s]+\??)\s+(\w+)\s*{\s*get;\s*set;\s*}(?:\s*=\s*([^;]+);)?/g;
+        let match;
+        
+        while ((match = propPattern.exec(classBody)) !== null) {
+            const [fullMatch, propType, propName, defaultValue] = match;
+            
+            fields.push({
+                name: propName,
+                type: propType.trim(),
+                required: !propType.includes('?') && !defaultValue,
+                default: defaultValue ? defaultValue.trim() : null
+            });
+        }
+        
+        // Also check for simple auto-properties
+        const autoPropPattern = /public\s+(\w+\??)\s+(\w+)\s*{\s*get;\s*set;\s*}/g;
+        while ((match = autoPropPattern.exec(classBody)) !== null) {
+            const [fullMatch, propType, propName] = match;
+            
+            if (!fields.find(f => f.name === propName)) {
+                fields.push({
+                    name: propName,
+                    type: propType.trim(),
+                    required: !propType.includes('?'),
+                    default: null
+                });
+            }
+        }
+        
+        return fields;
+    }
+
+    /**
+     * Extract .NET class documentation
+     */
+    extractDotNetClassDocstring(content, classIndex) {
+        // Look backwards for /// comments
+        const beforeClass = content.substring(Math.max(0, classIndex - 500), classIndex);
+        const docMatch = beforeClass.match(/\/\/\/\s*<summary>\s*([^<]+)\s*<\/summary>/);
+        return docMatch ? docMatch[1].trim() : null;
+    }
+
+    /**
+     * Extract TypeScript interfaces and types
+     */
+    async extractTypeScriptModels() {
+        const tsFiles = this.findFiles(this.servicePath, /\.(ts|tsx)$/);
+        
+        for (const filePath of tsFiles) {
+            try {
+                const content = fs.readFileSync(filePath, 'utf8');
+                const relativePath = path.relative(this.servicePath, filePath);
+                
+                // Extract interfaces
+                const interfacePattern = /interface\s+(\w+)(?:\s+extends\s+[^{]+)?\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)*}/g;
+                let match;
+                
+                while ((match = interfacePattern.exec(content)) !== null) {
+                    const [fullMatch, interfaceName, interfaceBody] = match;
+                    
+                    const fields = this.extractTypeScriptFields(interfaceBody);
+                    
+                    if (fields.length > 0) {
+                        const schema = {
+                            name: interfaceName,
+                            type: 'typescript_interface',
+                            file: relativePath,
+                            fields: fields,
+                            description: null
+                        };
+                        
+                        this.schemas.push(schema);
+                        console.log(`  📄 Schema: ${interfaceName} (${fields.length} fields)`);
+                    }
+                }
+                
+                // Extract types
+                const typePattern = /type\s+(\w+)\s*=\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)*}/g;
+                while ((match = typePattern.exec(content)) !== null) {
+                    const [fullMatch, typeName, typeBody] = match;
+                    
+                    const fields = this.extractTypeScriptFields(typeBody);
+                    
+                    if (fields.length > 0) {
+                        const schema = {
+                            name: typeName,
+                            type: 'typescript_type',
+                            file: relativePath,
+                            fields: fields,
+                            description: null
+                        };
+                        
+                        this.schemas.push(schema);
+                        console.log(`  📄 Schema: ${typeName} (${fields.length} fields)`);
+                    }
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error extracting schemas from ${filePath}:`, error.message);
+            }
+        }
+    }
+
+    /**
+     * Extract TypeScript interface/type fields
+     */
+    extractTypeScriptFields(body) {
+        const fields = [];
+        const fieldPattern = /(\w+)(\?)?:\s*([^;,\n]+)/g;
+        let match;
+        
+        while ((match = fieldPattern.exec(body)) !== null) {
+            const [fullMatch, fieldName, optional, fieldType] = match;
+            
+            fields.push({
+                name: fieldName,
+                type: fieldType.trim(),
+                required: !optional,
+                default: null
+            });
+        }
+        
+        return fields;
+    }
+
+    /**
+     * Extract Java model classes
+     */
+    async extractJavaModels() {
+        const javaFiles = this.findFiles(this.servicePath, /\.(java)$/);
+        
+        for (const filePath of javaFiles) {
+            try {
+                const content = fs.readFileSync(filePath, 'utf8');
+                const relativePath = path.relative(this.servicePath, filePath);
+                
+                // Skip controller files
+                if (content.includes('@RestController') || content.includes('@Controller')) continue;
+                
+                // Look for public classes
+                const classPattern = /public\s+class\s+(\w+)(?:\s+extends\s+\w+)?\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)*}/g;
+                let match;
+                
+                while ((match = classPattern.exec(content)) !== null) {
+                    const [fullMatch, className, classBody] = match;
+                    
+                    const fields = this.extractJavaFields(classBody);
+                    
+                    if (fields.length > 0) {
+                        const schema = {
+                            name: className,
+                            type: 'java_class',
+                            file: relativePath,
+                            fields: fields,
+                            description: null
+                        };
+                        
+                        this.schemas.push(schema);
+                        console.log(`  📄 Schema: ${className} (${fields.length} fields)`);
+                    }
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error extracting schemas from ${filePath}:`, error.message);
+            }
+        }
+    }
+
+    /**
+     * Extract Java class fields
+     */
+    extractJavaFields(classBody) {
+        const fields = [];
+        
+        // Look for private fields with getters/setters (common pattern)
+        const fieldPattern = /private\s+(\w+(?:<[^>]+>)?)\s+(\w+);/g;
+        let match;
+        
+        while ((match = fieldPattern.exec(classBody)) !== null) {
+            const [fullMatch, fieldType, fieldName] = match;
+            
+            // Check if there are getters/setters for this field
+            const getterPattern = new RegExp(`public\\s+${fieldType}\\s+get${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}\\s*\\(`);
+            const setterPattern = new RegExp(`public\\s+void\\s+set${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}\\s*\\(`);
+            
+            if (getterPattern.test(classBody) || setterPattern.test(classBody)) {
+                fields.push({
+                    name: fieldName,
+                    type: fieldType,
+                    required: true,
+                    default: null
+                });
+            }
+        }
+        
+        return fields;
     }
 
     /**
@@ -393,7 +1356,103 @@ class APIAnalyzer {
     async extractDependencies() {
         console.log('🔗 Extracting external dependencies...');
         
-        // Check requirements.txt for Python dependencies
+        // .NET dependencies from .csproj files
+        if (this.framework === 'ASP.NET Core' || this.framework === '.NET') {
+            await this.extractDotNetDependencies();
+        }
+        
+        // Node.js dependencies from package.json
+        if (this.framework === 'Express.js' || this.framework === 'NestJS' || this.framework === 'Next.js') {
+            await this.extractNodeDependencies();
+        }
+        
+        // Python dependencies from requirements.txt
+        if (this.framework === 'FastAPI' || this.framework === 'Flask' || this.framework === 'Django') {
+            await this.extractPythonDependencies();
+        }
+        
+        // Java dependencies from pom.xml or build.gradle
+        if (this.framework === 'Spring Boot' || this.framework === 'Java') {
+            await this.extractJavaDependencies();
+        }
+        
+        // Go dependencies from go.mod
+        if (this.framework === 'Gin' || this.framework === 'Fiber' || this.framework === 'Go') {
+            await this.extractGoDependencies();
+        }
+        
+        // Look for external API calls in code
+        await this.extractExternalAPICalls();
+        
+        console.log(`📦 Found ${this.dependencies.length} dependencies`);
+    }
+
+    /**
+     * Extract .NET NuGet dependencies from .csproj files
+     */
+    async extractDotNetDependencies() {
+        const csprojFiles = this.findFiles(this.servicePath, /\.csproj$/);
+        
+        for (const csprojPath of csprojFiles) {
+            try {
+                const content = fs.readFileSync(csprojPath, 'utf8');
+                
+                // Extract PackageReference elements
+                const packageMatches = content.match(/<PackageReference\s+Include="([^"]+)"\s+Version="([^"]+)"\s*\/>/g);
+                if (packageMatches) {
+                    for (const match of packageMatches) {
+                        const includeMatch = match.match(/Include="([^"]+)"/);
+                        const versionMatch = match.match(/Version="([^"]+)"/);
+                        
+                        if (includeMatch && versionMatch) {
+                            this.dependencies.push({
+                                name: includeMatch[1],
+                                version: versionMatch[1],
+                                type: 'nuget_package'
+                            });
+                        }
+                    }
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error reading ${csprojPath}:`, error.message);
+            }
+        }
+    }
+
+    /**
+     * Extract Node.js dependencies from package.json
+     */
+    async extractNodeDependencies() {
+        const packageJsonPath = path.join(this.servicePath, 'package.json');
+        if (fs.existsSync(packageJsonPath)) {
+            try {
+                const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+                
+                const allDeps = {
+                    ...packageJson.dependencies,
+                    ...packageJson.devDependencies,
+                    ...packageJson.peerDependencies
+                };
+                
+                for (const [name, version] of Object.entries(allDeps)) {
+                    this.dependencies.push({
+                        name: name,
+                        version: version,
+                        type: 'npm_package'
+                    });
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error reading package.json:`, error.message);
+            }
+        }
+    }
+
+    /**
+     * Extract Python dependencies from requirements.txt
+     */
+    async extractPythonDependencies() {
         const reqPath = path.join(this.servicePath, 'requirements.txt');
         if (fs.existsSync(reqPath)) {
             const content = fs.readFileSync(reqPath, 'utf8');
@@ -410,11 +1469,69 @@ class APIAnalyzer {
                 }
             }
         }
-        
-        // Look for external API calls in code
-        await this.extractExternalAPICalls();
-        
-        console.log(`📦 Found ${this.dependencies.length} dependencies`);
+    }
+
+    /**
+     * Extract Java dependencies from pom.xml
+     */
+    async extractJavaDependencies() {
+        const pomPath = path.join(this.servicePath, 'pom.xml');
+        if (fs.existsSync(pomPath)) {
+            try {
+                const content = fs.readFileSync(pomPath, 'utf8');
+                
+                // Extract dependency elements
+                const depMatches = content.match(/<dependency>[\s\S]*?<\/dependency>/g);
+                if (depMatches) {
+                    for (const depMatch of depMatches) {
+                        const groupMatch = depMatch.match(/<groupId>([^<]+)<\/groupId>/);
+                        const artifactMatch = depMatch.match(/<artifactId>([^<]+)<\/artifactId>/);
+                        const versionMatch = depMatch.match(/<version>([^<]+)<\/version>/);
+                        
+                        if (groupMatch && artifactMatch) {
+                            this.dependencies.push({
+                                name: `${groupMatch[1]}:${artifactMatch[1]}`,
+                                version: versionMatch ? versionMatch[1] : 'latest',
+                                type: 'maven_dependency'
+                            });
+                        }
+                    }
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error reading pom.xml:`, error.message);
+            }
+        }
+    }
+
+    /**
+     * Extract Go dependencies from go.mod
+     */
+    async extractGoDependencies() {
+        const goModPath = path.join(this.servicePath, 'go.mod');
+        if (fs.existsSync(goModPath)) {
+            try {
+                const content = fs.readFileSync(goModPath, 'utf8');
+                
+                // Extract require statements
+                const requireMatches = content.match(/^\s*([^\s]+)\s+([^\s]+)/gm);
+                if (requireMatches) {
+                    for (const match of requireMatches) {
+                        const parts = match.trim().split(/\s+/);
+                        if (parts.length >= 2 && !parts[0].startsWith('//')) {
+                            this.dependencies.push({
+                                name: parts[0],
+                                version: parts[1],
+                                type: 'go_module'
+                            });
+                        }
+                    }
+                }
+                
+            } catch (error) {
+                console.error(`  ⚠️  Error reading go.mod:`, error.message);
+            }
+        }
     }
 
     /**
