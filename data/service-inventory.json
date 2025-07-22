@@ -1,0 +1,720 @@
+{
+  "timestamp": "2025-07-22T10:02:26.988Z",
+  "totalServices": 37,
+  "services": [
+    {
+      "name": "MapGeoJsonTool-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/MapGeoJsonTool-trunk",
+      "type": "service",
+      "framework": "Node.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/MapGeoJsonTool-trunk/src/core/api.js"
+      ],
+      "lastModified": "2025-07-22T07:48:10.750Z"
+    },
+    {
+      "name": "automate-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/automate-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:48:10.750Z"
+    },
+    {
+      "name": "azure-ocr-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/azure-ocr-trunk",
+      "type": "service",
+      "framework": "FastAPI",
+      "language": "Python",
+      "configFiles": [
+        "Dockerfile",
+        "requirements.txt"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/azure-ocr-trunk/main.py",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/azure-ocr-trunk/src/mock_master_data_api/mock_master_api.py",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/azure-ocr-trunk/src/route/routes.py",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/azure-ocr-trunk/src/service/gpt_main.py",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/azure-ocr-trunk/src/service/ocr_main.py",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/azure-ocr-trunk/test/test_ocr_main.py"
+      ],
+      "lastModified": "2025-07-22T07:48:10.750Z"
+    },
+    {
+      "name": "crontab-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/crontab-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:48:10.750Z"
+    },
+    {
+      "name": "flutter-login-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/flutter-login-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:48:10.750Z"
+    },
+    {
+      "name": "keycloak-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/keycloak-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:48:10.750Z"
+    },
+    {
+      "name": "obk-app-temp-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk",
+      "type": "service",
+      "framework": "Node.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-document/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-document/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-document/src/controllers/category_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-document/src/controllers/document_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-document/src/controllers/feedback_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-document/src/controllers/health_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-document/src/controllers/type_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-document/src/utils/server.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/account_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/accounts_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/auth_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/external_identity_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/identity_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/otp_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/profile_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/qr_token_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/setting_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/controllers/task_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-iam/src/utils/server.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-notification/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-notification/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-notification/src/controllers/campaign_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-notification/src/controllers/message_category_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-notification/src/controllers/message_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-notification/src/controllers/message_template_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-notification/src/controllers/notification_group_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-notification/src/controllers/notification_setting_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-notification/src/controllers/recipient_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-notification/src/utils/server.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-template/src/templates/ob-template/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-template/src/templates/ob-template/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-template/src/templates/ob-template/src/controllers/health_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-template/src/templates/ob-template/src/utils/server.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-websocket/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-websocket/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-websocket/src/controllers/broadcast_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-websocket/src/controllers/health_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-temp-trunk/backend/ob-websocket/src/utils/server.ts"
+      ],
+      "lastModified": "2025-07-22T07:48:10.750Z"
+    },
+    {
+      "name": "obk-app-universal-link-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-app-universal-link-trunk",
+      "type": "service",
+      "framework": "Next.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "Dockerfile",
+        "package.json"
+      ],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:48:10.760Z"
+    },
+    {
+      "name": "obk-art-culture-api-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-art-culture-api-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:48:10.760Z"
+    },
+    {
+      "name": "obk-booking-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-booking-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:48:10.760Z"
+    },
+    {
+      "name": "obk-campaign-web-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-campaign-web-trunk",
+      "type": "service",
+      "framework": "Next.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "Dockerfile",
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-campaign-web-trunk/src/app/[locale]/cms/logout/route.ts"
+      ],
+      "lastModified": "2025-07-22T07:45:11.105Z"
+    },
+    {
+      "name": "obk-cms-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-cms-trunk",
+      "type": "service",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [
+        "Dockerfile"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-cms-trunk/app/__mocks__/server.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-cms-trunk/app/src/utils/api.ts"
+      ],
+      "lastModified": "2025-07-22T07:45:11.435Z"
+    },
+    {
+      "name": "obk-indoor-navigation-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-indoor-navigation-trunk",
+      "type": "service",
+      "framework": "React",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-indoor-navigation-trunk/App.js"
+      ],
+      "lastModified": "2025-07-22T07:45:11.505Z"
+    },
+    {
+      "name": "obk-infra-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-infra-trunk",
+      "type": "service",
+      "framework": "Node.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "Dockerfile",
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-infra-trunk/constructor/build-argo-app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-infra-trunk/main.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-infra-trunk/stacks/app.ts"
+      ],
+      "lastModified": "2025-07-22T07:45:11.565Z"
+    },
+    {
+      "name": "obk-marcom-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-marcom-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:45:11.575Z"
+    },
+    {
+      "name": "obk-mtel-bms-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk",
+      "type": "service",
+      "framework": "Express.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/ac_requests_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/ac_zone_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/building_access_log_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/floors_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/health_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/holidays_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/integrations/fs/jobs_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/integrations/fs/members_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/integrations/fs/parking_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/integrations/fs/webhook_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/issue_types_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/jobs_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/locations_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/members/commands_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/members_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/parking_access_log_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/parking_lots_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/parking_redemption_rates_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/parking_reservations_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/parking_spaces_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/parking_tickets_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/passes_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/payments_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/queries_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/sensors_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/service_requests_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/tenants_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/towers_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/traffic_records_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/v2/members_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/v2/parking_tickets_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/valet_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/visitor_schedules_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/visitor_tokens_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/controllers/visitors_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bms-trunk/src/server.ts"
+      ],
+      "lastModified": "2025-07-22T07:45:34.417Z"
+    },
+    {
+      "name": "obk-mtel-bus-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bus-trunk",
+      "type": "service",
+      "framework": "Express.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bus-trunk/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bus-trunk/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bus-trunk/src/controllers/integrations/montri/webhook_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bus-trunk/src/controllers/shuttle_bus_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bus-trunk/src/controllers/task_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bus-trunk/src/controllers/v2/integrations/montri/webhook_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-bus-trunk/src/server.ts"
+      ],
+      "lastModified": "2025-07-22T07:45:34.447Z"
+    },
+    {
+      "name": "obk-mtel-document-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk",
+      "type": "service",
+      "framework": "Express.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk/src/controllers/category_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk/src/controllers/document_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk/src/controllers/feedback_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk/src/controllers/history_category_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk/src/controllers/history_document_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk/src/controllers/test_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk/src/controllers/type_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk/src/controllers/whathappening_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-document-trunk/src/server.ts"
+      ],
+      "lastModified": "2025-07-22T07:45:34.487Z"
+    },
+    {
+      "name": "obk-mtel-iam-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk",
+      "type": "service",
+      "framework": "Express.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/account_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/accounts_admin_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/accounts_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/activity_log_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/auth_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/external_identity_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/identity_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/otp_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/permissions_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/profile_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/qr_token_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/roles_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/setting_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/sign_in_identity_log_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/task_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/controllers/tokens_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-iam-trunk/src/server.ts"
+      ],
+      "lastModified": "2025-07-22T07:45:34.557Z"
+    },
+    {
+      "name": "obk-mtel-notification-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk",
+      "type": "service",
+      "framework": "Express.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/campaign_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/message_category_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/message_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/message_template_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/notification_group_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/notification_setting_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/notifications_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/recipient_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/test_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/v2/campaigns_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/v2/message_categories_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/v2/message_templates_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/v2/tags_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/v2/target_groups_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/controllers/visitor_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-notification-trunk/src/server.ts"
+      ],
+      "lastModified": "2025-07-22T07:45:34.617Z"
+    },
+    {
+      "name": "obk-mtel-websocket-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-websocket-trunk",
+      "type": "service",
+      "framework": "Express.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "Dockerfile",
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-websocket-trunk/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-websocket-trunk/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-websocket-trunk/src/controllers/broadcast_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-websocket-trunk/src/controllers/health_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-mtel-websocket-trunk/src/utils/server.ts"
+      ],
+      "lastModified": "2025-07-22T07:46:22.761Z"
+    },
+    {
+      "name": "obk-operation-app-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-operation-app-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:46:22.761Z"
+    },
+    {
+      "name": "obk-operation-backend-dev",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-operation-backend-dev",
+      "type": "service",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [
+        "Dockerfile"
+      ],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:53:04.552Z"
+    },
+    {
+      "name": "obk-parking-payment-dev",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-payment-dev",
+      "type": "service",
+      "framework": "Next.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "Dockerfile",
+        "docker-compose.yml",
+        "package.json"
+      ],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:46:22.761Z"
+    },
+    {
+      "name": "obk-parking-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-trunk",
+      "type": "service",
+      "framework": "Express.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-trunk/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-trunk/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-trunk/src/controllers/campaign_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-trunk/src/controllers/config_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-trunk/src/controllers/health_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-trunk/src/controllers/parking_detail_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-trunk/src/controllers/receipts_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-trunk/src/controllers/test_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-parking-trunk/src/server.ts"
+      ],
+      "lastModified": "2025-07-22T07:46:22.761Z"
+    },
+    {
+      "name": "obk-pms-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-pms-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:46:22.761Z"
+    },
+    {
+      "name": "obk-predict-location-main",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-predict-location-main",
+      "type": "service",
+      "framework": "Python",
+      "language": "Python",
+      "configFiles": [
+        "Dockerfile",
+        "docker-compose.yml",
+        "requirements.txt"
+      ],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:46:22.761Z"
+    },
+    {
+      "name": "obk-residential-ipad-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-residential-ipad-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:46:22.761Z"
+    },
+    {
+      "name": "obk-sso-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-sso-trunk",
+      "type": "service",
+      "framework": "Node.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "Dockerfile",
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-sso-trunk/src/account/account.controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-sso-trunk/src/app.controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-sso-trunk/src/main.ts"
+      ],
+      "lastModified": "2025-07-22T07:46:22.761Z"
+    },
+    {
+      "name": "obk-sustainable-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-sustainable-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:46:22.761Z"
+    },
+    {
+      "name": "obk-wifi-auth-web-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-wifi-auth-web-trunk",
+      "type": "service",
+      "framework": "Next.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "Dockerfile",
+        "docker-compose.yml",
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-wifi-auth-web-trunk/src/config/api.js",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-wifi-auth-web-trunk/src/config/app.js",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-wifi-auth-web-trunk/src/config/route.js"
+      ],
+      "lastModified": "2025-07-22T07:45:39.267Z"
+    },
+    {
+      "name": "obk-wiremock-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-wiremock-trunk",
+      "type": "service",
+      "framework": "Express.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "Dockerfile",
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/obk-wiremock-trunk/server.js"
+      ],
+      "lastModified": "2025-07-22T07:46:14.830Z"
+    },
+    {
+      "name": "one-bangkok-app-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk",
+      "type": "service",
+      "framework": "Node.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "package.json"
+      ],
+      "hasAPI": true,
+      "apiFiles": [
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-document/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-document/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-document/src/controllers/category_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-document/src/controllers/document_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-document/src/controllers/feedback_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-document/src/controllers/health_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-document/src/controllers/type_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-document/src/utils/server.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/account_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/accounts_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/auth_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/external_identity_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/identity_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/otp_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/profile_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/qr_token_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/setting_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/controllers/task_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-iam/src/utils/server.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-notification/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-notification/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-notification/src/controllers/campaign_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-notification/src/controllers/message_category_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-notification/src/controllers/message_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-notification/src/controllers/message_template_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-notification/src/controllers/notification_group_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-notification/src/controllers/notification_setting_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-notification/src/controllers/recipient_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-notification/src/utils/server.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-template/src/templates/ob-template/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-template/src/templates/ob-template/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-template/src/templates/ob-template/src/controllers/health_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-template/src/templates/ob-template/src/utils/server.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-websocket/src/app.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-websocket/src/controllers/base_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-websocket/src/controllers/broadcast_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-websocket/src/controllers/health_controller.ts",
+        "/home/tkhongsap/my-gitlab/tcctech-obk-service/one-bangkok-app-trunk/backend/ob-websocket/src/utils/server.ts"
+      ],
+      "lastModified": "2025-07-22T07:46:16.070Z"
+    },
+    {
+      "name": "onebangkok-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/onebangkok-trunk",
+      "type": "unknown",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:46:35.262Z"
+    },
+    {
+      "name": "redirect-onebangkok-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/redirect-onebangkok-trunk",
+      "type": "service",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [
+        "Dockerfile"
+      ],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:46:35.272Z"
+    },
+    {
+      "name": "resize-service-trunk",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/resize-service-trunk",
+      "type": "service",
+      "framework": "Next.js",
+      "language": "JavaScript/TypeScript",
+      "configFiles": [
+        "Dockerfile",
+        "package.json"
+      ],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:46:47.783Z"
+    },
+    {
+      "name": "tcct-serviceabstraction-dev",
+      "path": "/home/tkhongsap/my-gitlab/tcctech-obk-service/tcct-serviceabstraction-dev",
+      "type": "service",
+      "framework": "unknown",
+      "language": "unknown",
+      "configFiles": [
+        "Dockerfile"
+      ],
+      "hasAPI": false,
+      "apiFiles": [],
+      "lastModified": "2025-07-22T07:46:47.973Z"
+    }
+  ],
+  "summary": {
+    "byFramework": {
+      "Node.js": 5,
+      "unknown": 16,
+      "FastAPI": 1,
+      "Next.js": 5,
+      "React": 1,
+      "Express.js": 8,
+      "Python": 1
+    },
+    "byLanguage": {
+      "JavaScript/TypeScript": 19,
+      "unknown": 16,
+      "Python": 2
+    },
+    "withAPI": 18,
+    "withoutAPI": 19
+  }
+}

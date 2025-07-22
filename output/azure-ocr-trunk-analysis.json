@@ -1,0 +1,297 @@
+{
+  "service": {
+    "name": "azure-ocr-trunk",
+    "path": "azure-ocr-trunk",
+    "framework": "FastAPI",
+    "language": "Python",
+    "analyzed_at": "2025-07-22T10:04:54.911Z"
+  },
+  "api": {
+    "total_endpoints": 7,
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/config/store/whitelist",
+        "functionName": "unknown",
+        "description": "GET /config/store/whitelist",
+        "file": "src/mock_master_data_api/mock_master_api.py",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "whitelist"
+          },
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "property_name"
+          },
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "doc_type"
+          },
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "history"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "GET",
+        "path": "/config/property/name",
+        "functionName": "unknown",
+        "description": "GET /config/property/name",
+        "file": "src/mock_master_data_api/mock_master_api.py",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "property_name"
+          },
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "doc_type"
+          },
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "history"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "GET",
+        "path": "/config/doc",
+        "functionName": "unknown",
+        "description": "GET /config/doc",
+        "file": "src/mock_master_data_api/mock_master_api.py",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "doc_type"
+          },
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "history"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "GET",
+        "path": "/receipt/all",
+        "functionName": "unknown",
+        "description": "GET /receipt/all",
+        "file": "src/mock_master_data_api/mock_master_api.py",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "history"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "GET",
+        "path": "/health",
+        "functionName": "health_check",
+        "description": "Health check endpoint to verify if the API is running.\n    Returns a simple status message with 200 OK status code.",
+        "file": "src/route/routes.py",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "{\"status\": \"healthy\", \"message\": \"API is up and running\"}"
+          },
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "extracted_receipt"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "POST",
+        "path": "/receipt-ocr",
+        "functionName": "read_receipt",
+        "description": "Endpoint to extract receipt information from a given source using OCR.",
+        "file": "src/route/routes.py",
+        "parameters": [
+          {
+            "name": "source",
+            "type": "str",
+            "required": true,
+            "location": "query"
+          }
+        ],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "extracted_receipt"
+          },
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "extracted_receipt"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      },
+      {
+        "method": "POST",
+        "path": "/receipt-ocr-gpt",
+        "functionName": "unknown",
+        "description": "POST /receipt-ocr-gpt",
+        "file": "src/route/routes.py",
+        "parameters": [],
+        "responses": [
+          {
+            "status": 200,
+            "description": "Success response",
+            "example": "extracted_receipt"
+          }
+        ],
+        "middleware": [],
+        "authentication": null
+      }
+    ],
+    "schemas": [
+      {
+        "name": "SubErrorResponse",
+        "type": "pydantic_model",
+        "file": "src/utils/response.py",
+        "fields": [
+          {
+            "name": "status",
+            "type": "str",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "http_status",
+            "type": "int",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "str",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "step",
+            "type": "str",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ErrorResponse",
+        "type": "pydantic_model",
+        "file": "src/utils/response.py",
+        "fields": [
+          {
+            "name": "detail",
+            "type": "dict",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      }
+    ]
+  },
+  "dependencies": {
+    "total": 11,
+    "external_apis": [],
+    "packages": [
+      {
+        "name": "azure-ai-documentintelligence",
+        "version": "1.0.1",
+        "type": "python_package"
+      },
+      {
+        "name": "azure-core",
+        "version": "1.32.0",
+        "type": "python_package"
+      },
+      {
+        "name": "openai",
+        "version": "1.72.0",
+        "type": "python_package"
+      },
+      {
+        "name": "python-dotenv",
+        "version": "1.1.0",
+        "type": "python_package"
+      },
+      {
+        "name": "Requests",
+        "version": "2.32.3",
+        "type": "python_package"
+      },
+      {
+        "name": "numpy",
+        "version": "2.2.4",
+        "type": "python_package"
+      },
+      {
+        "name": "uvicorn",
+        "version": "0.34.1",
+        "type": "python_package"
+      },
+      {
+        "name": "fastapi",
+        "version": "0.115.12",
+        "type": "python_package"
+      },
+      {
+        "name": "redis",
+        "version": "6.1.0",
+        "type": "python_package"
+      },
+      {
+        "name": "python-dateutil",
+        "version": "2.9.0.post0",
+        "type": "python_package"
+      },
+      {
+        "name": "scipy",
+        "version": "1.15.2",
+        "type": "python_package"
+      }
+    ]
+  },
+  "summary": {
+    "methods": {
+      "GET": 5,
+      "POST": 2
+    },
+    "has_authentication": false,
+    "has_documentation": true
+  }
+}

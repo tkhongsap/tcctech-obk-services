@@ -1,0 +1,223 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "azure-ocr-trunk API",
+    "version": "1.0.0",
+    "description": "API documentation for azure-ocr-trunk service (FastAPI)",
+    "contact": {
+      "name": "API Documentation Generator"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/config/store/whitelist": {
+      "get": {
+        "summary": "GET /config/store/whitelist",
+        "description": "GET /config/store/whitelist",
+        "operationId": "unknown",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/config/property/name": {
+      "get": {
+        "summary": "GET /config/property/name",
+        "description": "GET /config/property/name",
+        "operationId": "unknown",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/config/doc": {
+      "get": {
+        "summary": "GET /config/doc",
+        "description": "GET /config/doc",
+        "operationId": "unknown",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receipt/all": {
+      "get": {
+        "summary": "GET /receipt/all",
+        "description": "GET /receipt/all",
+        "operationId": "unknown",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check endpoint to verify if the API is running.\n    Returns a simple status message with 200 OK status code.",
+        "description": "Health check endpoint to verify if the API is running.\n    Returns a simple status message with 200 OK status code.",
+        "operationId": "health_check",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receipt-ocr": {
+      "post": {
+        "summary": "Endpoint to extract receipt information from a given source using OCR.",
+        "description": "Endpoint to extract receipt information from a given source using OCR.",
+        "operationId": "read_receipt",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "source",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receipt-ocr-gpt": {
+      "post": {
+        "summary": "POST /receipt-ocr-gpt",
+        "description": "POST /receipt-ocr-gpt",
+        "operationId": "unknown",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SubErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "status"
+          },
+          "http_status": {
+            "type": "integer",
+            "description": "http_status"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          },
+          "step": {
+            "type": "string",
+            "description": "step"
+          }
+        },
+        "required": [
+          "status",
+          "http_status",
+          "message",
+          "step"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "object",
+            "description": "detail"
+          }
+        },
+        "required": [
+          "detail"
+        ]
+      }
+    }
+  }
+}

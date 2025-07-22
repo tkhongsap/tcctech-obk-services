@@ -30,9 +30,9 @@
 ## Tasks
 
 - [ ] 1.0 Complete Service Discovery and Folder Inventory (Read-Only)
-  - [ ] 1.1 Create directory listing script to read folder structure and identify ALL folders from automate-trunk to tcct-serviceabstraction-dev
-  - [ ] 1.2 Generate complete list of all 37+ OBK service folders by reading directory contents
-  - [ ] 1.3 Implement folder validation by checking for common project files (package.json, pom.xml, etc.)
+  - [x] 1.1 Create directory listing script to read folder structure and identify ALL folders from automate-trunk to tcct-serviceabstraction-dev
+  - [x] 1.2 Generate complete list of all 37+ OBK service folders by reading directory contents
+  - [x] 1.3 Implement folder validation by checking for common project files (package.json, pom.xml, etc.)
   - [ ] 1.4 Create service identification logic by reading configuration files to detect project types and frameworks
   - [ ] 1.5 Build master folder inventory JSON file listing all discovered services
   - [ ] 1.6 Set up configuration file for file patterns to analyze per framework type
