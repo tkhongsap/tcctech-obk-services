@@ -1,10 +1,10 @@
 ## Relevant Files
 
-- `scripts/service-discovery.js` - Main service discovery script to identify all services from automate-trunk to tcct-serviceabstraction-dev
-- `scripts/api-analyzer.js` - Core API analysis engine for parsing codebases and extracting endpoint information
-- `scripts/schema-extractor.js` - Schema extraction utility for request/response format documentation
-- `scripts/dependency-mapper.js` - Service dependency mapping and external API tracking utility
-- `scripts/output-generator.js` - Multi-format output generation (Markdown, OpenAPI, JSON/YAML)
+- `scripts/service-discovery.js` - Read-only script to scan directories and identify all services from automate-trunk to tcct-serviceabstraction-dev
+- `scripts/api-analyzer.js` - Static code analysis engine for reading source files and extracting endpoint information
+- `scripts/schema-extractor.js` - File parser to extract schemas from type definitions and validation code
+- `scripts/dependency-mapper.js` - Static analysis tool to detect external API calls by reading import statements and HTTP client usage
+- `scripts/output-generator.js` - Documentation generator that creates Markdown, OpenAPI, and JSON/YAML from analyzed data
 - `templates/api-inventory-template.md` - Standard template for service API documentation
 - `templates/openapi-template.yaml` - OpenAPI specification template for services
 - `config/analysis-config.json` - Configuration file for analysis rules and output formats
@@ -24,28 +24,30 @@
 - Maintain strict folder processing checklist to ensure all 37+ folders are covered
 - Each folder should have its own api-inventory.md, openapi.yaml, and dependency-map.json files
 - Progress tracking is essential: always know which folder is currently being processed and how many remain
+- **READ-ONLY OPERATION**: No code execution, no testing, no service startup - only file reading and analysis
+- All scripts are simple file readers and parsers - no complex execution required
 
 ## Tasks
 
-- [ ] 1.0 Complete Service Discovery and Folder Inventory
-  - [ ] 1.1 Create comprehensive directory scanning script to identify ALL folders from automate-trunk to tcct-serviceabstraction-dev
-  - [ ] 1.2 Generate complete list of all 37+ OBK service folders with full directory paths
-  - [ ] 1.3 Implement folder validation system to ensure no directories are missed or skipped
-  - [ ] 1.4 Create service identification logic to detect project types and frameworks in each folder
-  - [ ] 1.5 Build master folder inventory checklist with processing status tracking
-  - [ ] 1.6 Set up configuration file for analysis rules and folder processing order
-  - [ ] 1.7 Create folder processing log system to track completion status for each directory
-  - [ ] 1.8 Implement double-check validation against known service list to prevent omissions
+- [ ] 1.0 Complete Service Discovery and Folder Inventory (Read-Only)
+  - [ ] 1.1 Create directory listing script to read folder structure and identify ALL folders from automate-trunk to tcct-serviceabstraction-dev
+  - [ ] 1.2 Generate complete list of all 37+ OBK service folders by reading directory contents
+  - [ ] 1.3 Implement folder validation by checking for common project files (package.json, pom.xml, etc.)
+  - [ ] 1.4 Create service identification logic by reading configuration files to detect project types and frameworks
+  - [ ] 1.5 Build master folder inventory JSON file listing all discovered services
+  - [ ] 1.6 Set up configuration file for file patterns to analyze per framework type
+  - [ ] 1.7 Create progress tracking file to monitor which folders have been analyzed
+  - [ ] 1.8 Implement validation by comparing discovered folders against expected service count
 
-- [ ] 2.0 Single-Folder API Analysis Engine Development
-  - [ ] 2.1 Build framework detection system for individual folders (Express.js, Spring Boot, FastAPI, etc.)
-  - [ ] 2.2 Implement single-folder API endpoint detection for all HTTP methods and route patterns
-  - [ ] 2.3 Create folder-specific query parameter and path variable extraction with type constraints
-  - [ ] 2.4 Build request/response header analysis including authentication requirements per folder
-  - [ ] 2.5 Implement complete schema extraction with nested object definitions for one folder at a time
-  - [ ] 2.6 Create example payload generation for success, error, and edge case scenarios per folder
-  - [ ] 2.7 Build error handling documentation system for all HTTP status codes per folder
-  - [ ] 2.8 Implement strict one-folder-at-a-time processing with context isolation between folders
+- [ ] 2.0 Static Code Analysis Engine Development (Read-Only)
+  - [ ] 2.1 Build file pattern detection to identify framework type by reading package.json, pom.xml, requirements.txt, etc.
+  - [ ] 2.2 Implement route file parsing to extract API endpoints from Express routes, Spring controllers, FastAPI decorators
+  - [ ] 2.3 Create regex patterns to extract query parameters and path variables from route definitions
+  - [ ] 2.4 Build header detection by parsing middleware files and authentication decorators
+  - [ ] 2.5 Implement type definition parsing to extract request/response schemas from TypeScript, Java classes, Python types
+  - [ ] 2.6 Create example payload inference from validation rules and type definitions found in code
+  - [ ] 2.7 Build error response detection by parsing error handling code and exception definitions
+  - [ ] 2.8 Implement file-by-file reading with memory management for large codebases
 
 - [ ] 3.0 Per-Folder Documentation Generation and Git Management
   - [ ] 3.1 Create standardized Markdown template for api-inventory.md files per folder

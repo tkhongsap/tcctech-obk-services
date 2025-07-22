@@ -2,7 +2,7 @@
 
 ## Introduction/Overview
 
-The API Documentation and Inventory System is a comprehensive analysis and documentation tool designed to create structured inventories of all APIs across our microservices architecture (from automate-trunk to tcct-serviceabstraction-dev). This system addresses the current lack of visibility into existing APIs, service dependencies, and external integrations across all of our services .
+The API Documentation and Inventory System is a **read-only static code analysis tool** designed to create structured inventories of all APIs across our microservices architecture (from automate-trunk to tcct-serviceabstraction-dev) by analyzing source code files without executing any services. This system addresses the current lack of visibility into existing APIs, service dependencies, and external integrations across all of our services through static analysis only.
 
 The primary goal is to provide a centralized, searchable, and comprehensive view of our entire API ecosystem to improve developer productivity, reduce integration time, enhance incident response capabilities, and ensure compliance with documentation standards.
 
@@ -33,9 +33,9 @@ The primary goal is to provide a centralized, searchable, and comprehensive view
 
 ## Functional Requirements
 
-1. **Complete Service Discovery**: The system must automatically identify and process ALL services from automate-trunk to tcct-serviceabstraction-dev, ensuring no service is overlooked, processing one service at a time to manage context.
+1. **Complete Service Discovery**: The system must automatically identify and process ALL services from automate-trunk to tcct-serviceabstraction-dev through **static file analysis only**, ensuring no service is overlooked, processing one service at a time to manage context.
 
-2. **Comprehensive API Endpoint Detection**: The system must scan codebases and identify ALL API endpoints with complete detail including:
+2. **Comprehensive API Endpoint Detection**: The system must **read and parse source code files** to identify ALL API endpoints with complete detail including:
    - HTTP methods (GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD, etc.)
    - URL paths and route patterns (including dynamic routes and wildcards)
    - Query parameters and path variables (with types and constraints)
@@ -128,13 +128,23 @@ The primary goal is to provide a centralized, searchable, and comprehensive view
 
 ## Technical Considerations
 
-1. **Codebase Analysis Engine**: Implement parsers for common frameworks (Express.js, Spring Boot, FastAPI, etc.)
-2. **Context Management**: Process one service at a time to avoid overwhelming analysis context
-3. **Pattern Recognition**: Identify common API patterns and frameworks across services
-4. **Data Storage**: Use structured format (JSON/YAML) for easy querying and filtering
-5. **Scalability**: Design to handle ALL services in the architecture efficiently, regardless of total count
-6. **Framework Support**: Support multiple programming languages and frameworks
-7. **Configuration**: Allow customization of analysis rules and output formats
+1. **Static Code Analysis Engine**: Implement read-only parsers for common frameworks (Express.js, Spring Boot, FastAPI, etc.) that analyze source files without execution
+2. **File-Based Analysis**: Read configuration files, route definitions, controller files, and API specifications directly from disk
+3. **No Runtime Execution**: The system must NOT start servers, run applications, or execute any service code
+4. **Context Management**: Process one service folder at a time to avoid overwhelming analysis context
+5. **Pattern Recognition**: Identify common API patterns and frameworks through static code analysis
+6. **Data Storage**: Use structured format (JSON/YAML) for easy querying and filtering
+7. **Scalability**: Design to handle ALL services in the architecture efficiently through file reading only
+8. **Framework Support**: Support multiple programming languages and frameworks through static analysis
+9. **Configuration**: Allow customization of analysis rules and output formats
+
+## Analysis Approach
+
+1. **Read-Only Operations**: All analysis must be performed by reading files only - no code execution
+2. **File Pattern Recognition**: Identify API endpoints by parsing route files, controllers, and configuration
+3. **Static Dependency Analysis**: Detect external API calls by searching for HTTP client usage in code
+4. **Documentation Extraction**: Parse comments, annotations, and documentation files
+5. **Schema Inference**: Analyze type definitions, validation rules, and data models from source code
 
 ## Success Metrics
 
