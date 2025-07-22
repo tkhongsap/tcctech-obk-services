@@ -27,6 +27,28 @@
 - **READ-ONLY OPERATION**: No code execution, no testing, no service startup - only file reading and analysis
 - All scripts are simple file readers and parsers - no complex execution required
 
+### Processing Protocol (Per @process-api-tasks.mdc Rule)
+
+**For Each Service Processing:**
+1. **Run Analysis**: `node scripts/api-analyzer.js [service-name]`
+2. **Generate Documentation**: `node scripts/output-generator.js output/[service-name]-analysis.json [service-name]`
+3. **Immediate Commit**: `git add . && git commit -m "docs: API analysis for [service-name]" && git push`
+4. **Update Task List**: Mark service as `[x]` with metrics
+5. **Update Progress Counter**: Increment completion count (e.g., 2/37 COMPLETED)
+6. **Continue Automatically**: Move to next service without user approval
+
+**Error Handling Protocol:**
+- **Stop processing** if any service analysis fails
+- **Report specific errors** and suggested fixes
+- **Resume processing** from the failed service after fixes
+- **Never skip services** - all 37 must be completed
+
+**Quality Validation Per Service:**
+- Verify all endpoints discovered and documented
+- Confirm schemas and dependencies extracted
+- Validate generated files exist (api-inventory.md, openapi.yaml, dependency-map.json)
+- Ensure git commit successful before proceeding
+
 ## Tasks
 
 - [x] 1.0 Complete Service Discovery and Folder Inventory (Read-Only)
@@ -73,7 +95,26 @@
 
 - [ ] 5.0 Folder-by-Folder Processing Execution and Quality Assurance **[PROGRESS: 1/37 COMPLETED]**
 
-### 5.1 Service Processing Checklist - Complete Analysis for Each Service (1/37 Completed)
+### 5.1 Service Processing Workflow (Per @process-api-tasks.mdc Rule)
+
+**Processing Commands for Each Service:**
+```bash
+# For each service in the checklist below:
+node scripts/api-analyzer.js [service-name]
+node scripts/output-generator.js output/[service-name]-analysis.json [service-name]
+git add . && git commit -m "docs: API analysis for [service-name]" && git push
+# Update task list: Mark service as [x] with endpoint/schema/dependency counts
+# Update progress counter (e.g., 2/37 COMPLETED)
+# Continue automatically to next service
+```
+
+**Automation Rules:**
+- ✅ **No user approval required** between services once processing starts
+- ✅ **Automatic progression** through the service list in order listed
+- ⚠️ **Stop only on errors** - report issues and wait for fixes
+- ✅ **Quality validation** after each service completion
+
+### 5.2 Service Processing Checklist - Complete Analysis for Each Service (1/37 Completed)
 
 #### ✅ **COMPLETED SERVICES (1/37):**
 - [x] **azure-ocr-trunk** - FastAPI/Python - 7 endpoints, 2 schemas, 11 dependencies ✓
@@ -125,19 +166,19 @@
 - [ ] **obk-masterdata-trunk** - Framework: TBD
 - [ ] **obk-masterdata-dev** - Framework: TBD
 
-### 5.2 Processing Infrastructure Tasks
-  - [x] 5.2.1 Implement folder processing checklist with mandatory validation before moving to next folder
-  - [x] 5.2.2 Create automated git commit with descriptive message after each folder completion
-  - [x] 5.2.3 Implement automated git push to remote repository after each folder documentation
-  - [x] 5.2.4 Build progress tracking system showing X of 37+ folders completed
-  - [x] 5.2.5 Implement quality assurance validation to ensure no folders are skipped
+### 5.3 Processing Infrastructure Tasks
+  - [x] 5.3.1 Implement folder processing checklist with mandatory validation before moving to next folder
+  - [x] 5.3.2 Create automated git commit with descriptive message after each folder completion
+  - [x] 5.3.3 Implement automated git push to remote repository after each folder documentation
+  - [x] 5.3.4 Build progress tracking system showing X of 37+ folders completed
+  - [x] 5.3.5 Implement quality assurance validation to ensure no folders are skipped
 
-### 5.3 Final Consolidation Tasks (Execute ONLY after all 37 services completed)
-  - [ ] 5.3.1 Create final consolidation step only after ALL 37+ folders are individually processed
-  - [ ] 5.3.2 Build searchable and filterable API explorer interface using all folder data
-  - [ ] 5.3.3 Create service dependency visualization with interactive graphs from all folders
-  - [ ] 5.3.4 Implement cross-service API discovery and search functionality across all processed folders
-  - [ ] 5.3.5 Build export capabilities for filtered results and custom reports
-  - [ ] 5.3.6 Create responsive design for various screen sizes and devices
-  - [ ] 5.3.7 Generate final master documentation consolidating all 37+ folders
-  - [ ] 5.3.8 Perform final validation that all folders have been processed and documented 
+### 5.4 Final Consolidation Tasks (Execute ONLY after all 37 services completed)
+  - [ ] 5.4.1 Create final consolidation step only after ALL 37+ folders are individually processed
+  - [ ] 5.4.2 Build searchable and filterable API explorer interface using all folder data
+  - [ ] 5.4.3 Create service dependency visualization with interactive graphs from all folders
+  - [ ] 5.4.4 Implement cross-service API discovery and search functionality across all processed folders
+  - [ ] 5.4.5 Build export capabilities for filtered results and custom reports
+  - [ ] 5.4.6 Create responsive design for various screen sizes and devices
+  - [ ] 5.4.7 Generate final master documentation consolidating all 37+ folders
+  - [ ] 5.4.8 Perform final validation that all folders have been processed and documented 
