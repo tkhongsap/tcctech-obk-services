@@ -6,7 +6,8 @@
     "language": "Python",
     "analyzed_at": "2025-07-22T10:34:22.082Z"
   },
-  "api_inventory": {
+  "api": {
+    "total_endpoints": 7,
     "endpoints": [
       {
         "method": "GET",
@@ -222,15 +223,7 @@
         ],
         "description": null
       }
-    ],
-    "summary": {
-      "methods": {
-        "GET": 5,
-        "POST": 2
-      },
-      "has_authentication": false,
-      "has_documentation": true
-    }
+    ]
   },
   "dependencies": {
     "total": 11,
@@ -293,5 +286,12 @@
       }
     ]
   },
-  "generated_at": "2025-07-22T10:34:30.541Z"
+  "summary": {
+    "methods": {
+      "GET": 5,
+      "POST": 2
+    },
+    "has_authentication": false,
+    "has_documentation": true
+  }
 }
