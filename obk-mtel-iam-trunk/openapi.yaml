@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "obk-mtel-iam-trunk API",
+    "version": "1.0.0",
+    "description": "API documentation for obk-mtel-iam-trunk service (Express.js)",
+    "contact": {
+      "name": "API Documentation Generator"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "GET /",
+        "description": "GET /",
+        "operationId": "get_",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
