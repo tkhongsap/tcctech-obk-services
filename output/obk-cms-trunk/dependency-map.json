@@ -1,0 +1,43 @@
+{
+  "service": {
+    "name": "obk-cms-trunk",
+    "path": "obk-cms-trunk",
+    "framework": "unknown",
+    "language": "unknown",
+    "analyzed_at": "2025-07-22T13:06:06.406Z"
+  },
+  "api_inventory": {
+    "endpoints": [],
+    "schemas": [],
+    "summary": {
+      "methods": {},
+      "has_authentication": false,
+      "has_documentation": false
+    }
+  },
+  "dependencies": {
+    "total": 3,
+    "external_apis": [
+      {
+        "name": "/api/external-camera-list",
+        "type": "external_api",
+        "method": "GET",
+        "file": "app/src/utils/external-camera-list.ts"
+      },
+      {
+        "name": "/api/image-uploader/proxy-upload",
+        "type": "external_api",
+        "method": "POST",
+        "file": "app/src/utils/image-uploader.ts"
+      },
+      {
+        "name": "/api/receipt-fetching-time",
+        "type": "external_api",
+        "method": "GET",
+        "file": "app/src/utils/receipt-fetching-time.ts"
+      }
+    ],
+    "packages": []
+  },
+  "generated_at": "2025-07-22T13:06:06.647Z"
+}
