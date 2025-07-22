@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBK Services - Interactive API Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .controls {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-group input, .filter-group select {
+            padding: 0.5rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .filter-group input:focus, .filter-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .service-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .service-framework {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .service-metrics {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .metric-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .service-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ OBK Services API Explorer</h1>
+            <p>Interactive dashboard for exploring 37 OBK services and their APIs</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">37</div>
+                    <div>Total Services</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">29</div>
+                    <div>API Endpoints</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">9</div>
+                    <div>API Services</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div>Web Apps</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="filter-group">
+                <input type="text" id="searchInput" placeholder="🔍 Search services..." />
+                <select id="frameworkFilter">
+                    <option value="">All Frameworks</option>
+                    <option value="FastAPI">FastAPI</option>
+                    <option value="Express.js">Express.js</option>
+                    <option value="Next.js">Next.js</option>
+                    <option value="unknown">Configuration/Support</option>
+                </select>
+                <select id="typeFilter">
+                    <option value="">All Types</option>
+                    <option value="api">API Services</option>
+                    <option value="web">Web Applications</option>
+                    <option value="infra">Infrastructure</option>
+                    <option value="support">Support Services</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="services-grid" id="servicesGrid">
+            <!-- Services will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Service data based on our analysis
+        const services = [
+            // API Services
+            { name: 'azure-ocr-trunk', framework: 'FastAPI', type: 'api', endpoints: 7, schemas: 2, dependencies: 11 },
+            { name: 'obk-wiremock-trunk', framework: 'Express.js', type: 'api', endpoints: 15, schemas: 0, dependencies: 0 },
+            { name: 'obk-mtel-bms-trunk', framework: 'Express.js', type: 'api', endpoints: 1, schemas: 0, dependencies: 0 },
+            { name: 'obk-mtel-bus-trunk', framework: 'Express.js', type: 'api', endpoints: 1, schemas: 0, dependencies: 0 },
+            { name: 'obk-parking-trunk', framework: 'Express.js', type: 'api', endpoints: 1, schemas: 0, dependencies: 0 },
+            { name: 'obk-mtel-document-trunk', framework: 'Express.js', type: 'api', endpoints: 1, schemas: 0, dependencies: 0 },
+            { name: 'obk-mtel-iam-trunk', framework: 'Express.js', type: 'api', endpoints: 1, schemas: 0, dependencies: 0 },
+            { name: 'obk-mtel-notification-trunk', framework: 'Express.js', type: 'api', endpoints: 1, schemas: 0, dependencies: 0 },
+            { name: 'obk-mtel-websocket-trunk', framework: 'Express.js', type: 'api', endpoints: 1, schemas: 0, dependencies: 0 },
+            
+            // Infrastructure
+            { name: 'crontab-trunk', framework: 'Cron', type: 'infra', endpoints: 0, schemas: 0, dependencies: 0 },
+            
+            // Web Applications
+            { name: 'obk-app-universal-link-trunk', framework: 'Next.js', type: 'web', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-campaign-web-trunk', framework: 'Next.js', type: 'web', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-parking-payment-dev', framework: 'Next.js', type: 'web', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-wifi-auth-web-trunk', framework: 'Next.js', type: 'web', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'resize-service-trunk', framework: 'Next.js', type: 'web', endpoints: 0, schemas: 0, dependencies: 0 },
+            
+            // Support Services
+            { name: 'MapGeoJsonTool-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'automate-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'flutter-login-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'keycloak-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-app-temp-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-art-culture-api-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-booking-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-cms-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 3 },
+            { name: 'obk-indoor-navigation-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 1 },
+            { name: 'obk-infra-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-marcom-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-operation-app-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-operation-backend-dev', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-pms-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-predict-location-main', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 7 },
+            { name: 'obk-residential-ipad-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-sso-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'obk-sustainable-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'one-bangkok-app-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'onebangkok-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'redirect-onebangkok-trunk', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 },
+            { name: 'tcct-serviceabstraction-dev', framework: 'unknown', type: 'support', endpoints: 0, schemas: 0, dependencies: 0 }
+        ];
+
+        function createServiceCard(service) {
+            const frameworkDisplay = service.framework === 'unknown' ? 'Config/Support' : service.framework;
+            
+            return `
+                <div class="service-card" data-framework="${service.framework}" data-type="${service.type}">
+                    <div class="service-header">
+                        <div>
+                            <div class="service-name">${service.name}</div>
+                            <div class="service-framework">${frameworkDisplay}</div>
+                        </div>
+                    </div>
+                    <div class="service-metrics">
+                        <div class="metric">
+                            <div class="metric-value">${service.endpoints}</div>
+                            <div class="metric-label">Endpoints</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">${service.schemas}</div>
+                            <div class="metric-label">Schemas</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">${service.dependencies}</div>
+                            <div class="metric-label">Dependencies</div>
+                        </div>
+                    </div>
+                    <div class="service-actions">
+                        <a href=".analysis/${service.name}/api-inventory.md" class="btn btn-primary">📄 Documentation</a>
+                        <a href=".analysis/${service.name}/openapi.yaml" class="btn btn-secondary">🔧 OpenAPI</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderServices(servicesToRender = services) {
+            const grid = document.getElementById('servicesGrid');
+            grid.innerHTML = servicesToRender.map(createServiceCard).join('');
+        }
+
+        function filterServices() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const frameworkFilter = document.getElementById('frameworkFilter').value;
+            const typeFilter = document.getElementById('typeFilter').value;
+
+            const filtered = services.filter(service => {
+                const matchesSearch = service.name.toLowerCase().includes(searchTerm);
+                const matchesFramework = !frameworkFilter || service.framework === frameworkFilter;
+                const matchesType = !typeFilter || service.type === typeFilter;
+                
+                return matchesSearch && matchesFramework && matchesType;
+            });
+
+            renderServices(filtered);
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', filterServices);
+        document.getElementById('frameworkFilter').addEventListener('change', filterServices);
+        document.getElementById('typeFilter').addEventListener('change', filterServices);
+
+        // Initial render
+        renderServices();
+    </script>
+</body>
+</html> 
