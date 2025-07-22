@@ -1,3 +1,10 @@
+# =============================================================================
+# COMPREHENSIVE .GITIGNORE FOR SERVICE DOCUMENTATION & ANALYSIS PROJECT
+# =============================================================================
+# This project focuses on documenting, inventorying, and analyzing services
+# We exclude build artifacts, dependencies, and runtime files to keep the 
+# repository focused on source code and documentation.
+
 # Operating System Files
 .DS_Store
 .DS_Store?
@@ -7,6 +14,9 @@
 ehthumbs.db
 Thumbs.db
 *~
+*.tmp
+*.temp
+Desktop.ini
 
 # IDE and Editor Files
 .vscode/
@@ -17,36 +27,59 @@ Thumbs.db
 *.temp
 .history/
 .vs/
+*.sublime-*
+*.atom/
+.brackets.json
+.project
+.classpath
+.settings/
+*.iml
+*.ipr
+*.iws
 
-# Security & Credentials
+# Security & Credentials (CRITICAL - NEVER COMMIT)
 *.key
 *.pem
 *.p12
 *.pfx
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*
+!.env.example
 secrets.json
 appsettings.Development.json
+appsettings.Local.json
 config.json
 credentials.json
+*.credentials
+auth.json
+*.auth
+private.json
 
-# Node.js & TypeScript (for obk-mtel-iam-trunk)
+# Node.js & TypeScript Dependencies & Build Artifacts
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 .npm
 .yarn/
+.pnp/
+.pnp.js
 dist/
 build/
+out/
 coverage/
 .nyc_output/
 *.tsbuildinfo
+.eslintcache
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist/
+.serverless/
+.cache/
+.temp/
 
-# .NET & C# (for backend services)
+# .NET & C# Build Artifacts
 bin/
 obj/
 *.user
@@ -55,29 +88,137 @@ obj/
 *.dll
 *.pdb
 *.exe
+*.msi
 .vs/
 packages/
 TestResults/
-*.log
-*.tmp
+BenchmarkDotNet.Artifacts/
 *.nupkg
 *.snupkg
+*.binlog
+.dotnet/
+.localhistory/
 
-# Build Artifacts & Dependencies
+# Java & Maven/Gradle
 target/
-out/
 *.war
 *.jar
 *.class
-*.pyc
-__pycache__/
-*.egg-info/
+.gradle/
+build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
 
-# Documentation & Analysis
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Rust
+target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+
+# Ruby
+*.gem
+*.rbc
+/.config
+/coverage/
+/InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
+.bundle/
+vendor/bundle
+
+# PHP
+/vendor/
+composer.phar
+composer.lock
+.env.local.php
+.env.*.local
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-shm
+*.db-wal
+*.mdf
+*.ldf
+
+# Logs and Runtime Files
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Build and Deployment Artifacts
+*.tar.gz
+*.tgz
+*.zip
+*.rar
+*.7z
+release/
+releases/
+publish/
+
+# Documentation Generation Artifacts (keep source docs, exclude generated)
 *.pdf
 *.docx
 analysis-output/
 temp-docs/
+site/
+_site/
+.jekyll-cache/
+.jekyll-metadata
 
 # DevOps & Containers
 .docker/
@@ -85,20 +226,67 @@ docker-compose.override.yml
 .terraform/
 *.tfstate
 *.tfstate.backup
+.terraform.lock.hcl
+.vagrant/
+Vagrantfile.local
 
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Cloud & Deployment
+.serverless/
+.amplify/
+.firebase/
+.vercel/
+.netlify/
 
-# Database
-*.db
-*.sqlite
-*.sqlite3
+# Testing
+.coverage
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+junit.xml
+coverage.xml
 
-# Backup Files
+# Backup and Temporary Files
 *.backup
 *.bak
 *.old
+*.orig
+*.rej
+*~
+*.swp
+*.swo
+.#*
+#*#
+
+# OS Generated Files
+.fseventsd
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDouble
+.LSOverride
+Icon?
+
+# Windows
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# KEEP THESE FILES FOR DOCUMENTATION & ANALYSIS:
+# - Source code files (*.cs, *.js, *.ts, *.py, etc.)
+# - Project files (*.csproj, package.json, requirements.txt, etc.)
+# - Configuration files (appsettings.json, web.config, etc.)
+# - Documentation files (README.md, *.md, etc.)
+# - Schema files (*.sql, *.json, *.yaml, etc.)
+# =============================================================================
