@@ -1,47 +1,75 @@
-# Task List Management
+# API Documentation Task List Management
 
-Guidelines for managing task lists in markdown files to track progress on completing a PRD
+Guidelines for managing task lists for API documentation and inventory systems with per-service processing
 
-## Task Implementation
-- **One sub-task at a time:** Do **NOT** start the next sub‑task until you ask the user for permission and they say "yes" or "y"
-- **Completion protocol:**  
-  1. When you finish a **sub‑task**, immediately mark it as completed by changing `[ ]` to `[x]`.
+## Task Implementation for API Analysis
+- **Proceed through infrastructure tasks first** Complete all setup tasks (1.0-4.0) before starting service processing
+- **Service-by-service processing** Process exactly ONE service at a time for task 5.0+
+- **Completion protocol for Infrastructure Tasks (1.0-4.0):**  
+  1. When you finish a **sub‑task**, immediately mark it as completed by changing `[ ]` to `[x]`
   2. If **all** subtasks underneath a parent task are now `[x]`, follow this sequence:
-    - **First**: Run the full test suite (`pytest`, `npm test`, `bin/rails test`, etc.)
-    - **Only if all tests pass**: Stage changes (`git add .`)
+    - **Skip test execution**: This is read-only static analysis - no tests required
+    - **Stage changes**: `git add .`
     - **Clean up**: Remove any temporary files and temporary code before committing
-    - **Commit**: Use a descriptive commit message that:
-      - Uses conventional commit format (`feat:`, `fix:`, `refactor:`, etc.)
-      - Summarizes what was accomplished in the parent task
-      - Lists key changes and additions
-      - References the task number and PRD context
-      - **Formats the message as a single-line command using `-m` flags**, e.g.:
+    - **Commit**: Use a descriptive commit message with conventional format
+  3. Once all subtasks are marked completed and changes committed, mark the **parent task** as completed
 
-        ```
-        git commit -m "feat: add payment validation logic" -m "- Validates card type and expiry" -m "- Adds unit tests for edge cases" -m "Related to T123 in PRD"
-        ```
-  3. Once all the subtasks are marked completed and changes have been committed, mark the **parent task** as completed.
-- Stop after each sub‑task and wait for the user's go‑ahead.
+- **Completion protocol for Service Processing (5.0+):**
+  1. **Process ONE service completely** before moving to the next
+  2. For each service:
+    - Run analysis: `node scripts/api-analyzer.js [service-name]`
+    - Generate docs: `node scripts/output-generator.js output/[service-name]-analysis.json [service-name]`
+    - **Immediate commit**: `git add . && git commit -m "docs: API analysis for [service-name]" && git push`
+    - **Update task list**: Mark service as `[x]` in the service checklist
+    - **Update progress**: Increment completion count (e.g., 2/37 COMPLETED)
+  3. **Continue automatically** to next service without user approval
+  4. **Only stop** if errors occur or manual intervention needed
 
-## Task List Maintenance
+## Service Processing Automation
+- **No user approval required** between services once processing starts
+- **Automatic progression** through the service list
+- **Error handling**: Stop and report if any service fails analysis
+- **Progress tracking**: Update task list after each service completion
+
+## Task List Maintenance for API Analysis
 
 1. **Update the task list as you work:**
-   - Mark tasks and subtasks as completed (`[x]`) per the protocol above.
-   - Add new tasks as they emerge.
+   - Mark infrastructure sub-tasks as completed (`[x]`) immediately
+   - Mark individual services as completed (`[x]`) in the service checklist
+   - Update progress counters (e.g., "PROGRESS: 5/37 COMPLETED")
 
 2. **Maintain the "Relevant Files" section:**
-   - List every file created or modified.
-   - Give each file a one‑line description of its purpose.
+   - List every script, template, and output file created or modified
+   - Give each file a one‑line description of its purpose in the API analysis
 
-## AI Instructions
+3. **Service tracking specifics:**
+   - Mark completed services with metrics: `[x] service-name - Framework - X endpoints, Y schemas, Z dependencies ✓`
+   - Update "NEXT TARGET" marker to the next service to be processed
+   - Maintain framework groupings and progress visibility
 
-When working with task lists, the AI must:
+## AI Instructions for API Documentation
 
-1. Regularly update the task list file after finishing any significant work.
-2. Follow the completion protocol:
-   - Mark each finished **sub‑task** `[x]`.
-   - Mark the **parent task** `[x]` once **all** its subtasks are `[x]`.
-3. Add newly discovered tasks.
-4. Keep "Relevant Files" accurate and up to date.
-5. Before starting work, check which sub‑task is next.
-6. After implementing a sub‑task, update the file and then pause for user approval.
+When working with API documentation task lists, the AI must:
+
+1. **For Infrastructure Tasks (1.0-4.0):**
+   - Complete all sub-tasks before moving to service processing
+   - Mark sub-tasks as `[x]` immediately upon completion
+   - Commit after each parent task completion
+
+2. **For Service Processing (5.0+):**
+   - Process services one at a time in the order listed
+   - Complete full analysis cycle per service (analyze → generate → commit → update task list)
+   - Update service checklist and progress counters immediately
+   - Continue automatically to next service
+
+3. **Error Handling:**
+   - Stop processing if any service analysis fails
+   - Report specific errors and suggested fixes
+   - Resume processing from the failed service after fixes
+
+4. **Progress Transparency:**
+   - Always show current progress (X/37 completed)
+   - Clearly indicate which service is being processed
+   - Update completion metrics for each service
+
+## Apply this process to process API documentation tasks from: $ARGUMENTS
