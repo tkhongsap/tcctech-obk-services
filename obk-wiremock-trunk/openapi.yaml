@@ -1,0 +1,415 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "obk-wiremock-trunk API",
+    "version": "1.0.0",
+    "description": "API documentation for obk-wiremock-trunk service (Express.js)",
+    "contact": {
+      "name": "API Documentation Generator"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/test/uuid": {
+      "get": {
+        "summary": "GET /test/uuid",
+        "description": "GET /test/uuid",
+        "operationId": "get_test_uuid",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/montri/webhook": {
+      "post": {
+        "summary": "POST /integrations/montri/webhook",
+        "description": "POST /integrations/montri/webhook",
+        "operationId": "post_integrations_montri_webhook",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/maps/api/distancematrix/json(.*)": {
+      "get": {
+        "summary": "GET /maps/api/distancematrix/json(.*)",
+        "description": "GET /maps/api/distancematrix/json(.*)",
+        "operationId": "get_maps_api_distancematrix_json(.*)",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/broadcast/all": {
+      "post": {
+        "summary": "POST /broadcast/all",
+        "description": "POST /broadcast/all",
+        "operationId": "post_broadcast_all",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/broadcast": {
+      "post": {
+        "summary": "POST /broadcast",
+        "description": "POST /broadcast",
+        "operationId": "post_broadcast",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/obk/api/oauth2/token": {
+      "post": {
+        "summary": "POST /obk/api/oauth2/token",
+        "description": "POST /obk/api/oauth2/token",
+        "operationId": "post_obk_api_oauth2_token",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/obk/api/v1/customer/kc/user": {
+      "post": {
+        "summary": "POST /obk/api/v1/customer/kc/user",
+        "description": "POST /obk/api/v1/customer/kc/user",
+        "operationId": "post_obk_api_v1_customer_kc_user",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/obk/api/v1/resident/register-new-tenant": {
+      "post": {
+        "summary": "POST /obk/api/v1/resident/register-new-tenant",
+        "description": "POST /obk/api/v1/resident/register-new-tenant",
+        "operationId": "post_obk_api_v1_resident_register-new-tenant",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/obk/api/v1/mt/parking/getParkingDetailByPersonId": {
+      "post": {
+        "summary": "POST /obk/api/v1/mt/parking/getParkingDetailByPersonId",
+        "description": "POST /obk/api/v1/mt/parking/getParkingDetailByPersonId",
+        "operationId": "post_obk_api_v1_mt_parking_getParkingDetailByPersonId",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Login/ForceStatusLogin": {
+      "post": {
+        "summary": "POST /api/Login/ForceStatusLogin",
+        "description": "POST /api/Login/ForceStatusLogin",
+        "operationId": "post_api_Login_ForceStatusLogin",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Login/Login": {
+      "post": {
+        "summary": "POST /api/Login/Login",
+        "description": "POST /api/Login/Login",
+        "operationId": "post_api_Login_Login",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/PreRegister/invitePreRegister": {
+      "post": {
+        "summary": "POST /api/PreRegister/invitePreRegister",
+        "description": "POST /api/PreRegister/invitePreRegister",
+        "operationId": "post_api_PreRegister_invitePreRegister",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AuthorizeFloor/getCallLift": {
+      "post": {
+        "summary": "POST /api/AuthorizeFloor/getCallLift",
+        "description": "POST /api/AuthorizeFloor/getCallLift",
+        "operationId": "post_api_AuthorizeFloor_getCallLift",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login/CheckRedemptionStatusByEmail": {
+      "post": {
+        "summary": "POST /api/login/CheckRedemptionStatusByEmail",
+        "description": "POST /api/login/CheckRedemptionStatusByEmail",
+        "operationId": "post_api_login_CheckRedemptionStatusByEmail",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "GET /",
+        "description": "GET /",
+        "operationId": "get_",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
