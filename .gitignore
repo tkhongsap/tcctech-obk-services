@@ -213,6 +213,57 @@ publish/
 # Source Repository Archives (extracted GitLab repos - keep originals for reference)
 # Note: Original zip files contain the source repositories and may be kept for backup/reference
 
+# Media Files & Binary Assets (not needed for documentation/analysis)
+*.mp3
+*.mp4
+*.wav
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.m4v
+*.m4a
+*.aac
+*.ogg
+*.wma
+*.flac
+*.3gp
+*.mkv
+*.ogv
+
+# Image Assets (large binary files not essential for code analysis)
+*.psd
+*.ai
+*.sketch
+*.fig
+*.xcf
+*.tiff
+*.tif
+*.bmp
+*.ico
+*.icns
+*.dmg
+*.app
+*.deb
+*.rpm
+
+# Font Files
+*.ttf
+*.otf
+*.woff
+*.woff2
+*.eot
+
+# Large Data Files
+*.csv
+*.xlsx
+*.xls
+*.ppt
+*.pptx
+*.doc
+*.docx
+
 # Documentation Generation Artifacts (keep source docs, exclude generated)
 *.pdf
 *.docx
