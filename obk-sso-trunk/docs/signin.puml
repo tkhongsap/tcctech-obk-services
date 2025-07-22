@@ -1,0 +1,12 @@
+@startuml
+
+App ->> Backend: sign in by username, encrypt(password)
+Backend ->> SSO: sign in by username, decrypt(password), grant_type=password
+SSO ->> SSO: verify credential
+SSO -->> Backend: return access token/account is inactive/invalid
+Backend ->> SSO: get profile by accessToken
+SSO -->> Backend: user profile
+Backend ->> Backend: Internal process ... (update existing/create user)
+Backend -->> App: App token
+
+@enduml

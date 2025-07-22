@@ -1,0 +1,98 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+  - ./ing.yaml
+commonLabels:
+  app: ob-notification
+namePrefix: ob-notification-
+namespace: default
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: $IMAGE_URL
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: Deployment
+  - patch: |-
+      - op: replace
+        path: /spec/ports/0/port
+        value: 3000
+      - op: replace
+        path: /spec/ports/0/targetPort
+        value: 3000
+    target:
+      kind: Service
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: DATABASE_URL
+            value: postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@obk-sit-ob-notification.c70qsyku4z3y.ap-southeast-1.rds.amazonaws.com/ob_notification_sit
+          - name: AWS_REGION
+            value: ap-southeast-1
+          - name: AWS_ACCESS_KEY_ID
+            value: AKIA2UC3CDGQONFWRE4F
+          - name: AWS_SECRET_ACCESS_KEY
+            value: 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
+          - name: EMAIL_SENDER_PROVIDER
+            value: SES
+          - name: SMS_SENDER_PROVIDER
+            value: SNS
+          - name: OB_EVENT_CONFIG_PATH
+            value: event.config.sit.json
+          - name: OB_WEB_SOCKET_URL
+            value: 'http://ws-sit.glorymtel.xyz'
+          - name: EMAIL_SOURCE
+            value: 'sittitep.tosuwan@mtel.co.th'
+          - name: RECIPIENT_EMAILS
+            value: issariya.yip@mtel.co.th,sittitep.tosuwan@mtel.co.th,wanput.lak@mtel.co.th
+          - name: ADMIN_EMAIL
+            value: 'contactcenter@onebangkok.com'
+          - name: FONT_LOGO_S3
+            value: 'https://obk-email-bucket.s3.ap-southeast-1.amazonaws.com'
+          - name: FIREBASE_PROJECT_ID
+            value: 'one-bangkok-sit'
+          - name: FIREBASE_CLIENT_EMAIL
+            value: 'notification@one-bangkok-sit.iam.gserviceaccount.com'
+          - name: FIREBASE_PRIVATE_KEY
+            value: |
+              -----BEGIN PRIVATE KEY-----
+              MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCwnEu5Bxjo8hYT
+              XQOdctKihjmLF+sBOZAXR5GUS7A+c7Ka1QPMuh9QFKWcv5dmTVP5sX8CKIu0lh6F
+              wNlYkDqMAE3lCibl+3teE3y0ETSoV++ksAJJiGlJ0EdbCP4Hy7uphk69n8b1kPLR
+              v6m6sSmh2BF/k4n8kE4d4Phby9JLwhgwVJg9e17F2buTIBHHWkxjjXw6E3x4q5TX
+              r644DTXkjqiGStrH7b7kwYdhVfblWfioTWm3dwT+3dunfEA89HXM+23nf/fn8t9J
+              vM1U9r7CHMjpRYtQRH/Cz5dUIjYoww3+5qIWAgV4RgmN/7tpe+Mfi+AUy1CKuHhP
+              80ZWMRj9AgMBAAECggEAFAiyzUspD/mwN+OX/qMREkckHWtp6OJo/j8L3FTmqfrx
+              Yn9x9iYR2cFx1PFl4QC6Gyu/ktTbHjHeRgFtlk6MGagKLgZkCbgokzAmN/3wqX0K
+              LfYaWFGNUgZ6pbDEMkmx4MXfxkJq7R3TcagqfodMx/Ns7rojj78l4V1NBwq8sQOj
+              nVmVAWam5r3zVlaxq/Vg8dCE3TNR6LVlunYxW8TG67zMK/a6KkJpryb2A2jZ2pCx
+              Gy+DLJv+e9rXnw+YJazlOItLi/wrEM9blVaJ083na/85b8a+IsS+lP+lI0EpMN9T
+              Ua0MrabT97cZNTSPEITESsd8v8c9FJHFewGN5FnDUQKBgQDxgrdW0lPzdZfDuS36
+              9N1woRNjdLHEPp4bi/Nu210SNpNotHGZtwrlLuTeczLuV417xNA5+fD2b3Q02C34
+              773YaYvt32NX7+fWCLS23KvNJ5t4V6Cmo+IZflAQsrD9VyTlTzyP11XRrqhLe1+4
+              ozAHKglsPO2VzCyQwjKd7TfHzQKBgQC7NMzXZKPq/FgbdvF+qjsxngLkoxzCZI1n
+              HnBDh7Fl+bs8w2F3gizhJWsfDCbdJrTv1mzlFKFekShc/hzvLmRxaq8BDzTol/IX
+              bQ2F2O+SHAc1sTTYFkA+sXF/Wd3z+RsXh179hDkUzZC6hinJE2KnOn/gpAhvGvnJ
+              Gnq/z+MF8QKBgH1w37mA1YoG8iT+8hr/RGVTxLZLzmmX/JdiQba6ycTEBBzGXJry
+              r/4KNWY1f6a8Ywh+WYlDgRz/FuS7xGUgYQMfD0cmWHs8aLaLHxI73CBbCi2flhn3
+              1WBYc025AqUTtl5Eobg0qKaYiWFrW3STjkaqVuqZWu4LdrpZo+DTbb2hAoGBAJ7i
+              UzBEBDL99LFqo8/DHvYfi4kNPu1ldfWdCd7mnZNU/qq1kFVjsD9uCJqTL7Dmlw4v
+              SMCsX8DpJf621UvSbgEscFdP1rHJs/hZ3+5HjhzNmPji61yyldgftZpGZXAZbfrs
+              M5yqyd90EG+eSnyT7VjM95dq4JWbqYAa7y84ew+hAoGBAL/nB4+2LI4rLJgaFVQp
+              HDMAgjBiBj44jEG5vUJ2anJs8JHcy90RJvYyDBf1UDP9bqth/sUEKeqwQ7SiR7TJ
+              xeH8lsXNSuBKS/Rw7+Fc0n7EDDZ/tcTjqo6PdNOxQo21oRsScLDrizcmYssELziq
+              ywACu+Xl0wfmPl2gBW56LbNS
+              -----END PRIVATE KEY-----
+          - name: AWS_UPLOAD_BUCKET_URL
+            value: 'https://hupvj2nxu0.execute-api.ap-southeast-1.amazonaws.com/sit/upload'
+          - name: OB_IAM_SDK_BASE_URL
+            value: 'http://iam-sit.glorymtel.xyz'
+          - name: MULTI_CAST_NOTI
+            value: 'true'
+    target:
+      kind: Deployment

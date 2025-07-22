@@ -1,0 +1,48 @@
+[
+    {
+        "merchant_name": {
+            "value": "ma\nma\ncafé",
+            "confidence": 0.578
+        },
+        "transaction_date": {
+            "value": "2025-01-20",
+            "confidence": 0.987
+        },
+        "transaction_time": {
+            "value": "12:19:00",
+            "confidence": 0.988
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "อเมริกาโน่เย็น(หวาน\nไม่หวาน)",
+                    "confidence": 0.984
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.985
+                },
+                "total_price": {
+                    "value": 60.0,
+                    "confidence": 0.988
+                }
+            }
+        ],
+        "total": {
+            "value": 60.0,
+            "confidence": 0.984
+        },
+        "tax_id": {
+            "value": "04023141",
+            "confidence": 0.607
+        },
+        "receipt_no": {
+            "value": null,
+            "confidence": 0
+        },
+        "address": null,
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "6521ada58e58a5d296b41fd8d184b08991c1fa84b0d3db6c843989ed26504501"
+    }
+]

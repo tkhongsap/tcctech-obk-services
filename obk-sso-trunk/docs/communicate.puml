@@ -1,0 +1,11 @@
+@startuml
+
+App1 ->> SSO: call /user/authentication + provider = App2
+SSO -->> App1: return authentication_code
+App1 ->> App2: authentication_code
+App2 ->> SSO: call /oauth/token with authentication_code
+SSO -->> App2: access_token
+App2 ->> SSO: get profile using access_token
+SSO -->> App2: user profile
+
+@enduml

@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS faqs;
+
+DROP SEQUENCE IF EXISTS faqs_id_seq;

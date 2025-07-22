@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS add_ons;
+
+DROP SEQUENCE IF EXISTS add_ons_id_seq;

@@ -1,0 +1,62 @@
+[
+    {
+        "merchant_name": {
+            "value": "da\n福鸡饭",
+            "confidence": 0.936
+        },
+        "transaction_date": {
+            "value": "2025-01-23",
+            "confidence": 0.992
+        },
+        "transaction_time": {
+            "value": "16:30:24",
+            "confidence": 0.995
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "ขนมผักกาด",
+                    "confidence": 0.989
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.989
+                },
+                "total_price": {
+                    "value": 160.0,
+                    "confidence": 0.99
+                }
+            },
+            {
+                "description": {
+                    "value": "ไก่ทอด",
+                    "confidence": 0.988
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.989
+                },
+                "total_price": {
+                    "value": 185.0,
+                    "confidence": 0.99
+                }
+            }
+        ],
+        "total": {
+            "value": 345.0,
+            "confidence": 0.986
+        },
+        "tax_id": {
+            "value": "1",
+            "confidence": 0.687
+        },
+        "receipt_no": {
+            "value": null,
+            "confidence": 0
+        },
+        "address": null,
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "40cfa8e2b7ccf03e53096f3bcefad0424210fd7db6b08026ac61701efb50fa23"
+    }
+]

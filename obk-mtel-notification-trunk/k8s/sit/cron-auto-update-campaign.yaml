@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-noti-auto-update-campaign
+  labels:
+    app: ob-noti-auto-update-campaign
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  schedule: '0 * * * *' # Run every hour
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ob-noti-auto-update-campaign
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: bash
+              image: curlimages/curl:7.70.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - 'curl --location --request POST "https://notification-sit.glorymtel.xyz/campaigns/sent"'

@@ -1,0 +1,4 @@
+process.env = {
+  EMAIL_SENDER_PROVIDER: 'MOCK',
+  SMS_SENDER_PROVIDER: 'MOCK',
+};

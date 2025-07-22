@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ob-notification
+spec:
+  selector:
+    matchLabels:
+      name: ob-notification
+  template:
+    metadata:
+      labels:
+        name: ob-notification
+    spec:
+      containers:
+        - name: ob-notification
+          image: 418772626632.dkr.ecr.ap-southeast-1.amazonaws.com/one-bangkok-dev:ob-notification_latest
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: dev
+            - name: DATABASE_URL
+              value: postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@ob-notification-dev.caktmhpgapyr.ap-southeast-1.rds.amazonaws.com:5432/ob_notification_development
+            - name: AWS_REGION
+              value: ap-southeast-1
+            - name: AWS_ACCESS_KEY_ID
+              value: AKIAWDAGLFTEC3EVLYNN
+            - name: AWS_SECRET_ACCESS_KEY
+              value: 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
+            - name: AWS_S3_BUCKET_NAME
+              value: bucket-ob-notification-dev
+            - name: ENABLE_S3_DOWNLOAD
+              value: 'true'
+            - name: OB_EVENT_CONFIG_PATH
+              value: event.config.dev.json
+            - name: OB_WEB_SOCKET_URL
+              value: 'https://ws.glorymtel.xyz'
+            - name: KAFKA_KRAFE_ENABLED
+              value: 'true'
+            - name: SMS_SENDER_PROVIDER
+              value: mock
+            - name: EMAIL_SENDER_PROVIDER
+              value: SES
+            - name: SLACK_OAUTH_TOKEN
+              value: xoxb-2523263893682-5967783408147-KauLenA2D3yOFnvjRtlYPFPf
+            - name: SLACK_CHANNEL_ID
+              value: C05UCUQE0LD
+            - name: EMAIL_SOURCE
+              value: 'sittitep.tosuwan@mtel.co.th'
+            - name: RECIPIENT_EMAILS
+              value: issariya.yip@mtel.co.th,sittitep.tosuwan@mtel.co.th
+            - name: ADMIN_EMAIL
+              value: 'contactcenter@onebangkok.com'
+            - name: FONT_LOGO_S3
+              value: 'https://ob-email-bucket.s3.ap-southeast-1.amazonaws.com'
+            - name: FIREBASE_PROJECT_ID
+              value: 'one-bangkok-alpha'
+            - name: FIREBASE_CLIENT_EMAIL
+              value: 'firebase-adminsdk-y1xa1@one-bangkok-alpha.iam.gserviceaccount.com'
+            - name: FIREBASE_PRIVATE_KEY
+              value: |
+                -----BEGIN PRIVATE KEY-----
+                MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCqYVDvzff91loq
+                XlPaPhCA/0YEfgDKCLoNALE54qTnxgVHoNwuM42QWUpIq/KdGEPKOnLqpc9keB6k
+                lcaSqtBCfOrFTbF9f4SWaEl+4whWQ13bIeFR/5TllJs8qSh+HwnuPfIECwBb6VIG
+                g2t/fiQM3F73R9D1Y/LHARz5m6M262gIAfe0KBXrXxsbzEaYoAoPSmUpGVfMvCle
+                FVpX7orUERlT7Fe9NUbxDRbB6d21DUSirpY2iMggOcLn4FkbugFUyzBqipdeI+ia
+                hREH+IizFx1B8i+77DTQwags46gjHtUIFFfYLV4nScrzWJsz1eglx3QuTKwUkcdk
+                Tfe6cmvvAgMBAAECggEAS0ahtsF+brT0s0FntMW1Dvk52yQ8fwaqBLKompWLHCe+
+                D25/uR3nzr3UdxUZJNUipkd6nDdT0OTNTRQrXoN/bdC4/SEdaQAc+ULsLdZqyYoL
+                /pQSc+MCywgEKiHmlQprncnaknS13OXR6rTHmtWFYfU/M+uT48cb7VaNka50xv80
+                LGzjzlal+L36bcDPkzjmSWD0wuCEY4V4/cdu2+HQwDAa9A7FIFBNtdQ+cwDM8Bqy
+                qLPtiCq2gRtlBpxBe0Myz2bO8GRDbpERUQT4Jj///q5v062nPszURtwMgRNJ0XTX
+                cXPLGQByHWgA1F2hylKdh7VYnUVeP2Tp0d0/FGDReQKBgQDUyqi/tv1mGDbQnhus
+                DU9iqdXi4YDU+770sAVnx6O2Qtx+g8ti/bGdpUAzJxEIcqvQu2YdHB/7dZWuW2AY
+                9R9TuP1HT+JM334CFaiG1EFykA/JjA4qnI5rpliKpVFUl7BmVz66DTyjg6HWBByK
+                a+Mn2EMtNP+fNk/OpFZlr+WVlQKBgQDM+gV7DFffOnx1bT4vecdO/Vi6cO0nwmk3
+                KYA3tW29MxmTW7xCw1a6xjDhvLdBGPih3+wEd8M2rOe7lmseeoCPb9A5VlNYZQ6Q
+                m3UT0KNghYRWq9xEUPBbNYez+yEYwJIU18K3t54GxegASJJqzboUaENDpyONreTz
+                Tjtf/CzScwKBgExF1BTb/5pPxZ4jfiG+p5zi6YKod+hf0EOesGFRovHap3RFw2pZ
+                KwgpyohLUYSorcNk2KZIhYI51IwpvplTi4YUAd1E2gXZ+i2/G6gwfsEUuEPzCsTl
+                VvtpJcWUmkFrGdSlIxvHUNv/e8vdr2lCYKrQjsuueo3UBuk36KwMT4u9AoGANyJZ
+                LwvW5vh4Wa2UuHhtH9YNc7jEUZl9a5UCI/ntFqMUEgruzJZ2Ua7VnyJ/uEbbOc9d
+                UKZWH/LKMi73iS8yPWK6A3Iw4OntzP/DshzAlUnUmuuHR+jtfdscMVEvSdUidfDD
+                M190ZiX9jXX3zDqh/rM8xInEimtn1foJBnxyIfkCgYAdKTkCZLSqnj4qeQUAVqBW
+                ZPh0l7Ws+IYh6UYPHXK8Kqa5CoeaRe3/rcZpX+NrSYmyULt2bnNvLpC2aewD0bmQ
+                GY4JzesDn7hoMKjTCKGuMQl4wH4ix2NhdLp6K175ujXHykx610opL6tTF/vcXYbB
+                g/BETRm+qhkXSjMIoz1APg==
+                -----END PRIVATE KEY-----
+            - name: AWS_UPLOAD_BUCKET_URL
+              value: 'https://j3vpgmeeuf.execute-api.ap-southeast-1.amazonaws.com/dev/upload'
+            - name: OB_IAM_SDK_BASE_URL
+              value: 'https://iam.glorymtel.xyz'
+            - name: CACHE_REDIS
+              value: 'true'
+            - name: CACHE_REDIS_URL
+              value: redis://one-bangkok-dev.lmsc6g.0001.apse1.cache.amazonaws.com:6379
+            - name: MULTI_CAST_NOTI
+              value: 'true'

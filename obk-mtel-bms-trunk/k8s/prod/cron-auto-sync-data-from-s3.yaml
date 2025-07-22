@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-bms-auto-sync-data-from-s3
+  labels:
+    app: ob-bms-auto-sync-data-from-s3
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  schedule: '0 0 * * *' # Run at midnight every day
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ob-bms-auto-sync-data-from-s3
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: bash
+              image: curlimages/curl:7.70.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - curl --location --request POST 'https://obk-bms-prod.tccproptech.com/integrations/fs/job/auto_sync'

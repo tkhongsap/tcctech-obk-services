@@ -1,0 +1,1348 @@
+openapi: '3.0.2'
+info:
+  title: ob-iam
+  version: '1.0'
+servers:
+  - url: http://{hostname}
+    variables:
+      hostname:
+        default: localhost:3000
+paths:
+  /health:
+    get:
+      summary: Check health
+      operationId: health
+      tags:
+        - Health
+      responses:
+        '200':
+          $ref: '#/components/responses/HealthResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /me/profile:
+    get:
+      summary: Get account profile
+      operationId: profile_controller.find
+      tags:
+        - profile_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          $ref: '#/components/responses/FindProfileResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+    put:
+      summary: Update profile
+      operationId: profile_controller.update
+      tags:
+        - update_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        description: Payload to update profile
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProfileRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateProfileResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /me/account:
+    get:
+      summary: Get user account
+      operationId: account_controller.find
+      tags:
+        - account_controller
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+      responses:
+        200:
+          $ref: '#/components/responses/AccountResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+    delete:
+      summary: Delete user account (soft)
+      operationId: account_controller.delete
+      tags:
+        - account_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      responses:
+        200:
+          $ref: '#/components/responses/DeleteAccountResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /me/account/password:
+    put:
+      summary: Update account password
+      operationId: account_controller.updatePassword
+      tags:
+        - account_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      requestBody:
+        description: Payload for update password
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePasswordRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/UpdatePasswordResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /me/account/reset_password:
+    put:
+      summary: Reset account password
+      operationId: account_controller.resetPassword
+      tags:
+        - account_controller
+      requestBody:
+        description: Payload for reset password
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/ResetPasswordResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /me/account/verify_password:
+    post:
+      summary: Verify current password
+      operationId: account_controller.verifyPassword
+      tags:
+        - account_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      requestBody:
+        description: Payload for verify password
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyPasswordRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/VerifyPasswordResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /me/setting:
+    get:
+      summary: Get account setting
+      operationId: setting_controller.find
+      tags:
+        - setting_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      responses:
+        200:
+          $ref: '#/components/responses/FindSettingResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+    put:
+      summary: Update account setting
+      operationId: setting_controller.update
+      tags:
+        - setting_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      requestBody:
+        description: Payload to update setting
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/UpdateSettingResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /task/{task_name}:
+    post:
+      summary: Job for create task
+      operationId: task_controller.create
+      tags:
+        - task_controller
+      parameters:
+        - $ref: '#/components/parameters/CreateTaskName'
+      responses:
+        200:
+          $ref: '#/components/responses/CreateTaskResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /auth/register:
+    post:
+      summary: Register
+      operationId: auth_controller.register
+      tags:
+        - auth_controller
+      requestBody:
+        description: Register
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterAuthRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/RegisterAuthResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /auth/login:
+    post:
+      summary: Login
+      operationId: auth_controller.login
+      tags:
+        - auth_controller
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        description: Login
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginAuthRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/LoginAuthResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /auth/logout:
+    delete:
+      summary: Logout
+      operationId: auth_controller.logout
+      tags:
+        - auth_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+      responses:
+        200:
+          $ref: '#/components/responses/LogoutAuthResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /auth/reactivate:
+    put:
+      summary: Re activate account
+      operationId: auth_controller.reactivate
+      tags:
+        - auth_controller
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        description: Reactivate
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReactivateAuthRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/ReactivateAuthResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /otp/request:
+    post:
+      summary: Request OTP
+      operationId: otp_controller.request
+      tags:
+        - otp_controller
+      requestBody:
+        description: identity data (email or phone number)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestOtpRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/RequestOtpResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /otp/verify:
+    post:
+      summary: Verify OTP
+      operationId: otp_controller.verify
+      tags:
+        - otp_controller
+      requestBody:
+        description: Verify OTP
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyOtpRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/VerifyOtpResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /identity/validate:
+    get:
+      summary: Validate identity
+      operationId: identity_controller.validate
+      tags:
+        - identity_controller
+      parameters:
+        - name: provider
+          in: query
+          schema:
+            type: string
+            enum: [email, phone, sso]
+        - name: identifier
+          in: query
+          schema:
+            type: string
+        - name: country_code
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/ValidateIdentityResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /identity:
+    post:
+      summary: create new email or phone to account
+      operationId: identity_controller.create
+      tags:
+        - identity_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      requestBody:
+        description: new Identity
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIdentityRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateIdentityResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+    get:
+      summary: get all Identities
+      operationId: identity_controller.findAll
+      tags:
+        - identity_controller
+      parameters:
+        - in: query
+          name: provider
+          schema:
+            type: string
+            enum: [email, phone, sso]
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetIdentitiesResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /identity/{id}:
+    delete:
+      summary: delete email or phone
+      operationId: identity_controller.delete
+      tags:
+        - identity_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteIdentityResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /identity/{id}/default:
+    put:
+      summary: update default identity
+      operationId: identity_controller.default
+      tags:
+        - identity_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateIdentityResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /external_identity/link:
+    post:
+      summary: check extenal identity exist
+      operationId: external_identity_controller.link
+      tags:
+        - externl_identity_controller
+      requestBody:
+        description: Register
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkExternalIdentityRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/LinkExternalIdentityResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /me/qr_token:
+    get:
+      summary: get active qr token
+      operationId: qr_token_controller.show
+      tags:
+        - qr_token_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      responses:
+        '200':
+          $ref: '#/components/responses/ShowQRTokenResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+    post:
+      summary: get active qr token
+      operationId: qr_token_controller.create
+      tags:
+        - qr_token_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+        - $ref: '#/components/parameters/RequiredAccountId'
+      responses:
+        '200':
+          $ref: '#/components/responses/ShowQRTokenResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /integration/tokens/{id}:
+    get:
+      summary: get encrypted data from token id
+      operationId: qr_token_controller.getEncryptedData
+      tags:
+        - qr_token_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccessToken'
+      responses:
+        '200':
+          $ref: '#/components/responses/EncryptedDataResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /account/{id}:
+    get:
+      summary: get account detail
+      operationId: accounts_controller.find
+      tags:
+        - accounts_controller
+      responses:
+        '200':
+          $ref: '#/components/responses/AccountDataResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+components:
+  parameters:
+    AccessToken:
+      name: X-Access-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    RequiredAccessToken:
+      name: X-Access-Token
+      in: header
+      required: true
+      schema:
+        type: string
+    AccountId:
+      name: X-Account-Id
+      in: header
+      required: false
+      schema:
+        type: string
+    RequiredAccountId:
+      name: X-Account-Id
+      in: header
+      required: true
+      schema:
+        type: string
+    CreateTaskName:
+      name: task_name
+      in: path
+      description: Task name for create job.
+      required: true
+      schema:
+        type: string
+        enum: [delete_deactivate_account, delete_expired_otp]
+  responses:
+    HealthResponse:
+      description: Health response
+      content:
+        application/json:
+          schema:
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/HealthData'
+    ErrorResp:
+      description: Unexpected error occurred
+      content:
+        application/json:
+          schema:
+            required:
+              - error
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+    FindProfileResponse:
+      description: Find profile response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FindProfileResponse'
+    FindSettingResponse:
+      description: Find setting response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FindSettingResponse'
+    UpdateSettingResponse:
+      description: Update setting response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateSettingResponse'
+    UpdateProfileResponse:
+      description: Update profile response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateProfileResponse'
+    RegisterAuthResponse:
+      description: Register response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RegisterAuthResponse'
+    LoginAuthResponse:
+      description: Login response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LoginAuthResponse'
+    LogoutAuthResponse:
+      description: Logout response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LogoutAuthResponse'
+    ReactivateAuthResponse:
+      description: Re activate response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReactivateAuthResponse'
+    RequestOtpResponse:
+      description: Request OTP response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RequestOtpResponse'
+    VerifyOtpResponse:
+      description: Verify OTP response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VerifyOtpResponse'
+    ValidateIdentityResponse:
+      description: Validate identity response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidateIdentityResponse'
+    LinkExternalIdentityResponse:
+      description: Link identity response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LinkExternalIdentityResponse'
+    AccountResponse:
+      description: Get account response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountResponse'
+    DeleteAccountResponse:
+      description: Delete account response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeleteAccountResponse'
+    CreateTaskResponse:
+      description: Delete task response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateTaskResponse'
+    CreateIdentityResponse:
+      description: Identity response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateIdentityResponse'
+    GetIdentitiesResponse:
+      description: Identities response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetIdentitiesResponse'
+    DeleteIdentityResponse:
+      description: delete Identities response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeleteIdentityResponse'
+    VerifyPasswordResponse:
+      description: Verify Password response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VerifyPasswordResponse'
+    UpdatePasswordResponse:
+      description: Update Password response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VerifyPasswordResponse'
+    ResetPasswordResponse:
+      description: Reset Password response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResetPasswordResponse'
+    ShowQRTokenResponse:
+      description: QR Token response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ShowQRTokenResponse'
+    EncryptedDataResponse:
+      description: QR Token response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EncryptedDataResponse'
+    AccountDataResponse:
+      description: Account data response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountDataResponse'
+  schemas:
+    Profile:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - dob
+      properties:
+        first_name:
+          type: string
+        middle_name:
+          type: string
+          nullable: true
+        last_name:
+          type: string
+        dob:
+          type: string
+        title:
+          type: string
+          enum: [mr, mrs, ms, dr]
+          nullable: true
+        gender:
+          type: string
+          enum: [male, female, nonbinary, prefernottosay]
+          nullable: true
+    Setting:
+      type: object
+      properties:
+        two_factor_authentication_enabled:
+          type: boolean
+        password_enabled:
+          type: boolean
+    UpdateProfile:
+      type: object
+      properties:
+        first_name:
+          type: string
+        middle_name:
+          type: string
+        last_name:
+          type: string
+        dob:
+          type: string
+        title:
+          type: string
+          enum: [mr, mrs, ms, dr]
+        gender:
+          type: string
+          enum: [male, female, nonbinary, prefernottosay]
+    Result:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          type: boolean
+          required:
+            - value
+    Provider:
+      type: string
+      enum: [phone, email, sso]
+    Device:
+      type: object
+      required:
+        - device_id
+        - os
+      properties:
+        device_id:
+          type: string
+        os:
+          type: string
+    Identity:
+      type: object
+      required:
+        - identifier
+        - provider
+      properties:
+        identifier:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Provider'
+        country_code:
+          type: string
+        type:
+          type: array
+          items:
+            enum: [google, apple, microsoft, fs]
+          nullable: true
+        default:
+          type: boolean
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: 'INTERNAL_SERVER_ERROR'
+          enum:
+            - 'BAD_REQUEST'
+            - 'NOT_FOUND'
+            - 'USER_NOT_FOUND'
+            - 'INTERNAL_SERVER_ERROR'
+            - 'UNAUTHORIZED'
+        message:
+          type: string
+          example: 'error message'
+    HealthData:
+      type: object
+      required:
+        - health
+      properties:
+        health:
+          type: boolean
+    FindProfileResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - profile
+          properties:
+            profile:
+              $ref: '#/components/schemas/FindProfileResponseData'
+    FindProfileResponseData:
+      $ref: '#/components/schemas/Profile'
+    UpdateProfileRequestBody:
+      $ref: '#/components/schemas/UpdateProfile'
+    UpdateProfileResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - profile
+          properties:
+            profile:
+              $ref: '#/components/schemas/UpdateProfileResponseData'
+    UpdateProfileResponseData:
+      $ref: '#/components/schemas/Profile'
+    FindSettingResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - setting
+          properties:
+            setting:
+              $ref: '#/components/schemas/FindSettingResponseData'
+    FindSettingResponseData:
+      $ref: '#/components/schemas/Setting'
+    UpdateSettingRequestBody:
+      $ref: '#/components/schemas/Setting'
+    UpdateSettingResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - setting
+          properties:
+            setting:
+              $ref: '#/components/schemas/UpdateSettingResponseData'
+    UpdateSettingResponseData:
+      $ref: '#/components/schemas/Setting'
+    RequestOtpRequestBody:
+      type: object
+      required:
+        - identity
+      properties:
+        identity:
+          type: object
+          required:
+            - provider
+            - identifier
+          properties:
+            provider:
+              $ref: '#/components/schemas/Provider'
+            identifier:
+              type: string
+            country_code:
+              type: string
+    RequestOtpResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RequestOtpResponseData'
+    RequestOtpResponseData:
+      type: object
+      required:
+        - otp
+      properties:
+        otp:
+          type: object
+          required:
+            - reference
+          properties:
+            reference:
+              type: string
+    VerifyOtpRequestBody:
+      type: object
+      required:
+        - otp
+      properties:
+        otp:
+          type: object
+          required:
+            - reference
+            - code
+          properties:
+            reference:
+              type: string
+            code:
+              type: string
+    VerifyOtpResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/VerifyOtpResponseData'
+    VerifiedOtpId:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+    VerifyOtpResponseData:
+      type: object
+      required:
+        - otp
+      properties:
+        otp:
+          $ref: '#/components/schemas/VerifiedOtpId'
+    RegisterAuthRequestBody:
+      type: object
+      required:
+        - profile
+        - identities
+        - push_token
+      properties:
+        profile:
+          $ref: '#/components/schemas/Profile'
+        identities:
+          type: object
+          required:
+            - provider
+            - identifier
+          properties:
+            provider:
+              $ref: '#/components/schemas/Provider'
+            identifier:
+              type: string
+            country_code:
+              type: string
+            uid:
+              type: string
+            provider_type:
+              type: string
+              enum: [google, microsoft, apple, fs]
+            meta:
+              type: object
+        password:
+          type: string
+        device:
+          $ref: '#/components/schemas/Device'
+        push_token:
+          type: object
+          required:
+            - value
+            - type
+          properties:
+            value:
+              type: string
+            type:
+              type: string
+    RegisterAuthResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/RegisterAuthResponseData'
+    RegisterAuthResponseData:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: object
+          required:
+            - value
+          properties:
+            value:
+              type: string
+    LoginAuthRequestBody:
+      type: object
+      required:
+        - identity
+      properties:
+        identity:
+          type: object
+          required:
+            - provider
+            - identifier
+          properties:
+            provider:
+              $ref: '#/components/schemas/Provider'
+            identifier:
+              type: string
+            country_code:
+              type: string
+        password:
+          type: string
+        device:
+          $ref: '#/components/schemas/Device'
+        otp:
+          type: object
+          required:
+            - id
+            - reference
+          properties:
+            id:
+              type: string
+            reference:
+              type: string
+    LoginAuthResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/LoginAuthResponseData'
+    LoginAuthResponseData:
+      type: object
+      properties:
+        identity:
+          $ref: '#/components/schemas/Identity'
+        token:
+          type: object
+          required:
+            - value
+          properties:
+            value:
+              type: string
+    ReactivateAuthRequestBody:
+      type: object
+      required:
+        - identity
+      properties:
+        identity:
+          type: object
+          required:
+            - provider
+            - identifier
+          properties:
+            provider:
+              $ref: '#/components/schemas/Provider'
+            identifier:
+              type: string
+            country_code:
+              type: string
+        password:
+          type: string
+        device:
+          $ref: '#/components/schemas/Device'
+        otp:
+          type: object
+          required:
+            - id
+            - reference
+          properties:
+            id:
+              type: string
+            reference:
+              type: string
+    ReactivateAuthResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ReactivateAuthResponseData'
+    ReactivateAuthResponseData:
+      type: object
+      properties:
+        identity:
+          $ref: '#/components/schemas/Identity'
+        token:
+          type: object
+          required:
+            - value
+          properties:
+            value:
+              type: string
+    LogoutAuthRequestBody:
+      type: object
+      nullable: true
+    LogoutAuthResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/LogoutAuthResponseData'
+    LogoutAuthResponseData:
+      $ref: '#/components/schemas/Result'
+    ValidateIdentityRequestBody:
+      $ref: '#/components/schemas/Identity'
+    ValidateIdentityResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/ValidateIdentityResponseData'
+    ValidateIdentityResponseData:
+      $ref: '#/components/schemas/Result'
+    LinkExternalIdentityRequestBody:
+      type: object
+      required:
+        - identifier
+        - uid
+        - provider_type
+        - meta
+      properties:
+        identifier:
+          type: string
+        uid:
+          type: string
+        provider_type:
+          type: string
+          enum: [google, microsoft, apple, fs]
+        meta:
+          type: object
+    LinkExternalIdentityResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/LinkExternalIdentityResponseData'
+    LinkExternalIdentityResponseData:
+      $ref: '#/components/schemas/Result'
+    AccountResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/AccountResponseData'
+    AccountResponseData:
+      type: object
+      required:
+        - account
+      properties:
+        account:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+    DeleteAccountResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DeleteAccountData'
+    DeleteAccountData:
+      $ref: '#/components/schemas/Result'
+    CreateTaskResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateTaskData'
+    CreateTaskData:
+      $ref: '#/components/schemas/Result'
+    CreateIdentityRequestBody:
+      type: object
+      required:
+        - otp
+        - identity
+      properties:
+        identity:
+          $ref: '#/components/schemas/Identity'
+        otp:
+          $ref: '#/components/schemas/VerifiedOtpId'
+    CheckIdentityExistsRequestBody:
+      type: object
+      required:
+        - provider
+        - identifier
+      properties:
+        provider:
+          $ref: '#/components/schemas/Provider'
+        identifier:
+          type: string
+        country_code:
+          type: string
+    IdentitiesResponseData:
+      type: array
+      items:
+        $ref: '#/components/schemas/Identity'
+    IdentityResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/IdentitiesResponseData'
+    CreateIdentityResponseData:
+      $ref: '#/components/schemas/Result'
+    CreateIdentityResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateIdentityResponseData'
+    IdentitiesData:
+      type: array
+      items:
+        $ref: '#/components/schemas/Identity'
+    GetIdentitiesResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/IdentitiesData'
+    DeleteIdentityResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    VerifyPasswordRequestBody:
+      type: object
+      required:
+        - password
+      properties:
+        password:
+          type: string
+    VerifyPasswordResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    UpdatePasswordRequestBody:
+      type: object
+      required:
+        - password
+      properties:
+        password:
+          type: string
+    UpdatePasswordResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    ResetPasswordRequestBody:
+      type: object
+      required:
+        - identity
+        - hashedPassword
+      properties:
+        identity:
+          type: object
+          required:
+            - identifier
+            - provider
+            - otp
+            - reference
+          properties:
+            identifier:
+              type: string
+            provider:
+              $ref: '#/components/schemas/Provider'
+            otp:
+              type: string
+            reference:
+              type: string
+            country_code:
+              type: string
+        otp:
+          type: object
+          required:
+            - id
+            - reference
+          properties:
+            id:
+              type: string
+            reference:
+              type: string
+        hashedPassword:
+          type: string
+    ResetPasswordResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          properties:
+            token:
+              type: object
+              required:
+                - value
+              properties:
+                value:
+                  type: string
+    ShowQRTokenResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          properties:
+            token:
+              type: object
+              required:
+                - id
+                - expired_date
+              properties:
+                id:
+                  type: string
+                expired_date:
+                  type: string
+    EncryptedDataResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          properties:
+            encrypted_data:
+              type: string
+    AccountDataResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          properties:
+            account:
+              type: object
+              properties:
+                device:
+                  type: object
+                  required:
+                    - id
+                  properties:
+                    id:
+                      type: string

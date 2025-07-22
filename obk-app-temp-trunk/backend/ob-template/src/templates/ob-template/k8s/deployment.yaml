@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{PROJECT-NAME}}
+spec:
+  selector:
+    matchLabels:
+      name: {{PROJECT-NAME}}
+  template:
+    metadata:
+      labels:
+        name: {{PROJECT-NAME}}
+    spec:
+      containers:
+      - name: {{PROJECT-NAME}}
+        image: 418772626632.dkr.ecr.ap-southeast-1.amazonaws.com/one-bangkok-dev:{{PROJECT-NAME}}_latest
+        ports:
+          - containerPort: 3000
+        imagePullPolicy: Always
+        

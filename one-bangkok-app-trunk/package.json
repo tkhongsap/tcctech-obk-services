@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "prepare": "husky install",
+    "lint:backend": "yarn lint:ob-iam && yarn lint:ob-document",
+    "lint:ob-iam": "cd backend/ob-iam && yarn lint",
+    "lint:ob-document": "cd backend/ob-document && yarn lint"
+  },
+  "dependencies": {
+    "husky": "^8.0.3"
+  },
+  "devDependencies": {
+    "detox": "^20.13.5",
+    "jest": "^29"
+  }
+}

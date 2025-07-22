@@ -1,0 +1,996 @@
+openapi: '3.0.2'
+info:
+  title: 'ob-notification'
+  version: '1.0'
+servers:
+  - url: http://{hostname}
+    variables:
+      hostname:
+        default: localhost:3000
+paths:
+  /health:
+    get:
+      summary: Check health
+      operationId: health
+      tags:
+        - Health
+      responses:
+        200:
+          $ref: '#/components/responses/HealthResponse'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+  /me/recipient:
+    post:
+      summary: Create recipient
+      operationId: recipient_controller.create
+      tags:
+        - recipient_controller
+      parameters:
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: data for create recipient
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRecipientRequest'
+      responses:
+        200:
+          $ref: '#/components/responses/CreateRecipientResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /message_template:
+    post:
+      summary: Create message template
+      operationId: message_template_controller.create
+      tags:
+        - message_template_controller
+      requestBody:
+        description: data for create message template
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageTemplateRequest'
+      responses:
+        200:
+          $ref: '#/components/responses/CreateMessageTemplateResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /campaign:
+    post:
+      summary: Create campaign
+      description: Create campaign
+      operationId: campaign_controller.create
+      tags:
+        - campaign_controller
+      requestBody:
+        description: data for create message template
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCampaignRequest'
+      responses:
+        200:
+          $ref: '#/components/responses/CreateCampaignResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /campaign/{id}/start:
+    post:
+      summary: Start sending a campaign
+      description: Initiates the process of sending a campaign notification.
+      operationId: campaign_controller.start
+      tags:
+        - campaign_controller
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the campaign.
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/SendingCampaignResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /me/message:
+    get:
+      summary: Get message
+      operationId: message_controller.findAll
+      tags:
+        - message_controller
+      parameters:
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Accept-Language
+          in: header
+          schema:
+            type: string
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: The unique id of category
+        - $ref: '#/components/parameters/PaginationLimit'
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationOrder'
+        - $ref: '#/components/parameters/PaginationSort'
+        - $ref: '#/components/parameters/PaginationCount'
+      responses:
+        200:
+          $ref: '#/components/responses/FindAllMessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+
+    delete:
+      summary: Delate message
+      operationId: message_controller.delete
+      tags:
+        - message_controller
+      parameters:
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: message ids
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteMessageRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/DeleteMessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /me/message/read:
+    put:
+      summary: Update read message
+      operationId: message_controller.read
+      tags:
+        - message_controller
+      parameters:
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: message ids
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadMessageRequestBody'
+      responses:
+        200:
+          $ref: '#/components/responses/ReadMessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /me/message/{id}:
+    get:
+      summary: Get message detail
+      operationId: message_controller.find
+      tags:
+        - message_controller
+      parameters:
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: The ID of the message.
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/GetMessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+    put:
+      summary: Update message
+      operationId: message_controller.update
+      tags:
+        - message_controller
+      parameters:
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: The ID of the message.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: data for update message
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMessageRequest'
+      responses:
+        200:
+          $ref: '#/components/responses/UpdateMessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /me/category/message/count:
+    get:
+      summary: count message category
+      operationId: message_category_controller.countMessage
+      tags:
+        - message_controller
+      parameters:
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: category
+          description: The name of category
+          schema:
+            type: string
+        - in: query
+          name: read
+          description: return only read message if true and unread message if value is false. If value is undefined, It will response both read and unread.
+          schema:
+            type: boolean
+      responses:
+        200:
+          $ref: '#/components/responses/CountMessageCategoryResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /message_category:
+    get:
+      summary: Get message category
+      operationId: message_category_controller.findAll
+      tags:
+        - message_category_controller
+      parameters:
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/GetMessageCategoryResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /notification_setting:
+    get:
+      summary: Get all notification settings
+      operationId: notification_setting_controller.findAll
+      tags:
+        - notification_setting_controller
+      parameters:
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: notification_group_id
+          in: query
+          description: notification group id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/FindAllNotificationSettingResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+    put:
+      summary: Update notification setting
+      operationId: notification_setting_controller.update
+      tags:
+        - notification_setting_controller
+      parameters:
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: data for update notification setting
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNotificationSettingRequest'
+      responses:
+        200:
+          $ref: '#/components/responses/UpdateNotificationSettingResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /notification_setting/deactivate:
+    put:
+      summary: deactivate all notification settings
+      operationId: notification_setting_controller.deactivateAll
+      tags:
+        - notification_setting_controller
+      parameters:
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/DeactivateAllNotificationSettingResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+  /notification_group:
+    get:
+      summary: get all notification groups with settings
+      operationId: notification_group_controller.findAll
+      tags:
+        - notification_group_controller
+      parameters:
+        - name: X-Access-Token
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: X-Account-Id
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          $ref: '#/components/responses/FindAllNotificationGroupResponse'
+        default:
+          $ref: '#/components/responses/ErrorResp'
+components:
+  parameters:
+    PaginationLimit:
+      name: limit
+      in: query
+      description: limit of page size
+      required: false
+      schema:
+        type: number
+        default: 25
+    PaginationPage:
+      name: page
+      in: query
+      description: page number
+      required: false
+      schema:
+        type: number
+    PaginationOrder:
+      name: order
+      in: query
+      description: query order by a ascending or descending
+      required: false
+      schema:
+        type: string
+        enum: [desc, asc]
+        default: desc
+    PaginationSort:
+      name: sort
+      in: query
+      description: sort by
+      required: false
+      schema:
+        type: string
+        default: created_at
+    PaginationCount:
+      name: count
+      in: query
+      description: count of total record. If count is not provided or value is false, total_pages and total will undefined in response
+      required: false
+      schema:
+        type: boolean
+        default: false
+  responses:
+    HealthResponse:
+      description: Health response
+      content:
+        application/json:
+          schema:
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/HealthData'
+    ErrorResp:
+      description: Unexpected error occurred
+      content:
+        application/json:
+          schema:
+            required:
+              - error
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+    CreateRecipientResponse:
+      description: Create recipient response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateRecipientResponse'
+    CreateMessageTemplateResponse:
+      description: Create message template response
+      content:
+        application/json:
+          schema:
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/CreateMessageTemplateResponse'
+    SendingCampaignResponse:
+      description: Sending campaign response
+      content:
+        application/json:
+          schema:
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/SendingCampaignResponse'
+    CreateCampaignResponse:
+      description: create campaign response
+      content:
+        application/json:
+          schema:
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/CreateCampaignResponse'
+    FindAllMessageResponse:
+      description: Get message response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FindAllMessageResponse'
+    CountMessageCategoryResponse:
+      description: Get count message category response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CountMessageCategoryResponse'
+    GetMessageCategoryResponse:
+      description: Get message category response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetMessageCategoryResponse'
+    UpdateMessageResponse:
+      description: Update message response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateMessageResponse'
+    ReadMessageResponse:
+      description: Read all message response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReadMessageResponse'
+    DeleteMessageResponse:
+      description: Delete message response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeleteMessageResponse'
+    GetMessageResponse:
+      description: Get message response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetMessageResponse'
+    FindAllNotificationSettingResponse:
+      description: Get all notification setting response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FindAllNotificationSettingResponse'
+    UpdateNotificationSettingResponse:
+      description: update notification setting response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateNotificationSettingResponse'
+    FindAllNotificationGroupResponse:
+      description: Get all notification groups and its setting value
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FindAllNotificationGroupResponse'
+    DeactivateAllNotificationSettingResponse:
+      description: deactivate all notification settings response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DeactivateAllNotificationSettingResponse'
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: 'INTERNAL_SERVER_ERROR'
+          enum:
+            - 'BAD_REQUEST'
+            - 'NOT_FOUND'
+            - 'USER_NOT_FOUND'
+            - 'INTERNAL_SERVER_ERROR'
+        message:
+          type: string
+          example: 'error message'
+    Result:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          type: boolean
+          required:
+            - value
+    HealthData:
+      type: object
+      required:
+        - health
+      properties:
+        health:
+          type: boolean
+    PaginationData:
+      type: object
+      required:
+        - limit
+        - page
+      properties:
+        total:
+          type: number
+        limit:
+          type: number
+        page:
+          type: number
+        total_pages:
+          type: number
+    CountData:
+      type: object
+      required:
+        - id
+        - name
+        - total
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        total:
+          type: number
+    CreateRecipientRequest:
+      type: object
+      required:
+        - token
+        - token_type
+      properties:
+        token:
+          type: string
+        token_type:
+          type: string
+          enum: [fcm]
+    CreateRecipientResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    CreateMessageTemplateRequest:
+      type: object
+      required:
+        - template
+      properties:
+        template:
+          type: object
+          required:
+            - name
+            - title
+            - sub_title
+            - data
+            - message_category_id
+          properties:
+            name:
+              type: string
+            title:
+              type: string
+            sub_title:
+              type: string
+            message_category_id:
+              type: string
+            deeplink:
+              type: string
+            thumbnail:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                required:
+                  - message_data_template_id
+                  - data
+                properties:
+                  message_data_template_id:
+                    type: string
+                  data:
+                    type: object
+    CreateMessageTemplateResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    SendingCampaignResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    FindAllMessageResponse:
+      type: object
+      required:
+        - data
+        - metaData
+      properties:
+        data:
+          $ref: '#/components/schemas/FineAllMessageData'
+        meta:
+          type: object
+          $ref: '#/components/schemas/PaginationData'
+    FineAllMessageData:
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - read
+          - created_at
+          - title
+          - sub_title
+          - category
+          - icon_url
+        properties:
+          id:
+            type: string
+          read:
+            type: boolean
+          created_at:
+            type: string
+          title:
+            type: string
+          sub_title:
+            type: string
+          deeplink:
+            type: string
+          thumbnail:
+            type: string
+          category:
+            type: string
+          icon_url:
+            type: string
+          data:
+            $ref: '#/components/schemas/MessageData'
+    MessageData:
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - data
+        properties:
+          id:
+            type: string
+          data:
+            type: object
+    GetMessageCategoryResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMessageCategoryData'
+    GetMessageCategoryData:
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - name
+          - sequence
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          sequence:
+            type: integer
+    CountMessageCategoryResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/CountMessageCategoryData'
+    CountMessageCategoryData:
+      type: array
+      items:
+        $ref: '#/components/schemas/CountData'
+    UpdateMessageRequest:
+      type: object
+      properties:
+        read:
+          type: boolean
+    UpdateMessageResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    ReadMessageResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    DeleteMessageResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    GetMessageResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/GetMessageData'
+    GetMessageData:
+      type: object
+      required:
+        - id
+        - read
+        - created_at
+        - title
+        - sub_title
+        - category
+        - data
+        - deeplink
+        - thumbnail
+        - tag
+      properties:
+        id:
+          type: string
+        read:
+          type: boolean
+        created_at:
+          type: string
+        title:
+          type: string
+        sub_title:
+          type: string
+        category:
+          type: string
+        data:
+          $ref: '#/components/schemas/MessageData'
+        deeplink:
+          type: string
+          nullable: true
+        tag:
+          type: array
+          items:
+            type: string
+        thumbnail:
+          type: string
+          nullable: true
+    CreateCampaignRequest:
+      type: object
+      required:
+        - message_template_id
+        - name
+      properties:
+        message_template_id:
+          type: string
+        name:
+          type: string
+    CreateCampaignResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    DeleteMessageRequestBody:
+      type: object
+      properties:
+        exclude:
+          type: array
+          items:
+            type: string
+        include:
+          type: array
+          items:
+            type: string
+    ReadMessageRequestBody:
+      type: object
+      properties:
+        exclude:
+          type: array
+          items:
+            type: string
+        include:
+          type: array
+          items:
+            type: string
+    FindAllNotificationSettingResponse:
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - sms_enabled
+          - email_enabled
+          - in_app_enabled
+          - push_enabled
+        properties:
+          id:
+            type: string
+          sms_enabled:
+            type: boolean
+          email_enabled:
+            type: boolean
+          in_app_enabled:
+            type: boolean
+          push_enabled:
+            type: boolean
+    UpdateNotificationSettingRequest:
+      type: object
+      required:
+        - id
+        - sms_enabled
+        - email_enabled
+        - in_app_enabled
+        - push_enabled
+      properties:
+        id:
+          type: string
+        sms_enabled:
+          type: boolean
+        email_enabled:
+          type: boolean
+        in_app_enabled:
+          type: boolean
+        push_enabled:
+          type: boolean
+    UpdateNotificationSettingResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'
+    FindAllNotificationGroupResponse:
+      type: array
+      items:
+        type: object
+        required:
+          - groupId
+          - groupName
+          - settings
+        properties:
+          groupId:
+            type: string
+          groupName:
+            type: string
+          settings:
+            type: object
+            required:
+              - sms_enabled
+              - email_enabled
+              - in_app_enabled
+              - push_enabled
+            properties:
+              sms_enabled:
+                type: boolean
+              email_enabled:
+                type: boolean
+              in_app_enabled:
+                type: boolean
+              push_enabled:
+                type: boolean
+    DeactivateAllNotificationSettingResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Result'

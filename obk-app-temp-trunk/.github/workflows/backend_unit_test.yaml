@@ -1,0 +1,49 @@
+name: Backend Unit Test
+
+on:
+  workflow_call:
+    inputs:
+      service:
+        required: true
+        type: string
+      env:
+        required: true
+        type: string
+jobs:
+  test:
+    defaults:
+      run:
+        working-directory: "./backend/${{ inputs.service }}"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '19.9.0'
+      - uses: actions/checkout@v3
+      - name: Setup Common lib
+        run: |
+          yarn global add typescript
+          yarn install
+          cd ../ob-common-lib
+          tsc -d -p ./tsconfig.json
+          cd ..
+          rm -rf node_modules
+          yarn install
+      - name: Setup Prisma client
+        run: |
+          yarn prisma:generate
+      - name: Test
+        run: |
+          yarn install
+          yarn run jest --coverage --passWithNoTests
+      - name: Check Code Coverage
+        run: |
+          MIN_COVERAGE=5
+          ACTUAL_COVERAGE=$(cat ./coverage/lcov.info | grep 'lines......:' | sed -n 's/^.*: \([0-9.]*\)%.*$/\1/p')
+          if (( $(echo "$ACTUAL_COVERAGE < $MIN_COVERAGE" | bc -l) )); then
+            echo "Code coverage is below $MIN_COVERAGE%. Actual coverage is $ACTUAL_COVERAGE%."
+            exit 0
+          else
+            echo "Code coverage is sufficient at $ACTUAL_COVERAGE%."
+          fi

@@ -1,0 +1,32 @@
+# Step 1: Build the Go application
+FROM golang:1.21-alpine AS builder
+
+WORKDIR /app
+
+# Install golang-migrate
+#RUN curl -L https://github.com/golang-migrate/migrate/releases/download/v4.12.2/migrate.linux-amd64.tar.gz | tar xvz
+
+# Cache go modules
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the Go application
+RUN go build -o obk-art-c-api ./
+
+# Step 2: Create the runtime image
+FROM alpine:latest
+
+WORKDIR /app
+
+# Copy the built application from the builder container
+COPY --from=builder /app/obk-art-c-api .
+RUN touch .env
+
+# Expose port for the app
+EXPOSE 8080
+
+# Command to run the app
+CMD ["./obk-art-c-api"]

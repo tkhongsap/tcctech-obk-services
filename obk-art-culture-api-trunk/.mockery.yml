@@ -1,0 +1,42 @@
+with-expecter: true
+packages:
+  example.com/art-culture-api/domain/booking/service:
+    config:
+      all: true
+      outpkg: mocks
+      dir: "domain/booking/mocks/service"
+      filename: "mock_{{.InterfaceNameSnake}}.go"
+      mockname: "Mock{{.InterfaceName}}"
+      with-expecter: true
+  example.com/art-culture-api/domain/booking/repository:
+    config:
+      all: true
+      outpkg: mocks
+      dir: "domain/booking/mocks/repository"
+      filename: "mock_{{.InterfaceNameSnake}}.go"
+      mockname: "Mock{{.InterfaceName}}"
+      with-expecter: true
+  example.com/art-culture-api/domain/booking/session:
+    config:
+      all: true
+      outpkg: mocks
+      dir: "domain/booking/mocks/session"
+      filename: "mock_{{.InterfaceNameSnake}}.go"
+      mockname: "Mock{{.InterfaceName}}"
+      with-expecter: true
+  example.com/art-culture-api/domain/act_c/repository:
+    config:
+      all: true
+      outpkg: mocks
+      dir: "domain/act_c/mocks/repository"
+      filename: "mock_{{.InterfaceNameSnake}}.go"
+      mockname: "Mock{{.InterfaceName}}"
+      with-expecter: true
+  example.com/art-culture-api/domain/programs/repository:
+    config:
+      all: true
+      outpkg: mocks
+      dir: "domain/programs/mocks/repository"
+      filename: "mock_{{.InterfaceNameSnake}}.go"
+      mockname: "Mock{{.InterfaceName}}"
+      with-expecter: true

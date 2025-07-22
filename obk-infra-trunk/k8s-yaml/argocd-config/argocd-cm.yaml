@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  accounts.billy: apiKey, login
+  accounts.obDevOps: apiKey, login
+  dex.config: |
+    connectors:
+    - config:
+        issuer: https://accounts.google.com
+        clientID: "${ARGO_GOOGLE_CLIENT_ID}"
+        clientSecret: "${ARGO_GOOGLE_CLIENT_SECRET}"
+      type: oidc
+      id: google
+      name: Google    
+  url: http://${HOST}

@@ -1,0 +1,549 @@
+---
+# Post Methods with DeviceID
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: checkin-socday
+  namespace: obk-production
+spec:
+  schedule: "0 8 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Parameters
+                URL="http://obk-obk-operation-backend-production.obk-production.svc.prd-obk-services.local/api/v1/Attendant/import"
+                POST_DATA='{"attendanceType":"checkin","shiftName":"socDay","deviceKeys":["E03C1CB15CCC5601"]}'
+
+                # Output file
+                LOGFILE="response.log"
+
+                # Check if POST_DATA is provided
+                if [ -z "$POST_DATA" ]; then
+                    # If no POST_DATA, perform a GET request
+                    echo "Making GET request to $URL"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt "$URL")
+                else
+                    # If POST_DATA is provided, perform a POST request
+                    echo "Making POST request to $URL with data: $POST_DATA"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt -X POST -d "$POST_DATA" -H "Content-Type: application/json" "$URL")
+                fi
+
+                # Capture HTTP status code
+                status_code="${response: -3}"
+                echo "HTTP Status Code: $status_code"
+
+                # Save response body to logfile
+                cat /tmp/curl_response.txt > "$LOGFILE"
+
+                # Check if the request was successful
+                if [ "$status_code" -eq 200 ]; then
+                    echo "Request successful. Response saved to $LOGFILE."
+                else
+                    echo "Request failed with status code $status_code. Check $LOGFILE for details."
+                fi
+
+                # Clean up
+                rm /tmp/curl_response.txt
+
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: checkin-socnight
+  namespace: obk-production
+spec:
+  schedule: "0 20 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Parameters
+                URL="http://obk-obk-operation-backend-production.obk-production.svc.prd-obk-services.local/api/v1/Attendant/import"
+                POST_DATA='{"attendanceType":"checkin","shiftName":"socNight","deviceKeys":["E03C1CB15CCC5601"]}'
+
+                # Output file
+                LOGFILE="response.log"
+
+                # Check if POST_DATA is provided
+                if [ -z "$POST_DATA" ]; then
+                    # If no POST_DATA, perform a GET request
+                    echo "Making GET request to $URL"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt "$URL")
+                else
+                    # If POST_DATA is provided, perform a POST request
+                    echo "Making POST request to $URL with data: $POST_DATA"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt -X POST -d "$POST_DATA" -H "Content-Type: application/json" "$URL")
+                fi
+
+                # Capture HTTP status code
+                status_code="${response: -3}"
+                echo "HTTP Status Code: $status_code"
+
+                # Save response body to logfile
+                cat /tmp/curl_response.txt > "$LOGFILE"
+
+                # Check if the request was successful
+                if [ "$status_code" -eq 200 ]; then
+                    echo "Request successful. Response saved to $LOGFILE."
+                else
+                    echo "Request failed with status code $status_code. Check $LOGFILE for details."
+                fi
+
+                # Clean up
+                rm /tmp/curl_response.txt
+
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: checkout-socday
+  namespace: obk-production
+spec:
+  schedule: "10 21 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Parameters
+                URL="http://obk-obk-operation-backend-production.obk-production.svc.prd-obk-services.local/api/v1/Attendant/import"
+                POST_DATA='{"attendanceType":"checkout","shiftName":"socDay","deviceKeys":["E03C1CB1747C5601"]}'
+
+                # Output file
+                LOGFILE="response.log"
+
+                # Check if POST_DATA is provided
+                if [ -z "$POST_DATA" ]; then
+                    # If no POST_DATA, perform a GET request
+                    echo "Making GET request to $URL"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt "$URL")
+                else
+                    # If POST_DATA is provided, perform a POST request
+                    echo "Making POST request to $URL with data: $POST_DATA"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt -X POST -d "$POST_DATA" -H "Content-Type: application/json" "$URL")
+                fi
+
+                # Capture HTTP status code
+                status_code="${response: -3}"
+                echo "HTTP Status Code: $status_code"
+
+                # Save response body to logfile
+                cat /tmp/curl_response.txt > "$LOGFILE"
+
+                # Check if the request was successful
+                if [ "$status_code" -eq 200 ]; then
+                    echo "Request successful. Response saved to $LOGFILE."
+                else
+                    echo "Request failed with status code $status_code. Check $LOGFILE for details."
+                fi
+
+                # Clean up
+                rm /tmp/curl_response.txt
+
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: checkout-socnight
+  namespace: obk-production
+spec:
+  schedule: "10 9 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Parameters
+                URL="http://obk-obk-operation-backend-production.obk-production.svc.prd-obk-services.local/api/v1/Attendant/import"
+                POST_DATA='{"attendanceType":"checkout","shiftName":"socNight","deviceKeys":["E03C1CB1747C5601"]}'
+
+                # Output file
+                LOGFILE="response.log"
+
+                # Check if POST_DATA is provided
+                if [ -z "$POST_DATA" ]; then
+                    # If no POST_DATA, perform a GET request
+                    echo "Making GET request to $URL"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt "$URL")
+                else
+                    # If POST_DATA is provided, perform a POST request
+                    echo "Making POST request to $URL with data: $POST_DATA"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt -X POST -d "$POST_DATA" -H "Content-Type: application/json" "$URL")
+                fi
+
+                # Capture HTTP status code
+                status_code="${response: -3}"
+                echo "HTTP Status Code: $status_code"
+
+                # Save response body to logfile
+                cat /tmp/curl_response.txt > "$LOGFILE"
+
+                # Check if the request was successful
+                if [ "$status_code" -eq 200 ]; then
+                    echo "Request successful. Response saved to $LOGFILE."
+                else
+                    echo "Request failed with status code $status_code. Check $LOGFILE for details."
+                fi
+
+                # Clean up
+                rm /tmp/curl_response.txt
+
+          restartPolicy: OnFailure
+---
+# Post Methods with KeycloakID
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: process-schedule-socday
+  namespace: obk-production
+spec:
+  schedule: "0 6 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Parameters
+                URL="http://obk-obk-operation-backend-production.obk-production.svc.prd-obk-services.local/api/v1/SchedulePlan/process"
+                POST_DATA='{"keyCloakUserId":"9f8144ca-1be1-4c88-aef3-1a2b98177640","startDate" : "2024-09-05","endDate": "2024-09-05","totalDays": 0,"isCrons": true,"shift": "socDay"}'
+
+                # Output file
+                LOGFILE="response.log"
+
+                # Check if POST_DATA is provided
+                if [ -z "$POST_DATA" ]; then
+                    # If no POST_DATA, perform a GET request
+                    echo "Making GET request to $URL"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt "$URL")
+                else
+                    # If POST_DATA is provided, perform a POST request
+                    echo "Making POST request to $URL with data: $POST_DATA"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt -X POST -d "$POST_DATA" -H "Content-Type: application/json" "$URL")
+                fi
+
+                # Capture HTTP status code
+                status_code="${response: -3}"
+                echo "HTTP Status Code: $status_code"
+
+                # Save response body to logfile
+                cat /tmp/curl_response.txt > "$LOGFILE"
+
+                # Check if the request was successful
+                if [ "$status_code" -eq 200 ]; then
+                    echo "Request successful. Response saved to $LOGFILE."
+                else
+                    echo "Request failed with status code $status_code. Check $LOGFILE for details."
+                fi
+
+                # Clean up
+                rm /tmp/curl_response.txt
+
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: process-schedule-socnight
+  namespace: obk-production
+spec:
+  schedule: "0 18 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Parameters
+                URL="http://obk-obk-operation-backend-production.obk-production.svc.prd-obk-services.local/api/v1/SchedulePlan/process"
+                POST_DATA='{"keyCloakUserId":"9f8144ca-1be1-4c88-aef3-1a2b98177640","startDate" : "2024-09-05","endDate": "2024-09-05","totalDays": 0,"isCrons": true,"shift": "socNight"}'
+
+                # Output file
+                LOGFILE="response.log"
+
+                # Check if POST_DATA is provided
+                if [ -z "$POST_DATA" ]; then
+                    # If no POST_DATA, perform a GET request
+                    echo "Making GET request to $URL"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt "$URL")
+                else
+                    # If POST_DATA is provided, perform a POST request
+                    echo "Making POST request to $URL with data: $POST_DATA"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt -X POST -d "$POST_DATA" -H "Content-Type: application/json" "$URL")
+                fi
+
+                # Capture HTTP status code
+                status_code="${response: -3}"
+                echo "HTTP Status Code: $status_code"
+
+                # Save response body to logfile
+                cat /tmp/curl_response.txt > "$LOGFILE"
+
+                # Check if the request was successful
+                if [ "$status_code" -eq 200 ]; then
+                    echo "Request successful. Response saved to $LOGFILE."
+                else
+                    echo "Request failed with status code $status_code. Check $LOGFILE for details."
+                fi
+
+                # Clean up
+                rm /tmp/curl_response.txt
+
+          restartPolicy: OnFailure
+---
+# Get Methods
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: report-attendant-socnight
+  namespace: obk-production
+spec:
+  schedule: "30 20 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Parameters
+                URL="http://obk-obk-operation-backend-production.obk-production.svc.prd-obk-services.local/api/operation/v1/report/Attendant?ShiftName=socNight"
+
+                # Output file
+                LOGFILE="response.log"
+
+                # Check if POST_DATA is provided
+                if [ -z "$POST_DATA" ]; then
+                    # If no POST_DATA, perform a GET request
+                    echo "Making GET request to $URL"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt "$URL")
+                else
+                    # If POST_DATA is provided, perform a POST request
+                    echo "Making POST request to $URL with data: $POST_DATA"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt -X POST -d "$POST_DATA" -H "Content-Type: application/json" "$URL")
+                fi
+
+                # Capture HTTP status code
+                status_code="${response: -3}"
+                echo "HTTP Status Code: $status_code"
+
+                # Save response body to logfile
+                cat /tmp/curl_response.txt > "$LOGFILE"
+
+                # Check if the request was successful
+                if [ "$status_code" -eq 200 ]; then
+                    echo "Request successful. Response saved to $LOGFILE."
+                else
+                    echo "Request failed with status code $status_code. Check $LOGFILE for details."
+                fi
+
+                # Clean up
+                rm /tmp/curl_response.txt
+
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: report-checkincheckout-socnight
+  namespace: obk-production
+spec:
+  schedule: "30 9 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Parameters
+                URL="http://obk-obk-operation-backend-production.obk-production.svc.prd-obk-services.local/api/operation/v1/report/CheckInCheckOut?ShiftName=socNight"
+
+                # Output file
+                LOGFILE="response.log"
+
+                # Check if POST_DATA is provided
+                if [ -z "$POST_DATA" ]; then
+                    # If no POST_DATA, perform a GET request
+                    echo "Making GET request to $URL"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt "$URL")
+                else
+                    # If POST_DATA is provided, perform a POST request
+                    echo "Making POST request to $URL with data: $POST_DATA"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt -X POST -d "$POST_DATA" -H "Content-Type: application/json" "$URL")
+                fi
+
+                # Capture HTTP status code
+                status_code="${response: -3}"
+                echo "HTTP Status Code: $status_code"
+
+                # Save response body to logfile
+                cat /tmp/curl_response.txt > "$LOGFILE"
+
+                # Check if the request was successful
+                if [ "$status_code" -eq 200 ]; then
+                    echo "Request successful. Response saved to $LOGFILE."
+                else
+                    echo "Request failed with status code $status_code. Check $LOGFILE for details."
+                fi
+
+                # Clean up
+                rm /tmp/curl_response.txt
+
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: report-attendant-socday
+  namespace: obk-production
+spec:
+  schedule: "30 8 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Parameters
+                URL="http://obk-obk-operation-backend-production.obk-production.svc.prd-obk-services.local/api/operation/v1/report/Attendant?ShiftName=socDay"
+
+                # Output file
+                LOGFILE="response.log"
+
+                # Check if POST_DATA is provided
+                if [ -z "$POST_DATA" ]; then
+                    # If no POST_DATA, perform a GET request
+                    echo "Making GET request to $URL"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt "$URL")
+                else
+                    # If POST_DATA is provided, perform a POST request
+                    echo "Making POST request to $URL with data: $POST_DATA"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt -X POST -d "$POST_DATA" -H "Content-Type: application/json" "$URL")
+                fi
+
+                # Capture HTTP status code
+                status_code="${response: -3}"
+                echo "HTTP Status Code: $status_code"
+
+                # Save response body to logfile
+                cat /tmp/curl_response.txt > "$LOGFILE"
+
+                # Check if the request was successful
+                if [ "$status_code" -eq 200 ]; then
+                    echo "Request successful. Response saved to $LOGFILE."
+                else
+                    echo "Request failed with status code $status_code. Check $LOGFILE for details."
+                fi
+
+                # Clean up
+                rm /tmp/curl_response.txt
+
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: report-checkincheckout-socday
+  namespace: obk-production
+spec:
+  schedule: "30 21 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Parameters
+                URL="http://obk-obk-operation-backend-production.obk-production.svc.prd-obk-services.local/api/operation/v1/report/CheckInCheckOut?ShiftName=socDay"
+
+                # Output file
+                LOGFILE="response.log"
+
+                # Check if POST_DATA is provided
+                if [ -z "$POST_DATA" ]; then
+                    # If no POST_DATA, perform a GET request
+                    echo "Making GET request to $URL"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt "$URL")
+                else
+                    # If POST_DATA is provided, perform a POST request
+                    echo "Making POST request to $URL with data: $POST_DATA"
+                    response=$(curl -s -w "%{http_code}" -o /tmp/curl_response.txt -X POST -d "$POST_DATA" -H "Content-Type: application/json" "$URL")
+                fi
+
+                # Capture HTTP status code
+                status_code="${response: -3}"
+                echo "HTTP Status Code: $status_code"
+
+                # Save response body to logfile
+                cat /tmp/curl_response.txt > "$LOGFILE"
+
+                # Check if the request was successful
+                if [ "$status_code" -eq 200 ]; then
+                    echo "Request successful. Response saved to $LOGFILE."
+                else
+                    echo "Request failed with status code $status_code. Check $LOGFILE for details."
+                fi
+
+                # Clean up
+                rm /tmp/curl_response.txt
+
+          restartPolicy: OnFailure

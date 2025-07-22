@@ -1,0 +1,94 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: daily-login-ops-app-report
+  namespace: obk-production
+spec:
+  schedule: "0 1 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: daily-login-ops-app-report
+            image: amazon/aws-cli:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                # Config aws client
+                export AWS_ACCESS_KEY_ID="AKIA2UC3CDGQDM65FYUZ"
+                export AWS_SECRET_ACCESS_KEY="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"
+                export AWS_DEFAULT_REGION="ap-southeast-1" 
+                export AWS_OUTPUT_FORMAT="json"
+                mkdir -p ~/.aws
+                echo "[default]" > ~/.aws/config
+                echo "region = $AWS_DEFAULT_REGION" >> ~/.aws/config
+                echo "output = $AWS_OUTPUT_FORMAT" >> ~/.aws/config
+                echo "[default]" > ~/.aws/credentials
+                echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
+                echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+
+
+                # Install PostgreSQL client
+                yum install -y postgresql && yum clean all
+
+                export PATH=$PATH:/usr/pgsql-16/bin
+
+                export PGPASSWORD="obk_report"
+                
+                # Database connection parameters
+                HOST="db.tccproptech.com"        # Replace with your PostgreSQL server host
+                PORT="5432"             # Default PostgreSQL port
+                DB_NAME="keycloak"  # Replace with your database name
+                USER="report"    # Replace with your PostgreSQL username
+                PASSWORD="obk_report" # Replace with your PostgreSQL password
+                # Email parameters
+                TO_EMAIL="butsaprat.w@tcc-technology.com,ong-ard.c@tcc-technology.com"  # Replace with the recipient's email address
+                FROM_EMAIL="no-reply@onebangkok.com"  # Replace with your verified SES sender email
+                SUBJECT="Daily Login Ops App Report $(date +'%Y-%m-%d %H:%M:%S')"
+                # Output file for the report
+                OUTPUT_FILE="report_$(date +%Y%m%d_%H%M%S).csv"
+                MIME_FILE="email.txt"
+                BODY="Please find the attached report for daily login Ops App's data."  # Email body
+
+                SQL_QUERY="SELECT TO_CHAR(TO_TIMESTAMP(event_time / 1000), 'DD/MM/YYYY HH24:MI:SS') as event_date, *
+                FROM event_entity
+                Join user_entity on user_entity.id = event_entity.user_id
+                Join user_attribute on user_attribute.user_id = event_entity.user_id
+                WHERE (event_entity.event_time >= (EXTRACT(epoch FROM (date_trunc('day', (NOW() - INTERVAL '1 day')))::timestamp) * 1000)::bigint)
+                AND (event_entity.event_time <= (EXTRACT(epoch FROM (date_trunc('day', NOW()))::timestamp) * 1000)::bigint)
+                AND (event_entity.realm_id = '9fc8fe81-8866-49c6-8a33-308077b47a43')
+                AND (event_entity.type = 'LOGIN')"
+
+                psql -h $HOST -U $USER -d $DB_NAME -p $PORT -c "\COPY ($SQL_QUERY) TO '$OUTPUT_FILE' WITH CSV HEADER"
+
+                # Execute the query and redirect the output to the file
+                if [ ! -f "$OUTPUT_FILE" ]; then
+                  echo "Error: Query failed or no data returned"
+                  exit 1
+                fi
+
+                echo "Report generated successfully: $OUTPUT_FILE"
+
+                # Step 2: Create the MIME email with the attachment
+                echo "Creating MIME email with attachment..."
+
+                ENCODED_ATTACHMENT=$(base64 -i "$OUTPUT_FILE" | tr -d '\n')  # Base64 encode the file and remove newlines
+
+                # Generate the MIME content and wrap it in the JSON format
+                (
+                  echo "{\"Data\": \"From: $FROM_EMAIL\\nTo: $TO_EMAIL\\nSubject: $SUBJECT\\nMIME-Version: 1.0\\nContent-Type: multipart/mixed; boundary=\\\"boundary-1\\\"\\n\\n--boundary-1\\nContent-Type: text/plain; charset=UTF-8\\nContent-Transfer-Encoding: 7bit\\n\\n$BODY\\n\\n--boundary-1\\nContent-Type: application/octet-stream; name=\\\"$(basename $OUTPUT_FILE)\\\"\\nContent-Disposition: attachment; filename=\\\"$(basename $OUTPUT_FILE)\\\"\\nContent-Transfer-Encoding: base64\\n\\n$ENCODED_ATTACHMENT\\n--boundary-1--\"}"
+                ) > "email_payload.json"
+
+                aws ses send-raw-email --cli-binary-format raw-in-base64-out --raw-message file://email_payload.json
+                # Check if the email was sent successfully
+                if [ $? -eq 0 ]; then
+                  echo "Email sent successfully!"
+                else
+                  echo "Error sending email"
+                  exit 1
+                fi
+
+          restartPolicy: OnFailure

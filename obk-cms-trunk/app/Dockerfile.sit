@@ -1,0 +1,62 @@
+FROM --platform=linux/amd64 node:18-alpine
+
+# TODO=ENV should be injected when building the image, this is a workaround
+ENV APP_PREFIX=''
+ENV NEXT_PUBLIC_URL='http://obk-sit.glorymtel.xyz'
+ENV API_BASE_URL='http://ec2-18-142-55-130.ap-southeast-1.compute.amazonaws.com/obkcms'
+
+ENV FIREBASE_ADMIN_SDK_TYPE='service_account'
+ENV FIREBASE_ADMIN_SDK_PROJECT_ID='one-bangkok-uat'
+ENV FIREBASE_ADMIN_SDK_PRIVATE_KEY_ID='d5d77f32ea2bb9c19b82c1e3ac2598e09563da93'
+ENV FIREBASE_ADMIN_SDK_PRIVATE_KEY='-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC+cOoSyf9UmrSq\n9VWpiX/ZaHzB08LVPANWyMsQbIRHLRC8ci367HheQNd7IXeNBXyX56fj5CTnOpvA\nqPU+vzMAE+rlzgvGecomVeb38qIw/9zx05CsbFTgtpm7HPoDgo9K2qpztAatOxX5\nHNqUiRuUoA889LgPDCYNMDYB/uFFy6Ye9ZUUItBAhRnxCCE/U+CePCqJ64NLccfQ\n8L4Z4tdtWJjsXSPdcBHoBSJnRk25L2KRyIfAGCdxNwwm8q9xVcCz/uZfVASqEtXj\nWwOY+phrMUqEbGzkSkt6BCrWSOpR58fVjNr6mWT1rpw5WSzxns3qnWzXfJ4NRJQg\ntwprFnIHAgMBAAECggEAAsveHAb5Yg33rLfgU4q+6rXVG90iedgVhWBjU04YQGsf\nB77NpNtdaUmejAWgX4tqfUFwUvzsHlgsvZSdirqlLmLLB+HRhRT4dZp22nDsZ5TJ\nfrXoWOH7nUJePLJb6OkxjVwOWDpRRd8X04zrmDB8epmHnkvtbwzy2BbSjDIixpXh\n11uXtvks3z4zHbHV5Qoof777XiEvSggyX9s8SpkcotjaJQAuCCjIGUqwkwtV1/x0\nBpzbvOSlbCnnK+r+VGvTCPkAJ4RUwiEFLYo5Oay8+yYIDkwAgqA7nxnfW06VIhoF\nv7GXWP38PjgXMWX81x5jRhVieSQ69+7Zz8/VToHh9QKBgQDxRvarwD3m3kcGnoi2\n2cUfchEmWKhRWbMRemOSPCShsf2C+j10wwI2A0By3iWLs1zjHHmHYQ/iE0acHQFT\nJS+e6VqUz5LbC6yeAGSXIwUFEoa1/9DDy258zBx4YN2yrR8yHqsaVxS1hcKmA0cd\nu811tubPpKoVwUTdx+EMwuGIpQKBgQDKD9R/Xz3XVwzmBHTodwdTaiUJb1Q0unCZ\nOwZkB4vxCTUSF2Crfocu+4VxnFR09Z/m1ujslQ3SZfdi0k/aq2rNVaFMTxcfwAzA\npLDWDRU3Fxmgjxap1kOAylvy6OO31Jow93i47RHxLOpv9/deirQWFyuZ7T06LN+t\nB3dpcHXkOwKBgQC7r1wK1oxQnu/ZMlFfC5/PikfU8Hpebcxh+Dakdqx4K6Ds1gQg\nY+HAal8j+7JxLaE/+dJ/gP19+0id/+Ib731PvG59+8pdIoOwlNWqy88H1xV7Vffr\nlr/nzE8JRTCv4QO3VSv8XWj6m4aC5WHYu1JkE1cQhyLXsXQEoYtrBd2zEQKBgQCi\nU29J2BCNM1CYZNIqgpzvBSG136sNJQ4Z+1IZ//oLbHMnEoLFosMlGkjMyWMMBtsr\njlDW5rOQ5/uCdyRRrk4BoR4QeKVCC33zMRsjCqWVeUhMNUdmr0vRZj/R+AgggXpR\nhi2EmmdEkenQg6tFVzZvXLPZV75NQwl6LrpeiUscSwKBgEHnGYBD0ZsIqIHJzDF8\nicjxXWcSOyRds5wA+kpJrYn1DcqGStAz6PFRow1z2zZZlzUjYz1DZfDv6ZOSvJ6D\nYhBH2Ag2fkXvGuPAB7ssl4mVj0P0CinWdE9+Z5OC+rJX9vkH1jS/V0DObC/N4mF1\nRf5tn6ydlZFKf2kxfEeRo+4z\n-----END PRIVATE KEY-----\n'
+ENV FIREBASE_ADMIN_SDK_CLIENT_EMAIL='firebase-adminsdk-s9lcq@one-bangkok-uat.iam.gserviceaccount.com'
+ENV FIREBASE_ADMIN_SDK_CLIENT_ID='111682566025372201514'
+ENV FIREBASE_ADMIN_SDK_AUTH_URI='https://accounts.google.com/o/oauth2/auth'
+ENV FIREBASE_ADMIN_SDK_TOKEN_URI='https://oauth2.googleapis.com/token'
+ENV FIREBASE_ADMIN_SDK_AUTH_PROVIDER_X509_CERT_URL='https://www.googleapis.com/oauth2/v1/certs'
+ENV FIREBASE_ADMIN_SDK_CLIENT_CERT_URL='https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-s9lcq%40one-bangkok-uat.iam.gserviceaccount.com'
+ENV FIREBASE_ADMIN_SDK_UNIVERAL_DOMAIN='googleapis.com'
+ENV FIREBASE_SDK_API_KEY='AIzaSyAd9rSaUAp18sZp7olSTTm6sxEfvmnxgDM'
+ENV FIREBASE_SDK_AUTH_DOMAIN='one-bangkok-uat.firebaseapp.com'
+ENV FIREBASE_SDK_PROJECT_ID='one-bangkok-uat'
+ENV FIREBASE_SDK_STORAGE_BUCKET='one-bangkok-uat.appspot.com'
+ENV FIREBASE_SDK_MESSAGING_SENDER_ID='558340199002'
+ENV FIREBASE_SDK_APP_ID='1:558340199002:web:985aae67db170fdf45be63'
+ENV FIREBASE_SDK_MEASUREMENT_ID='G-B02YZ44QSM'
+ENV AUTH_URL='https://ec2-18-142-55-130.ap-southeast-1.compute.amazonaws.com/obk'
+ENV CLIENT_ID='u6fYVEjpG3mc25ogbxi4rgHXwklMXHSK'
+ENV CLIENT_SECRET='0DIhcNitlMl4gRQ9Ca2V1mw5SbEkp9ao'
+ENV GRANT_TYPE='client_credentials'
+
+ENV OB_IAM_SDK_BASE_URL='http://iam-sit.glorymtel.xyz'
+ENV OB_DOCUMENT_SDK_BASE_URL='http://document-sit.glorymtel.xyz'
+ENV OB_DOCUMENT_API_BASE_URL='http://document-sit.glorymtel.xyz'
+ENV BMS_BASEURL='http://bms-sit.glorymtel.xyz'
+ENV OB_NOTIFICATION_BASE_URL='http://notification-sit.glorymtel.xyz'
+ENV OB_NOTIFICATION_SDK_BASE_URL='http://notification-sit.glorymtel.xyz'
+ENV ART_CULTURE_API_URL='https://obkgateway-uat.tccproptech.com/obk/art-c'
+ENV ART_CULTURE_CLIENT_ID='KeCI52KeztKeN7SwPmBtk5C1Tkem5MVo'
+ENV ART_CULTURE_CLIENT_SECRET='FohYitRxV5wGlWBCKyu5RVxW8B5k6gBO'
+ENV ART_CULTURE_CMS_CLIENT_ID='IHcRnIUhzmhP2YwxYf9oonUETIrRZfsD'
+ENV ART_CULTURE_CMS_CLIENT_SECRET='oMsDjmhL5cQQL6x3r8iBTCHww3eoSO4d'
+
+ENV S3_ENDPOINT='https://hupvj2nxu0.execute-api.ap-southeast-1.amazonaws.com/uat/upload'
+ENV REACT_APP_VERSION='1.15.13'
+
+WORKDIR /app
+
+RUN apk add curl
+RUN apk add --no-cache git
+
+COPY ./package*.json yarn.* ./
+ENV PATH /opt/node_modules/.bin:$PATH
+RUN yarn config set network-timeout 600000 -g
+RUN yarn
+
+COPY . .
+
+RUN yarn build
+
+EXPOSE 3000
+
+CMD yarn start

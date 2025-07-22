@@ -1,0 +1,19 @@
+PUT http://localhost:8080/api/landing
+content-type: application/json
+
+{
+    "sectionOrder": [
+        "highlights",
+        "program",
+        "faqs",
+        "actC"
+    ],
+    "programs": [
+        {
+            "id": 1
+        },
+        {
+            "id": 2
+        }
+    ]
+}

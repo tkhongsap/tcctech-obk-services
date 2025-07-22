@@ -1,0 +1,18 @@
+PUT http://localhost:8080/api/art-c/wireless-house?locale=en
+content-type: application/json
+
+{
+    "content": "What is Artloop? of artworks created by both local and international artists to suit One Bangkok’s public space, either indoor or accessible to specified target audiences.What is Artloop? of artworks created by both local and international artists to suit One Bangkok's public space, either indoor orWhat is Artloop? of artworks created by both local and international artists to suit One Bangkok's public space, either indoo",
+    "coverImage": "https://lebua.com/wp-content/uploads/2019/04/40-Alfresco-Angle-2-1-scaled.jpg",
+    "openingHours": [
+        "Mon-Fri 10:00-18:00",
+        "Sat-Sun 10:00-22:00"
+    ],
+    "location": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+    ],
+    "enterFee": 900,
+    "externalLink": "https://www.google.com"
+}

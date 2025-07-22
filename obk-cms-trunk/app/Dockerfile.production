@@ -1,0 +1,66 @@
+FROM --platform=linux/amd64 node:18-alpine
+
+# TODO=ENV should be injected when building the image, this is a workaround
+ENV APP_PREFIX=''
+ENV NEXT_PUBLIC_URL='https://obk-cms-prod.tccproptech.com'
+ENV API_BASE_URL='https://obkcms.tccproptech.com/obk'
+
+ENV FIREBASE_ADMIN_SDK_TYPE='service_account'
+ENV FIREBASE_ADMIN_SDK_PROJECT_ID='one-bangkok-prod'
+ENV FIREBASE_ADMIN_SDK_PRIVATE_KEY_ID='284e447b25275bfb8c24d1496c8ddb55fcbf2f87'
+ENV FIREBASE_ADMIN_SDK_PRIVATE_KEY='-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCgSdZGar0ES+sc\nUV2qRE3AeztlR4R5JjUS3NMapWzuY6DLfMDdeQ+HK0hC85yRWjAkkCTNhrAp4C7u\nzJdbLBuwDNCoonujI1mXJl2MpNNeZGO0e0pcqblJE5i/MguZikYasJ+r7iNigsYH\nPV2XbFE02RqbfmXcdZZlDtTcw0s0Uws/p4hoTT3MpfjU5qMZAGmFjVfr/FQ9oN0q\nGAgXyzQsbVcHED1ufckbmESzCpo5eaqDutFLVg7ilDVhsLVieOzW543bKm3c4HhH\nbWoVUDYmF9iSak4TvMtSdyxxqbHkeTh4rQADBtPZIJ4azn6mMhfZCLETHxCDALR6\nvQUnro49AgMBAAECggEAA9FrxaQhFKiJSmn5a5xHvNltSK7mLdZA5o403MTgKM0z\nOpL3a3RzhVJSMj69deyPyoMreUDSJ+veOlPMbtXIuA4UwfuS1d06SFfX28kzpriI\nnnc0W4DdzWrmf8wS9ik9cmvOyzM3i7nBOqbAeLenYd/3sAitUk3JE2cByjDAX8KT\n8PVWjcj7hqALpuaK0gkbOJUFK/3yz9jnrY1Fp+XL1igJHZLR1+ZCWCBEiUGnkqKL\ntLhl+EBk2WLIMRNqoFGUSZL3zy8EdwVBRUEoVDdytiVLnhybOgI3LgCM27Y41AuN\nJRDS2DwaDzxo7kQBOAFjCSnbjWW+l0MvjOYce6mbCQKBgQDf9hO9znURFokCZvup\nTCRLP2oq17sDhQZuYXasbIABUM4Wnuq0+hGPikd4FsMeUVgHhnJqqFHLkWSjTs60\nJKkipVqYNyOTU8FNIvcDyMLlxup47I9hNfjZ+WMjJ/xzbis/vJBtvK/UmSJNHXke\nALaP2CbK9Ds9Be8tIg/+cQ2HuQKBgQC3N+4Xrsm70Jlpcu29swQr4aefpopniQ1N\nfMeyhyfgF6Y0L3jI2kwuBneY07sVQczTcgaRvcFoSqxP8PleD7z36FerLbzC1UIo\n4tL8H5LcQJ6bCmluPAcCtW88pEDvwifJKK1jWcuA9twHcG/SwOfvR92yCi2+9iR1\nhqzvrsi0pQKBgACgGEgEZpFIpdNK5FMBsmw/XhWGirAk0/LE9ObgWq8mQZ0Qjok4\n1Ym4EiEEt0DDa2KB/pnLpIbT/hryomMgYxSEr68TIFdN+ZE0ksoA6oJnvsndpzzX\nQL2jE6LKfsr3uMkxxpl32GnYj571gRwTVm8qZFlWuz+dX6CZor/MIwSJAoGAWoAy\nB1i7JR6g6MlwTafDg7lvBxlIfGPiQkhEjBbex35nBpf8XZoWzxU6ti6/1nwuJLPK\nMus8QbvA6avqQWAcw4fs5g0tlD+q8m84MHmYHVt9/K9j7KOSAvCEBbxMpyGMbXy+\nSLjuIMHPZY1QbxYCettQ0sTcW9tRnwvrGGmJklECgYEAoySrc6ZbAZfsTKt+9bWe\nWQcScNg/R6J8AFAtjbMJJ4P1mO/YXNnf1cQvpHe9adL3rBLuY+wMVU/c8QgX3/py\nQWbHxdfSoPt6u2z/Sii3E8vsuwVme7wX/a5Q8CVdZ4sm8WhH1/W/Hu2JZk4Usq4q\n2CLrz0jkD2nasi7m6eggmsY=\n-----END PRIVATE KEY-----\n'
+ENV FIREBASE_ADMIN_SDK_CLIENT_EMAIL='firebase-adminsdk-eqk3z@one-bangkok-prod.iam.gserviceaccount.com'
+ENV FIREBASE_ADMIN_SDK_CLIENT_ID='103143159321757675174'
+ENV FIREBASE_ADMIN_SDK_AUTH_URI='https://accounts.google.com/o/oauth2/auth'
+ENV FIREBASE_ADMIN_SDK_TOKEN_URI='https://oauth2.googleapis.com/token'
+ENV FIREBASE_ADMIN_SDK_AUTH_PROVIDER_X509_CERT_URL='https://www.googleapis.com/oauth2/v1/certs'
+ENV FIREBASE_ADMIN_SDK_CLIENT_CERT_URL='https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-eqk3z%40one-bangkok-prod.iam.gserviceaccount.com'
+ENV FIREBASE_ADMIN_SDK_UNIVERAL_DOMAIN='googleapis.com'
+ENV FIREBASE_SDK_API_KEY='AIzaSyAc76C-m7hN6wmHNstfSbd80v21rXDri-Y'
+ENV FIREBASE_SDK_AUTH_DOMAIN='one-bangkok-prod.firebaseapp.com'
+ENV FIREBASE_SDK_PROJECT_ID='one-bangkok-prod'
+ENV FIREBASE_SDK_STORAGE_BUCKET='one-bangkok-prod.appspot.com'
+ENV FIREBASE_SDK_MESSAGING_SENDER_ID='788013757680'
+ENV FIREBASE_SDK_APP_ID='1:788013757680:web:a225dd2042f365027bfe35'
+ENV FIREBASE_SDK_MEASUREMENT_ID='G-ZB0Z0FSFQ2'
+ENV AUTH_URL='https://obkservice.tccproptech.com/obk'
+ENV CLIENT_ID='3WE762lH561sybr0pLwN7EOc6LAsDI8u'
+ENV CLIENT_SECRET='QOuihPJX9hWyX4zarhGWUoKQYrYXZgny'
+ENV GRANT_TYPE='client_credentials'
+
+ENV OB_IAM_SDK_BASE_URL='https://obk-iam-prod.tccproptech.com'
+ENV OB_DOCUMENT_SDK_BASE_URL='https://obk-document-prod.tccproptech.com'
+ENV OB_DOCUMENT_API_BASE_URL='https://obk-document-prod.tccproptech.com'
+ENV BMS_BASEURL='https://obk-bms-prod.tccproptech.com'
+ENV OB_NOTIFICATION_BASE_URL='https://obk-notification-prod.tccproptech.com'
+ENV OB_NOTIFICATION_SDK_BASE_URL='https://obk-notification-prod.tccproptech.com'
+ENV ART_CULTURE_API_URL='https://obkgateway.tccproptech.com/obk/art-c'
+ENV ART_CULTURE_CLIENT_ID='WbHIZQCK5ugWngOrVfyZgptCUW28Ci0e'
+ENV ART_CULTURE_CLIENT_SECRET='AuujrRd2ZQAyme8MH65LrbB4LBVMw80p'
+ENV ART_CULTURE_CMS_CLIENT_ID='IHcRnIUhzmhP2YwxYf9oonUETIrRZfsD'
+ENV ART_CULTURE_CMS_CLIENT_SECRET='oMsDjmhL5cQQL6x3r8iBTCHww3eoSO4d'
+ENV ART_CULTURE_UNIVERSAL_LINK='https://socialshare.onebangkok.com/art-culture'
+ENV SUSTAIN_UNIVERSAL_LINK='https://socialshare.onebangkok.com/sustainability'
+ENV VENUE_CLIENT_ID='66ceae2b64f993da2d485d7f'
+ENV VENUE_CLIENT_SECRET='1KqYi5IJWfweZ1513U1xu8aQHbjWvp7SXaKJHQkLLkVwFazl'
+
+ENV S3_ENDPOINT='https://fcqhuv440f.execute-api.ap-southeast-1.amazonaws.com/prod/upload'
+ENV REACT_APP_VERSION='1.15.13'
+
+WORKDIR /app
+
+RUN apk add curl
+RUN apk add --no-cache git
+
+COPY ./package*.json yarn.* ./
+ENV PATH /opt/node_modules/.bin:$PATH
+RUN yarn config set network-timeout 600000 -g
+RUN yarn
+
+COPY . .
+
+RUN yarn build
+
+EXPOSE 3000
+
+CMD yarn start

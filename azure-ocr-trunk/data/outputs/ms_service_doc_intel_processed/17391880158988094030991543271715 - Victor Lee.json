@@ -1,0 +1,79 @@
+[
+    {
+        "merchant_name": {
+            "value": "Shake Shack",
+            "confidence": 0.965
+        },
+        "transaction_date": {
+            "value": "2025-02-10",
+            "confidence": 0.987
+        },
+        "transaction_time": {
+            "value": "18:44:00",
+            "confidence": 0.988
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "Shack",
+                    "confidence": 0.982
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 230.0,
+                    "confidence": 0.988
+                }
+            },
+            {
+                "description": {
+                    "value": "Chz Fries",
+                    "confidence": 0.98
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 155.0,
+                    "confidence": 0.987
+                }
+            },
+            {
+                "description": {
+                    "value": "S 50/50",
+                    "confidence": 0.973
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 90.0,
+                    "confidence": 0.987
+                }
+            }
+        ],
+        "total": {
+            "value": 475.0,
+            "confidence": 0.985
+        },
+        "tax_id": {
+            "value": "0105565082764(VAT",
+            "confidence": 0.995
+        },
+        "receipt_no": {
+            "value": "250210-01-02808",
+            "confidence": 0.343
+        },
+        "address": {
+            "value": "16604 One Bangkok",
+            "confidence": 0.982
+        },
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "9fc6a47cfc6d6e591a4023f0617b5ae69d5e719b049b6a03db3d20f43179a1c9"
+    }
+]

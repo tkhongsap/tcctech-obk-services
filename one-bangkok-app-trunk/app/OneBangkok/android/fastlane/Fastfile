@@ -1,0 +1,263 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+def cleanup_keychain(name)
+  delete_keychain(name: name) if File.exist?(File.expand_path("~/Library/Keychains/#{name}-db"))
+end
+
+def process_version(version)
+  version = version[1..-1] if version.start_with?('v')  # Remove 'v' if it starts with 'v'
+  hyphen_index = version.index('-')
+  version = version[0...hyphen_index] unless hyphen_index.nil?  # Remove '-...' suffix
+  version
+end
+
+platform :android do
+ desc "Runs all the tests"
+ lane :test do
+   gradle(task: "test")
+ end
+
+ desc "Submit a new Beta Build to Firebase App Distribution"
+ lane :beta do
+   app_id = "1:300033733234:android:b346115b19b9ca732cc8eb"
+
+   latest_release = firebase_app_distribution_get_latest_release(
+     app: app_id,
+     service_credentials_file: "service-account.json"
+   )
+
+   increment_version_code(
+         gradle_file_path:"./app/build.gradle",
+         ext_constant_name:"versionCode",
+         version_code: (latest_release ? latest_release[:buildVersion].to_i : 0) + 1
+   )
+
+   gradle(
+         task: "app:assemble",
+         flavor: 'dev',
+         build_type: "Release",
+         print_command: false,
+         properties: {
+           "android.injected.signing.store.file" => ENV["KEYSTORE_FILE"],
+           "android.injected.signing.store.password" => ENV["STORE_PASSWORD"],
+           "android.injected.signing.key.alias" => ENV["KEY_ALIAS"],
+           "android.injected.signing.key.password" => ENV["KEY_PASSWORD"],
+         },
+         system_properties: {
+          "ENVFILE": ".env.dev"
+        }
+   )
+   firebase_app_distribution(
+     app: app_id,
+     service_credentials_file: "service-account.json",
+     groups: "internal",
+     release_notes: "test!"
+   )
+
+    # Call cleanup_keychain after you're done with the temporary keychain
+    cleanup_keychain("fastlane_tmp_keychain")
+ end
+
+  desc "Submit a new Alpha Build to Firebase App Distribution"
+  lane :bump do
+    app_id = "1:300033733234:android:b346115b19b9ca732cc8eb"
+
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: app_id,
+      service_credentials_file: "service-account.json"
+    )
+
+    increment_version_code(
+          gradle_file_path:"./app/build.gradle",
+          ext_constant_name:"versionCode",
+          version_code: (latest_release ? latest_release[:buildVersion].to_i : 0) + 1
+    )
+
+   version_no = ENV["RELEASE_VERSION"]
+   increment_version_name(
+         gradle_file_path:"./app/build.gradle",
+         ext_constant_name:"versionName",
+         version_name: version_no[1..-1]
+   )
+
+    gradle(
+          task: "app:assemble",
+          flavor: 'dev',
+          build_type: "Release",
+          print_command: false,
+          properties: {
+            "android.injected.signing.store.file" => ENV["KEYSTORE_FILE"],
+            "android.injected.signing.store.password" => ENV["STORE_PASSWORD"],
+            "android.injected.signing.key.alias" => ENV["KEY_ALIAS"],
+            "android.injected.signing.key.password" => ENV["KEY_PASSWORD"],
+          },
+          system_properties: {
+          "ENVFILE": ".env.dev"
+        }
+    )
+    firebase_app_distribution(
+      app: app_id,
+      service_credentials_file: "service-account.json",
+      groups: "internal",
+      release_notes: "test!"
+    )
+    # Call cleanup_keychain after you're done with the temporary keychain
+    cleanup_keychain("fastlane_tmp_keychain")
+  end
+
+ desc "Deploy a new version to Google Play"
+ lane :deploy do
+   gradle(task: "clean assembleRelease")
+   upload_to_play_store
+ end
+
+ desc "Deploy a sit version to Firebase App Distribution"
+ lane :sit do
+  app_id = "1:300033733234:android:8f0dc15eef0e444b2cc8eb"
+
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: app_id,
+      service_credentials_file: "service-account.json"
+    )
+
+    increment_version_code(
+          gradle_file_path:"./app/build.gradle",
+          ext_constant_name:"versionCode",
+          version_code: (latest_release ? latest_release[:buildVersion].to_i : 0) + 1
+    )
+
+   version_no = ENV["RELEASE_VERSION"]
+   increment_version_name(
+         gradle_file_path:"./app/build.gradle",
+         ext_constant_name:"versionName",
+         version_name: process_version(version_no)
+   )
+
+  gradle(
+        task: "app:assemble",
+        flavor: 'sit',
+        build_type: "Release",
+        print_command: false,
+        properties: {
+          "android.injected.signing.store.file" => ENV["KEYSTORE_FILE"],
+          "android.injected.signing.store.password" => ENV["STORE_PASSWORD"],
+          "android.injected.signing.key.alias" => ENV["KEY_ALIAS"],
+          "android.injected.signing.key.password" => ENV["KEY_PASSWORD"],
+        },
+        system_properties: {
+          "ENVFILE": ".env.sit"
+        }
+  )
+  firebase_app_distribution(
+    app: app_id,
+    service_credentials_file: "service-account.json",
+    groups: "internal",
+    release_notes: "test!"
+  )
+
+   # Call cleanup_keychain after you're done with the temporary keychain
+   cleanup_keychain("fastlane_tmp_keychain")
+ end
+
+ desc "Deploy a uat version to Firebase App Distribution"
+ lane :uat do
+  app_id = "1:300033733234:android:b6f1f602e1094db22cc8eb"
+
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: app_id,
+      service_credentials_file: "service-account.json"
+    )
+
+    increment_version_code(
+          gradle_file_path:"./app/build.gradle",
+          ext_constant_name:"versionCode",
+          version_code: (latest_release ? latest_release[:buildVersion].to_i : 0) + 1
+    )
+
+   version_no = ENV["RELEASE_VERSION"]
+   increment_version_name(
+         gradle_file_path:"./app/build.gradle",
+         ext_constant_name:"versionName",
+         version_name: process_version(version_no)
+   )
+
+  gradle(
+        task: "app:assemble",
+        flavor: 'uat',
+        build_type: "Release",
+        print_command: false,
+        properties: {
+          "android.injected.signing.store.file" => ENV["KEYSTORE_FILE"],
+          "android.injected.signing.store.password" => ENV["STORE_PASSWORD"],
+          "android.injected.signing.key.alias" => ENV["KEY_ALIAS"],
+          "android.injected.signing.key.password" => ENV["KEY_PASSWORD"],
+        },
+        system_properties: {
+          "ENVFILE": ".env.uat"
+        }
+  )
+  firebase_app_distribution(
+    app: app_id,
+    service_credentials_file: "service-account.json",
+    groups: "internal",
+    release_notes: "test!"
+  )
+
+   # Call cleanup_keychain after you're done with the temporary keychain
+   cleanup_keychain("fastlane_tmp_keychain")
+ end
+
+ desc "Build AAB UAT"
+ lane :build_uat do
+    gradle(
+      task: "app:bundle",
+      flavor: 'uat',
+      build_type: "Release",
+      print_command: false,
+      system_properties: {
+        "ENVFILE": ".env.uat"
+      }
+    )
+ end
+
+ desc "Build AAB PROD"
+ lane :build_prod do
+    gradle(
+      task: "app:bundle",
+      flavor: 'prod',
+      build_type: "Release",
+      print_command: false,
+      system_properties: {
+        "ENVFILE": ".env.prod"
+      }
+    )
+ end 
+
+ desc "Build AAB DEV"
+  lane :build_dev do
+     gradle(
+       task: "app:assemble",
+       flavor: 'dev',
+       build_type: "Release",
+       print_command: false,
+       system_properties: {
+         "ENVFILE": ".env.dev"
+       }
+     )
+  end
+end

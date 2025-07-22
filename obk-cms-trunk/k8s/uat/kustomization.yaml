@@ -1,0 +1,53 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+- ./ing.yaml
+
+commonLabels:
+  app: ob-cms
+
+namePrefix: ob-cms-
+namespace: default
+
+patches:
+- patch: "- op: replace\n  path: /spec/template/spec/containers/0/image\n  value:
+    \n- op: replace\n  path: /spec/replicas\n  value: 1"
+  target:
+    kind: Deployment
+- patch: |-
+    - op: replace
+      path: /spec/ports/0/port
+      value: 3000
+    - op: replace
+      path: /spec/ports/0/targetPort
+      value: 3000
+  target:
+    kind: Service
+- patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/env
+      value:
+        - name: NEXT_PUBLIC_ENV_AUTH_URL
+          value: https://testtcctbackendopapp.southeastasia.cloudapp.azure.com/api/v1/mobileop/security/login
+        - name: NEXT_PUBLIC_ENV_BASE_URL
+          value: http://ec2-54-179-44-55.ap-southeast-1.compute.amazonaws.com/
+        - name: OB_IAM_SDK_BASE_URL
+          value: https://iam.glorymtel.xyz
+        - name: OB_DOCUMENT_SDK_BASE_URL
+          value: https://dev.glorymtel.xyz/ob-document
+        - name: OB_DOCUMENT_API_BASE_URL
+          value: https://dev.glorymtel.xyz/ob-document
+        - name: ART_CULTURE_API_URL
+          value: https://obkgateway-uat.tccproptech.com/obk/art-c
+        - name: ART_CULTURE_CLIENT_ID
+          value: KeCI52KeztKeN7SwPmBtk5C1Tkem5MVo
+        - name: ART_CULTURE_CLIENT_SECRET
+          value: FohYitRxV5wGlWBCKyu5RVxW8B5k6gBO
+  target:
+    kind: Deployment
+commonAnnotations:
+  deploy-timestamp: "1733539564"
+images:
+- name: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-cms/uat
+  newTag: latest

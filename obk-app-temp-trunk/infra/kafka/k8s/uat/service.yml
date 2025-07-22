@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ob-kafka
+spec:
+  ports:
+    - protocol: TCP
+      port: 9092
+      targetPort: 9092
+  selector:
+    name: ob-kafka
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ob-zookeeper
+spec:
+  ports:
+    - protocol: TCP
+      port: 2181
+      targetPort: 2181
+  selector:
+    name: ob-zookeeper

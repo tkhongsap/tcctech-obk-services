@@ -1,0 +1,80 @@
+name: App Android Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**/app/**"
+      - ".github/workflows/app_*"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.branch }}
+  cancel-in-progress: true
+defaults:
+  run:
+    working-directory: "./app/OneBangkok"
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: "./app/OneBangkok"
+    runs-on: ubuntu-latest
+    env:
+      GIT_PRIVATE_KEY: ${{ secrets.GIT_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Install Node Modules
+        run: |
+          yarn install
+      - name: Install bundle
+        run: |
+          cd android
+          bundle install
+      - name: Decode Keystore File
+        uses: timheuer/base64-to-file@v1
+        id: android_keystore
+        with:
+          fileName: "dev.keystore"
+          encodedString: ${{ secrets.ANDROID_KEY_STORE_FILE }}
+      - name: "Create env file"
+        run: |
+          touch .env.dev
+          echo GATEWAY_BASEURL=${{ vars.GATEWAY_DEV_BASEURL }} >> .env.dev
+          echo WEBSOCKET_BASEURL=${{ vars.WEBSOCKET_DEV_BASEURL }} >> .env.dev
+          echo OB_BMS_URL=${{ vars.OB_BMS_DEV_URL }} >> .env.dev
+          echo WEB_VIEW_URL=${{ vars.DEV_WEB_VIEW_URL }} >> .env.dev
+          echo OB_IAM_URL=${{ vars.OB_IAM_DEV_URL }} >> .env.dev
+          echo OB_DOCUMENT_URL=${{ vars.OB_DOCUMENT_DEV_URL }} >> .env.dev
+          echo OB_NOTI_URL=${{ vars.OB_NOTI_DEV_URL }} >> .env.dev
+          echo UPLOAD_IMAGE_URL=${{ vars.UPLOAD_IMAGE_DEV_URL }} >> .env.dev
+          echo S3_TRANSLATION_BUCKET_URL=${{ vars.S3_TRANSLATION_BUCKET_URL }} >> .env.dev
+          echo GOOGLE_MAPS_APIKEY=${{ vars.GOOGLE_MAPS_APIKEY }} >> .env.dev
+          echo OB_ENV='dev' >> .env.dev
+          echo DEVELOPMENT_MODE=${{ vars.DEVELOPMENT_MODE_DEV }} >> .env.dev
+          echo OB_SERVICE_MIND_URL=${{ vars.OB_SERVICE_MIND_URL_DEV }} >> .env.dev
+          echo OB_RESIDENTIAL_BASEURL=${{ vars.OB_RESIDENTIAL_BASEURL_DEV }} >> .env.dev
+          echo OB_RESIDENTIAL_HOME_AUTOMATION=${{ vars.OB_RESIDENTIAL_HOME_AUTOMATION_DEV }} >> .env.dev
+          echo OB_RESIDENTIAL_HOME_AUTOMATION_AUTHEN=${{ vars.OB_RESIDENTIAL_HOME_AUTOMATION_AUTHEN_DEV }} >> .env.dev
+          echo ART_C_BASEURL=${{ vars.ART_C_BASEURL_DEV }} >> .env.dev
+          echo ART_C_CLIENT_ID=${{ vars.ART_C_CLIENT_ID }} >> .env.dev
+          echo ART_C_CLIENT_SECRET=${{ vars.ART_C_CLIENT_SECRET }} >> .env.dev          
+          echo SUSTAINABILITY_BASEURL=${{ vars.SUSTAINABILITY_BASEURL_DEV }} >> .env.dev
+          echo SUSTAINABILITY_ClientID=${{ vars.SUSTAINABILITY_ClientID_DEV }} >> .env.dev
+          echo SUSTAINABILITY_ClientSecret=${{ vars.SUSTAINABILITY_ClientSecret_DEV }} >> .env.dev
+          echo VENUE_CLIENT_ID=${{ vars.VENUE_CLIENT_ID }} >> .env.dev
+          echo VENUE_CLIENT_SECRET=${{ vars.VENUE_CLIENT_SECRET }} >> .env.dev
+          cat .env.dev
+      - name: Run Fastlane
+        run: |
+          cd android
+          bundle exec fastlane beta
+        env:
+          KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}

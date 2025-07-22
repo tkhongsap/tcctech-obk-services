@@ -1,0 +1,20 @@
+{
+  "name": "test-ob-yarn-workspaces",
+  "version": "1.1.8",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "ob-iam",
+    "ob-template",
+    "ob-document",
+    "ob-notification",
+    "ob-websocket"
+  ],
+  "dependencies": {
+    "ob-common-lib": "file:./ob-common-lib"
+  },
+  "scripts": {
+    "start": "./scripts/start.sh $1"
+  }
+}

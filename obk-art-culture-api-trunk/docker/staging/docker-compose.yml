@@ -1,0 +1,44 @@
+version: "3.4"
+
+services:
+  redis:
+    image: "redis:alpine"
+    command: sh -c 'if [ -n "$$REDIS_PASSWORD" ]; then redis-server --requirepass $$REDIS_PASSWORD; else redis-server; fi'
+    ports:
+      - "6379:6379"
+    container_name: redis
+    environment:
+      - REDIS_PASSWORD=
+  obk-art-culture-api:
+    container_name: staging-obk-art-culture-api
+    image: registry.lab.tcctech.app/obk/obk-art-culture-api:staging
+    environment:
+      - ENV=Staging
+      - SERVER.PORT=0.0.0.0:8080
+      - APP_URL=https://obkgateway-uat.tccproptech.com/obk/art-c
+      - OBK_S3_URL=https://obk-uat-image.s3.ap-southeast-1.amazonaws.com
+      - DATASOURCE_USERNAME=postgres
+      - DATASOURCE_PASSWORD=2a843c492f23fdbd6d586d0911d275fc
+      - DATASOURCE_HOST=obk-art-culture-sit.c70qsyku4z3y.ap-southeast-1.rds.amazonaws.com
+      - DATASOURCE_PORT=5432
+      - DATASOURCE_DB_NAME=ob_art_culture
+      - DATASOURCE_POOL_MAX_CONN=10
+      - DATASOURCE_POOL_IDLE_CONN=5
+      - DATASOURCE_POOL_LIFE_TIME=30000
+      - JWT_SECRET_KEY=secret
+      - JWT_EXPIRE_MINUTES_COUNT=60
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_POOL_MAX_SIZE=10
+      - TZ="Asia/Bangkok"
+    ports:
+      - "80:8080"
+    networks:
+      - staging-obk-art-culture-api
+    restart: always
+
+networks:
+  staging-obk-art-culture-api:
+    name: staging-obk-art-culture-api
+    driver: bridge

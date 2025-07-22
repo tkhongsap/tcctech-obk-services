@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../db/client"
+  binaryTargets = ["linux-musl-openssl-3.0.x", "debian-openssl-1.1.x", "darwin-arm64", "darwin"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model shuttleBusPositions {
+  id             String   @id @default(dbgenerated("uuid_generate_v4()"))
+  shuttle_bus_id String   @map(name: "shuttle_bus_id")
+  latitude       String   @map(name: "latitude")
+  longitude      String   @map(name: "longitude")
+  course         String   @map(name: "course")
+  meta           Json     @map(name: "meta") @db.Json
+  processes      Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @default(now()) @updatedAt
+
+  shuttle_buses shuttleBuses @relation(fields: [shuttle_bus_id], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@map("shuttle_bus_positions")
+}
+
+model shuttleBuses {
+  id                          String                     @id @default(dbgenerated("uuid_generate_v4()"))
+  vehicle_id                  String                     @map(name: "vehicle_id")
+  vehicle_name                String?                    @map(name: "vehicle_name")
+  created_at                  DateTime                   @default(now())
+  updated_at                  DateTime                   @default(now()) @updatedAt
+  shuttle_bus_positions       shuttleBusPositions[]
+  shuttle_bus_mapping_details shuttleBusMappingDetails[]
+
+  @@unique([vehicle_id])
+  @@index([id])
+  @@map("shuttle_buses")
+}
+
+model destinations {
+  id                          String                     @id @default(dbgenerated("uuid_generate_v4()"))
+  name                        String                     @map(name: "name")
+  latitude                    String                     @map(name: "latitude")
+  longitude                   String                     @map(name: "longitude")
+  status                      Boolean                    @map(name: "status")
+  created_at                  DateTime                   @default(now())
+  updated_at                  DateTime                   @default(now()) @updatedAt
+  destination_criteria        destinationCriteria[]
+  shuttle_bus_mapping_details shuttleBusMappingDetails[]
+  destination_flags           destinationFlags[]
+  time_tables                 timeTables[]
+
+  @@index([id])
+  @@map("destinations")
+}
+
+model areas {
+  id                     String                @id @default(dbgenerated("uuid_generate_v4()"))
+  name                   String                @map(name: "name")
+  top_left_latitude      String                @map(name: "top_left_latitude")
+  top_left_longitude     String                @map(name: "top_left_longitude")
+  bottom_right_latitude  String                @map(name: "bottom_right_latitude")
+  bottom_right_longitude String                @map(name: "bottom_right_longitude")
+  status                 Boolean
+  created_at             DateTime              @default(now())
+  updated_at             DateTime              @default(now()) @updatedAt
+  destination_criteria   destinationCriteria[]
+
+  @@index([id])
+  @@map("areas")
+}
+
+model destinationCriteria {
+  id             String   @id @default(dbgenerated("uuid_generate_v4()"))
+  destination_id String   @map(name: "destination_id")
+  area_id        String   @map(name: "area_id")
+  min_angle      String   @map(name: "min_angle")
+  max_angle      String   @map(name: "max_angle")
+  created_at     DateTime @default(now())
+  updated_at     DateTime @default(now()) @updatedAt
+
+  destinations destinations @relation(fields: [destination_id], references: [id], onDelete: Cascade)
+  areas        areas        @relation(fields: [area_id], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@map("destination_criteria")
+}
+
+model shuttleBusMappingDetails {
+  id                  String   @id @default(dbgenerated("uuid_generate_v4()"))
+  destination_id      String   @map(name: "destination_id")
+  shuttle_bus_id      String   @map(name: "shuttle_bus_id")
+  distance            Json     @map(name: "distance") @db.Json
+  duration            Json     @map(name: "duration") @db.Json
+  duration_in_traffic Json     @map(name: "duration_in_traffic") @db.Json
+  latitude            String   @default("") @map(name: "latitude")
+  longitude           String   @default("") @map(name: "longitude")
+  course              String   @default("") @map(name: "course")
+  created_at          DateTime @default(now())
+  updated_at          DateTime @default(now()) @updatedAt
+
+  destinations  destinations @relation(fields: [destination_id], references: [id], onDelete: Cascade)
+  shuttle_buses shuttleBuses @relation(fields: [shuttle_bus_id], references: [id], onDelete: Cascade)
+
+  @@unique([shuttle_bus_id])
+  @@index([id])
+  @@map("shuttle_bus_mapping_details")
+}
+
+model destinationFlags {
+  id             String   @id @default(dbgenerated("uuid_generate_v4()"))
+  destination_id String   @map(name: "destination_id")
+  name           Json     @map(name: "name") @db.Json
+  created_at     DateTime @default(now())
+  updated_at     DateTime @default(now()) @updatedAt
+
+  destinations destinations @relation(fields: [destination_id], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@map("destination_flags")
+}
+
+model timeTables {
+  id             String   @id @default(dbgenerated("uuid_generate_v4()"))
+  destination_id String   @map(name: "destination_id")
+  time           String   @map(name: "time")
+  created_at     DateTime @default(now())
+  updated_at     DateTime @default(now()) @updatedAt
+
+  destinations destinations @relation(fields: [destination_id], references: [id], onDelete: Cascade)
+
+  @@index([id])
+  @@map("time_tables")
+}

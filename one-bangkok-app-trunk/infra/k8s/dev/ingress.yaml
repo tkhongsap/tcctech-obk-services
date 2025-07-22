@@ -1,0 +1,102 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: one-bangkok
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:418772626632:certificate/974899a9-7138-469e-94c8-a97462f7a6d3
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  rules:
+    - host: dev.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-gw
+                port:
+                  number: 80
+    - host: iam.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-iam
+                port:
+                  number: 80
+    - host: document.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-document
+                port:
+                  number: 80
+    - host: notification.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-notification
+                port:
+                  number: 80
+    - host: bms.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-bms
+                port:
+                  number: 80
+    - host: bus.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-bus
+                port:
+                  number: 80
+    - host: ws.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-websocket
+                port:
+                  number: 80
+    - host: v2-iam.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-iam-v2
+                port:
+                  number: 80
+    - host: v2-notification.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-notification-v2
+                port:
+                  number: 80                  

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-upload
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-upload
+  template:
+    metadata:
+      labels:
+        app: service-upload
+    spec:
+      containers:
+        - name: service-upload
+          image: martinhodges/service-upload-img:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000

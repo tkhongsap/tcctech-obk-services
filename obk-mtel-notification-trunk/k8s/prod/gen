@@ -1,0 +1,98 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+  - ./ing.yaml
+commonLabels:
+  app: ob-notification
+namePrefix: ob-notification-
+namespace: default
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: $IMAGE_URL
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: Deployment
+  - patch: |-
+      - op: replace
+        path: /spec/ports/0/port
+        value: 3000
+      - op: replace
+        path: /spec/ports/0/targetPort
+        value: 3000
+    target:
+      kind: Service
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: DATABASE_URL
+            value: postgresql://obkDbAdmin:Z3YSa0bl92299byCkJiQGClsh9zL@obk-prod-ob-notification.c70qsyku4z3y.ap-southeast-1.rds.amazonaws.com/ob_notification_prod
+          - name: AWS_REGION
+            value: ap-southeast-1
+          - name: AWS_ACCESS_KEY_ID
+            value: AKIA2UC3CDGQONFWRE4F
+          - name: AWS_SECRET_ACCESS_KEY
+            value: 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
+          - name: EMAIL_SENDER_PROVIDER
+            value: SES
+          - name: SMS_SENDER_PROVIDER
+            value: SNS
+          - name: OB_EVENT_CONFIG_PATH
+            value: event.config.prod.json
+          - name: OB_WEB_SOCKET_URL
+            value: 'https://obk-ws-prod.tccproptech.com'
+          - name: EMAIL_SOURCE
+            value: 'no-reply@onebangkok.com'
+          - name: RECIPIENT_EMAILS
+            value: 'contactcenter@onebangkok.com'
+          - name: ADMIN_EMAIL
+            value: 'contactcenter@onebangkok.com'
+          - name: FONT_LOGO_S3
+            value: 'https://obk-email-bucket.s3.ap-southeast-1.amazonaws.com'
+          - name: FIREBASE_PROJECT_ID
+            value: 'one-bangkok-prod'
+          - name: FIREBASE_CLIENT_EMAIL
+            value: 'notification@one-bangkok-prod.iam.gserviceaccount.com'
+          - name: FIREBASE_PRIVATE_KEY
+            value: |
+              -----BEGIN PRIVATE KEY-----
+              MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCz+zM5swJ1VARg
+              JV0NY/FgamGsSAxnok8y6AP/jiagCgO5+QyG8bSH+ELKT0S9xC/W7Ef01PWt/KM2
+              0axqbJNZ4XFF+qs/wUS9KXjSRMqCUae2hovToyX3NKlRvt+8ezsrv2SMC5DNAGdL
+              bigFQCuNjqzcWfJjbDfH4nUe7UlohVU4rgZqI8sRVU3oLRvwQAfvHaOzE9zoQ0f5
+              UmhVJpfLe5PZ7AJi1Q0eu0Iio5+wusxwVnTlS0bxqHMKgr/VFPWxV2SP7eEa/9Ec
+              CfNl0NCxujXCxe43FanNktSUPIg+Sz4Puq3xIuMFeTtxcylv30LSkUCdhQBxEo8f
+              xiFZa+P9AgMBAAECggEAAzbo1s56LENIYrk4HL2cuYac4PlWc2FkPboEHEPbL7+O
+              CnvGvABEI6uM8dURmrwOyK1mqZpGGwnollmPVUVEKnZK0h+kgFqA0koT1NmSrlor
+              /ygPBkQjMPOZVJLupwyiZWkhMBkiyG6J6cB5aYKYZIpYTwUyPZFYu7KxOdCuH3Y+
+              c+decFtATBXimxIx/wCV4GweLnHVj9M1fMuIJLJzTAX4DdEUxZVt0ZBLVOQTJP/v
+              ZZLPhel5YpUGyzBCkHvUd3E1Jb6AdoAWOTNxQ4+Zd0rDLRVrMgzm9q1Vb3LoM1ec
+              HJ47iUEX/O/UZttTc25S6jck9N3zeVWlMGwbVwyVlwKBgQDw8mc846GoNXyGcpGc
+              87hxtLCjWMV2APQkCgDMBkN4TiU0zmGXLApUR9TyrI9K/Hot21DqPIYseeWqUHZe
+              qpgyY1S9kWyBcBWQP75M1OlSBV4iTIrUpCOAbbmi2Yd1Z3KuxOoJRmj+8+n3f7He
+              39B+ydEQYJ0Gehshr/f4k8QDMwKBgQC/Ob1cxvx4hPqjKcIxaRnuJd5FO5L3U57m
+              sfdn/IW8M3bxMLEccUC8xyC6lrALa4ORPSoLikKv8ZoFlycBwU+cNJoW3/Zyleh0
+              acO658MS33zjtRbXo8PmwofrPi+8uOyU7cm4WopgugGTn5RjcIDbUXV2HP6lzuqg
+              tZ5QUxF8DwKBgD4QIlmDxNMgG9hB0JIeESdwxIL+zbYMntZdoUDsaBqn/ltwwaB/
+              3pVA/3AW1L4a9Jm1QU1kk6cHKwpIuYS+6n8oKN6/g7R/m35RfQIrYYIYEdxB3QzS
+              zrY5DTUOVR7/q4GrBSGoekkZqO1wfe+LtRfDgk92o1vUvgJaYkQsQ7QTAoGAbnmH
+              IuB6343D1xu66xzTNDiAbvL59xVCSfkq+9Jx2MbKwpDk4Y+0XNuV1vZTgmV8vx3c
+              +onH+SnVV8F5cZQi0BW7p9d/47cjco3f3E0k7/RZjJwENFSSSvC74XYt0hPr6iZu
+              UalNJJCRdJ3O9pv6dbpb5/7cRyKBfpMugS1cfpUCgYEA2psPfArMwkTvC44FH8iE
+              vgqPeOVLLrvWXZnMUp/oMEzZmWUK4NSh7Si9ELKFHUWapiCfgYl4zoLa8owZ75fJ
+              rJ3oOMSmiBnangIPMYKHRqnNMW/OrpN+YvOra8pdwFgqaIajelsKK5erlfOVx5cs
+              tgRZjyXDxPHBTNK4UQTlFuI=
+              -----END PRIVATE KEY-----
+          - name: AWS_UPLOAD_BUCKET_URL
+            value: 'https://fcqhuv440f.execute-api.ap-southeast-1.amazonaws.com/prod/upload'
+          - name: OB_IAM_SDK_BASE_URL
+            value: 'https://obk-iam-prod.tccproptech.com'
+          - name: MULTI_CAST_NOTI
+            value: 'true'
+    target:
+      kind: Deployment

@@ -1,0 +1,174 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "client"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model message_category {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name       String   @map(name: "name")
+  created_at DateTime @default(now()) @map(name: "created_at")
+  updated_at DateTime @default(now()) @updatedAt @map(name: "updated_at")
+  icon_id    String
+  sequence   Int
+
+  icon             icon               @relation(fields: [icon_id], references: [id])
+  message_template message_template[]
+}
+
+model message_template {
+  id                    String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name                  String
+  title                 Json?    @db.Json
+  sub_title             Json?    @db.Json
+  personalized          Boolean?
+  data                  Json?    @map(name: "data") @db.Json
+  message_category_id   String
+  created_at            DateTime @default(now()) @map(name: "created_at")
+  updated_at            DateTime @default(now()) @updatedAt @map(name: "updated_at")
+  notification_group_id String?  @map(name: "notification_group_id")
+  thumbnail             String?
+  deeplink              String?
+
+  message_category   message_category    @relation(fields: [message_category_id], references: [id])
+  notification_group notification_group? @relation(fields: [notification_group_id], references: [id])
+  campaign           campaign[]
+  message            message[]
+  auto_message       auto_message[]
+}
+
+model tag {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name       String
+  created_at DateTime @default(now()) @map(name: "created_at")
+  updated_at DateTime @default(now()) @updatedAt @map(name: "updated_at")
+
+  tag_on_campaign tag_on_campaign[]
+}
+
+model campaign {
+  id                  String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name                String   @map(name: "name")
+  message_template_id String
+  created_at          DateTime @default(now()) @map(name: "created_at")
+  updated_at          DateTime @default(now()) @updatedAt @map(name: "updated_at")
+
+  message_template message_template  @relation(fields: [message_template_id], references: [id])
+  tag_on_campaigns tag_on_campaign[]
+}
+
+model tag_on_campaign {
+  id          String    @id @default(dbgenerated("uuid_generate_v4()"))
+  campaign    campaign? @relation(fields: [campaign_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  tag         tag?      @relation(fields: [tag_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  campaign_id String
+  tag_id      String
+  created_at  DateTime  @default(now()) @map(name: "created_at")
+  updated_at  DateTime  @default(now()) @updatedAt @map(name: "updated_at")
+}
+
+model recipient {
+  id         String    @id @default(dbgenerated("uuid_generate_v4()"))
+  account_id String
+  data       Json      @map(name: "data") @db.Json
+  created_at DateTime  @default(now()) @map(name: "created_at")
+  updated_at DateTime  @default(now()) @updatedAt @map(name: "updated_at")
+  deleted_at DateTime? @map(name: "deleted_at")
+  message    message[]
+  setting    setting[]
+}
+
+model message {
+  id                  String    @id @default(dbgenerated("uuid_generate_v4()"))
+  data                Json?     @map(name: "data") @db.Json
+  message_template_id String
+  read                Boolean   @default(false) @map(name: "read")
+  recipient_id        String    @map(name: "recipient_id")
+  sender_id           String
+  sender_type         String    @map(name: "sender_type")
+  created_at          DateTime  @default(now()) @map(name: "created_at")
+  updated_at          DateTime  @default(now()) @updatedAt @map(name: "updated_at")
+  deleted_at          DateTime? @map(name: "deleted_at")
+
+  message_template    message_template      @relation(fields: [message_template_id], references: [id])
+  recipient           recipient             @relation(fields: [recipient_id], references: [id])
+  message_transaction message_transaction[]
+
+  @@index([recipient_id, read])
+  @@index([recipient_id])
+}
+
+model message_data_template {
+  id       String @id @default(dbgenerated("uuid_generate_v4()"))
+  name     String @map(name: "name")
+  template Json   @map(name: "template") @db.Json
+
+  created_at DateTime @default(now()) @map(name: "created_at")
+  updated_at DateTime @default(now()) @updatedAt @map(name: "updated_at")
+}
+
+model message_transaction {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  message_id String
+  created_at DateTime @default(now()) @map(name: "created_at")
+  updated_at DateTime @default(now()) @updatedAt @map(name: "updated_at")
+  message    message  @relation(fields: [message_id], references: [id])
+}
+
+model auto_message {
+  id                  String    @id @default(dbgenerated("uuid_generate_v4()"))
+  name                String    @map(name: "name")
+  event_name          String    @map(name: "event_name")
+  message_template_id String
+  created_at          DateTime  @default(now()) @map(name: "created_at")
+  updated_at          DateTime  @default(now()) @updatedAt @map(name: "updated_at")
+  deleted_at          DateTime? @map(name: "deleted_at")
+
+  message_template message_template @relation(fields: [message_template_id], references: [id])
+}
+
+enum TokenType {
+  fcm
+}
+
+model icon {
+  id               String             @id @default(dbgenerated("uuid_generate_v4()"))
+  url              String
+  name             String
+  created_at       DateTime           @default(now()) @map(name: "created_at")
+  updated_at       DateTime           @default(now()) @updatedAt @map(name: "updated_at")
+  message_category message_category[]
+}
+
+model notification_group {
+  id               String             @id @default(dbgenerated("uuid_generate_v4()"))
+  name             String
+  created_at       DateTime           @default(now()) @map(name: "created_at")
+  updated_at       DateTime           @default(now()) @updatedAt @map(name: "updated_at")
+  deleted_at       DateTime?          @map(name: "deleted_at")
+  setting          setting[]
+  message_template message_template[]
+}
+
+model setting {
+  id                    String             @id @default(dbgenerated("uuid_generate_v4()"))
+  recipient_id          String
+  notification_group_id String
+  sms_enabled           Boolean            @default(true)
+  email_enabled         Boolean            @default(true)
+  in_app_enabled        Boolean            @default(true)
+  push_enabled          Boolean            @default(true)
+  created_at            DateTime           @default(now()) @map(name: "created_at")
+  updated_at            DateTime           @default(now()) @updatedAt @map(name: "updated_at")
+  deleted_at            DateTime?          @map(name: "deleted_at")
+  recipient             recipient          @relation(fields: [recipient_id], references: [id])
+  notification_group    notification_group @relation(fields: [notification_group_id], references: [id])
+}

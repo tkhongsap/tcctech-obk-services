@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: update-sync-status-home-auto
+  namespace: obk-production
+spec:
+  schedule: "0 0 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest
+            command: ["sh", "-c"]
+            args:
+              - |
+                curl --location 'http://obk-tcct-serviceabstraction-production.obk-production.svc.prd-obk-services.local/api/v1/netatmo/update-status-sync' --header 'Content-Type: application/json' --data '{"statusId": 0}'
+          restartPolicy: OnFailure

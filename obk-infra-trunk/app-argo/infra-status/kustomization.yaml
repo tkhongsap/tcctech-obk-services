@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+# - ing.yaml
+
+commonLabels:
+  app: ob-infra-status
+  
+namePrefix: ob-infra-status-
+
+configMapGenerator:
+- literals:
+  - NODE_ENV=development
+  name: configmap
+
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/source/repoURL
+      value: https://github.com/mtel-thailand/ob-infra-status
+    - op: replace
+      path: /spec/source/targetRevision
+      value: development
+    - op: replace
+      path: /spec/source/path
+      value: k8s/development
+  target:
+    kind: Application
+- patch: |-
+    - op: replace
+      path: /stringData/url
+      value: https://github.com/mtel-thailand/ob-infra-status
+  target:
+    kind: Secret

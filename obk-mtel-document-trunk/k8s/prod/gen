@@ -1,0 +1,46 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+- ./ing.yaml
+commonLabels:
+  app: ob-document
+namePrefix: ob-document-
+namespace: default
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: $IMAGE_URL
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: Deployment
+  - patch: |-
+      - op: replace
+        path: /spec/ports/0/port
+        value: 3000
+      - op: replace
+        path: /spec/ports/0/targetPort
+        value: 3000
+    target:
+      kind: Service
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/env
+        value:
+          - name: DATABASE_URL
+            value: postgresql://obkDbAdmin:Z3YSa0bl92299byCkJiQGClsh9zL@obk-prod-ob-document.c70qsyku4z3y.ap-southeast-1.rds.amazonaws.com/ob_document_prod
+          - name: AWS_ACCESS_KEY_ID
+            value: AKIA2UC3CDGQONFWRE4F
+          - name: AWS_SECRET_ACCESS_KEY
+            value: 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
+          - name: OB_IAM_SDK_BASE_URL
+            value: 'https://obk-iam-prod.tccproptech.com'
+          - name: CACHE_REDIS
+            value: 'true'
+          - name: CACHE_REDIS_URL
+            value: 'redis://obk-prod.gr1rpl.0001.apse1.cache.amazonaws.com:6379'
+    target:
+      kind: Deployment

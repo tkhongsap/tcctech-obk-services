@@ -1,0 +1,128 @@
+.p-dialog .p-dialog-content {
+  padding: 0 40px 24px 40px;
+}
+
+.p-dialog .p-dialog-header {
+  padding: 40px 40px 24px 40px;
+}
+
+.p-dialog-footer {
+  text-align: start;
+  padding: 0 40px 40px 40px;
+}
+
+.p-confirm-dialog {
+  .p-confirm-dialog-message {
+    margin: 0;
+    width: 100%;
+  }
+
+  .p-dialog-footer {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .p-dialog-header {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+}
+
+// Tree Table
+#booking-status-table {
+  .highlight-row {
+    background-color: #f4f7fe;
+  }
+  .faded-text {
+    color: #676b9b;
+  }
+  .bold-text {
+    font-weight: 700;
+    color: #1b1b1b;
+  }
+  .p-treetable-emptymessage {
+    td {
+      border: none;
+      caret-color: transparent;
+      text-align: center;
+      height: 104px;
+    }
+  }
+  &.p-paginator {
+    justify-content: flex-end;
+  }
+  &.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    color: white;
+    background-color: #4318ff;
+    border-color: #4318ff;
+  }
+
+  &.p-paginator .p-paginator-pages .p-paginator-page {
+    border-radius: 16px;
+    min-width: 37px;
+    height: 40px;
+  }
+
+  &.p-treetable .p-sortable-column.p-highlight {
+    background-color: #eef2ff;
+    color: inherit;
+  }
+
+  &.p-treetable .p-treetable-thead > tr > th {
+    padding: 14px 4px 14px 16px;
+  }
+}
+
+// Badge
+#booking-badge {
+  &.p-badge {
+    &.p-badge-info {
+      background-color: #dbecff;
+      color: #007aff;
+    }
+    &.p-badge-warning {
+      background-color: #fff9e5;
+      color: #ef8f00;
+    }
+    &.p-badge-success {
+      background-color: #eff8e8;
+      color: #59b413;
+    }
+    &.p-badge-danger {
+      background-color: #fbe9e9;
+      color: #cd1a1a;
+    }
+    &.p-badge-secondary {
+      background-color: #64748b;
+      color: #ffffff;
+    }
+  }
+}
+
+.p-datepicker table td.p-datepicker-today > span {
+  background-color: #b1aeff;
+}
+.p-datepicker:not(.p-disabled)
+  table
+  td
+  span:not(.p-highlight):not(.p-disabled):hover {
+  background-color: #b1aeff;
+}
+.p-datepicker table td > span.p-highlight {
+  color: white;
+  background-color: #4318ff;
+}
+// .p-datepicker table td > span:not(.p-highlight):not(.p-disabled) {
+//   color: #1b1b1b;
+// }
+.p-disabled,
+.p-disabled {
+  color: #b0b0b0;
+}
+
+#booking-showtime {
+  .p-inputtext .p-component .p-disabled,
+  .p-component:disabled {
+    color: #b0b0b0;
+  }
+}

@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: sync-cwo
+  namespace: obk-production
+spec:
+  schedule: "*/1 * * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                curl --location 'https://obkoperation.tccproptech.com/obk/api/v1/operation/mobile/cwo/SyncCWO' --header 'Content-Type: application/json' --data '{"lastMinute": 2}'
+          restartPolicy: OnFailure

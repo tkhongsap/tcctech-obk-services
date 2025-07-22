@@ -1,0 +1,89 @@
+name: UAT Build and Deploy to ECR
+
+on:
+  push:
+    tags:
+      - '**-uat'
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.8.1'
+      - name: Install dependencies
+        run: |
+          yarn cache clean
+          yarn install --frozen-lockfile
+      - name: Build
+        run: |
+          yarn build
+#      - name: Test
+#        run: |
+#          yarn test
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.UAT_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.UAT_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Build and Push Docker image
+        id: build
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: 'ob-bus/uat'
+        run: |
+          ./scripts/build-docker.sh --env uat
+          docker tag ob-bus:latest $ECR_REGISTRY/$ECR_REPOSITORY:ob-bus_latest
+          docker image push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:ob-bus_latest"
+
+#  deploy:
+#    runs-on: ubuntu-latest
+#    needs: [build]
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#      - name: Checkout main
+#        run: |
+#          git config --global user.email "github@github.com"
+#          git config --global user.name "Github CI/CD"
+#          git fetch origin main
+#          git checkout main
+#      - name: Install Kustomize
+#        run: |
+#          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+#          sudo mv kustomize /usr/local/bin/
+#      - name: Set Environment
+#        uses: nowactions/envsubst@v1
+#        with:
+#          input: ./k8s/uat/gen
+#          output: ./k8s/uat/kustomization.yaml
+#        env:
+#          REPOSITORY_URL: ${{ vars.REPOSITORY_URL }}
+#      - name: Set deploy timestamp
+#        run: echo "DEPLOY_TIMESTAMP=$(date +%s)" >> $GITHUB_ENV
+#      - name: Config Kustomize
+#        run: |
+#          cd ./k8s/uat
+#          kustomize edit add annotation "deploy-timestamp":$DEPLOY_TIMESTAMP -f
+#          kustomize edit set image ${{ vars.REPOSITORY_URL }}:ob-bus_latest
+#          kustomize build
+#      - name: Deploy to ArgoCD
+#        run: |
+#          cd ./k8s/uat
+#          git config --global user.email "github@github.com"
+#          git config --global user.name "Github CI/CD"
+#          git status
+#          git add kustomization.yaml
+#          git commit -m "[skip ci] deploy argoCD"
+#          # Use the PAT for pushing
+#          git push https://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@github.com/mtel-thailand/ob-bus main --force

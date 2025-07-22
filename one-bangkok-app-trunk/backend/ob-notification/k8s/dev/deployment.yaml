@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ob-notification
+spec:
+  selector:
+    matchLabels:
+      name: ob-notification
+  template:
+    metadata:
+      labels:
+        name: ob-notification
+    spec:
+      containers:
+        - name: ob-notification
+          image: 418772626632.dkr.ecr.ap-southeast-1.amazonaws.com/one-bangkok-dev:ob-notification_latest
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+          env:
+            - name: AWS_REGION
+              value: ap-southeast-1
+            - name: AWS_ACCESS_KEY_ID
+              value: AKIAWDAGLFTEC3EVLYNN
+            - name: AWS_SECRET_ACCESS_KEY
+              value: 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
+            - name: DATABASE_URL
+              value: postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@ob-notification-dev.caktmhpgapyr.ap-southeast-1.rds.amazonaws.com:5432/ob_notification_development
+            - name: OB_EVENT_CONFIG_PATH
+              value: event.config.dev.json
+            - name: SMS_SENDER_PROVIDER
+              value: mock
+            - name: EMAIL_SENDER_PROVIDER
+              value: mock
+            - name: SLACK_OAUTH_TOKEN
+              value: xoxb-2523263893682-5967783408147-KauLenA2D3yOFnvjRtlYPFPf
+            - name: SLACK_CHANNEL_ID
+              value: C05UCUQE0LD
+            - name: OB_WEB_SOCKET_URL
+              value: 'https://ws.glorymtel.xyz'

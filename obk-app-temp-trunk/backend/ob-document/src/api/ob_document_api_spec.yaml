@@ -1,0 +1,256 @@
+openapi: '3.0.2'
+info:
+  title: 'ob-document'
+  version: '1.0'
+servers:
+  - url: http://{hostname}
+    variables:
+      hostname:
+        default: localhost:3000
+paths:
+  /health:
+    get:
+      summary: Check health
+      operationId: health
+      tags:
+        - Health
+      responses:
+        200:
+          $ref: '#/components/responses/HealthResponse'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+  /category:
+    get:
+      summary: Get Category by id
+      operationId: getCategory
+      tags:
+        - document_controller
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+          description: The unique id of items
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: The unique id of items
+      responses:
+        '200':
+          $ref: '#/components/responses/DocumentResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /type:
+    get:
+      summary: Get Type
+      operationId: getType
+      tags:
+        - document_controller
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: get type
+      responses:
+        '200':
+          $ref: '#/components/responses/DocumentTypeResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /documents:
+    get:
+      summary: Get List
+      operationId: getList
+      tags:
+        - document_controller
+      parameters:
+        - in: query
+          name: category_id
+          schema:
+            type: string
+          description: The unique id of category
+          required: true
+        - in: query
+          name: active
+          schema:
+            type: boolean
+          description: The active flag
+          required: true
+        - in: query
+          name: released
+          schema:
+            type: boolean
+          description: The released flag
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/DocumentListsResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /documents/{id}:
+    get:
+      summary: Return a faq by id
+      operationId: getDetail
+      tags:
+        - document_controller
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          description: The unique id of faq list
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/DocumentDetailResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+components:
+  responses:
+    HealthResponse:
+      description: Health response
+      content:
+        application/json:
+          schema:
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/HealthData'
+    DocumentResponse:
+      description: document response
+      content:
+        application/json:
+          schema:
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/DocumentData'
+    DocumentTypeResponse:
+      description: document response
+      content:
+        application/json:
+          schema:
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/DocumentTypeData'
+    DocumentListsResponse:
+      description: document response
+      content:
+        application/json:
+          schema:
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/DocumentListsData'
+    DocumentDetailResponse:
+      description: document response
+      content:
+        application/json:
+          schema:
+            required:
+              - data
+            properties:
+              data:
+                $ref: '#/components/schemas/DocumentDetailData'
+    ErrorResp:
+      description: Unexpected error occurred
+      content:
+        application/json:
+          schema:
+            required:
+              - error
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: 'INTERNAL_SERVER_ERROR'
+          enum:
+            - 'BAD_REQUEST'
+            - 'NOT_FOUND'
+            - 'USER_NOT_FOUND'
+            - 'INTERNAL_SERVER_ERROR'
+        message:
+          type: string
+          example: 'error message'
+    HealthData:
+      type: object
+      required:
+        - health
+      properties:
+        health:
+          type: boolean
+    DocumentData:
+      type: array
+      required:
+        - id
+        - title
+        - image
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        image:
+          type: string
+    DocumentTypeData:
+      type: array
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+    DocumentListsData:
+      type: array
+      required:
+        - id
+        - title
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+    DocumentDetailData:
+      type: object
+      required:
+        - document
+      properties:
+        document:
+          type: object
+          required:
+            - id
+            - title
+            - body
+          properties:
+            id:
+              type: string
+            title:
+              type: string
+            body:
+              type: string

@@ -1,0 +1,2 @@
+ALTER TABLE booking_transactions
+DROP COLUMN booker_phone_number;

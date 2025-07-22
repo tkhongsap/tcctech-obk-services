@@ -1,0 +1,13 @@
+@startuml
+
+App ->> Backend: Register
+Backend ->> SSO: Check existing account
+SSO -->> Backend: account already exists or can register
+Backend -->> App: send OTP to verify identity
+App ->> Backend: verify identity (phone number, email)
+Backend ->> SSO: identity + profile (birthday, gender, idCard?, passport?)
+SSO ->> Backend: 201 + public_id (SSO_xxxxxxxx), profile (same as /userinfo)
+Backend ->> Backend: Internal process (register in application db)
+Backend -->> App: 200 success
+
+@enduml

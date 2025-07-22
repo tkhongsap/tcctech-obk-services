@@ -1,0 +1,28 @@
+name: Tag UAT Backend Deployment
+on:
+  push:
+    tags:
+      - "*.*.*-uataa"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.branch }}
+  cancel-in-progress: true
+jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+  run-matrix:
+    permissions:
+      id-token: write # need this for OIDC
+      contents: read
+    needs: set-matrix
+    strategy:
+      matrix:
+        service: ['ob-notification','ob-websocket']
+    uses: ./.github/workflows/uat_backend_push.yaml
+    with:
+      service: ${{ matrix.service }}
+      env: uat
+    secrets:
+      aws-access-key-id: ${{ secrets.UAT_AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.UAT_AWS_SECRET_ACCESS_KEY }}

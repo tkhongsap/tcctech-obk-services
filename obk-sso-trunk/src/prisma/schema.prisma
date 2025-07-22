@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("accounts")
+}
+
+
+// buzzebee db
+model Buzzebee {
+  id                      String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  user_id                 String   @db.VarChar(50)   // Buzzebees User Id/ publish_id
+  first_name              String   @db.VarChar(200)  // Name
+  last_name               String   @db.VarChar(200)  // Last name
+  contact_number          String?  @db.VarChar(15)   // Mobile no.
+  email                   String?  @db.VarChar(200)  // email
+  birthday                DateTime? // Birthday
+  gender                  String   @db.VarChar(50)   // Gender (male, female, other)
+  register_date           DateTime? // Register date
+  register_type           String   @db.VarChar(100)  // Register type (thai, foreigner, traveller)
+  modify_date             DateTime? // Modify date
+  id_card_number          String?  @db.VarChar(50)   // ID card no.
+  passport_number         String?  @db.VarChar(50)   // Passport no.
+  picture_url             String?  @db.VarChar(300)  // Profile picture
+  address                 String?  @db.VarChar(500)  // Address
+  zipcode                 String?  @db.VarChar(20)   // Zip code
+  province_code           Int?     // Province code
+  province_name           String?  // Province name
+  district_code           Int?     // District code
+  district_name           String?  // District name
+  sub_district_code       Int?     // Sub district code
+  sub_district_name       String?  // Sub district name
+  country_code            Int?     // Country code
+  country_name            String?  @db.VarChar(100) // Country name
+  status                  String   @db.VarChar(20)  // Status (Active, Deactived, Block)
+  deactive_date           DateTime? // Deactive date
+  deactive_reason         String?  @db.VarChar(100) // Deactive reason
+  line_name               String?  @db.VarChar(100) // Line Name
+  line_id                 String?  // Line Id
+  facebook_id             String?  // Facebook Id
+  apple_id                String?  // Apple Id
+  hash_password           String   @db.VarChar(200)
+  salt_password           String   @db.VarChar(200)
+  @@map("buzzebee")
+}

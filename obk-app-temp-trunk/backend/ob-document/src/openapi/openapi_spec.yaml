@@ -1,0 +1,468 @@
+openapi: '3.0.2'
+info:
+  title: 'ob-document'
+  version: '1.0'
+servers:
+  - url: http://{hostname}
+    variables:
+      hostname:
+        default: localhost:3000
+paths:
+  /health:
+    get:
+      summary: Check health
+      operationId: health_controller.get
+      tags:
+        - Health
+      responses:
+        200:
+          $ref: '#/components/responses/HealthResponse'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+  /category:
+    get:
+      summary: Get Category by id
+      operationId: category_controller.get
+      tags:
+        - category_controller
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+          description: get by id
+        - in: query
+          name: type
+          schema:
+            type: string
+          description: get by type
+      responses:
+        '200':
+          $ref: '#/components/responses/DocumentResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /type:
+    get:
+      summary: Get Type
+      operationId: type_controller.get
+      tags:
+        - type_controller
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: get type
+      responses:
+        '200':
+          $ref: '#/components/responses/DocumentTypeResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /documents:
+    get:
+      summary: Get documents
+      operationId: document_controller.getAll
+      tags:
+        - document_controller
+      parameters:
+        - in: query
+          name: category_id
+          schema:
+            type: string
+          description: The unique id of category
+          required: true
+        - in: query
+          name: active
+          schema:
+            type: boolean
+          description: The active flag
+          required: true
+        - in: query
+          name: released
+          schema:
+            type: boolean
+          description: The released flag
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/DocumentListsResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /documents/{id}:
+    get:
+      summary: Return a document by id or slug
+      operationId: document_controller.getByIdOrSlug
+      tags:
+        - document_controller
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          description: The unique id or slug of document
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/DocumentDetailResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /feedback:
+    post:
+        summary: create new feedback
+        operationId: feedback_controller.create
+        tags:
+          - feedback_controller
+        requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CreateFeedbackData'
+        parameters:
+          - $ref: '#/components/parameters/RequiredAccountId'
+        responses:
+          '200':
+            $ref: '#/components/responses/CreateFeedbackResponse'
+          '400':
+            $ref: '#/components/responses/ErrorResp'
+          '500':
+            $ref: '#/components/responses/ErrorResp'
+    get:
+      summary: Return feedback by document_id
+      operationId: feedback_controller.find
+      tags:
+        - feedback_controller
+      parameters:
+        - $ref: '#/components/parameters/RequiredAccountId'
+        - $ref: '#/components/parameters/documentId'
+      responses:
+        '200':
+          $ref: '#/components/responses/GetFeedbackResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+  /feedback/{id}:
+    put:
+      summary: update feedback by id
+      operationId: feedback_controller.update
+      tags:
+        - feedback_controller
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFeedbackData'
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          description: The unique document id
+          required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateFeedbackResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResp'
+        '500':
+          $ref: '#/components/responses/ErrorResp'
+
+components:
+  responses:
+    HealthResponse:
+      description: Health response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthResponse'
+    DocumentResponse:
+      description: document response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentResponse'
+    DocumentTypeResponse:
+      description: document response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentTypeResponse'
+    DocumentListsResponse:
+      description: document response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentListsResponse'
+    DocumentDetailResponse:
+      description: document response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentDetailResponse'
+    GetFeedbackResponse:
+      description: get feedback response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetFeedbackResponseData'
+    CreateFeedbackResponse:
+      description: create feedback response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FeedbackResponseData'
+    UpdateFeedbackResponse:
+      description: create feedback response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FeedbackResponseData'
+    ErrorResp:
+      description: Unexpected error occurred
+      content:
+        application/json:
+          schema:
+            required:
+              - error
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+  parameters:
+    type:
+      name: type
+      in: query
+      description: The unique id of items
+      schema:
+        type: string
+        default: ''
+    title:
+      name: title
+      in: query
+      description: title name of category
+      schema:
+        type: string
+        default: ''
+    documentId:
+      name: document_id
+      in: query
+      description: The unique id of document
+      schema:
+        type: string
+        default: ''
+    accountId:
+      name: account_id
+      in: query
+      description: The unique id of user account
+      schema:
+        type: string
+        default: ''
+    AccountId:
+      name: X-Account-Id
+      in: header
+      required: false
+      schema:
+        type: string
+    RequiredAccountId:
+      name: X-Account-Id
+      in: header
+      required: true
+      schema:
+        type: string
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: 'INTERNAL_SERVER_ERROR'
+          enum:
+            - 'BAD_REQUEST'
+            - 'NOT_FOUND'
+            - 'USER_NOT_FOUND'
+            - 'INTERNAL_SERVER_ERROR'
+        message:
+          type: string
+          example: 'error message'
+    HealthData:
+      type: object
+      required:
+        - health
+      properties:
+        health:
+          type: boolean
+    HealthResponse:
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/HealthData'
+    DocumentData:
+      type: object
+      required:
+        - id
+        - title
+        - image
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        image:
+          type: string
+    DocumentResponseData:
+      type: array
+      items:
+        $ref: '#/components/schemas/DocumentData'
+    DocumentResponse:
+      description: object response data which contains an array of DocumentDatas
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentResponseData'
+    DocumentTypeData:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+    DocumentTypeResponseData:
+      type: array
+      items:
+        $ref: '#/components/schemas/DocumentTypeData'
+    DocumentTypeResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentTypeResponseData'
+    DocumentListsData:
+      type: object
+      required:
+        - id
+        - title
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+    DocumentListsResponseData:
+      type: array
+      items:
+        $ref: '#/components/schemas/DocumentListsData'
+    DocumentListsResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentListsResponseData'
+    DocumentDetailData:
+      type: object
+      required:
+        - document
+      properties:
+        document:
+          type: object
+          required:
+            - id
+            - title
+            - body
+          properties:
+            id:
+              type: string
+            title:
+              type: string
+            body:
+              type: string
+    DocumentDetailResponseData:
+        $ref: '#/components/schemas/DocumentDetailData'
+    DocumentDetailResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/DocumentDetailResponseData'
+    Feedback:
+      type: object
+      required:
+        - id
+        - document_id
+        - account_id
+        - like
+        - created_at
+        - updated_at
+      properties:
+        id:
+          type: string
+        document_id:
+          type: string
+        account_id:
+          type: string
+        like:
+          type: boolean
+        created_at:
+          type: string
+          nullable: true
+        updated_at:
+          type: string
+          nullable: true
+    GetFeedbackData:
+      type: array
+      items:
+        $ref: '#/components/schemas/Feedback'
+    GetFeedbackResponseData:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/GetFeedbackData'
+    CreateFeedbackData:
+      type: object
+      required:
+        - document_id
+        - like
+      properties:
+        document_id:
+          type: string
+        like:
+          type: boolean
+    FeedbackResponseData:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Feedback'
+    UpdateFeedbackData:
+      required:
+          - like
+      properties:
+        like: 
+          type: boolean
+
+        
+  

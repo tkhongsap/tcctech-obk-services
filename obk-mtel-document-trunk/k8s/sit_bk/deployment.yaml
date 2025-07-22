@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ob-document
+spec:
+  selector:
+    matchLabels:
+      name: ob-document
+  template:
+    metadata:
+      labels:
+        name: ob-document
+    spec:
+      containers:
+        - name: ob-document
+          image: 418772626632.dkr.ecr.ap-southeast-1.amazonaws.com/one-bangkok-sit:ob-document_latest
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: dev
+            - name: DATABASE_URL
+              value: postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@ob-document-sit.caktmhpgapyr.ap-southeast-1.rds.amazonaws.com/ob_document_development
+            - name: AWS_ACCESS_KEY_ID
+              value: AKIAWDAGLFTEC3EVLYNN
+            - name: AWS_SECRET_ACCESS_KEY
+              value: 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
+            - name: AWS_S3_BUCKET_NAME
+              value: bucket-ob-document-sit
+            - name: ENABLE_S3_DOWNLOAD
+              value: 'true'
+            - name: OB_EVENT_CONFIG_PATH
+              value: event.config.sit.json
+            - name: OB_IAM_SDK_BASE_URL
+              value: 'https://iam-sit.glorymtel.xyz'

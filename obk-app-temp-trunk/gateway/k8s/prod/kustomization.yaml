@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+- ./ing.yaml
+
+commonLabels:
+  app: ob-gw
+
+namePrefix: ob-gw-
+namespace: default
+
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/image
+      value: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-gw/production:latest
+    - op: replace
+      path: /spec/replicas
+      value: 1
+  target:
+    kind: Deployment
+- patch: |-
+    - op: replace
+      path: /spec/ports/0/port
+      value: 8080
+    - op: replace
+      path: /spec/ports/0/targetPort
+      value: 8080
+  target:
+    kind: Service
+commonAnnotations:
+  deploy-timestamp: "1706695699"
+images:
+- name: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-gw/production

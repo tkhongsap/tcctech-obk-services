@@ -1,0 +1,65 @@
+[
+    {
+        "merchant_name": {
+            "value": "WAFFLE KHAN",
+            "confidence": 0.972
+        },
+        "transaction_date": {
+            "value": "2025-01-30",
+            "confidence": 0.992
+        },
+        "transaction_time": {
+            "value": "18:15:38",
+            "confidence": 0.994
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "quarter size",
+                    "confidence": 0.984
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.987
+                },
+                "total_price": {
+                    "value": 30.0,
+                    "confidence": 0.989
+                }
+            },
+            {
+                "description": {
+                    "value": "whipped cream",
+                    "confidence": 0.984
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.987
+                },
+                "total_price": {
+                    "value": 30.0,
+                    "confidence": 0.989
+                }
+            }
+        ],
+        "total": {
+            "value": 60.0,
+            "confidence": 0.985
+        },
+        "tax_id": {
+            "value": "202501304112170",
+            "confidence": 0.934
+        },
+        "receipt_no": {
+            "value": "15344-1",
+            "confidence": 0.566
+        },
+        "address": {
+            "value": "One Bangkok Mitsukoshi",
+            "confidence": 0.983
+        },
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "7ef239066a35e38fef6b1965a7e3679ace55d3748c186e54d0bf5ac59d4b4c8a"
+    }
+]

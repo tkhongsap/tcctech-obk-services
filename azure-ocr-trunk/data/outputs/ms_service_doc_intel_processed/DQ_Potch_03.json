@@ -1,0 +1,57 @@
+[
+    {
+        "merchant_name": {
+            "value": "Minor DQ Company Limited",
+            "confidence": 0.967
+        },
+        "transaction_date": {
+            "value": "2025-01-23",
+            "confidence": 0.985
+        },
+        "transaction_time": {
+            "value": "18:22:00",
+            "confidence": 0.983
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "CONE (L)",
+                    "confidence": 0.981
+                },
+                "total_price": {
+                    "value": 25.0,
+                    "confidence": 0.985
+                }
+            },
+            {
+                "description": {
+                    "value": "DIP C-CONE (L)",
+                    "confidence": 0.98
+                },
+                "total_price": {
+                    "value": 20.0,
+                    "confidence": 0.985
+                }
+            }
+        ],
+        "total": {
+            "value": 45.0,
+            "confidence": 0.981
+        },
+        "tax_id": {
+            "value": "0105525046201",
+            "confidence": 0.984
+        },
+        "receipt_no": {
+            "value": "37436",
+            "confidence": 0.846
+        },
+        "address": {
+            "value": "DQ_ONE",
+            "confidence": 0.158
+        },
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "0ea63583baaf41b8e19912b3b4f59d952ffd9baddb3fb27da986d8045bd929c2"
+    }
+]

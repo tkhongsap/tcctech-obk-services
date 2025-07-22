@@ -1,0 +1,1 @@
+kcat -b ob-kafka:9092 -t ob-iam.profile.updated -C

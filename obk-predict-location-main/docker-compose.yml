@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "7777:7777"  # Expose port 7777 to the host machine
+    environment:
+      - TF_ENABLE_ONEDNN_OPTS=1  # Optional: set environment variable for TensorFlow
+    volumes:
+      - .:/app  # Mount the current directory to /app inside the container
+    networks:
+      - flask-network
+
+networks:
+  flask-network:
+    driver: bridge

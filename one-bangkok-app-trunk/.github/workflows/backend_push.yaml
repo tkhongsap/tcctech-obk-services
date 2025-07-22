@@ -1,0 +1,61 @@
+name: Backend Push
+
+on:
+  workflow_call:
+    inputs:
+      service:
+        required: true
+        type: string
+      env:
+        required: true
+        type: string
+    secrets:
+      aws-access-key-id:
+        required: true
+      aws-secret-access-key:
+        required: true
+
+jobs:
+  push:
+    defaults:
+      run:
+        working-directory: "./backend/${{ inputs.service }}"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.OBK_SIT_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.OBK_SIT_AWS_ACCESS_KEY_SECRET }}
+          # role-to-assume: arn:aws:iam::418772626632:role/gha_oidc_assume_role
+          aws-region: ap-southeast-1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: "one-bangkok-${{ inputs.env }}"
+          IMAGE_SHA: ${{ github.sha }}
+          IMAGE_SERVICE: ${{ inputs.service }}
+          IMAGE_TAG: "${{ inputs.service }}_${{ github.sha }}"
+          IMAGE_TAG_LATEST: "${{ inputs.service }}_latest"
+        run: |
+          cd ..
+          docker build --platform=linux/amd64 -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG_LATEST . --build-arg BUILD_CONTEXT=${{ inputs.service }}
+          docker image push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          cd ${{ inputs.service }}
+      - name: Set kubeconfig
+        id: set-kubeconfig
+        run: |
+          aws sts get-caller-identity
+          aws eks --region ap-southeast-1 update-kubeconfig --name one-bangkok-${{ inputs.env }}
+      - name: Rollout
+        id: rollout
+        run: |
+          kubectl set image deployment/${{ inputs.service }} ${{ inputs.service }}=${{ steps.build-image.outputs.image }}
+          kubectl rollout restart deployment/${{ inputs.service }}

@@ -1,0 +1,73 @@
+openapi: '3.0.2'
+info:
+  title: '{{PROJECT-NAME}}'
+  version: '1.0'
+servers:
+  - url: http://{hostname}
+    variables:
+      hostname:
+        default: localhost:3000
+paths:
+  /health:
+    get:
+      summary: Check health
+      operationId: health_controller.get
+      tags:
+        - Health
+      responses:
+        200:
+          $ref: '#/components/responses/HealthResponse'
+        400:
+          $ref: '#/components/responses/ErrorResp'
+        500:
+          $ref: '#/components/responses/ErrorResp'
+components:
+  responses:
+    HealthResponse:
+      description: Health response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthResponse'
+    ErrorResp:
+      description: Unexpected error occurred
+      content:
+        application/json:
+          schema:
+            required:
+              - error
+            properties:
+              error:
+                $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: 'INTERNAL_SERVER_ERROR'
+          enum:
+            - 'BAD_REQUEST'
+            - 'NOT_FOUND'
+            - 'USER_NOT_FOUND'
+            - 'INTERNAL_SERVER_ERROR'
+        message:
+          type: string
+          example: 'error message'
+    HealthData:
+      type: object
+      required:
+        - health
+      properties:
+        health:
+          type: boolean
+    HealthResponse:
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/HealthData'
+          

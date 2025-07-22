@@ -1,0 +1,30 @@
+/* @font-face {
+  font-family: 'OneBangkok';
+  src:
+    url('../assets/fonts/OneBangkok-Regular.ttf') format('truetype'),
+    url('../assets/fonts/onebangkok-regular.eot') format('eot'),
+    url('../assets/fonts/onebangkok-regular.woff') format('woff'),
+    url('../assets/fonts/onebangkok-regular.woff2') format('woff2');
+  font-style: 'normal';
+  font-weight: '400';
+} */
+
+@font-face {
+  font-family: 'OneBangkok';
+  src:
+    url('../assets/fonts/OneBangkok-Bold.ttf') format('truetype'),
+    url('../assets/fonts/onebangkok-bold.eot') format('eot'),
+    url('../assets/fonts/onebangkok-bold.woff') format('woff'),
+    url('../assets/fonts/onebangkok-bold.woff2') format('woff2');
+  font-style: 'normal';
+  font-weight: '700';
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}

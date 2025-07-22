@@ -1,0 +1,25 @@
+services:
+  redis:
+    image: redis:latest
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
+  azure-ocr:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /azure-ocr
+    ports:
+      - "11439:80"
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+    depends_on:
+      - redis
+    env_file: ".env"
+    # volumes:
+    #   - .:/azure-ocr
+    # environment:
+    #   - PYTHONUNBUFFERED=1
+volumes:
+  redis_data:

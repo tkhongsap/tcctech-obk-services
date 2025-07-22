@@ -1,0 +1,36 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+- ./ing.yaml
+
+commonLabels:
+  app: ob-cms
+
+namePrefix: ob-cms-
+namespace: default
+
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/image
+      value: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-cms/production
+    - op: replace
+      path: /spec/replicas
+      value: 1
+  target:
+    kind: Deployment
+- patch: |-
+    - op: replace
+      path: /spec/ports/0/port
+      value: 3000
+    - op: replace
+      path: /spec/ports/0/targetPort
+      value: 3000
+  target:
+    kind: Service
+commonAnnotations:
+  deploy-timestamp: "1729087421"
+images:
+- name: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-cms/production
+  newTag: latest

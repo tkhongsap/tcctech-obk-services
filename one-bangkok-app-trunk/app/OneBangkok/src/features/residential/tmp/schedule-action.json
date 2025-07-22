@@ -1,0 +1,166 @@
+{
+    "body": {
+        "homes": [
+            {
+                "id": "668f623acf93b03f4a04ab25",
+                "name": "AheadAll Office Test",
+                "altitude": 9,
+                "coordinates": [
+                    100.52919,
+                    13.829366
+                ],
+                "country": "TH",
+                "timezone": "Asia/Bangkok",
+                "temperature_control_mode": "cooling",
+                "therm_mode": "schedule",
+                "therm_setpoint_default_duration": 180,
+                "cooling_mode": "schedule",
+                "schedules": {
+                    "timetable": [
+                        {
+                            "zone_id": 1,
+                            "m_offset": 1380
+                        }
+                    ],
+                    "readable_timetable": {
+                        "Mon": [
+                            {
+                                "timeReadable": "23:00",
+                                "zoneId": 1,
+                                "mOffset": 1380
+                            },
+                            {
+                                "timeReadable": "23:00",
+                                "zoneId": 1,
+                                "mOffset": 1380
+                            },
+                            {
+                                "timeReadable": "12:00",
+                                "zoneId": 1,
+                                "mOffset": 1380
+                            },
+                            {
+                                "timeReadable": "12:00",
+                                "zoneId": 1,
+                                "mOffset": 1380
+                            },
+                            {
+                                "timeReadable": "12:00",
+                                "zoneId": 1,
+                                "mOffset": 1380
+                            },
+                            {
+                                "timeReadable": "12:00",
+                                "zoneId": 1,
+                                "mOffset": 1380
+                            }
+                        ],
+                        "Tue": [],
+                        "Wed": [],
+                        "Thu": [],
+                        "Fri": [],
+                        "Sat": [],
+                        "Sun": []
+                    },
+                    "zones": [
+                        {
+                            "name": null,
+                            "id": 0,
+                            "type": 0,
+                            "rooms_temp": null,
+                            "rooms": [],
+                            "modules": [
+                                {
+                                    "id": "a26daf-0310-1f8cedef177e",
+                                    "type": "BNIL",
+                                    "name": "Light Dining room 1",
+                                    "setup_date": 0,
+                                    "room_name": "Dining room",
+                                    "bridge": "00:03:50:a2:6d:af",
+                                    "on": true
+                                }
+                            ],
+                            "scenarios": null
+                        },
+                        {
+                            "name": "Launch scenario",
+                            "id": 1,
+                            "type": 0,
+                            "rooms_temp": null,
+                            "rooms": [],
+                            "modules": [
+                                {
+                                    "id": "a26daf-0310-1f8cedef177e",
+                                    "type": "BNIL",
+                                    "name": "Light Dining room 1",
+                                    "setup_date": 0,
+                                    "room_name": "Dining room",
+                                    "bridge": "00:03:50:a2:6d:af",
+                                    "on": true
+                                }
+                            ],
+                            "scenarios": null
+                        }
+                    ],
+                    "name": "action schedule61",
+                    "default": false,
+                    "away_temp": 0,
+                    "hg_temp": 0,
+                    "id": "66bb2d2df87294bd9d036049",
+                    "type": "event",
+                    "timetable_sunrise": [
+                        {
+                            "zone_id": 0,
+                            "day": 1,
+                            "twilight_offset": -15
+                        },
+                        {
+                            "zone_id": 0,
+                            "day": 2,
+                            "twilight_offset": -15
+                        },
+                        {
+                            "zone_id": 0,
+                            "day": 3,
+                            "twilight_offset": -15
+                        },
+                        {
+                            "zone_id": 0,
+                            "day": 4,
+                            "twilight_offset": -15
+                        },
+                        {
+                            "zone_id": 0,
+                            "day": 5,
+                            "twilight_offset": -15
+                        },
+                        {
+                            "zone_id": 0,
+                            "day": 6,
+                            "twilight_offset": -15
+                        },
+                        {
+                            "zone_id": 0,
+                            "day": 7,
+                            "twilight_offset": -15
+                        }
+                    ],
+                    "timetable_sunset": []
+                }
+            }
+        ],
+        "user": {
+            "email": "piya.ph.tcc@gmail.com",
+            "language": "en",
+            "locale": "en-US",
+            "feel_like_algorithm": 0,
+            "unit_pressure": 0,
+            "unit_system": 0,
+            "unit_wind": 0,
+            "id": "66837c59a4396346a20f87ec"
+        }
+    },
+    "status": "ok",
+    "time_exec": 0.0396730899810791,
+    "time_server": 1723776404
+}

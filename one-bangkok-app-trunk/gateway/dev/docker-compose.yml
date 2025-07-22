@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+  gateway:
+    # image: docker.tyk.io/tyk-gateway/tyk-gateway:v4.3.3
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - ENV=dev
+    ports:
+      - 8080:8080
+    volumes:
+      - ./tyk.dev.conf:/opt/tyk-gateway/tyk.conf
+      - ./apps:/opt/tyk-gateway/apps
+      - ./middleware:/opt/tyk-gateway/middleware
+    environment:
+      - TYK_GW_SECRET=foo
+    depends_on:
+      - gateway-redis
+  gateway-redis:
+    image: redis:6.2.7-alpine
+    ports:
+      - 6379:6379

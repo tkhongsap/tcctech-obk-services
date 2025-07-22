@@ -1,0 +1,65 @@
+[
+    {
+        "merchant_name": {
+            "value": "Starbucks Coffee",
+            "confidence": 0.981
+        },
+        "transaction_date": {
+            "value": null,
+            "confidence": 0.987
+        },
+        "transaction_time": {
+            "value": "08:45:00",
+            "confidence": 0.988
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "CRAB STICK SALAD",
+                    "confidence": 0.98
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.984
+                },
+                "total_price": {
+                    "value": 90.0,
+                    "confidence": 0.987
+                }
+            },
+            {
+                "description": {
+                    "value": "G.PINEAPP CB",
+                    "confidence": 0.981
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.984
+                },
+                "total_price": {
+                    "value": 165.0,
+                    "confidence": 0.987
+                }
+            }
+        ],
+        "total": {
+            "value": 255.0,
+            "confidence": 0.986
+        },
+        "tax_id": {
+            "value": "0105541008688(VAT",
+            "confidence": 0.962
+        },
+        "receipt_no": {
+            "value": "0100028368",
+            "confidence": 0.937
+        },
+        "address": {
+            "value": "14577 One Bangkok - R1, B1 fl.",
+            "confidence": 0.986
+        },
+        "discount": 0,
+        "status": false,
+        "hashed_receipt": "6a28f31437efc22878ef870092fa7205706192b3586fa2b3a30dc9e54b1e1656"
+    }
+]

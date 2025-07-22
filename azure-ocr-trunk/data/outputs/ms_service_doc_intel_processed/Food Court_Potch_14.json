@@ -1,0 +1,48 @@
+[
+    {
+        "merchant_name": {
+            "value": "ร้านค้า (FOOD STREET)",
+            "confidence": 0.96
+        },
+        "transaction_date": {
+            "value": "2025-01-31",
+            "confidence": 0.986
+        },
+        "transaction_time": {
+            "value": "13:02:00",
+            "confidence": 0.988
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "Cash Card [001002890:",
+                    "confidence": 0.98
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 1000.0,
+                    "confidence": 0.988
+                }
+            }
+        ],
+        "total": {
+            "value": 1000.0,
+            "confidence": 0.986
+        },
+        "tax_id": {
+            "value": "ID:0105563049786",
+            "confidence": 0.844
+        },
+        "receipt_no": {
+            "value": "GC680131000133",
+            "confidence": 0.624
+        },
+        "address": null,
+        "discount": 4,
+        "status": true,
+        "hashed_receipt": "98c39b8550308b81bb31ab7d72d2f61d09ea325db670a9da530b4d4dd9e2266d"
+    }
+]

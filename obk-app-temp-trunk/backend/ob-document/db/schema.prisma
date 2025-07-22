@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "client"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model category {
+  id         String     @id @default(dbgenerated("uuid_generate_v4()"))
+  title      Json       @map(name: "title") @db.Json
+  active     Boolean    @default(false) @map(name: "active")
+  image      String?    @map(name: "image")
+  type_id    String     @map(name: "type_id")
+  list       document[]
+  type       type       @relation(fields: [type_id], references: [id])
+  created_at DateTime   @default(now())
+  updated_at DateTime   @default(now()) @updatedAt
+}
+
+model document {
+  id           String    @id @default(dbgenerated("uuid_generate_v4()"))
+  category_id  String    @map(name: "category_id")
+  title        Json      @map(name: "title") @db.Json
+  body         Json      @map(name: "body") @db.Json
+  image        String?   @map(name: "image")
+  active       Boolean   @default(false) @map(name: "active")
+  created_at   DateTime? @default(now()) @map(name: "created_at")
+  updated_at   DateTime  @default(now()) @updatedAt
+  published    Boolean   @default(false) @map(name: "published")
+  release_date DateTime? @map(name: "release_date")
+  slug         String    @map(name: "slug")
+
+  category category   @relation(fields: [category_id], references: [id])
+  feedback feedback[]
+}
+
+model type {
+  id   String @id @default(dbgenerated("uuid_generate_v4()"))
+  type String @map(name: "type")
+
+  category category[]
+}
+
+model feedback {
+  id          String   @id @default(dbgenerated("uuid_generate_v4()"))
+  account_id  String
+  document_id String
+  like        Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+  document    document @relation(fields: [document_id], references: [id], onDelete: Cascade)
+
+  @@unique([account_id, document_id])
+  @@index([account_id, document_id])
+}

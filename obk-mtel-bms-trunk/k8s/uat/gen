@@ -1,0 +1,57 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+  - ./ing.yaml
+commonLabels:
+  app: ob-bms
+namePrefix: ob-bms-
+namespace: default
+
+configMapGenerator:
+  - literals:
+      - DATABASE_URL=postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@obk-uat-ob-bms.c70qsyku4z3y.ap-southeast-1.rds.amazonaws.com/ob_bms_uat
+      - AWS_ACCESS_KEY_ID=AKIA2UC3CDGQONFWRE4F
+      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_S3_BUCKET_NAME=obk-uat-bucket-bms
+      - ENABLE_S3_DOWNLOAD=true
+      - OB_EVENT_CONFIG_PATH=event.config.uat.json
+      - OB_WEB_SOCKET_URL=http://ws-uat.glorymtel.xyz
+      - OB_IAM_URL=http://iam-uat.glorymtel.xyz
+      - FS_API_URL=https://203.159.103.39:444
+      - FS_API_USERNAME=mtel
+      - FS_API_PASSWORD=fscp_1
+      - FS_PARKING_API_URL=http://mt-services-dev.fs-omc.io
+      - FS_PARKING_API_KEY=0b101f38ee2eb132c3ba390cb3556a2b
+      - CACHE_REDIS=true
+      - CACHE_REDIS_URL=redis://obk-uat.gr1rpl.0001.apse1.cache.amazonaws.com:6379
+      - TCC_API_URL=https://ec2-18-142-55-130.ap-southeast-1.compute.amazonaws.com
+      - TCC_CLIENT_ID=qAVBaRmQdzK2PMptwXKJlGOKlbYGeMV2
+      - TCC_CLIENT_SECRET=AKiMukKt9kDMXG6XBk1ST68M6L5lmmyd
+      - WEB_VIEW_URL=http://s3.ap-southeast-1.amazonaws.com/visitor-uat.glorymtel.xyz/passes/index.html
+      - WEB_VIEW_RESIDENT_URL=http://s3.ap-southeast-1.amazonaws.com/visitor-uat.glorymtel.xyz/passes/resident.html
+      - BOT_IBM_CLIENT_ID=1f602cb1-27f8-4998-b72d-52e93ddcc266
+      - BOT_API_URL=https://apigw1.bot.or.th/bot/public
+      - FS_LOCATION_RESIDENTIAL_FILE_NAME=location_residential.json
+      - FS_TOWER_RESIDENTIAL_FILE_NAME=tower_residential.json
+    name: configmap
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: $IMAGE_URL
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: Deployment
+  - patch: |-
+      - op: replace
+        path: /spec/ports/0/port
+        value: 3000
+      - op: replace
+        path: /spec/ports/0/targetPort
+        value: 3000
+    target:
+      kind: Service

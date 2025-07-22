@@ -1,0 +1,79 @@
+[
+    {
+        "merchant_name": {
+            "value": "Starbucks Coffee",
+            "confidence": 0.974
+        },
+        "transaction_date": {
+            "value": "2025-01-17",
+            "confidence": 0.982
+        },
+        "transaction_time": {
+            "value": "14:11:00",
+            "confidence": 0.984
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "T.CAPPUCCINO",
+                    "confidence": 0.98
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.979
+                },
+                "total_price": {
+                    "value": 130.0,
+                    "confidence": 0.983
+                }
+            },
+            {
+                "description": {
+                    "value": "FOR HERE",
+                    "confidence": 0.979
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 0.0,
+                    "confidence": 0.987
+                }
+            },
+            {
+                "description": {
+                    "value": "T:WET",
+                    "confidence": 0.98
+                },
+                "quantity": {
+                    "value": 9,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 0.0,
+                    "confidence": 0.986
+                }
+            }
+        ],
+        "total": {
+            "value": 110.0,
+            "confidence": 0.985
+        },
+        "tax_id": {
+            "value": "0105541008688(VAT",
+            "confidence": 0.978
+        },
+        "receipt_no": {
+            "value": "250117-02-13057",
+            "confidence": 0.479
+        },
+        "address": {
+            "value": "14596 Reserve One Bangkok",
+            "confidence": 0.982
+        },
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "14572572e8f50047691b5e6322b8679e1a2f5da5eddd4522b41b908ae98a82c5"
+    }
+]

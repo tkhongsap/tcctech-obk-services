@@ -1,0 +1,41 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+- ./ing.yaml
+commonLabels:
+  app: ob-ws
+namePrefix: ob-ws-
+namespace: default
+patches:
+- patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/image
+      value: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-websocket/sit:latest
+    - op: replace
+      path: /spec/replicas
+      value: 1
+  target:
+    kind: Deployment
+- patch: |-
+    - op: replace
+      path: /spec/ports/0/port
+      value: 8080
+    - op: replace
+      path: /spec/ports/0/targetPort
+      value: 8080
+  target:
+    kind: Service
+- patch: |-
+    - op: add
+      path: /spec/template/spec/containers/0/env
+      value:
+        - name: DATABASE_URL
+          value: postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@obk-sit-ob-websocket.c70qsyku4z3y.ap-southeast-1.rds.amazonaws.com/ob_websocket_sit
+  target:
+    kind: Deployment
+commonAnnotations:
+  deploy-timestamp: "1706841263"
+images:
+- name: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-websocket/sit
+  newTag: latest

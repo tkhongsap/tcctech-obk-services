@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS partners;
+
+DROP SEQUENCE IF EXISTS partners_id_seq;

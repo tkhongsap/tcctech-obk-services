@@ -1,0 +1,2432 @@
+{
+    "apiVersion": "2024-11-30",
+    "modelId": "prebuilt-receipt",
+    "stringIndexType": "utf16CodeUnit",
+    "content": "K.0077\nร้านค้า (FOOD STREET)\nTAX INVOICE ABB\nVAT INCLUDED\nTAX ID:0105563049786\nPOSID :E010030002A8657\nTerminal name :\nเลขที่ใบกำกับภาษี :\nShop16\n68012200077\nวันที่ :\n22 มกราคม 2568 11:33\nชื่อลูกค้า :\nลูกค้าทั่วไป\nรายการอาหาร\nราคา\nK16 เด็ดกะเพรา\n1\nห่อกลับบ้าน\n10.00\n1\nข้าวกะเพราเนื้อ\n100.00\n- ไข่ดาวไม่สุก\nยอดรวมทั้งหมด\n110.00\nTHAIQR\n110.00\nChange\n0.00\nCard Amount\n0.00\nShop16",
+    "pages": [
+        {
+            "pageNumber": 1,
+            "angle": 0.790060818195343,
+            "width": 1774,
+            "height": 2364,
+            "unit": "pixel",
+            "words": [
+                {
+                    "content": "K.0077",
+                    "polygon": [
+                        738,
+                        598,
+                        955,
+                        601,
+                        955,
+                        650,
+                        737,
+                        647
+                    ],
+                    "confidence": 0.992,
+                    "span": {
+                        "offset": 0,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "ร้าน",
+                    "polygon": [
+                        588,
+                        728,
+                        658,
+                        730,
+                        656,
+                        781,
+                        587,
+                        779
+                    ],
+                    "confidence": 0.989,
+                    "span": {
+                        "offset": 7,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "ค้า",
+                    "polygon": [
+                        673,
+                        730,
+                        721,
+                        732,
+                        720,
+                        783,
+                        671,
+                        782
+                    ],
+                    "confidence": 0.987,
+                    "span": {
+                        "offset": 11,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "(FOOD",
+                    "polygon": [
+                        744,
+                        732,
+                        891,
+                        736,
+                        890,
+                        788,
+                        743,
+                        784
+                    ],
+                    "confidence": 0.99,
+                    "span": {
+                        "offset": 15,
+                        "length": 5
+                    }
+                },
+                {
+                    "content": "STREET)",
+                    "polygon": [
+                        915,
+                        737,
+                        1107,
+                        740,
+                        1107,
+                        792,
+                        915,
+                        788
+                    ],
+                    "confidence": 0.989,
+                    "span": {
+                        "offset": 21,
+                        "length": 7
+                    }
+                },
+                {
+                    "content": "TAX",
+                    "polygon": [
+                        634,
+                        793,
+                        726,
+                        796,
+                        726,
+                        841,
+                        633,
+                        839
+                    ],
+                    "confidence": 0.995,
+                    "span": {
+                        "offset": 29,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "INVOICE",
+                    "polygon": [
+                        740,
+                        796,
+                        940,
+                        801,
+                        939,
+                        846,
+                        740,
+                        841
+                    ],
+                    "confidence": 0.992,
+                    "span": {
+                        "offset": 33,
+                        "length": 7
+                    }
+                },
+                {
+                    "content": "ABB",
+                    "polygon": [
+                        954,
+                        801,
+                        1048,
+                        803,
+                        1048,
+                        848,
+                        953,
+                        846
+                    ],
+                    "confidence": 0.997,
+                    "span": {
+                        "offset": 41,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "VAT",
+                    "polygon": [
+                        665,
+                        857,
+                        757,
+                        860,
+                        756,
+                        904,
+                        665,
+                        902
+                    ],
+                    "confidence": 0.998,
+                    "span": {
+                        "offset": 45,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "INCLUDED",
+                    "polygon": [
+                        773,
+                        860,
+                        1014,
+                        866,
+                        1014,
+                        910,
+                        772,
+                        905
+                    ],
+                    "confidence": 0.994,
+                    "span": {
+                        "offset": 49,
+                        "length": 8
+                    }
+                },
+                {
+                    "content": "TAX",
+                    "polygon": [
+                        553,
+                        916,
+                        648,
+                        918,
+                        647,
+                        963,
+                        553,
+                        961
+                    ],
+                    "confidence": 0.995,
+                    "span": {
+                        "offset": 58,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "ID:0105563049786",
+                    "polygon": [
+                        663,
+                        919,
+                        1116,
+                        929,
+                        1116,
+                        973,
+                        662,
+                        964
+                    ],
+                    "confidence": 0.993,
+                    "span": {
+                        "offset": 62,
+                        "length": 16
+                    }
+                },
+                {
+                    "content": "POSID",
+                    "polygon": [
+                        526,
+                        978,
+                        678,
+                        982,
+                        676,
+                        1028,
+                        524,
+                        1025
+                    ],
+                    "confidence": 0.994,
+                    "span": {
+                        "offset": 79,
+                        "length": 5
+                    }
+                },
+                {
+                    "content": ":E010030002A8657",
+                    "polygon": [
+                        696,
+                        983,
+                        1149,
+                        993,
+                        1148,
+                        1038,
+                        694,
+                        1029
+                    ],
+                    "confidence": 0.977,
+                    "span": {
+                        "offset": 85,
+                        "length": 16
+                    }
+                },
+                {
+                    "content": "Terminal",
+                    "polygon": [
+                        355,
+                        1075,
+                        528,
+                        1080,
+                        527,
+                        1124,
+                        355,
+                        1120
+                    ],
+                    "confidence": 0.992,
+                    "span": {
+                        "offset": 102,
+                        "length": 8
+                    }
+                },
+                {
+                    "content": "name",
+                    "polygon": [
+                        545,
+                        1081,
+                        649,
+                        1084,
+                        648,
+                        1128,
+                        545,
+                        1125
+                    ],
+                    "confidence": 0.992,
+                    "span": {
+                        "offset": 111,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": ":",
+                    "polygon": [
+                        680,
+                        1084,
+                        690,
+                        1085,
+                        689,
+                        1129,
+                        679,
+                        1129
+                    ],
+                    "confidence": 0.994,
+                    "span": {
+                        "offset": 116,
+                        "length": 1
+                    }
+                },
+                {
+                    "content": "เลข",
+                    "polygon": [
+                        357,
+                        1129,
+                        419,
+                        1130,
+                        419,
+                        1178,
+                        357,
+                        1177
+                    ],
+                    "confidence": 0.992,
+                    "span": {
+                        "offset": 118,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "ที่",
+                    "polygon": [
+                        434,
+                        1131,
+                        467,
+                        1131,
+                        466,
+                        1180,
+                        433,
+                        1179
+                    ],
+                    "confidence": 0.993,
+                    "span": {
+                        "offset": 121,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "ใบ",
+                    "polygon": [
+                        468,
+                        1131,
+                        499,
+                        1132,
+                        498,
+                        1180,
+                        468,
+                        1180
+                    ],
+                    "confidence": 0.993,
+                    "span": {
+                        "offset": 124,
+                        "length": 2
+                    }
+                },
+                {
+                    "content": "กำกับ",
+                    "polygon": [
+                        510,
+                        1132,
+                        600,
+                        1134,
+                        599,
+                        1183,
+                        509,
+                        1180
+                    ],
+                    "confidence": 0.992,
+                    "span": {
+                        "offset": 126,
+                        "length": 5
+                    }
+                },
+                {
+                    "content": "ภาษี",
+                    "polygon": [
+                        611,
+                        1134,
+                        684,
+                        1136,
+                        684,
+                        1184,
+                        610,
+                        1183
+                    ],
+                    "confidence": 0.987,
+                    "span": {
+                        "offset": 131,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": ":",
+                    "polygon": [
+                        700,
+                        1136,
+                        711,
+                        1137,
+                        711,
+                        1184,
+                        700,
+                        1184
+                    ],
+                    "confidence": 0.986,
+                    "span": {
+                        "offset": 136,
+                        "length": 1
+                    }
+                },
+                {
+                    "content": "Shop16",
+                    "polygon": [
+                        1158,
+                        1094,
+                        1302,
+                        1096,
+                        1302,
+                        1141,
+                        1158,
+                        1140
+                    ],
+                    "confidence": 0.998,
+                    "span": {
+                        "offset": 138,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "68012200077",
+                    "polygon": [
+                        1045,
+                        1150,
+                        1301,
+                        1152,
+                        1301,
+                        1195,
+                        1045,
+                        1192
+                    ],
+                    "confidence": 0.994,
+                    "span": {
+                        "offset": 145,
+                        "length": 11
+                    }
+                },
+                {
+                    "content": "วัน",
+                    "polygon": [
+                        354,
+                        1186,
+                        397,
+                        1187,
+                        397,
+                        1235,
+                        354,
+                        1235
+                    ],
+                    "confidence": 0.992,
+                    "span": {
+                        "offset": 157,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "ที่",
+                    "polygon": [
+                        411,
+                        1188,
+                        435,
+                        1188,
+                        434,
+                        1236,
+                        411,
+                        1235
+                    ],
+                    "confidence": 0.987,
+                    "span": {
+                        "offset": 160,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": ":",
+                    "polygon": [
+                        468,
+                        1189,
+                        479,
+                        1189,
+                        479,
+                        1237,
+                        467,
+                        1237
+                    ],
+                    "confidence": 0.989,
+                    "span": {
+                        "offset": 164,
+                        "length": 1
+                    }
+                },
+                {
+                    "content": "22",
+                    "polygon": [
+                        873,
+                        1202,
+                        919,
+                        1203,
+                        918,
+                        1247,
+                        873,
+                        1246
+                    ],
+                    "confidence": 0.991,
+                    "span": {
+                        "offset": 166,
+                        "length": 2
+                    }
+                },
+                {
+                    "content": "มกราคม",
+                    "polygon": [
+                        935,
+                        1203,
+                        1073,
+                        1205,
+                        1072,
+                        1249,
+                        935,
+                        1247
+                    ],
+                    "confidence": 0.993,
+                    "span": {
+                        "offset": 169,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "2568",
+                    "polygon": [
+                        1085,
+                        1205,
+                        1180,
+                        1207,
+                        1179,
+                        1250,
+                        1084,
+                        1249
+                    ],
+                    "confidence": 0.99,
+                    "span": {
+                        "offset": 176,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "11:33",
+                    "polygon": [
+                        1192,
+                        1207,
+                        1299,
+                        1209,
+                        1299,
+                        1251,
+                        1191,
+                        1250
+                    ],
+                    "confidence": 0.987,
+                    "span": {
+                        "offset": 181,
+                        "length": 5
+                    }
+                },
+                {
+                    "content": "ชื่อ",
+                    "polygon": [
+                        349,
+                        1245,
+                        403,
+                        1245,
+                        403,
+                        1303,
+                        349,
+                        1303
+                    ],
+                    "confidence": 0.987,
+                    "span": {
+                        "offset": 187,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "ลูกค้า",
+                    "polygon": [
+                        413,
+                        1246,
+                        507,
+                        1247,
+                        507,
+                        1304,
+                        412,
+                        1303
+                    ],
+                    "confidence": 0.99,
+                    "span": {
+                        "offset": 191,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": ":",
+                    "polygon": [
+                        527,
+                        1248,
+                        539,
+                        1248,
+                        539,
+                        1304,
+                        526,
+                        1304
+                    ],
+                    "confidence": 0.989,
+                    "span": {
+                        "offset": 198,
+                        "length": 1
+                    }
+                },
+                {
+                    "content": "ลูกค้า",
+                    "polygon": [
+                        1100,
+                        1262,
+                        1201,
+                        1263,
+                        1201,
+                        1313,
+                        1100,
+                        1313
+                    ],
+                    "confidence": 0.988,
+                    "span": {
+                        "offset": 200,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "ทั่วไป",
+                    "polygon": [
+                        1206,
+                        1263,
+                        1299,
+                        1263,
+                        1299,
+                        1313,
+                        1206,
+                        1313
+                    ],
+                    "confidence": 0.981,
+                    "span": {
+                        "offset": 206,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "รายการ",
+                    "polygon": [
+                        478,
+                        1322,
+                        611,
+                        1323,
+                        611,
+                        1360,
+                        478,
+                        1359
+                    ],
+                    "confidence": 0.987,
+                    "span": {
+                        "offset": 213,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "อาหาร",
+                    "polygon": [
+                        617,
+                        1323,
+                        725,
+                        1324,
+                        725,
+                        1361,
+                        617,
+                        1360
+                    ],
+                    "confidence": 0.991,
+                    "span": {
+                        "offset": 219,
+                        "length": 5
+                    }
+                },
+                {
+                    "content": "ราคา",
+                    "polygon": [
+                        1220,
+                        1337,
+                        1307,
+                        1338,
+                        1307,
+                        1373,
+                        1220,
+                        1372
+                    ],
+                    "confidence": 0.989,
+                    "span": {
+                        "offset": 225,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "K16",
+                    "polygon": [
+                        339,
+                        1379,
+                        424,
+                        1379,
+                        424,
+                        1424,
+                        339,
+                        1423
+                    ],
+                    "confidence": 0.993,
+                    "span": {
+                        "offset": 230,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "เด็ด",
+                    "polygon": [
+                        441,
+                        1380,
+                        507,
+                        1381,
+                        507,
+                        1425,
+                        440,
+                        1424
+                    ],
+                    "confidence": 0.987,
+                    "span": {
+                        "offset": 234,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "กะเพรา",
+                    "polygon": [
+                        523,
+                        1381,
+                        659,
+                        1383,
+                        659,
+                        1427,
+                        523,
+                        1426
+                    ],
+                    "confidence": 0.991,
+                    "span": {
+                        "offset": 238,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "1",
+                    "polygon": [
+                        346,
+                        1445,
+                        366,
+                        1445,
+                        366,
+                        1485,
+                        346,
+                        1484
+                    ],
+                    "confidence": 0.995,
+                    "span": {
+                        "offset": 245,
+                        "length": 1
+                    }
+                },
+                {
+                    "content": "ห่อ",
+                    "polygon": [
+                        466,
+                        1441,
+                        514,
+                        1442,
+                        514,
+                        1486,
+                        466,
+                        1486
+                    ],
+                    "confidence": 0.991,
+                    "span": {
+                        "offset": 247,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "กลับ",
+                    "polygon": [
+                        527,
+                        1441,
+                        596,
+                        1442,
+                        596,
+                        1486,
+                        527,
+                        1486
+                    ],
+                    "confidence": 0.991,
+                    "span": {
+                        "offset": 250,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "บ้าน",
+                    "polygon": [
+                        609,
+                        1442,
+                        678,
+                        1442,
+                        678,
+                        1487,
+                        609,
+                        1487
+                    ],
+                    "confidence": 0.99,
+                    "span": {
+                        "offset": 254,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "10.00",
+                    "polygon": [
+                        1202,
+                        1457,
+                        1310,
+                        1459,
+                        1310,
+                        1501,
+                        1202,
+                        1500
+                    ],
+                    "confidence": 0.996,
+                    "span": {
+                        "offset": 259,
+                        "length": 5
+                    }
+                },
+                {
+                    "content": "1",
+                    "polygon": [
+                        343,
+                        1523,
+                        363,
+                        1523,
+                        363,
+                        1563,
+                        343,
+                        1563
+                    ],
+                    "confidence": 0.996,
+                    "span": {
+                        "offset": 265,
+                        "length": 1
+                    }
+                },
+                {
+                    "content": "ข้าว",
+                    "polygon": [
+                        462,
+                        1516,
+                        534,
+                        1516,
+                        534,
+                        1566,
+                        462,
+                        1566
+                    ],
+                    "confidence": 0.989,
+                    "span": {
+                        "offset": 267,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "กะเพรา",
+                    "polygon": [
+                        536,
+                        1516,
+                        664,
+                        1516,
+                        664,
+                        1568,
+                        536,
+                        1566
+                    ],
+                    "confidence": 0.987,
+                    "span": {
+                        "offset": 271,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "เนื้อ",
+                    "polygon": [
+                        669,
+                        1516,
+                        727,
+                        1516,
+                        727,
+                        1568,
+                        669,
+                        1568
+                    ],
+                    "confidence": 0.99,
+                    "span": {
+                        "offset": 277,
+                        "length": 5
+                    }
+                },
+                {
+                    "content": "100.00",
+                    "polygon": [
+                        1179,
+                        1536,
+                        1311,
+                        1538,
+                        1311,
+                        1581,
+                        1179,
+                        1580
+                    ],
+                    "confidence": 0.998,
+                    "span": {
+                        "offset": 283,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "-",
+                    "polygon": [
+                        515,
+                        1588,
+                        526,
+                        1588,
+                        526,
+                        1636,
+                        515,
+                        1636
+                    ],
+                    "confidence": 0.99,
+                    "span": {
+                        "offset": 290,
+                        "length": 1
+                    }
+                },
+                {
+                    "content": "ไข่",
+                    "polygon": [
+                        541,
+                        1588,
+                        577,
+                        1588,
+                        576,
+                        1636,
+                        541,
+                        1635
+                    ],
+                    "confidence": 0.987,
+                    "span": {
+                        "offset": 292,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "ดาว",
+                    "polygon": [
+                        578,
+                        1588,
+                        629,
+                        1590,
+                        628,
+                        1637,
+                        577,
+                        1636
+                    ],
+                    "confidence": 0.987,
+                    "span": {
+                        "offset": 295,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "ไม่",
+                    "polygon": [
+                        634,
+                        1590,
+                        664,
+                        1590,
+                        664,
+                        1638,
+                        633,
+                        1637
+                    ],
+                    "confidence": 0.99,
+                    "span": {
+                        "offset": 298,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "สุก",
+                    "polygon": [
+                        665,
+                        1590,
+                        700,
+                        1590,
+                        700,
+                        1638,
+                        664,
+                        1638
+                    ],
+                    "confidence": 0.956,
+                    "span": {
+                        "offset": 301,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "ยอด",
+                    "polygon": [
+                        330,
+                        1647,
+                        428,
+                        1647,
+                        428,
+                        1708,
+                        329,
+                        1708
+                    ],
+                    "confidence": 0.993,
+                    "span": {
+                        "offset": 305,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "รวม",
+                    "polygon": [
+                        450,
+                        1647,
+                        520,
+                        1647,
+                        520,
+                        1709,
+                        450,
+                        1708
+                    ],
+                    "confidence": 0.993,
+                    "span": {
+                        "offset": 308,
+                        "length": 3
+                    }
+                },
+                {
+                    "content": "ทั้งหมด",
+                    "polygon": [
+                        542,
+                        1647,
+                        711,
+                        1649,
+                        711,
+                        1710,
+                        542,
+                        1709
+                    ],
+                    "confidence": 0.991,
+                    "span": {
+                        "offset": 311,
+                        "length": 7
+                    }
+                },
+                {
+                    "content": "110.00",
+                    "polygon": [
+                        1120,
+                        1671,
+                        1311,
+                        1677,
+                        1311,
+                        1724,
+                        1120,
+                        1720
+                    ],
+                    "confidence": 0.998,
+                    "span": {
+                        "offset": 319,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "THAIQR",
+                    "polygon": [
+                        326,
+                        1732,
+                        486,
+                        1734,
+                        486,
+                        1782,
+                        326,
+                        1780
+                    ],
+                    "confidence": 0.994,
+                    "span": {
+                        "offset": 326,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "110.00",
+                    "polygon": [
+                        1178,
+                        1750,
+                        1311,
+                        1753,
+                        1311,
+                        1795,
+                        1177,
+                        1793
+                    ],
+                    "confidence": 0.998,
+                    "span": {
+                        "offset": 333,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "Change",
+                    "polygon": [
+                        324,
+                        1795,
+                        477,
+                        1797,
+                        477,
+                        1845,
+                        323,
+                        1843
+                    ],
+                    "confidence": 0.998,
+                    "span": {
+                        "offset": 340,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "0.00",
+                    "polygon": [
+                        1223,
+                        1815,
+                        1311,
+                        1816,
+                        1311,
+                        1857,
+                        1222,
+                        1856
+                    ],
+                    "confidence": 0.992,
+                    "span": {
+                        "offset": 347,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "Card",
+                    "polygon": [
+                        321,
+                        1856,
+                        414,
+                        1857,
+                        414,
+                        1901,
+                        321,
+                        1901
+                    ],
+                    "confidence": 0.992,
+                    "span": {
+                        "offset": 352,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "Amount",
+                    "polygon": [
+                        424,
+                        1857,
+                        582,
+                        1858,
+                        582,
+                        1902,
+                        424,
+                        1901
+                    ],
+                    "confidence": 0.995,
+                    "span": {
+                        "offset": 357,
+                        "length": 6
+                    }
+                },
+                {
+                    "content": "0.00",
+                    "polygon": [
+                        1222,
+                        1876,
+                        1311,
+                        1878,
+                        1311,
+                        1920,
+                        1222,
+                        1919
+                    ],
+                    "confidence": 0.992,
+                    "span": {
+                        "offset": 364,
+                        "length": 4
+                    }
+                },
+                {
+                    "content": "Shop16",
+                    "polygon": [
+                        731,
+                        1922,
+                        894,
+                        1924,
+                        894,
+                        1976,
+                        731,
+                        1974
+                    ],
+                    "confidence": 0.995,
+                    "span": {
+                        "offset": 369,
+                        "length": 6
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "content": "K.0077",
+                    "polygon": [
+                        738,
+                        597,
+                        955,
+                        601,
+                        954,
+                        650,
+                        737,
+                        647
+                    ],
+                    "spans": [
+                        {
+                            "offset": 0,
+                            "length": 6
+                        }
+                    ]
+                },
+                {
+                    "content": "ร้านค้า (FOOD STREET)",
+                    "polygon": [
+                        588,
+                        728,
+                        1106,
+                        740,
+                        1105,
+                        792,
+                        587,
+                        780
+                    ],
+                    "spans": [
+                        {
+                            "offset": 7,
+                            "length": 21
+                        }
+                    ]
+                },
+                {
+                    "content": "TAX INVOICE ABB",
+                    "polygon": [
+                        634,
+                        793,
+                        1048,
+                        803,
+                        1047,
+                        848,
+                        633,
+                        838
+                    ],
+                    "spans": [
+                        {
+                            "offset": 29,
+                            "length": 15
+                        }
+                    ]
+                },
+                {
+                    "content": "VAT INCLUDED",
+                    "polygon": [
+                        665,
+                        857,
+                        1014,
+                        865,
+                        1013,
+                        909,
+                        664,
+                        902
+                    ],
+                    "spans": [
+                        {
+                            "offset": 45,
+                            "length": 12
+                        }
+                    ]
+                },
+                {
+                    "content": "TAX ID:0105563049786",
+                    "polygon": [
+                        553,
+                        916,
+                        1116,
+                        929,
+                        1115,
+                        973,
+                        552,
+                        961
+                    ],
+                    "spans": [
+                        {
+                            "offset": 58,
+                            "length": 20
+                        }
+                    ]
+                },
+                {
+                    "content": "POSID :E010030002A8657",
+                    "polygon": [
+                        525,
+                        978,
+                        1149,
+                        993,
+                        1147,
+                        1038,
+                        524,
+                        1024
+                    ],
+                    "spans": [
+                        {
+                            "offset": 79,
+                            "length": 22
+                        }
+                    ]
+                },
+                {
+                    "content": "Terminal name :",
+                    "polygon": [
+                        355,
+                        1075,
+                        690,
+                        1084,
+                        689,
+                        1129,
+                        354,
+                        1119
+                    ],
+                    "spans": [
+                        {
+                            "offset": 102,
+                            "length": 15
+                        }
+                    ]
+                },
+                {
+                    "content": "เลขที่ใบกำกับภาษี :",
+                    "polygon": [
+                        357,
+                        1128,
+                        711,
+                        1136,
+                        710,
+                        1184,
+                        356,
+                        1177
+                    ],
+                    "spans": [
+                        {
+                            "offset": 118,
+                            "length": 19
+                        }
+                    ]
+                },
+                {
+                    "content": "Shop16",
+                    "polygon": [
+                        1158,
+                        1094,
+                        1302,
+                        1096,
+                        1302,
+                        1141,
+                        1158,
+                        1139
+                    ],
+                    "spans": [
+                        {
+                            "offset": 138,
+                            "length": 6
+                        }
+                    ]
+                },
+                {
+                    "content": "68012200077",
+                    "polygon": [
+                        1045,
+                        1150,
+                        1301,
+                        1152,
+                        1300,
+                        1194,
+                        1045,
+                        1191
+                    ],
+                    "spans": [
+                        {
+                            "offset": 145,
+                            "length": 11
+                        }
+                    ]
+                },
+                {
+                    "content": "วันที่ :",
+                    "polygon": [
+                        354,
+                        1186,
+                        479,
+                        1189,
+                        478,
+                        1237,
+                        354,
+                        1234
+                    ],
+                    "spans": [
+                        {
+                            "offset": 157,
+                            "length": 8
+                        }
+                    ]
+                },
+                {
+                    "content": "22 มกราคม 2568 11:33",
+                    "polygon": [
+                        873,
+                        1202,
+                        1298,
+                        1208,
+                        1298,
+                        1251,
+                        873,
+                        1245
+                    ],
+                    "spans": [
+                        {
+                            "offset": 166,
+                            "length": 20
+                        }
+                    ]
+                },
+                {
+                    "content": "ชื่อลูกค้า :",
+                    "polygon": [
+                        349,
+                        1245,
+                        538,
+                        1247,
+                        537,
+                        1304,
+                        348,
+                        1302
+                    ],
+                    "spans": [
+                        {
+                            "offset": 187,
+                            "length": 12
+                        }
+                    ]
+                },
+                {
+                    "content": "ลูกค้าทั่วไป",
+                    "polygon": [
+                        1100,
+                        1262,
+                        1299,
+                        1262,
+                        1299,
+                        1313,
+                        1100,
+                        1312
+                    ],
+                    "spans": [
+                        {
+                            "offset": 200,
+                            "length": 12
+                        }
+                    ]
+                },
+                {
+                    "content": "รายการอาหาร",
+                    "polygon": [
+                        478,
+                        1322,
+                        725,
+                        1324,
+                        725,
+                        1361,
+                        478,
+                        1359
+                    ],
+                    "spans": [
+                        {
+                            "offset": 213,
+                            "length": 11
+                        }
+                    ]
+                },
+                {
+                    "content": "ราคา",
+                    "polygon": [
+                        1220,
+                        1337,
+                        1307,
+                        1338,
+                        1307,
+                        1373,
+                        1219,
+                        1372
+                    ],
+                    "spans": [
+                        {
+                            "offset": 225,
+                            "length": 4
+                        }
+                    ]
+                },
+                {
+                    "content": "K16 เด็ดกะเพรา",
+                    "polygon": [
+                        339,
+                        1379,
+                        658,
+                        1382,
+                        658,
+                        1427,
+                        339,
+                        1423
+                    ],
+                    "spans": [
+                        {
+                            "offset": 230,
+                            "length": 14
+                        }
+                    ]
+                },
+                {
+                    "content": "1",
+                    "polygon": [
+                        346,
+                        1445,
+                        365,
+                        1445,
+                        365,
+                        1484,
+                        346,
+                        1484
+                    ],
+                    "spans": [
+                        {
+                            "offset": 245,
+                            "length": 1
+                        }
+                    ]
+                },
+                {
+                    "content": "ห่อกลับบ้าน",
+                    "polygon": [
+                        466,
+                        1441,
+                        678,
+                        1442,
+                        678,
+                        1486,
+                        465,
+                        1485
+                    ],
+                    "spans": [
+                        {
+                            "offset": 247,
+                            "length": 11
+                        }
+                    ]
+                },
+                {
+                    "content": "10.00",
+                    "polygon": [
+                        1202,
+                        1457,
+                        1310,
+                        1459,
+                        1310,
+                        1501,
+                        1202,
+                        1500
+                    ],
+                    "spans": [
+                        {
+                            "offset": 259,
+                            "length": 5
+                        }
+                    ]
+                },
+                {
+                    "content": "1",
+                    "polygon": [
+                        343,
+                        1523,
+                        362,
+                        1523,
+                        362,
+                        1563,
+                        343,
+                        1563
+                    ],
+                    "spans": [
+                        {
+                            "offset": 265,
+                            "length": 1
+                        }
+                    ]
+                },
+                {
+                    "content": "ข้าวกะเพราเนื้อ",
+                    "polygon": [
+                        462,
+                        1516,
+                        727,
+                        1516,
+                        727,
+                        1567,
+                        462,
+                        1567
+                    ],
+                    "spans": [
+                        {
+                            "offset": 267,
+                            "length": 15
+                        }
+                    ]
+                },
+                {
+                    "content": "100.00",
+                    "polygon": [
+                        1179,
+                        1536,
+                        1310,
+                        1538,
+                        1310,
+                        1581,
+                        1178,
+                        1579
+                    ],
+                    "spans": [
+                        {
+                            "offset": 283,
+                            "length": 6
+                        }
+                    ]
+                },
+                {
+                    "content": "- ไข่ดาวไม่สุก",
+                    "polygon": [
+                        515,
+                        1587,
+                        700,
+                        1590,
+                        699,
+                        1638,
+                        515,
+                        1635
+                    ],
+                    "spans": [
+                        {
+                            "offset": 290,
+                            "length": 14
+                        }
+                    ]
+                },
+                {
+                    "content": "ยอดรวมทั้งหมด",
+                    "polygon": [
+                        330,
+                        1646,
+                        711,
+                        1648,
+                        711,
+                        1710,
+                        329,
+                        1707
+                    ],
+                    "spans": [
+                        {
+                            "offset": 305,
+                            "length": 13
+                        }
+                    ]
+                },
+                {
+                    "content": "110.00",
+                    "polygon": [
+                        1120,
+                        1671,
+                        1311,
+                        1676,
+                        1310,
+                        1724,
+                        1119,
+                        1719
+                    ],
+                    "spans": [
+                        {
+                            "offset": 319,
+                            "length": 6
+                        }
+                    ]
+                },
+                {
+                    "content": "THAIQR",
+                    "polygon": [
+                        326,
+                        1732,
+                        486,
+                        1734,
+                        486,
+                        1782,
+                        326,
+                        1780
+                    ],
+                    "spans": [
+                        {
+                            "offset": 326,
+                            "length": 6
+                        }
+                    ]
+                },
+                {
+                    "content": "110.00",
+                    "polygon": [
+                        1178,
+                        1750,
+                        1311,
+                        1753,
+                        1310,
+                        1795,
+                        1177,
+                        1792
+                    ],
+                    "spans": [
+                        {
+                            "offset": 333,
+                            "length": 6
+                        }
+                    ]
+                },
+                {
+                    "content": "Change",
+                    "polygon": [
+                        324,
+                        1794,
+                        477,
+                        1797,
+                        476,
+                        1845,
+                        323,
+                        1842
+                    ],
+                    "spans": [
+                        {
+                            "offset": 340,
+                            "length": 6
+                        }
+                    ]
+                },
+                {
+                    "content": "0.00",
+                    "polygon": [
+                        1223,
+                        1814,
+                        1311,
+                        1816,
+                        1311,
+                        1857,
+                        1222,
+                        1856
+                    ],
+                    "spans": [
+                        {
+                            "offset": 347,
+                            "length": 4
+                        }
+                    ]
+                },
+                {
+                    "content": "Card Amount",
+                    "polygon": [
+                        321,
+                        1856,
+                        581,
+                        1858,
+                        581,
+                        1902,
+                        321,
+                        1900
+                    ],
+                    "spans": [
+                        {
+                            "offset": 352,
+                            "length": 11
+                        }
+                    ]
+                },
+                {
+                    "content": "0.00",
+                    "polygon": [
+                        1222,
+                        1876,
+                        1311,
+                        1877,
+                        1310,
+                        1920,
+                        1221,
+                        1918
+                    ],
+                    "spans": [
+                        {
+                            "offset": 364,
+                            "length": 4
+                        }
+                    ]
+                },
+                {
+                    "content": "Shop16",
+                    "polygon": [
+                        731,
+                        1922,
+                        894,
+                        1924,
+                        893,
+                        1976,
+                        731,
+                        1974
+                    ],
+                    "spans": [
+                        {
+                            "offset": 369,
+                            "length": 6
+                        }
+                    ]
+                }
+            ],
+            "spans": [
+                {
+                    "offset": 0,
+                    "length": 375
+                }
+            ]
+        }
+    ],
+    "styles": [],
+    "languages": [
+        {
+            "spans": [
+                {
+                    "offset": 0,
+                    "length": 6
+                },
+                {
+                    "offset": 352,
+                    "length": 11
+                }
+            ],
+            "locale": "en",
+            "confidence": 0.99
+        },
+        {
+            "spans": [
+                {
+                    "offset": 7,
+                    "length": 21
+                },
+                {
+                    "offset": 118,
+                    "length": 19
+                },
+                {
+                    "offset": 157,
+                    "length": 87
+                },
+                {
+                    "offset": 247,
+                    "length": 11
+                },
+                {
+                    "offset": 267,
+                    "length": 15
+                },
+                {
+                    "offset": 290,
+                    "length": 28
+                }
+            ],
+            "locale": "th",
+            "confidence": 1
+        },
+        {
+            "spans": [
+                {
+                    "offset": 29,
+                    "length": 15
+                },
+                {
+                    "offset": 340,
+                    "length": 6
+                }
+            ],
+            "locale": "en",
+            "confidence": 0.95
+        },
+        {
+            "spans": [
+                {
+                    "offset": 45,
+                    "length": 33
+                }
+            ],
+            "locale": "en",
+            "confidence": 1
+        },
+        {
+            "spans": [
+                {
+                    "offset": 79,
+                    "length": 22
+                }
+            ],
+            "locale": "et",
+            "confidence": 1
+        },
+        {
+            "spans": [
+                {
+                    "offset": 102,
+                    "length": 15
+                },
+                {
+                    "offset": 138,
+                    "length": 6
+                },
+                {
+                    "offset": 369,
+                    "length": 6
+                }
+            ],
+            "locale": "en",
+            "confidence": 0.9
+        },
+        {
+            "spans": [
+                {
+                    "offset": 326,
+                    "length": 6
+                }
+            ],
+            "locale": "en",
+            "confidence": 0.8
+        }
+    ],
+    "documents": [
+        {
+            "docType": "receipt.retailMeal",
+            "boundingRegions": [
+                {
+                    "pageNumber": 1,
+                    "polygon": [
+                        0,
+                        0,
+                        1774,
+                        0,
+                        1774,
+                        2364,
+                        0,
+                        2364
+                    ]
+                }
+            ],
+            "fields": {
+                "CountryRegion": {
+                    "type": "countryRegion",
+                    "valueCountryRegion": "THA",
+                    "confidence": 0.995
+                },
+                "Items": {
+                    "type": "array",
+                    "valueArray": [
+                        {
+                            "type": "object",
+                            "valueObject": {
+                                "Description": {
+                                    "type": "string",
+                                    "valueString": "ห่อกลับบ้าน",
+                                    "content": "ห่อกลับบ้าน",
+                                    "boundingRegions": [
+                                        {
+                                            "pageNumber": 1,
+                                            "polygon": [
+                                                466,
+                                                1440,
+                                                678,
+                                                1442,
+                                                678,
+                                                1488,
+                                                466,
+                                                1486
+                                            ]
+                                        }
+                                    ],
+                                    "confidence": 0.983,
+                                    "spans": [
+                                        {
+                                            "offset": 247,
+                                            "length": 11
+                                        }
+                                    ]
+                                },
+                                "Quantity": {
+                                    "type": "number",
+                                    "valueNumber": 1,
+                                    "content": "1",
+                                    "boundingRegions": [
+                                        {
+                                            "pageNumber": 1,
+                                            "polygon": [
+                                                346,
+                                                1445,
+                                                366,
+                                                1445,
+                                                366,
+                                                1485,
+                                                346,
+                                                1484
+                                            ]
+                                        }
+                                    ],
+                                    "confidence": 0.987,
+                                    "spans": [
+                                        {
+                                            "offset": 245,
+                                            "length": 1
+                                        }
+                                    ]
+                                },
+                                "TotalPrice": {
+                                    "type": "currency",
+                                    "valueCurrency": {
+                                        "amount": 10.0,
+                                        "currencyCode": "THB"
+                                    },
+                                    "content": "10.00",
+                                    "boundingRegions": [
+                                        {
+                                            "pageNumber": 1,
+                                            "polygon": [
+                                                1202,
+                                                1457,
+                                                1310,
+                                                1459,
+                                                1310,
+                                                1501,
+                                                1202,
+                                                1500
+                                            ]
+                                        }
+                                    ],
+                                    "confidence": 0.989,
+                                    "spans": [
+                                        {
+                                            "offset": 259,
+                                            "length": 5
+                                        }
+                                    ]
+                                }
+                            },
+                            "content": "1\nห่อกลับบ้าน\n10.00",
+                            "boundingRegions": [
+                                {
+                                    "pageNumber": 1,
+                                    "polygon": [
+                                        346,
+                                        1439,
+                                        1311,
+                                        1449,
+                                        1310,
+                                        1501,
+                                        346,
+                                        1491
+                                    ]
+                                }
+                            ],
+                            "confidence": 0.982,
+                            "spans": [
+                                {
+                                    "offset": 245,
+                                    "length": 19
+                                }
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "valueObject": {
+                                "Description": {
+                                    "type": "string",
+                                    "valueString": "ข้าวกะเพราเนื้อ",
+                                    "content": "ข้าวกะเพราเนื้อ",
+                                    "boundingRegions": [
+                                        {
+                                            "pageNumber": 1,
+                                            "polygon": [
+                                                462,
+                                                1516,
+                                                727,
+                                                1516,
+                                                727,
+                                                1568,
+                                                462,
+                                                1568
+                                            ]
+                                        }
+                                    ],
+                                    "confidence": 0.983,
+                                    "spans": [
+                                        {
+                                            "offset": 267,
+                                            "length": 15
+                                        }
+                                    ]
+                                },
+                                "Quantity": {
+                                    "type": "number",
+                                    "valueNumber": 1,
+                                    "content": "1",
+                                    "boundingRegions": [
+                                        {
+                                            "pageNumber": 1,
+                                            "polygon": [
+                                                343,
+                                                1523,
+                                                363,
+                                                1523,
+                                                363,
+                                                1563,
+                                                343,
+                                                1563
+                                            ]
+                                        }
+                                    ],
+                                    "confidence": 0.987,
+                                    "spans": [
+                                        {
+                                            "offset": 265,
+                                            "length": 1
+                                        }
+                                    ]
+                                },
+                                "TotalPrice": {
+                                    "type": "currency",
+                                    "valueCurrency": {
+                                        "amount": 100.0,
+                                        "currencyCode": "THB"
+                                    },
+                                    "content": "100.00",
+                                    "boundingRegions": [
+                                        {
+                                            "pageNumber": 1,
+                                            "polygon": [
+                                                1179,
+                                                1536,
+                                                1311,
+                                                1538,
+                                                1311,
+                                                1581,
+                                                1179,
+                                                1580
+                                            ]
+                                        }
+                                    ],
+                                    "confidence": 0.989,
+                                    "spans": [
+                                        {
+                                            "offset": 283,
+                                            "length": 6
+                                        }
+                                    ]
+                                }
+                            },
+                            "content": "1\nข้าวกะเพราเนื้อ\n100.00\n- ไข่ดาวไม่สุก",
+                            "boundingRegions": [
+                                {
+                                    "pageNumber": 1,
+                                    "polygon": [
+                                        343,
+                                        1513,
+                                        1311,
+                                        1521,
+                                        1311,
+                                        1643,
+                                        342,
+                                        1635
+                                    ]
+                                }
+                            ],
+                            "confidence": 0.961,
+                            "spans": [
+                                {
+                                    "offset": 265,
+                                    "length": 39
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "MerchantName": {
+                    "type": "string",
+                    "valueString": "ร้านค้า (FOOD STREET)",
+                    "content": "ร้านค้า (FOOD STREET)",
+                    "boundingRegions": [
+                        {
+                            "pageNumber": 1,
+                            "polygon": [
+                                588,
+                                725,
+                                1108,
+                                740,
+                                1107,
+                                795,
+                                587,
+                                780
+                            ]
+                        }
+                    ],
+                    "confidence": 0.968,
+                    "spans": [
+                        {
+                            "offset": 7,
+                            "length": 21
+                        }
+                    ]
+                },
+                "ReceiptType": {
+                    "type": "string",
+                    "valueString": "Meal",
+                    "confidence": 0.977
+                },
+                "Total": {
+                    "type": "currency",
+                    "valueCurrency": {
+                        "amount": 110.0,
+                        "currencyCode": "THB"
+                    },
+                    "content": "110.00",
+                    "boundingRegions": [
+                        {
+                            "pageNumber": 1,
+                            "polygon": [
+                                1120,
+                                1671,
+                                1311,
+                                1677,
+                                1311,
+                                1724,
+                                1120,
+                                1720
+                            ]
+                        }
+                    ],
+                    "confidence": 0.607,
+                    "spans": [
+                        {
+                            "offset": 319,
+                            "length": 6
+                        }
+                    ]
+                },
+                "TransactionDate": {
+                    "type": "date",
+                    "valueDate": "2025-01-22",
+                    "content": "22 มกราคม 2568",
+                    "boundingRegions": [
+                        {
+                            "pageNumber": 1,
+                            "polygon": [
+                                873,
+                                1202,
+                                1180,
+                                1207,
+                                1179,
+                                1251,
+                                872,
+                                1246
+                            ]
+                        }
+                    ],
+                    "confidence": 0.988,
+                    "spans": [
+                        {
+                            "offset": 166,
+                            "length": 14
+                        }
+                    ]
+                },
+                "TransactionTime": {
+                    "type": "time",
+                    "valueTime": "11:33:00",
+                    "content": "11:33",
+                    "boundingRegions": [
+                        {
+                            "pageNumber": 1,
+                            "polygon": [
+                                1192,
+                                1207,
+                                1299,
+                                1209,
+                                1299,
+                                1251,
+                                1191,
+                                1250
+                            ]
+                        }
+                    ],
+                    "confidence": 0.989,
+                    "spans": [
+                        {
+                            "offset": 181,
+                            "length": 5
+                        }
+                    ]
+                },
+                "Receipt_No": {
+                    "type": "string",
+                    "valueString": "68012200077",
+                    "content": "68012200077",
+                    "boundingRegions": [
+                        {
+                            "pageNumber": 1,
+                            "polygon": [
+                                1045,
+                                1150,
+                                1301,
+                                1152,
+                                1301,
+                                1195,
+                                1045,
+                                1192
+                            ]
+                        }
+                    ],
+                    "confidence": 0.552,
+                    "spans": [
+                        {
+                            "offset": 145,
+                            "length": 11
+                        }
+                    ]
+                },
+                "Tax_Id": {
+                    "type": "string",
+                    "confidence": 0
+                }
+            },
+            "confidence": 0.976,
+            "spans": [
+                {
+                    "offset": 0,
+                    "length": 375
+                }
+            ]
+        }
+    ],
+    "contentFormat": "text"
+}

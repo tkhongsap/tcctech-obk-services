@@ -1,0 +1,10 @@
+@startuml
+app ->> minio: take photo or upload file
+minio -->> app: return upload url
+app ->> "parking service": submit receipt
+"parking service" -> "parking service": queueing to submit to OCR
+"parking service" ->> "OCR validation": submit file url to OCR
+"OCR validation" -->> "parking service": data + status = [valid, invalid]
+"parking service" ->> "parking service": update receipt status [SUCCESS, DECLINED, DUPLICATED]
+"parking service" --> app: update receipt status (real time)
+@enduml

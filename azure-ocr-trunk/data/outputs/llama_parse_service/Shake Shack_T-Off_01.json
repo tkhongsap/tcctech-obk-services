@@ -1,0 +1,74 @@
+{
+  "merchant_name": {
+    "value": "Shake Shack",
+    "confidence": 0.99
+  },
+  "transaction_date": {
+    "value": "2025-01-30",
+    "confidence": 0.95
+  },
+  "transaction_time": {
+    "value": "12:55:00",
+    "confidence": 0.95
+  },
+  "items": [
+    {
+      "description": {
+        "value": "1 DBL Shack",
+        "confidence": 0.98
+      },
+      "quantity": {
+        "value": 1,
+        "confidence": 0.98
+      },
+      "total_price": {
+        "value": 340.0,
+        "confidence": 0.98
+      }
+    },
+    {
+      "description": {
+        "value": "1 S Mango PF",
+        "confidence": 0.98
+      },
+      "quantity": {
+        "value": 1,
+        "confidence": 0.98
+      },
+      "total_price": {
+        "value": 110.0,
+        "confidence": 0.98
+      }
+    },
+    {
+      "description": {
+        "value": "1 Fries",
+        "confidence": 0.98
+      },
+      "quantity": {
+        "value": 1,
+        "confidence": 0.98
+      },
+      "total_price": {
+        "value": 110.0,
+        "confidence": 0.98
+      }
+    }
+  ],
+  "total": {
+    "value": 560.0,
+    "confidence": 0.99
+  },
+  "tax_id": {
+    "value": "0105565082764",
+    "confidence": 0.95
+  },
+  "receipt_no": {
+    "value": "0200008328",
+    "confidence": 0.95
+  },
+  "address": "16604 One Bangkok",
+  "discount": 0,
+  "status": false,
+  "hashed_receipt": "string"
+}

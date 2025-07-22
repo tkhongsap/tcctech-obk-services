@@ -1,0 +1,51 @@
+[
+    {
+        "merchant_name": {
+            "value": "Starbucks Coffee",
+            "confidence": 0.976
+        },
+        "transaction_date": {
+            "value": "2025-01-17",
+            "confidence": 0.985
+        },
+        "transaction_time": {
+            "value": "08:46:00",
+            "confidence": 0.987
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "SBUX 500",
+                    "confidence": 0.981
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 500.0,
+                    "confidence": 0.987
+                }
+            }
+        ],
+        "total": {
+            "value": 500.0,
+            "confidence": 0.984
+        },
+        "tax_id": {
+            "value": null,
+            "confidence": 0
+        },
+        "receipt_no": {
+            "value": "0100028369",
+            "confidence": 0.645
+        },
+        "address": {
+            "value": "14577 One Bangkok - R1, B1 fl.",
+            "confidence": 0.982
+        },
+        "discount": 0,
+        "status": false,
+        "hashed_receipt": "a0d8679384813c7360c0c31eb6484ac077c01b0a9881e521df1ffe8a59358e98"
+    }
+]

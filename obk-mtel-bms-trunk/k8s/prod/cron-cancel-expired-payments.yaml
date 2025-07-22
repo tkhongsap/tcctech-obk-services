@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-bms-cancel-expired-payments
+  labels:
+    app: ob-bms-cancel-expired-payments
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  schedule: '*/5 * * * *' # Run every 5 min
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ob-bms-cancel-expired-payments
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: bash
+              image: curlimages/curl:7.70.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - 'curl -X POST https://obk-bms-prod.tccproptech.com/jobs/cancel_expired_payments/execute -H "accept: application/json" -H "x-permissions: eyJwZXJtaXNzaW9uIjogWyAgeyAidmFsdWUiOiB7InJlc291cmNlX3R5cGUiOiAiam9iOmV4ZWN1dGlvbiIsICJhY3Rpb25zIjogWyJjcmVhdGUiXSB9IH1dfQ=="'

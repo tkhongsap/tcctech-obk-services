@@ -1,0 +1,60 @@
+.obk-layout-menu-button-active {
+  left: 20rem;
+}
+
+.obk-layout-menu-button-inactive {
+  left: 1rem;
+}
+
+.obk-layout-topbar-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: var(--text-color-secondary);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  transition: background-color $transitionDuration;
+
+  &:hover {
+    color: var(--text-color);
+    background-color: var(--surface-hover);
+  }
+
+  &:focus {
+    @include focused();
+  }
+
+  i {
+    font-size: 1.5rem;
+  }
+
+  span {
+    font-size: 1rem;
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .obk-layout-menu-button {
+    left: 1rem;
+    order: 1;
+  }
+
+  .obk-layout-topbar-button {
+    left: 1rem;
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    border-radius: 12px;
+    padding: 1rem;
+
+    span {
+      font-weight: medium;
+      display: block;
+    }
+  }
+}

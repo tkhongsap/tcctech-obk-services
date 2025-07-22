@@ -1,0 +1,65 @@
+[
+    {
+        "merchant_name": {
+            "value": "Veggie First cafe",
+            "confidence": 0.966
+        },
+        "transaction_date": {
+            "value": "2025-01-30",
+            "confidence": 0.986
+        },
+        "transaction_time": {
+            "value": "19:34:00",
+            "confidence": 0.987
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "เสริฟในร้าน\nน้ำผลไม้",
+                    "confidence": 0
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 30.0,
+                    "confidence": 0.982
+                }
+            },
+            {
+                "description": {
+                    "value": "ข้าวปลาดิบรวมแบบฮาวาย",
+                    "confidence": 0.981
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.985
+                },
+                "total_price": {
+                    "value": 159.0,
+                    "confidence": 0.983
+                }
+            }
+        ],
+        "total": {
+            "value": 202.23,
+            "confidence": 0.982
+        },
+        "tax_id": {
+            "value": "0505566019213",
+            "confidence": 0.994
+        },
+        "receipt_no": {
+            "value": "#2-7867",
+            "confidence": 0.941
+        },
+        "address": {
+            "value": "1877 ถนนพระรามที่ 4 แขวงลุมพินี เขต\nปทุมวัน กรุงเทพมหานคร 10330",
+            "confidence": 0.984
+        },
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "9cbe9f2b954cb7394f37bc7e7fccdc01ecd82a74f757d3d9cdfc09c87315eca4"
+    }
+]

@@ -1,0 +1,60 @@
+{
+  "merchant_name": {
+    "value": "ma ma cafe",
+    "confidence": 0.9
+  },
+  "transaction_date": {
+    "value": "20-01-2025",
+    "confidence": 0.9
+  },
+  "transaction_time": {
+    "value": "12:19:00",
+    "confidence": 0.9
+  },
+  "items": [
+    {
+      "description": {
+        "value": "Item 1",
+        "confidence": 0.8
+      },
+      "quantity": {
+        "value": 1,
+        "confidence": 0.9
+      },
+      "total_price": {
+        "value": 60.0,
+        "confidence": 0.9
+      }
+    },
+    {
+      "description": {
+        "value": "Item 2",
+        "confidence": 0.8
+      },
+      "quantity": {
+        "value": 1,
+        "confidence": 0.9
+      },
+      "total_price": {
+        "value": 40.0,
+        "confidence": 0.9
+      }
+    }
+  ],
+  "total": {
+    "value": 100.0,
+    "confidence": 0.9
+  },
+  "tax_id": {
+    "value": null,
+    "confidence": 0
+  },
+  "receipt_no": {
+    "value": "04023141",
+    "confidence": 0.9
+  },
+  "address": "One Bangkok",
+  "discount": 0,
+  "status": false,
+  "hashed_receipt": "string"
+}

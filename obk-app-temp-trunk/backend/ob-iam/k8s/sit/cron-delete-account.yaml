@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-iam-cronjob-delete-deactivate-account
+  labels:
+    app: ob-iam-cronjob-delete-deactivate-account
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  schedule: '0 0 * * *' # Run at 00:00 (midnight) every day
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ob-iam-cronjob-delete-deactivate-account
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: bash
+              image: curlimages/curl:7.70.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - 'curl -X POST https://sit.glorymtel.xyz/ob-iam/task/delete_deactivate_account -H "accept: application/json"'

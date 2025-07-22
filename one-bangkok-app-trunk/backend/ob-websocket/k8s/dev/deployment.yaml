@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ob-websocket
+spec:
+  selector:
+    matchLabels:
+      name: ob-websocket
+  template:
+    metadata:
+      labels:
+        name: ob-websocket
+    spec:
+      containers:
+        - name: ob-websocket
+          image: 418772626632.dkr.ecr.ap-southeast-1.amazonaws.com/one-bangkok-dev:ob-websocket_latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          env:
+            - name: DATABASE_URL
+              value: postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@ob-websocket-dev.caktmhpgapyr.ap-southeast-1.rds.amazonaws.com/ob_websocket_development

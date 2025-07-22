@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/partners?locale=en
+content-type: application/json
+
+{
+    "title": "MoMA 3 th!",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Moma-1-logo.jpg",
+    "link": "https://www.moma.org/"
+}

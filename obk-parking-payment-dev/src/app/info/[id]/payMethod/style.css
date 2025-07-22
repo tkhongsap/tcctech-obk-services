@@ -1,0 +1,11 @@
+.item {
+  @apply cursor-pointer border border-[#DCDCDC] flex items-center justify-between p-3.5 mt-1.5;
+}
+
+.item.selected {
+  @apply border-[#162C51] bg-[#EFEFEF] font-medium;
+}
+
+.item.selected .checkMark {
+  display: flex;
+}

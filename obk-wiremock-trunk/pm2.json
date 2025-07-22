@@ -1,0 +1,10 @@
+{
+  "name": "wiremock",
+  "script": "server.js",
+  "instances": 1,
+  "exec_mode": "cluster",
+  "env": {
+    "NODE_ENV": "production",
+    "SERVER_PORT": 8080
+  }
+}

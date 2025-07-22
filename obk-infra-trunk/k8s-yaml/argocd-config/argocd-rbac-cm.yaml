@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+data:
+    policy.csv: |
+      g, billy_wong@mtelnet.com, role:admin
+      g, preenun.suw@mtel.co.th, role:admin
+      g, sittitep.tosuwan@mtel.co.th, role:admin
+      g, billy, role:admin
+      g, obDevOps, role:admin
+      # g, colleague@yourcorp.com, role:admin
+      # policies : can be done multiple times to give access to multiple projects
+      # See https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md for more information
+      # p, dev1@yourcorp.com, applications, *, project1/*, allow
+      # p, dev2@yourcorp.com, applications, *, project2/*, allow      
+    # default policy for people logging in --> no privileges, they are blind and can't do anything
+    policy.default: ""
+    scopes: '[email, group]'

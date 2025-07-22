@@ -1,0 +1,39 @@
+name: Backend Sanity Check
+on:
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - "**/backend/**"
+      - ".github/workflows/backend_*"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.branch }}
+  cancel-in-progress: true
+jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: get-changes
+        with:
+          filters: |
+            helloworld:
+              - 'backend/helloworld/**'
+            ob-iam:
+              - 'backend/ob-iam/**'
+      - id: set-matrix
+        run: |
+          echo "::set-output name=matrix::$(echo '${{ steps.get-changes.outputs.changes }}')"
+  run-matrix:
+    needs: set-matrix
+    strategy:
+      matrix:
+        # service: ${{ fromJson(needs.set-matrix.outputs.matrix) }}
+        service: [ob-iam] # mock to test workflow
+    uses: ./.github/workflows/backend_unit_test.yaml
+    with:
+      service: ${{ matrix.service }}
+      env: dev

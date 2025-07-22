@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS programs;
+
+DROP SEQUENCE IF EXISTS programs_id_seq;

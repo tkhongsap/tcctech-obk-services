@@ -1,0 +1,62 @@
+[
+    {
+        "merchant_name": {
+            "value": "ร้านค้า (FOOD STREET)",
+            "confidence": 0.968
+        },
+        "transaction_date": {
+            "value": "2025-01-22",
+            "confidence": 0.988
+        },
+        "transaction_time": {
+            "value": "11:33:00",
+            "confidence": 0.989
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "ห่อกลับบ้าน",
+                    "confidence": 0.983
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.987
+                },
+                "total_price": {
+                    "value": 10.0,
+                    "confidence": 0.989
+                }
+            },
+            {
+                "description": {
+                    "value": "ข้าวกะเพราเนื้อ",
+                    "confidence": 0.983
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.987
+                },
+                "total_price": {
+                    "value": 100.0,
+                    "confidence": 0.989
+                }
+            }
+        ],
+        "total": {
+            "value": 110.0,
+            "confidence": 0.607
+        },
+        "tax_id": {
+            "value": null,
+            "confidence": 0
+        },
+        "receipt_no": {
+            "value": "68012200077",
+            "confidence": 0.552
+        },
+        "address": null,
+        "discount": 0,
+        "status": false,
+        "hashed_receipt": "fcab59bd4e65e896306a3d0a22af57f05f9c6780c005fb709d4340c659d132cc"
+    }
+]

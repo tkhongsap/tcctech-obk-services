@@ -1,0 +1,8 @@
+PUT http://localhost:8080/api/partners/7?locale=zh
+content-type: application/json
+
+{
+    "title": "MoMA 3 zh!",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Moma-1-logo.jpg",
+    "link": "https://www.moma.org/"
+}

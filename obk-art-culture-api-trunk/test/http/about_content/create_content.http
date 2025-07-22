@@ -1,0 +1,14 @@
+POST http://localhost:8080/api/about?locale=en
+content-type: application/json
+
+{
+    "content": "EN Planned before Christo's death in May 2020, this is an opportunity to share the last public work realised in Christo's lifetime with a global audience and celebrate the memory of his and Jeanne-Claude's visionary projects. Christo, you and your wife Jeanne-Claude were born on the exact same day in 1935, but in completely different countries. Do you believe in destiny? Jeanne-Claude always said, “There are a million people born on the same day.” But it happened that we met, that's all. That is something not unusual. But there are many things that are not destiny. You make your own destiny. Christo, you and your wife Jeanne-Claude were born on the exact same day in 1935, but in completely different countries. Do you believe in destiny? Jeanne-Claude always said, “There are a million people born on the same day.” But it happened that we met, that's all. That is something not unusual. But there are many things that are not destiny. You make your own destiny.",
+    "partners": [
+        {
+            "id": 4
+        },
+        {
+            "id": 7
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+name: Draft Release
+
+on:
+  push:
+    tags:
+      - "*.*.*-sit"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.branch }}
+  cancel-in-progress: true
+
+jobs:
+  draft_release:
+    name: Create Draft Release
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get Previous Tag
+        id: previous_tag
+        run: |
+          PREV_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))
+          echo "previous_tag=${PREV_TAG}" >> $GITHUB_ENV
+
+      - name: Generate Changelog
+        run: |
+          # Generate the changelog between the current tag and the previous tag
+          changelog=$(git log --oneline --no-merges --pretty="* %h - %s (%an)" ${{ env.previous_tag }}..${{ github.ref }})
+          
+          # Save the changelog to a file
+          echo "$changelog" > changelog.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          body_path: changelog.txt
+          tag_name: ${{ github.ref_name }}
+          title: Release ${{ github.ref_name }}

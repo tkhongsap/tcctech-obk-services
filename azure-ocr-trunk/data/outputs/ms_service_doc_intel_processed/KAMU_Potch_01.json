@@ -1,0 +1,58 @@
+[
+    {
+        "merchant_name": {
+            "value": "00146:",
+            "confidence": 0.612
+        },
+        "transaction_date": {
+            "value": "2025-01-23",
+            "confidence": 0.987
+        },
+        "transaction_time": {
+            "value": "17:12:40",
+            "confidence": 0.989
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "Long Black Lemonade (L)",
+                    "confidence": 0.978
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.982
+                },
+                "total_price": {
+                    "value": 80.0,
+                    "confidence": 0.983
+                }
+            },
+            {
+                "description": {
+                    "value": "KM อ-ศ ลด 10 .-",
+                    "confidence": 0.967
+                },
+                "total_price": {
+                    "value": -10.0,
+                    "confidence": 0.983
+                }
+            }
+        ],
+        "total": {
+            "value": 70.0,
+            "confidence": 0.985
+        },
+        "tax_id": {
+            "value": "0105556195543",
+            "confidence": 0.967
+        },
+        "receipt_no": {
+            "value": "0119736",
+            "confidence": 0.56
+        },
+        "address": null,
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "4b5c6fede5df3df679be9db8a4be175221f02fd78ea13387c9fe78431068456d"
+    }
+]

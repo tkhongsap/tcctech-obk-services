@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ob-gw
+spec:
+  selector:
+    matchLabels:
+      name: ob-gw
+  template:
+    metadata:
+      labels:
+        name: ob-gw
+    spec:
+      containers:
+      - name: ob-gw
+        image: 418772626632.dkr.ecr.ap-southeast-1.amazonaws.com/one-bangkok-dev:ob-gw
+        ports:
+          - containerPort: 8080
+        imagePullPolicy: Always

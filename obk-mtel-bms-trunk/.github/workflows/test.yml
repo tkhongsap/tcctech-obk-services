@@ -1,0 +1,33 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!main' # Exclude the main branch for push events
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.8.1'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: |
+          yarn build
+
+      - name: Run tests
+        run: yarn test

@@ -1,0 +1,68 @@
+[
+    {
+        "merchant_name": {
+            "value": "ร้านค้า (FOOD STREET)",
+            "confidence": 0.966
+        },
+        "transaction_date": {
+            "value": "2025-01-31",
+            "confidence": 0.988
+        },
+        "transaction_time": {
+            "value": "12:45:00",
+            "confidence": 0.989
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "โป่งเทียมเฮง",
+                    "confidence": 0.834
+                }
+            },
+            {
+                "description": {
+                    "value": "เกาเหลาหมูตุ๋น",
+                    "confidence": 0.983
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.987
+                },
+                "total_price": {
+                    "value": 90.0,
+                    "confidence": 0.989
+                }
+            },
+            {
+                "description": {
+                    "value": "ข้าวเปล่า",
+                    "confidence": 0.984
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.987
+                },
+                "total_price": {
+                    "value": 15.0,
+                    "confidence": 0.989
+                }
+            }
+        ],
+        "total": {
+            "value": 105.0,
+            "confidence": 0.773
+        },
+        "tax_id": {
+            "value": "ID:0105563049786",
+            "confidence": 0.907
+        },
+        "receipt_no": {
+            "value": ":E010030002A8641 68013101041",
+            "confidence": 0.369
+        },
+        "address": null,
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "29ad4865a6e3982813463187bbf319eb3064116ce2ac1c8ec8de10f224e8985f"
+    }
+]

@@ -1,0 +1,37 @@
+{
+  "language": "typescript",
+  "app": "npx ts-node main.ts",
+  "projectId": "b0345a21-b02e-4778-9094-e2438b5bf424",
+  "sendCrashReports": "false",
+  "terraformProviders": [
+    "aws@~> 5.0",
+    "helm@~> 2.0",
+    "http@~> 3.0",
+    "tls@~> 4.0",
+    "hashicorp/kubernetes@~> 2.23.0",
+    "gavinbunney/kubectl@~> 1.14",
+    "integrations/github@~> 5.38.0",
+    "cloudflare/cloudflare@~> 4.17"
+  ],
+  "terraformModules": [
+    {
+      "name": "eks",
+      "source": "terraform-aws-modules/eks/aws",
+      "version": "~> 19.17.2"
+    },
+    {
+      "name": "eks-karpenter",
+      "source": "terraform-aws-modules/eks/aws//modules/karpenter",
+      "version": "~> 19.17.2"
+    },
+    {
+      "name": "eks-ng",
+      "source": "terraform-aws-modules/eks/aws//modules/eks-managed-node-group",
+      "version": "~> 19.17.2"
+    }
+  ],
+  "context": {
+    "excludeStackIdFromLogicalIds": "true",
+    "allowSepCharsInLogicalIds": "true"
+  }
+}

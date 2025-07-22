@@ -1,0 +1,767 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../db/client"
+  binaryTargets = ["linux-musl-openssl-3.0.x", "debian-openssl-1.1.x", "darwin-arm64", "darwin", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Member {
+  id                String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid               String   @unique
+  metadata          Json?    @db.Json
+  metadata_resident Json?    @db.Json
+  account_id        String?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @default(now()) @updatedAt
+  default_floor     String?
+
+  tenant_members TenantMember[]
+
+  visitors             Visitor[]
+  authorized_locations AuthorizedLocation[]
+  passes               Pass[]
+  commands             Command[]
+  parking_tickets      ParkingTicket[]
+  service_requests     ServiceRequest[]
+  ac_requests          ACRequest[]
+  ParkingReservations  ParkingReservation[]
+
+  @@unique([id])
+  @@map("members")
+}
+
+model Tenant {
+  id                  String               @id @default(dbgenerated("uuid_generate_v4()"))
+  uid                 String               @unique
+  name                String
+  display_name        Json                 @db.Json
+  email               String
+  phone_number        String
+  address             String
+  metadata            Json                 @db.Json
+  created_at          DateTime             @default(now())
+  updated_at          DateTime             @default(now()) @updatedAt
+  tenant_members      TenantMember[]
+  authorized_location AuthorizedLocation[]
+
+  @@unique([id])
+  @@map("tenants")
+}
+
+model TenantMember {
+  id         String           @id @default(dbgenerated("uuid_generate_v4()"))
+  tenant_id  String
+  member_id  String
+  role       TenantMemberRole
+  setting    Json             @db.Json
+  created_at DateTime         @default(now())
+  updated_at DateTime         @default(now()) @updatedAt
+
+  tenant Tenant? @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  member Member? @relation(fields: [member_id], references: [id], onDelete: Cascade)
+
+  @@unique([tenant_id, member_id])
+  @@map("tenant_members")
+}
+
+model Project {
+  id           String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid          String   @default("")
+  name         String
+  display_name Json     @db.Json
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now()) @updatedAt
+  towers       Tower[]
+
+  @@unique([name])
+  @@map("projects")
+}
+
+model Area {
+  id           String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name         String
+  display_name Json     @db.Json
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now()) @updatedAt
+
+  @@map("areas")
+}
+
+model ParkingTower {
+  id           String         @id @default(dbgenerated("uuid_generate_v4()"))
+  uid          String
+  name         String
+  display_name Json           @db.Json
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @default(now()) @updatedAt
+  ParkingFloor ParkingFloor[]
+
+  @@unique([uid])
+  @@map("parking_towers")
+}
+
+model ParkingFloor {
+  id               String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid              String
+  name             String
+  display_name     Json     @db.Json
+  parking_tower_id String
+  created_at       DateTime @default(now())
+  updated_at       DateTime @default(now()) @updatedAt
+
+  parking_towers ParkingTower @relation(fields: [parking_tower_id], references: [id], onDelete: Cascade)
+  parking_lots   ParkingLot[]
+  ZoneArea       ZoneArea[]
+
+  @@unique([uid])
+  @@map("parking_floors")
+}
+
+model ZoneArea {
+  id               String @id @default(dbgenerated("uuid_generate_v4()"))
+  parking_floor_id String
+  parking_lot_id   String
+
+  parking_floors ParkingFloor @relation(fields: [parking_floor_id], references: [id], onDelete: Cascade)
+  parking_lots   ParkingLot   @relation(fields: [parking_lot_id], references: [id], onDelete: Cascade)
+}
+
+model Tower {
+  id           String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid          String
+  name         String
+  display_name Json     @db.Json
+  project_id   String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now()) @updatedAt
+
+  project          Project          @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  zones            Zone[]
+  floors           Floor[]
+  locations        Location[]
+  service_requests ServiceRequest[]
+  ac_requests      ACRequest[]
+  mapping          Json             @default("{}") @db.Json
+
+  @@unique([uid])
+  @@map("towers")
+}
+
+model Zone {
+  id           String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid          String
+  name         String
+  display_name Json     @db.Json
+  tower_id     String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now()) @updatedAt
+
+  tower     Tower      @relation(fields: [tower_id], references: [id], onDelete: Cascade)
+  locations Location[]
+
+  @@unique([uid, tower_id])
+  @@map("zones")
+}
+
+model Floor {
+  id           String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid          String
+  name         String
+  display_name Json     @db.Json
+  tower_id     String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now()) @updatedAt
+  mapping      Json     @default("{}") @db.Json
+  image        String?
+
+  tower            Tower            @relation(fields: [tower_id], references: [id], onDelete: Cascade)
+  locations        Location[]
+  service_requests ServiceRequest[]
+  ac_zone          ACZone[]
+  ac_requests      ACRequest[]
+
+  @@unique([uid, tower_id])
+  @@map("floors")
+}
+
+model Location {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid        String
+  name       String
+  tower_id   String
+  zone_id    String
+  floor_id   String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  tower                Tower                @relation(fields: [tower_id], references: [id], onDelete: Cascade)
+  zone                 Zone                 @relation(fields: [zone_id], references: [id], onDelete: Cascade)
+  floor                Floor                @relation(fields: [floor_id], references: [id], onDelete: Cascade)
+  authorized_locations AuthorizedLocation[]
+  beacons              Beacon[]
+  visitor_schedules    VisitorSchedule[]
+
+  @@unique([uid, tower_id, zone_id, floor_id])
+  @@map("locations")
+}
+
+model Beacon {
+  id          String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid         String
+  name        String
+  major       String
+  minor       String
+  location_id String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+
+  location Location @relation(fields: [location_id], references: [id], onDelete: Cascade)
+
+  @@unique([uid, location_id])
+  @@map("beacons")
+}
+
+model Visitor {
+  id                String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name              String
+  profile_image_url String?
+  email             String
+  company_name      String
+  reference         String?
+  inviter_id        String
+  created_at        DateTime @default(now())
+  updated_at        DateTime @default(now()) @updatedAt
+
+  inviter           Member            @relation(fields: [inviter_id], references: [id], onDelete: Cascade)
+  visitor_schedules VisitorSchedule[]
+  passes            Pass[]
+
+  @@map("visitors")
+}
+
+model VisitorSchedule {
+  id         String    @id @default(dbgenerated("uuid_generate_v4()"))
+  visitor_id String
+  tower_id   String
+  floor_id   String
+  from       DateTime
+  to         DateTime
+  repetition Json?     @db.Json
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+
+  visitor  Visitor        @relation(fields: [visitor_id], references: [id], onDelete: Cascade)
+  location Location       @relation(fields: [floor_id], references: [id], onDelete: Cascade)
+  passes   Pass[]
+  tokens   VisitorToken[]
+
+  @@map("visitor_schedules")
+}
+
+model VisitorToken {
+  id                  String    @id @default(dbgenerated("uuid_generate_v4()"))
+  token_id            String
+  expired_date        DateTime?
+  visitor_schedule_id String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  visitor_schedule VisitorSchedule? @relation(fields: [visitor_schedule_id], references: [id], onDelete: Cascade)
+
+  @@index([visitor_schedule_id])
+  @@map("visitor_tokens")
+}
+
+model Pass {
+  id                String     @id @default(dbgenerated("uuid_generate_v4()"))
+  uid               String?
+  from              DateTime
+  to                DateTime
+  visitor_id        String
+  visit_schedule_id String
+  issuer_id         String
+  status            PassStatus
+  created_at        DateTime   @default(now())
+  updated_at        DateTime   @default(now()) @updatedAt
+  consent           Boolean?
+  metadata_resident Json?      @db.Json
+
+  visitor              Visitor              @relation(fields: [visitor_id], references: [id], onDelete: Cascade)
+  visitor_schedule     VisitorSchedule      @relation(fields: [visit_schedule_id], references: [id], onDelete: Cascade)
+  issuer               Member               @relation(fields: [issuer_id], references: [id], onDelete: Cascade)
+  authorized_locations AuthorizedLocation[]
+
+  @@map("passes")
+}
+
+model AuthorizedLocation {
+  id            String       @id @default(dbgenerated("uuid_generate_v4()"))
+  tenant_id     String?
+  member_id     String?
+  pass_id       String?
+  accessor_type AccessorType
+  default       Boolean
+  location_id   String
+  created_at    DateTime     @default(now())
+  updated_at    DateTime     @default(now()) @updatedAt
+
+  location Location @relation(fields: [location_id], references: [id], onDelete: Cascade)
+  tenant   Tenant?  @relation(fields: [tenant_id], references: [id], map: "tenant_id")
+  member   Member?  @relation(fields: [member_id], references: [id], map: "member_id")
+  pass     Pass?    @relation(fields: [pass_id], references: [id], map: "pass_id")
+
+  @@unique([accessor_type, tenant_id, location_id])
+  @@unique([accessor_type, member_id, location_id])
+  @@unique([accessor_type, pass_id, location_id])
+  @@map("authorized_locations")
+}
+
+model ParkingLot {
+  id           String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid          String
+  name         String
+  display_name Json     @db.Json
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now()) @updatedAt
+
+  spot_types       SpotType[]
+  parking_floor_id String
+
+  parking_floors ParkingFloor   @relation(fields: [parking_floor_id], references: [id], onDelete: Cascade)
+  ZoneArea       ZoneArea[]
+  total_spots    Int            @default(0)
+  parking_spaces ParkingSpace[]
+
+  @@unique([uid])
+  @@map("parking_lots")
+}
+
+model SpotType {
+  id              String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name            String   @default("")
+  display_name    Json     @db.Json
+  available_spots Int
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now()) @updatedAt
+  parking_lot_id  String
+  total_spots     Int      @default(0)
+
+  parking_lot ParkingLot @relation(fields: [parking_lot_id], references: [id], onDelete: Cascade)
+
+  @@unique([name, parking_lot_id])
+  @@map("spot_types")
+}
+
+model Command {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name       String
+  data       Json     @db.Json
+  status     String
+  result     Json     @db.Json
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+  member_id  String
+
+  member Member @relation(fields: [member_id], references: [id], onDelete: Cascade)
+
+  @@map("commands")
+}
+
+model ParkingTicket {
+  id           String   @id @default(dbgenerated("uuid_generate_v4()"))
+  plate_number String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now()) @updatedAt
+  member_id    String
+
+  member Member @relation(fields: [member_id], references: [id], onDelete: Cascade)
+
+  @@map("parking_ticket")
+}
+
+model IssueType {
+  id               String           @id @default(dbgenerated("uuid_generate_v4()"))
+  name             String
+  display_name     Json             @db.Json
+  created_at       DateTime         @default(now())
+  updated_at       DateTime         @default(now()) @updatedAt
+  deleted_at       DateTime?
+  internal_remark  String?
+  service_requests ServiceRequest[]
+
+  @@map("issue_type")
+}
+
+model ServiceRequest {
+  id              String               @id @default(dbgenerated("uuid_generate_v4()"))
+  image_url       String[]
+  tower_id        String
+  floor_id        String
+  issue_type_id   String
+  requester_id    String
+  title           String
+  description     String
+  status          ServiceRequestStatus
+  references      Int                  @default(autoincrement())
+  created_at      DateTime             @default(now())
+  updated_at      DateTime             @default(now()) @updatedAt
+  internal_remark String?
+  created_by      String               @default("")
+
+  tower      Tower     @relation(fields: [tower_id], references: [id], onDelete: Cascade)
+  floor      Floor     @relation(fields: [floor_id], references: [id], onDelete: Cascade)
+  issue_type IssueType @relation(fields: [issue_type_id], references: [id], onDelete: Cascade)
+  requester  Member    @relation(fields: [requester_id], references: [id], onDelete: Cascade)
+
+  @@map("service_requests")
+}
+
+model ACZone {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  floor_id   String
+  name       String
+  area_size  Int
+  rate       Decimal  @db.Decimal(10, 2)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  floor            Floor           @relation(fields: [floor_id], references: [id], onDelete: Cascade)
+  ac_request_zones ACRequestZone[]
+
+  @@map("ac_zone")
+}
+
+model ACRequest {
+  id              String   @id @default(dbgenerated("uuid_generate_v4()"))
+  tower_id        String
+  floor_id        String
+  estimated_cost  Decimal  @db.Decimal(10, 2)
+  total_area_size Int      @default(0)
+  from            DateTime
+  to              DateTime
+  duration_hour   Int
+  requester_id    String
+  status          ACStatus
+  references      Int      @default(autoincrement())
+  reason          String?
+  internal_remark String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now()) @updatedAt
+  created_by      String   @default("")
+
+  requester Member @relation(fields: [requester_id], references: [id], onDelete: Cascade)
+  tower     Tower  @relation(fields: [tower_id], references: [id], onDelete: Cascade)
+  floor     Floor  @relation(fields: [floor_id], references: [id], onDelete: Cascade)
+
+  ac_request_zones ACRequestZone[]
+
+  @@map("ac_requests")
+}
+
+model ACRequestZone {
+  id            String   @id @default(dbgenerated("uuid_generate_v4()"))
+  ac_zone_id    String
+  ac_request_id String
+  rate          Decimal  @db.Decimal(10, 2)
+  area_size     Int
+  created_at    DateTime @default(now())
+  updated_at    DateTime @default(now()) @updatedAt
+
+  ac_zone    ACZone    @relation(fields: [ac_zone_id], references: [id], onDelete: Cascade)
+  ac_request ACRequest @relation(fields: [ac_request_id], references: [id], onDelete: Cascade)
+
+  @@map("ac_request_zones")
+}
+
+model ParkingLog {
+  id               String         @id @default(dbgenerated("uuid_generate_v4()"))
+  uid              String
+  identifier       String
+  type             AccessorType
+  status           PositionStatus
+  terminal_id      String
+  transaction_date String
+  data             Json           @default("{}") @db.Json
+  name             String?
+  display_status   String?
+  display_termianl String?
+  plate_number     String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("parking_log")
+}
+
+model BuildingAccessgLog {
+  id                String       @id @default(dbgenerated("uuid_generate_v4()"))
+  uid               String
+  fs_account_id     String
+  type              AccessorType
+  status            Int
+  transaction_date  String
+  turnstile_id      String
+  data              Json         @default("{}") @db.Json
+  name              String?
+  display_status    String?
+  display_tower     String?
+  display_turnstile String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("building_access_log")
+}
+
+model ActivityLog {
+  id         String @id @default(dbgenerated("uuid_generate_v4()"))
+  trace_id   String
+  account_id String
+  action     String
+  status     String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("activity_log")
+}
+
+model AirQualityIndex {
+  id                String @id @default(dbgenerated("uuid_generate_v4()"))
+  name              String
+  display_name      Json   @default("{}") @db.Json
+  short_description Json   @default("{}") @db.Json
+  description       Json   @default("{}") @db.Json
+  sequence          Int
+
+  created_at                  DateTime                   @default(now())
+  updated_at                  DateTime                   @default(now()) @updatedAt
+  air_quality_index_indicator AirQualityIndexIndicator[]
+
+  @@map("air_quality_index")
+}
+
+model AirQualityIndexIndicator {
+  id                   String @id @default(dbgenerated("uuid_generate_v4()"))
+  air_quality_index_id String
+  title                Json   @default("{}") @db.Json
+  description          Json   @default("{}") @db.Json
+  sequence             Int
+  color_code           String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  air_quality_index                 AirQualityIndex                 @relation(fields: [air_quality_index_id], references: [id], onDelete: Cascade)
+  air_quality_index_indicator_range AirQualityIndexIndicatorRange[]
+
+  @@map("air_quality_index_indicator")
+}
+
+model AirQualityIndexIndicatorRange {
+  id                             String @id @default(dbgenerated("uuid_generate_v4()"))
+  air_quality_index_indicator_id String
+  title                          Json   @default("{}") @db.Json
+  min_value                      Float?
+  max_value                      Float?
+  min_display                    String
+  max_display                    String
+  sequence                       Int
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  air_quality_index_indicator AirQualityIndexIndicator @relation(fields: [air_quality_index_indicator_id], references: [id], onDelete: Cascade)
+
+  @@map("air_quality_index_indicator_range")
+}
+
+model Holiday {
+  id                       String   @id @default(dbgenerated("uuid_generate_v4()"))
+  holiday_week_day         String
+  holiday_week_day_thai    String
+  date                     DateTime @unique
+  date_thai                String
+  holiday_description      String
+  holiday_description_thai String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("holiday")
+}
+
+model SyncDataFromS3 {
+  id            String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name          String   @unique
+  created_at    DateTime @default(now())
+  last_modified DateTime
+  sync_type     SyncType
+
+  @@map("sync_data_from_s3")
+}
+
+model Sensor {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid        String
+  name       String
+  type       String
+  data       Json     @default("{}") @db.Json
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("sensors")
+}
+
+model ParkingSpace {
+  id             String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name           String
+  parking_lot_id String
+  available      Boolean
+  created_at     DateTime @default(now())
+  updated_at     DateTime @default(now()) @updatedAt
+
+  blocker              Blocker?
+  parking_reservations ParkingReservation[]
+  parking_lot          ParkingLot           @relation(fields: [parking_lot_id], references: [id], onDelete: Cascade)
+
+  @@map("parking_spaces")
+}
+
+model Blocker {
+  id               String   @id @default(dbgenerated("uuid_generate_v4()"))
+  uid              String   @unique
+  meta             Json     @default("{}") @db.Json
+  parking_space_id String   @unique
+  created_at       DateTime @default(now())
+  updated_at       DateTime @default(now()) @updatedAt
+
+  parking_space ParkingSpace @relation(fields: [parking_space_id], references: [id], onDelete: Cascade)
+
+  @@map("blockers")
+}
+
+model ParkingReservation {
+  id                 String            @id @default(dbgenerated("uuid_generate_v4()"))
+  member_id          String
+  parking_space_id   String
+  start_time         DateTime
+  fee                Int
+  created_at         DateTime          @default(now())
+  updated_at         DateTime          @default(now()) @updatedAt
+  reservation_number String            @unique
+  status             ReservationStatus
+  payment            Payment?
+
+  member        Member       @relation(fields: [member_id], references: [id], onDelete: Cascade)
+  parking_space ParkingSpace @relation(fields: [parking_space_id], references: [id], onDelete: Cascade)
+
+  @@map("parking_reservations")
+}
+
+model Payment {
+  id               String        @id @default(dbgenerated("uuid_generate_v4()"))
+  payment_url      String?
+  description      String
+  reference_number String        @unique
+  invoice_number   String?       @unique
+  amount           Float
+  vat_amount       Float
+  total_amount     Float
+  status           PaymentStatus @default(pending)
+  paid_at          DateTime?
+  expired_at       DateTime
+  meta             Json          @default("{}") @db.Json
+
+  parking_reservation_id String             @unique
+  parking_reservation    ParkingReservation @relation(fields: [parking_reservation_id], references: [id], onDelete: Cascade)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("payments")
+}
+
+model SyncRoleLog {
+  id         String         @id @default(dbgenerated("uuid_generate_v4()"))
+  trace_id   String
+  action     SyncRoleType
+  status     SyncRoleStatus
+  account_id String
+  payload    Json           @default("{}") @db.Json
+  created_at DateTime       @default(now())
+  updated_at DateTime       @default(now()) @updatedAt
+
+  @@map("sync_role_log")
+}
+
+enum PaymentStatus {
+  pending
+  confirmed
+  cancelled
+}
+
+enum SyncRoleType {
+  ShopperToTenant
+  TenantToShopper
+  VisitorToApp
+}
+
+enum SyncRoleStatus {
+  pending
+  success
+  failed
+}
+
+enum SyncType {
+  autosync
+  manual
+}
+
+enum PassStatus {
+  pending
+  confirmed
+}
+
+enum TenantMemberRole {
+  manager
+  staff
+}
+
+enum AccessorType {
+  pass
+  member
+  tenant
+}
+
+enum ServiceRequestStatus {
+  submitted
+  in_progress
+  done
+}
+
+enum ACStatus {
+  submitted
+  rejected
+  approved
+}
+
+enum PositionStatus {
+  onsite
+  leave
+}
+
+enum ReservationStatus {
+  pending
+  confirmed
+  cancelled
+}

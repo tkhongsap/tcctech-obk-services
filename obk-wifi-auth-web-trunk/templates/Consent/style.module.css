@@ -1,0 +1,16 @@
+.consentHtml {
+  line-break: anywhere;
+  word-break: initial;
+}
+
+@-moz-document url-prefix() {
+  .consentHtml {
+    word-break: keep-all;
+    line-break: initial;
+  }
+}
+
+.consentHtml p {
+  display: inline;
+  white-space: nowrap;
+}

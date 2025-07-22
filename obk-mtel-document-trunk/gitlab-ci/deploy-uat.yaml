@@ -1,0 +1,97 @@
+build-docker-image:
+  stage: build-image
+  rules:
+    - if: $CI_COMMIT_BRANCH == "uat" || ($CI_PIPELINE_SOURCE == 'merge_request_event' && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "uat")
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: ['']
+  variables:
+    ECR_REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+    CI_REGISTRY_IMAGE: $ECR_REGISTRY/$ECR_REPOSITORY
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"credsStore\":\"ecr-login\"}" > /kaniko/.docker/config.json
+    - echo "Building and push Docker image..."
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/dockerfile"
+      --build-arg=NODE_ENV=uat
+      --custom-platform=linux/amd64
+      --destination $ECR_REGISTRY/$ECR_REPOSITORY:latest
+    - BUILD_IMAGE=$ECR_REGISTRY/$ECR_REPOSITORY:latest > vars.env
+    - echo "Docker image pushed successfully."
+  artifacts:
+    reports:
+      dotenv: vars.env
+
+deploy-dev:
+  stage: deploy
+  # needs: [build-docker-image]
+  image: alpine:3.8
+  before_script:
+    - apk add --no-cache gettext
+    - echo "Installing curl and bash..."
+    - apk add --no-cache git curl bash coreutils
+    - echo "Install Kustomize"
+    - curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+    - mv kustomize /usr/local/bin/
+    - echo "Kustomize installed"
+    - echo "Setting up environment.."
+    - export IMAGE_URL="730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-document/uat:latest"
+    - envsubst < ./k8s/uat/gen > ./k8s/uat/kustomization.yaml
+    - echo "Environment setup complete"
+    - cd ./k8s/uat
+    - TIMESTAMP=$(date +%s)
+    - kustomize edit add annotation "deploy-timestamp":$TIMESTAMP -f
+    - kustomize edit set image 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-document/uat:latest
+    - kustomize build
+    - echo "Deploy timestamp set to $TIMESTAMP"
+    - echo "Kustomize configuration completed"
+  script:
+    - echo "Deploy to ArgoCD"
+    - git config --global user.email "gitlab@gitlab.com"
+    - git config --global user.name "GitLab CI/CD"
+    - git checkout -B uat
+    - git pull origin uat
+    - echo "Current branch $CI_COMMIT_BRANCH"
+    - echo "Git status before commit:"
+    - git status
+    # - git remote set-url origin https://${GITLAB_USERNAME}:${GITLAB_TOKEN}@git.lab.tcctech.app/obk/obk-mtel-document.git
+    - git remote set-url origin https://piya.ph:glpat-xkduQyGC1joKkNEmNKmT@git.lab.tcctech.app/obk/obk-mtel-document.git
+    - git add kustomization.yaml
+    - git commit -m "[skip ci] deploy argoCD"
+    - git push -u origin uat
+    # - git push --no-verify
+    - echo "Changes pushed to repository"
+  only:
+    refs:
+      - uat
+# deploy-to-eks:
+#   stage: deploy
+#   needs: [build-docker-image]
+#   image: amazon/aws-cli:latest
+#   script:
+#     - aws sts get-caller-identity
+#     - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name obk-eks-sit
+#     - echo "Kubeconfig contents:"
+#     - cat ~/.kube/config
+#     - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+#     - chmod +x ./kubectl
+#     - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+#     - kubectl config view
+#     - kubectl set image deployment/ob-document-app ob-document=$BUILD_IMAGE
+#     - kubectl rollout restart deployment/ob-document-app
+# deploy-to-eks:
+#   stage: deploy
+#   needs: [build-docker-image]
+#   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+#   before_script:
+#     - aws sts get-caller-identity
+#     - aws eks --region ap-southeast-1 update-kubeconfig --name obk-eks-sit
+#     - kubectl version --client
+#   script:
+#     - echo "Rollout..."
+#     - kubectl set image deployment/ob-document ob-document=$BUILD_IMAGE
+#     - kubectl rollout restart deployment/ob-document
+#   environment: development

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ob-bus
+spec:
+  selector:
+    matchLabels:
+      name: ob-bus
+  template:
+    metadata:
+      labels:
+        name: ob-bus
+    spec:
+      containers:
+        - name: ob-bus
+          image: 479397374389.dkr.ecr.ap-southeast-1.amazonaws.com/ob-bus/uat:ob-bus_latest
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: uat
+            - name: DATABASE_URL
+              value: postgresql://postgres:2a843c492f23fdbd6d586d0911d275fc@ob-uat-ob-bus.cu8h89u4zzko.ap-southeast-1.rds.amazonaws.com/ob-uat-ob-bus
+            - name: AWS_ACCESS_KEY_ID
+              value: AKIAW7HSPNG26XNINRPP
+            - name: AWS_SECRET_ACCESS_KEY
+              value: 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
+            - name: AWS_S3_BUCKET_NAME
+              value: bucket-ob-bus-uat
+            - name: ENABLE_S3_DOWNLOAD
+              value: 'true'
+            - name: OB_EVENT_CONFIG_PATH
+              value: event.config.uat.json

@@ -1,0 +1,40 @@
+-- CreateTable
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE "buzzebee" (
+    "id" UUID NOT NULL DEFAULT uuid_generate_v4(),
+    "user_id" VARCHAR(50) NOT NULL,
+    "first_name" VARCHAR(200) NOT NULL,
+    "last_name" VARCHAR(200) NOT NULL,
+    "contact_number" VARCHAR(15),
+    "email" VARCHAR(200),
+    "birthday" TIMESTAMP(3),
+    "gender" VARCHAR(50) NOT NULL,
+    "register_date" TIMESTAMP(3),
+    "register_type" VARCHAR(100) NOT NULL,
+    "modify_date" TIMESTAMP(3),
+    "id_card_number" VARCHAR(50),
+    "passport_number" VARCHAR(50),
+    "picture_url" VARCHAR(300),
+    "address" VARCHAR(500),
+    "zipcode" VARCHAR(20),
+    "province_code" INTEGER,
+    "province_name" TEXT,
+    "district_code" INTEGER,
+    "district_name" TEXT,
+    "sub_district_code" INTEGER,
+    "sub_district_name" TEXT,
+    "country_code" INTEGER,
+    "country_name" VARCHAR(100),
+    "status" VARCHAR(20) NOT NULL,
+    "deactive_date" TIMESTAMP(3),
+    "deactive_reason" VARCHAR(100),
+    "line_name" VARCHAR(100),
+    "line_id" TEXT,
+    "facebook_id" TEXT,
+    "apple_id" TEXT,
+    "hash_password" VARCHAR(200) NOT NULL,
+    "salt_password" VARCHAR(200) NOT NULL,
+
+    CONSTRAINT "buzzebee_pkey" PRIMARY KEY ("id")
+);

@@ -1,0 +1,118 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../db/client"
+  binaryTargets = ["linux-musl-openssl-3.0.x", "debian-openssl-1.1.x", "darwin-arm64", "darwin", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model category {
+  id              String     @id @default(dbgenerated("uuid_generate_v4()"))
+  title           Json       @map(name: "title") @db.Json
+  active          Boolean    @default(false) @map(name: "active")
+  image           String?    @map(name: "image")
+  type_id         String     @map(name: "type_id")
+  list            document[]
+  type            type       @relation(fields: [type_id], references: [id], onDelete: Cascade)
+  created_at      DateTime   @default(now())
+  updated_at      DateTime   @default(now()) @updatedAt
+  version         Int        @default(1)
+  deleted_at      DateTime?  @map(name: "deleted_at")
+  updated_by      String?    @map(name: "updated_by")
+  updated_by_name String?    @map(name: "updated_by_name")
+
+  history_document history_document[]
+  history_category history_category[]
+}
+
+model document {
+  id                 String             @id @default(dbgenerated("uuid_generate_v4()"))
+  category_id        String             @map(name: "category_id")
+  title              Json               @map(name: "title") @db.Json
+  body               Json               @map(name: "body") @db.Json
+  image              String?            @map(name: "image")
+  active             Boolean            @default(false) @map(name: "active")
+  created_at         DateTime?          @default(now()) @map(name: "created_at")
+  updated_at         DateTime           @default(now()) @updatedAt
+  published          Boolean            @default(false) @map(name: "published")
+  release_date       DateTime?          @map(name: "release_date")
+  slug               String             @map(name: "slug")
+  version            Int                @default(1)
+  feedback           feedback[]
+  history_document   history_document[]
+  history_categoryId String?
+  deleted_at         DateTime?          @map(name: "deleted_at")
+  updated_by         String?            @map(name: "updated_by")
+
+  category         category          @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  history_category history_category? @relation(fields: [history_categoryId], references: [id])
+}
+
+model type {
+  id   String @id @default(dbgenerated("uuid_generate_v4()"))
+  type String @map(name: "type")
+
+  category         category[]
+  history_category history_category[]
+}
+
+model feedback {
+  id          String   @id @default(dbgenerated("uuid_generate_v4()"))
+  account_id  String
+  document_id String
+  like        Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+  document    document @relation(fields: [document_id], references: [id], onDelete: Cascade)
+
+  @@unique([account_id, document_id])
+  @@index([account_id, document_id])
+}
+
+model history_document {
+  id                  String    @id @default(dbgenerated("uuid_generate_v4()"))
+  category_id         String    @map(name: "category_id")
+  title               Json      @map(name: "title") @db.Json
+  body                Json      @map(name: "body") @db.Json
+  image               String?   @map(name: "image")
+  active              Boolean   @default(false) @map(name: "active")
+  created_at          DateTime? @default(now()) @map(name: "created_at")
+  updated_at          DateTime  @default(now()) @updatedAt
+  published           Boolean   @default(false) @map(name: "published")
+  release_date        DateTime? @map(name: "release_date")
+  slug                String    @map(name: "slug")
+  version             Int       @default(1)
+  document_id         String    @map(name: "docuemnt_id")
+  history_category_id String?   @map(name: "history_category_id")
+  updated_by          String?   @map(name: "updated_by")
+  updated_by_name     String?   @map(name: "updated_by_name")
+
+  category         category?         @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  document         document?         @relation(fields: [document_id], references: [id], onDelete: Cascade)
+  history_category history_category? @relation(fields: [history_category_id], references: [id])
+}
+
+model history_category {
+  id               String             @id @default(dbgenerated("uuid_generate_v4()"))
+  title            Json               @map(name: "title") @db.Json
+  active           Boolean            @default(false) @map(name: "active")
+  image            String?            @map(name: "image")
+  type_id          String             @map(name: "type_id")
+  list             document[]
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @default(now()) @updatedAt
+  version          Int                @default(1)
+  category_id      String             @map(name: "category_id")
+  history_document history_document[]
+  updated_by       String?            @map(name: "updated_by")
+  updated_by_name  String?            @map(name: "updated_by_name")
+
+  type     type?     @relation(fields: [type_id], references: [id], onDelete: Cascade)
+  category category? @relation(fields: [category_id], references: [id], onDelete: Cascade)
+}

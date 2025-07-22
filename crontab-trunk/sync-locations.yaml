@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: sync-locations
+  namespace: obk-production
+spec:
+  schedule: "0 6,18 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                curl --location --request POST 'https://obkoperation.tccproptech.com/obk/api/v1/BatchCall/UpsertLocations'
+          restartPolicy: OnFailure

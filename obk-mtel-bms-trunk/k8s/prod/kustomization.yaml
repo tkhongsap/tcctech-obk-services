@@ -1,0 +1,66 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+  - ./ing.yaml
+commonLabels:
+  app: ob-bms
+namePrefix: ob-bms-
+namespace: default
+
+configMapGenerator:
+  - literals:
+      - DATABASE_URL=postgresql://obkDbAdmin:Z3YSa0bl92299byCkJiQGClsh9zL@obk-prod-ob-bms.c70qsyku4z3y.ap-southeast-1.rds.amazonaws.com/ob_bms_prod
+      - AWS_ACCESS_KEY_ID=AKIA2UC3CDGQONFWRE4F
+      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_S3_BUCKET_NAME=obk-prod-bucket-bms
+      - ENABLE_S3_DOWNLOAD=true
+      - OB_EVENT_CONFIG_PATH=event.config.prod.json
+      - OB_WEB_SOCKET_URL=https://obk-ws-prod.tccproptech.com
+      - OB_IAM_URL=https://obk-iam-prod.tccproptech.com
+      - FS_API_URL=https://203.159.103.47:444
+      - FS_API_USERNAME=mtel
+      - FS_API_PASSWORD=fscp_1
+      - FS_PARKING_API_URL=https://mt-services.fs-omc.io
+      - FS_PARKING_API_KEY=234f94d84d96a4362fcfb5d99d2ca844
+      - FS_LOCATION_FILE_NAME=locationMapping.json
+      - FS_TENANT_FILE_NAME=tenants.json
+      - FS_TOWER_FILE_NAME=towers.json
+      - CACHE_REDIS=true
+      - CACHE_REDIS_URL=redis://obk-prod.gr1rpl.0001.apse1.cache.amazonaws.com:6379
+      - TCC_API_URL=https://obkservice.tccproptech.com
+      - TCC_CLIENT_ID=kZGAdPU2lDLju135AEcz9u9GbP6w92O3
+      - TCC_CLIENT_SECRET=SO5w0AJgRJQyoz4q6Y8aqsy42BHwNV0V
+      - WEB_VIEW_URL=https://s3.ap-southeast-1.amazonaws.com/visitor-prod.glorymtel.xyz/passes/index.html
+      - WEB_VIEW_RESIDENT_URL=https://s3.ap-southeast-1.amazonaws.com/visitor-prod.glorymtel.xyz/passes/resident.html
+      - BOT_IBM_CLIENT_ID=1f602cb1-27f8-4998-b72d-52e93ddcc266
+      - BOT_API_URL=https://apigw1.bot.or.th/bot/public
+      - FS_LOCATION_RESIDENTIAL_FILE_NAME=location_residential.json
+      - FS_TOWER_RESIDENTIAL_FILE_NAME=tower_residential.json
+      - ENABLE_IMPORT_PHYSICAL_PARKING_TICKET=true
+
+    name: configmap
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-bms/production:latest
+      - op: replace
+        path: /spec/replicas
+        value: 1
+    target:
+      kind: Deployment
+  - patch: |-
+      - op: replace
+        path: /spec/ports/0/port
+        value: 3000
+      - op: replace
+        path: /spec/ports/0/targetPort
+        value: 3000
+    target:
+      kind: Service
+commonAnnotations:
+  deploy-timestamp: '1738855359'
+images:
+  - name: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-bms/production
+    newTag: latest

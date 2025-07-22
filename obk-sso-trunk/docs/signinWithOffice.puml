@@ -1,0 +1,10 @@
+@startuml
+
+App ->> BZB: login with office account
+BZB ->> SSO: office account username & password
+SSO -->> BZB: return accessToken, refreshToken, valid
+BZB ->> SSO: get profile by accessToken
+SSO -->> BZB: profile with/without one_bangkok_id (BKL_xxxxxx)
+BZB ->> BZB: if one_bangkok_id not exist BZB will require more data
+
+@enduml

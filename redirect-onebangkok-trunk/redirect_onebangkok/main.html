@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting...</title>
+  <script>
+    // Utility: ดึง Query Parameter
+    const getQueryParam = (param) => new URLSearchParams(window.location.search).get(param) || "guest";
+
+    // เรียก API ของ Xano
+    const callXanoAPI = async (params) => {
+      try {
+        const response = await fetch("https://xgrx-nsni-ogo5.s2.xano.io/api:byMbdJr1/checkAppSource", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(params),
+        });
+        const result = await response.json();
+        console.log("API Response:", result);
+        return result;
+      } catch (error) {
+        console.error("API Error:", error);
+        return null;
+      }
+    };
+
+    // ตรวจสอบ Platform และทำ Redirect
+    const redirect = async () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+
+      // กำหนดค่าพารามิเตอร์
+      const params = {
+        device: /iphone|ipad|ipod|android/.test(userAgent) ? "mobile" : "web",
+        os: /iphone|ipad|ipod/.test(userAgent) ? "ios" : /android/.test(userAgent) ? "android" : "web",
+        account_id: getQueryParam("account_id"),
+        source: getQueryParam("source"),
+      };
+
+      console.log("Calling API with parameters:", params);
+
+      // เรียก API
+      await callXanoAPI(params);
+
+      // Map Redirect URL
+      const redirectURLs = {
+        ios: "https://apps.apple.com/th/app/one-bangkok/id6475669593",
+        android: "https://play.google.com/store/apps/details?id=com.onebangkok.prod",
+        web: "https://www.onebangkok.com",
+      };
+
+      // หน่วงเวลา 3 วินาทีก่อน Redirect
+      setTimeout(() => {
+        window.location.href = redirectURLs[params.os];
+      }, 3000);
+    };
+
+    window.onload = redirect;
+  </script>
+</head>
+<body>
+  <p>Redirecting... Please wait...</p>
+</body>
+</html>

@@ -1,0 +1,65 @@
+stages:
+  - build
+
+variables:
+  GIT_STRATEGY: clone
+  GIT_SUBMODULE_STRATEGY: recursive
+  ANDROID_HOME: /sdk  # Set the path to where your Android SDK is located
+  ANDROID_SDK_ROOT: /sdk  # Android SDK root
+  ANDROID_NDK_HOME: /sdk/ndk-bundle  # NDK, if needed
+  GRADLE_USER_HOME: /builds/.gradle  # To store gradle cache in builds
+
+cache:
+  paths:
+    - node_modules/
+    - ~/.cache/yarn/
+    - /builds/.gradle  # Cache gradle dependencies
+
+build:
+  stage: build
+  image: openjdk:11  # Switch to an image with Java for Android builds
+  before_script:
+    - apt-get update && apt-get install -y curl unzip git
+    # Install Android SDK Command Line Tools directly into the latest folder
+    - mkdir -p /sdk/cmdline-tools/latest
+    - curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+    - unzip commandlinetools.zip -d /sdk/cmdline-tools/latest
+    # Correct PATH setup
+    - export PATH=$PATH:/sdk/cmdline-tools/latest/cmdline-tools/bin:/sdk/platform-tools/
+    # Accept licenses and install Android SDK components
+    - yes | sdkmanager --licenses
+    - sdkmanager "platform-tools" "build-tools;34.0.0" "platforms;android-34"
+    
+    # Install Node.js and Yarn dependencies
+    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+    - apt-get update && apt-get install -y yarn
+    - yarn install --network-timeout 600000 --verbose
+
+  script:
+    - cd app/OneBangkok
+    - yarn install --network-timeout 600000 --verbose  # Ensure node_modules installation
+    # Create local.properties with SDK path
+    - echo "sdk.dir=$ANDROID_HOME" > android/local.properties
+    - if [ -d "android" ]; then
+      echo "Directory android exists";
+      cd android;
+      fastlane beta --env dev;
+      else
+      echo "Directory android does not exist";
+      fi
+
+  only:
+    - trunk
+
+  artifacts:
+    paths:
+      - app/OneBangkok/android/app/build/outputs/apk/
+      - fastlane/screenshots
+      - fastlane/logs
+
+  variables:
+    KEYSTORE_FILE: dev.keystore
+    STORE_PASSWORD: $ANDROID_KEY_STORE_PASSWORD
+    KEY_ALIAS: $ANDROID_KEY_ALIAS
+    KEY_PASSWORD: $ANDROID_KEY_PASSWORD

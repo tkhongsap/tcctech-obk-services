@@ -1,0 +1,239 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "client"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model account {
+  id         String    @id @default(dbgenerated("uuid_generate_v4()"))
+  password   String?   @map(name: "password")
+  created_at DateTime  @default(now()) @map(name: "created_at")
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime? @map(name: "deleted_at")
+
+  identities           identity[]
+  token                token[]
+  profile              profile[]
+  setting              setting?
+  external_identity    external_identity[]
+  account_group_member account_group_member[]
+  attached_permission  attached_permission[]
+  device               device[]
+  api_key              api_key[]
+  account_role         account_role[]
+}
+
+model api_key {
+  id         String @id @unique @default(dbgenerated("uuid_generate_v4()"))
+  secret     String
+  account_id String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  expired_at DateTime?
+
+  account account @relation(fields: [account_id], references: [id], onDelete: Cascade)
+}
+
+model account_group {
+  id   String @id @default(dbgenerated("uuid_generate_v4()"))
+  name String
+
+  created_at             DateTime               @default(now())
+  updated_at             DateTime               @default(now()) @updatedAt
+  deleted_at             DateTime?
+  attached_permission_id String
+  account_group_member   account_group_member[]
+  attached_permission    attached_permission[]
+}
+
+model account_group_member {
+  id               String @id @default(dbgenerated("uuid_generate_v4()"))
+  account_group_id String
+  account_id       String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+
+  account       account       @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  account_group account_group @relation(fields: [account_group_id], references: [id], onDelete: Cascade)
+}
+
+model attached_permission {
+  id             String         @id @default(dbgenerated("uuid_generate_v4()"))
+  permittee_type PermitteeType
+  value          Json           @db.Json
+  account        account?       @relation(fields: [account_id], references: [id])
+  account_group  account_group? @relation(fields: [account_group_id], references: [id])
+
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @default(now()) @updatedAt
+  deleted_at       DateTime?
+  account_id       String?
+  account_group_id String?
+  role             role?     @relation(fields: [role_id], references: [id])
+  role_id          String?
+}
+
+model setting {
+  id                                String  @id @default(dbgenerated("uuid_generate_v4()"))
+  account_id                        String  @unique
+  two_factor_authentication_enabled Boolean @default(false) @map(name: "two_factor_authentication_enabled")
+
+  created_at DateTime @default(now()) @map(name: "created_at")
+  updated_at DateTime @default(now()) @updatedAt
+
+  account account @relation(fields: [account_id], references: [id], onDelete: Cascade)
+}
+
+model identity {
+  id          String           @id @default(dbgenerated("uuid_generate_v4()"))
+  identifier  String           @unique @map(name: "identifier")
+  meta        Json?            @map(name: "meta") @db.Json
+  provider    IdentityProvider @map(name: "provider")
+  verified_at DateTime?        @map(name: "verified_at")
+  linked_at   DateTime?        @map(name: "linked_at")
+  unlinked_at DateTime?        @map(name: "unlinked_at")
+  account_id  String           @map(name: "account_id")
+  created_at  DateTime         @default(now()) @map(name: "created_at")
+  updated_at  DateTime         @default(now()) @updatedAt
+  default     Boolean          @default(false) @map(name: "default")
+
+  account account @relation(fields: [account_id], references: [id], onDelete: Cascade)
+}
+
+model token {
+  id           String    @id @default(dbgenerated("uuid_generate_v4()"))
+  value        String    @unique @default(dbgenerated("uuid_generate_v4()")) @map(name: "value")
+  account_id   String    @map(name: "account_id")
+  expired_date DateTime? @map(name: "expired_date")
+  type         String    @map(name: "type")
+  active       Boolean   @default(true) @map(name: "active")
+  created_at   DateTime  @default(now()) @map(name: "created_at")
+  updated_at   DateTime  @default(now()) @updatedAt
+
+  account account @relation(fields: [account_id], references: [id], onDelete: Cascade)
+
+  @@index([id, value, type, created_at(sort: Desc)])
+}
+
+model profile {
+  id          String         @id @default(dbgenerated("uuid_generate_v4()"))
+  account_id  String         @unique @map(name: "account_id")
+  gender      ProfileGender? @map(name: "gender")
+  title       ProfileTitle?  @map(name: "title")
+  first_name  String         @map(name: "first_name")
+  middle_name String?        @map(name: "middle_name")
+  last_name   String         @map(name: "last_name")
+  dob         DateTime       @map(name: "dob")
+  created_at  DateTime       @default(now()) @map(name: "created_at")
+  updated_at  DateTime       @default(now()) @updatedAt
+
+  account account @relation(fields: [account_id], references: [id], onDelete: Cascade)
+}
+
+model external_identity {
+  id         String               @id @default(dbgenerated("uuid_generate_v4()"))
+  uid        String               @map(name: "uid")
+  type       ExternalIdentityType @map(name: "type")
+  identifier String               @map(name: "identifier")
+  account_id String               @map(name: "account_id")
+
+  meta       Json     @map(name: "meta") @db.Json
+  created_at DateTime @default(now()) @map(name: "created_at")
+  updated_at DateTime @default(now()) @updatedAt
+  account    account  @relation(fields: [account_id], references: [id], onDelete: Cascade)
+
+  @@index([identifier, created_at(sort: Desc)])
+}
+
+model otp {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  code       String   @map(name: "code")
+  reference  String   @map(name: "reference")
+  identifier String   @default("") @map(name: "identifier")
+  expired_at DateTime @map(name: "expired_at")
+  created_at DateTime @default(now()) @map(name: "created_at")
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@index([reference, created_at(sort: Desc)])
+  @@index([identifier, created_at(sort: Desc)])
+}
+
+model device {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  account_id String   @map(name: "account_id")
+  device_id  String   @map(name: "device_id")
+  os         String   @map(name: "os")
+  active     Boolean  @default(true) @map(name: "active")
+  created_at DateTime @default(now()) @map(name: "created_at")
+  updated_at DateTime @default(now()) @updatedAt
+
+  account account @relation(fields: [account_id], references: [id], onDelete: Cascade)
+
+  @@index([id, created_at(sort: Desc)])
+  @@index([account_id, created_at(sort: Desc)])
+  @@index([device_id, created_at(sort: Desc)])
+}
+
+model role {
+  id          String                @id @default(dbgenerated("uuid_generate_v4()"))
+  name        String
+  permissions attached_permission[]
+  created_at  DateTime              @default(now())
+  updated_at  DateTime              @default(now()) @updatedAt
+
+  account_role account_role[]
+}
+
+model account_role {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  role_id    String
+  account_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  account account @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  role    role    @relation(fields: [role_id], references: [id], onDelete: Cascade)
+}
+
+enum ProfileTitle {
+  mr
+  mrs
+  ms
+  dr
+}
+
+enum ProfileGender {
+  male
+  female
+  nonbinary
+  prefernottosay
+}
+
+enum IdentityProvider {
+  email
+  phone
+  sso
+}
+
+enum ExternalIdentityType {
+  google
+  apple
+  microsoft
+  fs
+}
+
+enum PermitteeType {
+  account
+  account_group
+}

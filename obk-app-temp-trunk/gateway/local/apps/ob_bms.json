@@ -1,0 +1,30 @@
+{
+  "name": "OB BMS",
+  "org_id": "one-bangkok",
+  "use_keyless": true,
+  "version_data": {
+    "not_versioned": true,
+    "versions": {
+      "Default": {
+        "name": "Default",
+        "use_extended_paths": true
+      }
+    }
+  },
+  "proxy": {
+    "listen_path": "/ob-bms",
+    "target_url": "http://host.docker.internal:3001",
+    "strip_listen_path": true
+  },
+  "active": true,
+  "custom_middleware": {
+    "pre": [
+      {
+        "name": "authorization",
+        "path": "middleware/authorization.js",
+        "require_session": false
+      }
+    ],
+    "driver": "otto"
+  }
+}

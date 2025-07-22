@@ -1,0 +1,47 @@
+apiVersion: karpenter.sh/v1beta1
+kind: NodePool
+metadata:
+  name: eck
+spec:
+  template:
+    spec:
+      requirements:
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["on-demand"]
+        - key: node.kubernetes.io/instance-type
+          operator: In
+          values: ["${ELASTICSEARCH_INSTANCE_TYPE_SMALL}", "${ELASTICSEARCH_INSTANCE_TYPE_LARGE}"]
+      nodeClassRef:
+        name: eck
+    taints:
+      - key: app-type/eck
+        value: true
+        effect: "NoSchedule"
+  limits:
+    cpu: 10
+  disruption:
+    consolidationPolicy: WhenUnderutilized
+    expireAfter: 720h
+---
+apiVersion: karpenter.k8s.aws/v1beta1
+kind: EC2NodeClass
+metadata:
+  name: eck
+spec:
+  amiFamily: AL2
+  instanceProfile: ${INSTANCE_PROFILE}
+  subnetSelectorTerms:
+    - tags:
+        kubernetes.io/cluster/${CLUSTER_NAME}: owned
+        Scope: common-private
+  securityGroupSelectorTerms:
+    - tags:
+        kubernetes.io/cluster/${CLUSTER_NAME}: owned
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 50Gi
+        volumeType: gp3
+        encrypted: true
+        deleteOnTermination: true

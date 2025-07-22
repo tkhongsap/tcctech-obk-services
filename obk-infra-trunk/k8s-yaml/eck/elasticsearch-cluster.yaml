@@ -1,0 +1,146 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elastic-cluster
+spec:
+  version: 8.6.2
+  volumeClaimDeletePolicy: DeleteOnScaledownOnly
+  nodeSets:
+  - name: masters
+    count: ${ELASTICSEARCH_NUM_OF_NODES}
+    config:
+      node.roles: ["master"]
+    podTemplate:
+      spec:
+        priorityClassName: elastic-cluster-high-priority
+        containers:
+        - name: elasticsearch
+          resources:
+            limits:
+              cpu: ${ELASTICSEARCH_LIMIT_CPU}
+              memory: ${ELASTICSEARCH_LIMIT_MEMORY}
+            requests:
+              cpu: ${ELASTICSEARCH_REQUEST_CPU}
+              memory: ${ELASTICSEARCH_REQUEST_MEMORY}
+        initContainers:
+        - name: sysctl
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values: ["${ELASTICSEARCH_INSTANCE_TYPE_SMALL}", "${ELASTICSEARCH_INSTANCE_TYPE_LARGE}"]
+                  - key: "topology.kubernetes.io/zone"
+                    operator: In
+                    values: ["ap-southeast-1a"]
+        tolerations:
+        - key: app-type/eck
+          operator: Exists
+          effect: NoSchedule
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: ${ELASTICSEARCH_NODE_STORAGE}
+  - name: data
+    count: ${ELASTICSEARCH_DATA_NUM_OF_NODES}
+    config:
+      node.roles: ["data", "ingest"]
+    podTemplate:
+      spec:
+        priorityClassName: elastic-cluster-high-priority
+        containers:
+        - name: elasticsearch
+          resources:
+            limits:
+              cpu: ${ELASTICSEARCH_DATA_LIMIT_CPU}
+              memory: ${ELASTICSEARCH_DATA_LIMIT_MEMORY}
+            requests:
+              cpu: ${ELASTICSEARCH_DATA_REQUEST_CPU}
+              memory: ${ELASTICSEARCH_DATA_REQUEST_MEMORY}
+        initContainers:
+        - name: sysctl
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values: ["${ELASTICSEARCH_INSTANCE_TYPE_SMALL}", "${ELASTICSEARCH_INSTANCE_TYPE_LARGE}"]
+                  - key: "topology.kubernetes.io/zone"
+                    operator: In
+                    values: ["ap-southeast-1a"]
+        tolerations:
+        - key: app-type/eck
+          operator: Exists
+          effect: NoSchedule            
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: ${ELASTICSEARCH_DATA_NODE_STORAGE}
+  - name: data-warm
+    count: ${ELASTICSEARCH_DATA_WARM_NUM_OF_NODES}
+    config:
+      node.roles: ["data", "data_warm"]
+    podTemplate:
+      spec:
+        priorityClassName: elastic-cluster-high-priority
+        containers:
+        - name: elasticsearch
+          resources:
+            limits:
+              cpu: ${ELASTICSEARCH_DATA_WARM_LIMIT_CPU}
+              memory: ${ELASTICSEARCH_DATA_WARM_LIMIT_MEMORY}
+            requests:
+              cpu: ${ELASTICSEARCH_DATA_WARM_REQUEST_CPU}
+              memory: ${ELASTICSEARCH_DATA_WARM_REQUEST_MEMORY}
+        initContainers:
+        - name: sysctl
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: node.kubernetes.io/instance-type
+                    operator: In
+                    values: ["${ELASTICSEARCH_INSTANCE_TYPE_SMALL}", "${ELASTICSEARCH_INSTANCE_TYPE_LARGE}"]
+                  - key: "topology.kubernetes.io/zone"
+                    operator: In
+                    values: ["ap-southeast-1a"]
+        tolerations:
+        - key: app-type/eck
+          operator: Exists
+          effect: NoSchedule            
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: ${ELASTICSEARCH_DATA_WARM_NODE_STORAGE}

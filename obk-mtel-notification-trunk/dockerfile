@@ -1,0 +1,38 @@
+# Use Node.js 20 with Alpine
+FROM node:20.8.1-alpine3.17
+
+# Set the working directory in Docker
+WORKDIR /usr/src/app
+
+# Accept the NODE_ENV build argument and default it to dev
+ARG NODE_ENV=dev
+ENV NODE_ENV=${NODE_ENV}
+
+# Only copy the package.json and yarn.lock to optimize Docker caching
+COPY package.json yarn.lock ./
+
+# Install dependencies
+RUN yarn install --frozen-lockfile --production
+
+# Add TypeScript as a dependency (if not already present)
+RUN yarn add typescript
+
+# Copy the local code to the container
+COPY . .
+
+# Generate Prisma client (ensure it generates the db/client directory)
+RUN npx prisma generate
+
+# Copy the Prisma client to the dist directory (adjust paths if needed)
+RUN mkdir -p ./dist/db && cp -R ./db/client ./dist/db/client
+
+# Compile TypeScript to JavaScript
+RUN yarn build
+
+RUN mkdir -p ./dist/db && mv ./db/client ./dist/db/client
+
+# Inform Docker that the container is listening on the specified port at runtime.
+EXPOSE 3000
+
+# Run the application
+CMD ["node", "./dist/src/server.js"]

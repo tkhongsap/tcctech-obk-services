@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ob-kafka
+spec:
+  selector:
+    matchLabels:
+      name: ob-kafka
+  template:
+    metadata:
+      labels:
+        name: ob-kafka
+    spec:
+      containers:
+        - name: ob-kafka
+          image: wurstmeister/kafka:latest
+          ports:
+            - containerPort: 9092
+          imagePullPolicy: Always
+          env:
+            - name: KAFKA_BROKER_ID
+              value: "1"
+            - name: KAFKA_ZOOKEEPER_CONNECT
+              value: "ob-zookeeper:2181"
+            - name: KAFKA_LISTENERS
+              value: "PLAINTEXT://:9092"
+            - name: KAFKA_ADVERTISED_LISTENERS
+              value: "PLAINTEXT://ob-kafka:9092"
+            - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
+              value: "PLAINTEXT:PLAINTEXT"
+            - name: KAFKA_INTER_BROKER_LISTENER_NAME
+              value: "PLAINTEXT"
+            - name: KAFKA_AUTO_CREATE_TOPICS_ENABLE
+              value: 'true'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ob-zookeeper
+spec:
+  selector:
+    matchLabels:
+      name: ob-zookeeper
+  template:
+    metadata:
+      labels:
+        name: ob-zookeeper
+    spec:
+      containers:
+        - name: ob-zookeeper
+          image: wurstmeister/zookeeper:latest
+          ports:
+            - containerPort: 2181
+          imagePullPolicy: Always

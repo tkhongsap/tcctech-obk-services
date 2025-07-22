@@ -1,0 +1,86 @@
+name: App Ios Workflow
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**/app/**"
+      - ".github/workflows/app_*"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.branch }}
+  cancel-in-progress: true
+defaults:
+  run:
+    working-directory: "./app/OneBangkok"
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: "./app/OneBangkok"
+    runs-on: macos-latest
+    env:
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+      MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+      APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+      APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+      APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+      GIT_PRIVATE_KEY: ${{ secrets.GIT_PRIVATE_KEY }}
+      GIT_BASIC_AUTH_SIT: ${{ secrets.GIT_BASIC_AUTH_SIT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install Node Modules
+        run: |
+          yarn install
+      - uses: actions/cache@v3
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - name: "Create env file"
+        run: |
+          touch .env.dev
+          echo GATEWAY_BASEURL=${{ vars.GATEWAY_DEV_BASEURL }} >> .env.dev
+          echo WEBSOCKET_BASEURL=${{ vars.WEBSOCKET_DEV_BASEURL }} >> .env.dev
+          echo OB_BMS_URL=${{ vars.OB_BMS_DEV_URL }} >> .env.dev
+          echo WEB_VIEW_URL=${{ vars.DEV_WEB_VIEW_URL }} >> .env.dev
+          echo OB_IAM_URL=${{ vars.OB_IAM_DEV_URL }} >> .env.dev
+          echo OB_DOCUMENT_URL=${{ vars.OB_DOCUMENT_DEV_URL }} >> .env.dev
+          echo OB_NOTI_URL=${{ vars.OB_NOTI_DEV_URL }} >> .env.dev
+          echo UPLOAD_IMAGE_URL=${{ vars.UPLOAD_IMAGE_DEV_URL }} >> .env.dev
+          echo S3_TRANSLATION_BUCKET_URL=${{ vars.S3_TRANSLATION_BUCKET_URL }} >> .env.dev
+          echo GOOGLE_MAPS_APIKEY=${{ vars.GOOGLE_MAPS_APIKEY }} >> .env.dev
+          echo OB_ENV='dev' >> .env.dev
+          echo SENTRY_ENABLE=${{ vars.SENTRY_ENABLE }} >> .env.dev
+          echo SUSTAINABILITY_BASEURL=${{ vars.SUSTAINABILITY_BASEURL_DEV }} >> .env.dev
+          echo DEVELOPMENT_MODE=${{ vars.DEVELOPMENT_MODE_DEV }} >> .env.dev
+          echo OB_SERVICE_MIND_URL=${{ vars.OB_SERVICE_MIND_URL_DEV }} >> .env.dev
+          echo OB_RESIDENTIAL_HOME_AUTOMATION=${{ vars.OB_RESIDENTIAL_HOME_AUTOMATION_DEV }} >> .env.dev
+          echo OB_RESIDENTIAL_HOME_AUTOMATION_AUTHEN=${{ vars.OB_RESIDENTIAL_HOME_AUTOMATION_AUTHEN_DEV }} >> .env.dev
+          echo ART_C_BASEURL=${{ vars.ART_C_BASEURL_DEV }} >> .env.dev
+          echo OB_RESIDENTIAL_BASEURL=${{ vars.OB_RESIDENTIAL_BASEURL_DEV }} >> .env.dev
+          echo SUSTAINABILITY_ClientID=${{ vars.SUSTAINABILITY_ClientID_DEV }} >> .env.dev
+          echo SUSTAINABILITY_ClientSecret=${{ vars.SUSTAINABILITY_ClientSecret_DEV }} >> .env.dev          
+          cat .env.dev
+      - name: Set Xcode Version
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+      - name: Clean Xcode Derived Data
+        run: rm -rf ~/Library/Developer/Xcode/DerivedData/*
+      - name: Install IOS Fastlane and Dependencies
+        run: |
+          cd ios
+          gem install cocoapods -v 1.15.2
+          gem install bundler
+          bundle install
+          pod _1.15.2_ setup
+          pod install
+      - name: Run Fastlane
+        run: |
+          cd ios
+          bundle exec fastlane alpha --env dev

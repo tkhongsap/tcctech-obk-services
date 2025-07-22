@@ -1,0 +1,13 @@
+POST http://localhost:8080/api/art-c/wireless-house?locale=en
+content-type: application/json
+
+{
+    "content": "The Art Activities at One Bangkok comprises of both signature art activity initiated by A&C and seasonal art activity for the district and each component in various scales.",
+    "coverImage": "https://www.bkkmenu.com/files/2018/09/PenthouseDinner__00012.jpg",
+    "openingHours": ["Everyday 10:00-21:00"],
+    "location": [
+        "Post28 Floor8, One Bangkok"
+    ],
+    "enterFee": 450,
+    "externalLink": "www.onebangkokartgallery.com"
+}

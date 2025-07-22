@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-document-delete-expired-whathappening
+  labels:
+    app: ob-document-delete-expired-whathappening
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  schedule: '0 1 * * *' # Run every 5 min
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ob-document-delete-expired-whathappening
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: bash
+              image: curlimages/curl:7.70.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - 'curl -X POST http://document-uat.glorymtel.xyz/whathappening/processDisableOverdue'

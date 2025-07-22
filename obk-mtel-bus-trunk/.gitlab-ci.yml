@@ -1,0 +1,313 @@
+include:
+  - project: iac/pipeline
+    file:
+      - pipeline-env.yaml
+      # - tpl.yaml
+  - project: iac/projects/obk/capp-dev
+    file: project-env.yaml
+    rules:
+      - if: $CI_COMMIT_TAG =~ /^.*-dev/ 
+  - project: iac/projects/obk/capp-sit
+    file: project-env.yaml
+    rules:
+      - if: $CI_COMMIT_TAG =~ /^.*-sit/ 
+  - project: iac/projects/obk/capp-uat
+    file: project-env.yaml
+    rules:
+      - if: $CI_COMMIT_TAG =~ /^.*-uat/
+      - if: '$TEST == "true"'
+  # - project: iac/projects/obk/production
+  #   file: project-env.yaml
+  #   rules:
+  #     - if: $CI_COMMIT_TAG =~ /^.*-prod/
+
+  - template: Jobs/SAST.gitlab-ci.yml
+  - template: Jobs/Code-Quality.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - template: Jobs/Container-Scanning.gitlab-ci.yml
+  - template: Jobs/SAST-IaC.gitlab-ci.yml
+
+default: 
+  tags:
+    - obk-np-capp
+
+sast:
+  stage: pre-build
+code_quality:
+  stage: pre-build
+secret_detection:
+  stage: pre-build
+iac-sast:
+  stage: pre-build
+
+container_scanning:
+  stage: post-build
+  extends:
+    - .project_env
+  variables:
+    GIT_STRATEGY: fetch
+    CS_DOCKERFILE_PATH: "Dockerfile"
+    CS_IMAGE: "${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_TAG}-${CI_COMMIT_SHORT_SHA}"
+    CS_REGISTRY_USER: "${CI_REGISTRY_USER}"
+    CS_REGISTRY_PASSWORD: "${CI_REGISTRY_PASS}"
+    # SECURE_LOG_LEVEL: debug
+  allow_failure: false
+  rules:
+  - if: $CI_COMMIT_TAG =~ /^.*-dev/ 
+  - if: $CI_COMMIT_TAG =~ /^.*-sit/ 
+  - if: $CI_COMMIT_TAG =~ /^.*-uat/ 
+  # - if: $CI_COMMIT_TAG =~ /^.*-prod/ 
+
+variables:
+  SERVICE_PORT: 3000
+  FQDN_DEV: dev-obk-bus.tccproptech.com
+  FQDN_SIT: sit-socialshare.onebangkok.com
+  FQDN_UAT: uat-obk-bus.tccproptech.com
+  # FQDN_PROD: socialshare.onebangkok.com
+
+stages:
+  - pre-build
+  - build
+  - post-build
+  - deploy
+  - test
+  - post-test
+
+.build_tpl:
+  stage: build
+  image: docker
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "${DOCKER_TLS_CERTDIR}/client"
+  services:
+    - name: docker:20.10.16-dind
+  before_script:
+    - until docker info; do sleep 1; done
+  allow_failure: false    
+  script:   
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASS} ${CI_REGISTRY}
+    - docker build --pull --compress --network host -t ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_TAG}-${CI_COMMIT_SHORT_SHA} ${SERVICE_BUILD_ARG} .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:${CI_COMMIT_TAG}-${CI_COMMIT_SHORT_SHA}
+    - docker logout
+
+
+.deploy_tpl:
+  stage: deploy
+  image: alpine/k8s:1.24.15
+  script:
+    - |
+      kubectl version --output=yaml;
+      kubectl config set-cluster k8s --server=$K8S_API_URL --insecure-skip-tls-verify=true;
+      kubectl config set-credentials k8s --token=$K8S_API_TOKEN;
+      kubectl config set-context k8s --cluster k8s --user k8s --namespace=$K8S_NAMESPACE;
+    - kubectl config use-context k8s
+    - cat k8s.yml | envsubst | kubectl apply -f -              
+  allow_failure: false
+
+.project_env:
+  when: always
+
+build_dev:
+  extends:
+    - .pipeline_obk_np_capp                                
+    - .project_env     
+    - .build_tpl
+  environment:
+    name: dev
+  variables:
+    SERVICE_BUILD_ARG: --build-arg SERVICE_PORT=${SERVICE_PORT}
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-dev/ 
+
+deploy_dev:
+  variables:
+    FQDN: ${FQDN_DEV}
+  dependencies:
+    - build_dev
+  extends:
+    - .pipeline_obk_np_capp                               
+    - .project_env 
+    - .deploy_tpl                     
+  environment:
+    name: dev 
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-dev/ 
+
+build_sit:
+  extends:
+    - .pipeline_obk_np_capp                                
+    - .project_env  
+    - .build_tpl
+  variables:
+    SERVICE_BUILD_ARG: --build-arg SERVICE_PORT=${SERVICE_PORT}
+  environment:
+    name: sit
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-sit/ 
+
+deploy_sit:
+  variables:
+    FQDN: ${FQDN_SIT}
+  dependencies:
+    - build_sit
+  extends:
+    - .pipeline_obk_np_capp                                
+    - .project_env 
+    - .deploy_tpl    
+  environment:
+    name: sit                 
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-sit/ 
+
+build_uat:
+  extends:
+    - .pipeline_obk_np_capp                                
+    - .project_env     
+    - .build_tpl
+  variables:
+    SERVICE_BUILD_ARG: --build-arg SERVICE_PORT=${SERVICE_PORT}
+  environment:
+    name: uat
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-uat/ 
+
+deploy_uat:
+  variables:
+    FQDN: ${FQDN_UAT}
+  dependencies:
+    - build_uat
+  extends:
+    - .pipeline_obk_np_capp                              
+    - .project_env
+    - .deploy_tpl
+  environment:
+    name: uat
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-uat/ 
+
+# build_prod:
+#   extends:
+#     - .pipeline_sandbox_obk                                
+#     - .project_env     
+#     - .build_tpl
+#   variables:
+#     SERVICE_BUILD_ARG: --build-arg SERVICE_PORT=${SERVICE_PORT}
+#   environment:
+#     name: production
+#   rules:
+#     - if: $CI_COMMIT_TAG =~ /^.*-prod/ 
+
+# deploy_prod:
+#   dependencies:
+#     - build_prod
+#   extends:
+#     - .pipeline_sandbox_obk                              
+#     - .project_env
+#     - .deploy_tpl
+#   environment:
+#     name: production
+#   rules:
+#     - if: $CI_COMMIT_TAG =~ /^.*-prod/ 
+
+uat_to_test:
+  image: alpine/k8s:1.24.15
+  stage: test
+  environment:
+    name: uat
+  extends:
+    - .pipeline_obk_np_capp                              
+    - .project_env
+  variables:
+    VAULT_SECRET_YAML: |
+      apiVersion: secrets.hashicorp.com/v1beta1
+      kind: VaultStaticSecret
+      metadata:
+        name: ${CI_PROJECT_NAME}-test-vss
+        namespace: ${K8S_NAMESPACE}
+      spec:
+        namespace: ${K8S_NAMESPACE}
+        type: kv-v2
+        mount: ${K8S_PROJECT}
+        path: test/${CI_PROJECT_NAME}
+        destination:
+          name: ${CI_PROJECT_PATH_SLUG}-config-test
+          create: true
+        refreshAfter: 2m
+        vaultAuthRef: static-auth
+        syncConfig:
+          instantUpdates: true
+    # PATCH_SECRET_CMD: |
+    #   ${CI_PROJECT_PATH_SLUG}-${CI_ENVIRONMENT_SLUG} -p '{"spec":{"template":{"spec":{"containers":[{"name":"${CI_PROJECT_PATH_SLUG}-${CI_ENVIRONMENT_SLUG}","envFrom":[{"secretRef":{"name":"${CI_PROJECT_PATH_SLUG}-config-test"}}]}]}}}}'
+  script:
+    - |
+      # Set Kubernetes context using environment variables
+      kubectl version --output=yaml
+      kubectl config set-cluster k8s --server=$K8S_API_URL --insecure-skip-tls-verify=true
+      kubectl config set-credentials k8s --token=$K8S_API_TOKEN
+      kubectl config set-context k8s --cluster k8s --user k8s --namespace=$K8S_NAMESPACE
+      kubectl config use-context k8s
+
+    - |
+      # Apply Vault Static Secret YAML using the defined variable
+      echo "$VAULT_SECRET_YAML" | kubectl apply -f -
+
+    - |
+      # Patch deployment with new secrets
+      kubectl patch deployment ${CI_PROJECT_PATH_SLUG}-${CI_ENVIRONMENT_SLUG} -p "{\"spec\":{\"template\":{\"spec\":{\"containers\":[{\"name\":\"${CI_PROJECT_PATH_SLUG}-${CI_ENVIRONMENT_SLUG}\",\"envFrom\":[{\"secretRef\":{\"name\":\"${CI_PROJECT_PATH_SLUG}-config-test\"}}]}]}}}}"
+  rules:
+    - if: '$TEST == "true"'
+  when: manual
+  allow_failure: false
+
+test_to_uat:
+  image: alpine/k8s:1.24.15
+  dependencies:
+    - uat_to_test
+  stage: post-test
+  environment:
+    name: uat
+  extends:
+    - .pipeline_obk_np_capp                              
+    - .project_env
+  variables:
+    VAULT_SECRET_YAML: |
+      apiVersion: secrets.hashicorp.com/v1beta1
+      kind: VaultStaticSecret
+      metadata:
+        name: ${CI_PROJECT_NAME}-test-vss
+        namespace: ${K8S_NAMESPACE}
+      spec:
+        namespace: ${K8S_NAMESPACE}
+        type: kv-v2
+        mount: ${K8S_PROJECT}
+        path: test/${CI_PROJECT_NAME}
+        destination:
+          name: ${CI_PROJECT_PATH_SLUG}-config-test
+          create: true
+        refreshAfter: 2m
+        vaultAuthRef: static-auth
+        syncConfig:
+          instantUpdates: true
+  script:
+    - |
+      # Set Kubernetes context using environment variables
+      kubectl version --output=yaml
+      kubectl config set-cluster k8s --server=$K8S_API_URL --insecure-skip-tls-verify=true
+      kubectl config set-credentials k8s --token=$K8S_API_TOKEN
+      kubectl config set-context k8s --cluster k8s --user k8s --namespace=$K8S_NAMESPACE
+      kubectl config use-context k8s
+
+    - |
+      # Apply Vault Static Secret YAML using the defined variable
+      echo "$VAULT_SECRET_YAML" | kubectl delete -f -
+      
+    - |
+      # Patch deployment with new secrets
+      kubectl patch deployment ${CI_PROJECT_PATH_SLUG}-${CI_ENVIRONMENT_SLUG} -p "{\"spec\":{\"template\":{\"spec\":{\"containers\":[{\"name\":\"${CI_PROJECT_PATH_SLUG}-${CI_ENVIRONMENT_SLUG}\",\"envFrom\":[{\"secretRef\":{\"name\":\"${CI_PROJECT_PATH_SLUG}-config-${CI_ENVIRONMENT_SLUG}\"}}]}]}}}}"
+  rules:
+    - if: '$TEST == "true"'
+  when: manual
+  allow_failure: false

@@ -1,0 +1,79 @@
+[
+    {
+        "merchant_name": {
+            "value": "บริษัท ซันปาร์ค แบงค็อก จำกัด",
+            "confidence": 0.964
+        },
+        "transaction_date": {
+            "value": "2025-01-23",
+            "confidence": 0.986
+        },
+        "transaction_time": {
+            "value": "18:15:00",
+            "confidence": 0.987
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "Hamburg + Egg (Sunny\nSide up) Curry\n##Beef",
+                    "confidence": 0
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.984
+                },
+                "total_price": {
+                    "value": 250.0,
+                    "confidence": 0.987
+                }
+            },
+            {
+                "description": {
+                    "value": "Chicken",
+                    "confidence": 0.981
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.984
+                },
+                "total_price": {
+                    "value": 60.0,
+                    "confidence": 0.987
+                }
+            },
+            {
+                "description": {
+                    "value": "Set A (Potato Salad)",
+                    "confidence": 0.977
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.984
+                },
+                "total_price": {
+                    "value": 70.0,
+                    "confidence": 0.987
+                }
+            }
+        ],
+        "total": {
+            "value": 380.0,
+            "confidence": 0.985
+        },
+        "tax_id": {
+            "value": "0105556039185",
+            "confidence": 0.984
+        },
+        "receipt_no": {
+            "value": "00025 18130",
+            "confidence": 0.36
+        },
+        "address": {
+            "value": "ห้องเลขที่ 18130 B1 เลขที่1877 ถนนพระราม4\nแขวงลุมพินี เขตปทุมวัน จังหวัด\nกรุงเทพมหานคร 10330",
+            "confidence": 0.287
+        },
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "4001893f8d7450c2e260d14bfef5f405ad2cfe08b3c7c4674b1a63ce6767a1ec"
+    }
+]

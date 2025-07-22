@@ -1,0 +1,14 @@
+default_platform(:android)
+
+platform :android do
+  desc "Submit a new Beta to FIrebase App Distribution."
+  lane :beta do
+    firebase_app_distribution(
+          app: ENV["APP_ID_ANDROID"],
+          groups: "Dev",
+          release_notes: "new Update",
+          apk_path: ENV["APK_PATH"],
+          firebase_cli_token: ENV["FIREBASE_TOKEN"],
+      )
+  end
+end

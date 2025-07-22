@@ -1,0 +1,61 @@
+[
+    {
+        "merchant_name": {
+            "value": "Starbucks Coffee",
+            "confidence": 0.972
+        },
+        "transaction_date": {
+            "value": "2025-01-17",
+            "confidence": 0.987
+        },
+        "transaction_time": {
+            "value": "14:14:00",
+            "confidence": 0.988
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "T.AMERICANO",
+                    "confidence": 0.984
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 120.0,
+                    "confidence": 0.988
+                }
+            },
+            {
+                "description": {
+                    "value": ">1 TO GO",
+                    "confidence": 0.978
+                },
+                "total_price": {
+                    "value": 0.0,
+                    "confidence": 0.988
+                }
+            }
+        ],
+        "total": {
+            "value": 100.0,
+            "confidence": 0.986
+        },
+        "tax_id": {
+            "value": "0105541008688(VAT",
+            "confidence": 0.984
+        },
+        "receipt_no": {
+            "value": "250117-02-13059",
+            "confidence": 0.875
+        },
+        "address": {
+            "value": "14596 Reserve One Bangkok",
+            "confidence": 0.982
+        },
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "ff60dc8269ee2be4167d317db08526862e0042612653051d98825c8b427e2998"
+    }
+]

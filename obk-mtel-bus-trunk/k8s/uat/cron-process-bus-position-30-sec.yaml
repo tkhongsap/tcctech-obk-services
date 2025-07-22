@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-bus-process-bus-position
+  labels:
+    app: ob-bus-process-bus-position
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  schedule: '* * * * *' # Run every 1 min
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ob-bus-process-bus-position
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: bash
+              image: curlimages/curl:7.70.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  sleep 30
+                  curl -X POST https://obk-bus-uat.tccproptech.com/task/process_bus_position -H "accept: application/json"

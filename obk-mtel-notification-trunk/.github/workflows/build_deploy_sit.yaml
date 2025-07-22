@@ -1,0 +1,93 @@
+name: '[SIT] Build and Deploy'
+on:
+  push:
+    branches:
+      - sit
+    tags:
+      - '*.*.*-sit'
+jobs:
+  build:
+    runs-on: self-hosted
+    outputs:
+      image_url: ${{ steps.build.outputs.image_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.8.1'
+      - name: Install dependencies
+        run: |
+          yarn cache clean
+          yarn install --frozen-lockfile
+          echo "Yarn version $(yarn --version)"
+          echo "Dependencies installed"
+      - name: Build
+        run: |
+          yarn build
+          echo "Build completed"
+      # - name: Test
+      #   run: |
+      #     yarn test
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.OBK_SIT_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.OBK_SIT_AWS_ACCESS_KEY_SECRET }}
+          aws-region: ap-southeast-1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Build and Push Docker image
+        id: build
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: 'ob-notification/sit'
+        run: |
+          ./scripts/build-docker.sh --env sit
+          docker tag ob-notification:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker image push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "Docker image pushed to $ECR_REGISTRY/$ECR_REPOSITORY:latest"
+          echo "image_url=$ECR_REGISTRY/$ECR_REPOSITORY:latest" >> "$GITHUB_OUTPUT"
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    environment: sit
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Kustomize
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+          sudo mv kustomize /usr/local/bin/
+          echo "Kustomize installed"
+      - name: Set Environment
+        uses: nowactions/envsubst@v1
+        with:
+          input: ./k8s/sit/gen
+          output: ./k8s/sit/kustomization.yaml
+        env:
+          IMAGE_URL: 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-notification/sit:latest
+      - name: Config Kustomize
+        run: |
+          echo "Current image URL: ${{needs.build.outputs.image_url}}"
+          cd ./k8s/sit
+          TIMESTAMP=$(date +%s)
+          kustomize edit add annotation "deploy-timestamp":$TIMESTAMP -f
+          kustomize edit set image 730335418784.dkr.ecr.ap-southeast-1.amazonaws.com/ob-notification/sit:latest
+          kustomize build
+          echo "Deploy timestamp set to $TIMESTAMP"
+          echo "Kustomize configuration completed"
+      - name: Deploy to ArgoCD
+        run: |
+          cd ./k8s/sit
+          git config --global user.email "github@github.com"
+          git config --global user.name "Github CI/CD"
+          git status
+          echo "Git status before commit:"
+          git status
+          git add kustomization.yaml
+          git commit -m "[skip ci] deploy argoCD"
+          git push --no-verify
+          echo "Changes pushed to repository"

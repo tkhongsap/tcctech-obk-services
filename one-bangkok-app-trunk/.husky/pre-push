@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+
+# Get the root directory of your repository
+root_directory=$(git rev-parse --show-toplevel)
+
+# Get the current branch
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Check if the branch name matches the convention
+if [[ ! ($current_branch =~ (feature|bugfix|hotfix|chore)/(artc/|OBSD-[0-9]+_.+) || $current_branch =~ ^v[0-9]+\.[0-9]+\.[0-9]) ]]; then
+  echo "Branch name does not match the convention. Please follow the format: feature/bugfix/hotfix/chore/OBSD-XXX_short_title or vX.X.X"
+  exit 1
+fi
+
+# Get the list of changed files between two commits
+changed_files=$(git diff origin/"$current_branch" origin/main --name-status)
+
+# Create an array to store the unique directories
+unique_directories=()
+
+# Iterate over the changed files and extract the directories
+while read -r line; do
+  # Extract the status and file path from the line
+  status=$(echo "$line" | awk '{print $1}')
+  file=$(echo "$line" | awk '{print $2}')
+  
+  # Extract the directory path
+  directory=$(dirname "$file")
+  
+  # Check if the directory is already in the array
+  if ! printf '%s\n' "${unique_directories[@]}" | grep -q "^$directory$"; then
+    unique_directories+=("$directory")
+  fi
+done <<< "$changed_files"
+
+echo ${unique_directories[@]}
+
+# Iterate over the unique directories and perform necessary actions
+for directory in "${unique_directories[@]}"; do
+  # Perform your desired actions for each directory
+  IFS='/' read -ra parts <<< "$directory"
+  desired_element="${parts[1]}"
+  root_element="${parts[0]}"
+  # Check if desired_element is not empty and the directory is not excluded
+  if [ -n "$desired_element" ] && ( [ "$desired_element" == "ob-iam" ] || [ "$desired_element" == "ob-notification" ] || [ "$desired_element" == "ob-document" ] ); then
+    cd "$root_directory/backend/$desired_element" && yarn generate:openapi && yarn lint && yarn tsc
+  fi
+done

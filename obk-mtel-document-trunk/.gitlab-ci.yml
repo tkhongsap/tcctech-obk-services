@@ -1,0 +1,230 @@
+stages:
+  - pre-build
+  - build & test
+  - build
+  - build-image
+  - post-build
+  - deploy
+
+
+# workflow:
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == "sit" || ($CI_PIPELINE_SOURCE == 'merge_request_event' && ( $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "sit" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "sit" ))
+
+include:
+  - local: gitlab-ci/deploy-dev.yaml
+    rules:
+      - if: $CI_COMMIT_BRANCH == "sit"
+  - local: gitlab-ci/deploy-uat.yaml
+    rules:
+      - if: $CI_COMMIT_BRANCH == "uat"
+  - project: iac/pipeline
+    file:
+      - pipeline-env.yaml
+      # - tpl.yaml
+  - project: iac/projects/obk/capp-dev
+    file: project-env.yaml
+    rules:
+      - if: $CI_COMMIT_TAG =~ /^.*-dev/ 
+  - project: iac/projects/obk/capp-sit
+    file: project-env.yaml
+    rules:
+      - if: $CI_COMMIT_TAG =~ /^.*-sit/ 
+  - project: iac/projects/obk/capp-uat
+    file: project-env.yaml
+    rules:
+      - if: $CI_COMMIT_TAG =~ /^.*-uat/
+
+  - template: Jobs/SAST.gitlab-ci.yml
+  - template: Jobs/Code-Quality.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - template: Jobs/Container-Scanning.gitlab-ci.yml
+  - template: Jobs/SAST-IaC.gitlab-ci.yml
+
+default: 
+  tags:
+    - obk-np-capp
+
+sast:
+  stage: pre-build
+code_quality:
+  stage: pre-build
+secret_detection:
+  stage: pre-build
+iac-sast:
+  stage: pre-build
+
+container_scanning:
+  stage: post-build
+  extends:
+    - .project_env
+  variables:
+    GIT_STRATEGY: fetch
+    CS_DOCKERFILE_PATH: "Dockerfile"
+    CS_IMAGE: "${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_TAG}-${CI_COMMIT_SHORT_SHA}"
+    CS_REGISTRY_USER: "${CI_REGISTRY_USER}"
+    CS_REGISTRY_PASSWORD: "${CI_REGISTRY_PASS}"
+    # SECURE_LOG_LEVEL: debug
+  # allow_failure: false
+  rules:
+  - if: $CI_COMMIT_TAG =~ /^.*-dev/ 
+  - if: $CI_COMMIT_TAG =~ /^.*-sit/ 
+  - if: $CI_COMMIT_TAG =~ /^.*-uat/
+
+variables:
+  # AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+  AWS_ACCESS_KEY_ID: AKIA2UC3CDGQDM65FYUZ
+  # AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+  AWS_SECRET_ACCESS_KEY: 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
+  # AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+  AWS_DEFAULT_REGION: ap-southeast-1
+  # AWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID}
+  AWS_ACCOUNT_ID: 730335418784
+  # ECR_REPOSITORY: ${ECR_REPOSITORY}
+  ECR_REPOSITORY: 'ob-document/${CI_COMMIT_BRANCH}'
+  SERVICE_PORT: 3000
+  FQDN_DEV: dev-obk-document.tccproptech.com
+  FQDN_SIT: sit-socialshare.onebangkok.com
+  FQDN_UAT: uat-obk-document.tccproptech.com
+
+build:
+  stage: build & test
+  image: node:20.8.1
+  script:
+    - echo "Building the Service..."
+    - yarn cache clean
+    - yarn install --frozen-lockfile
+    - yarn build
+    # - echo "Running tests..."
+    # - yarn test
+  cache:
+    paths:
+      - ./node_modules/
+  rules:
+  - if: $CI_COMMIT_BRANCH == "uat"
+  - if: $CI_COMMIT_BRANCH == "sit"
+
+.build_tpl:
+  stage: build
+  image: docker
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "${DOCKER_TLS_CERTDIR}/client"
+  services:
+    - name: docker:20.10.16-dind
+  before_script:
+    - until docker info; do sleep 1; done    
+    # Check if the tagged commit exists in the '${CI_ENVIRONMENT_NAME}' branch
+    # - |
+    #   if ! git fetch origin ${CI_ENVIRONMENT_NAME}; then
+    #     echo "Failed to fetch '${CI_ENVIRONMENT_NAME}' branch."
+    #     exit 1
+    #   fi
+    #   if ! git branch --contains "$CI_COMMIT_SHA" | grep -qw "${CI_ENVIRONMENT_NAME}"; then
+    #     echo "Tag '$CI_COMMIT_TAG' is not on the '${CI_ENVIRONMENT_NAME}' branch. Exiting."
+    #     exit 1
+    #   fi
+  allow_failure: false
+  script:   
+    # - printenv
+    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASS} ${CI_REGISTRY}
+    - docker build --pull --compress --network host -t ${CI_REGISTRY}/${CI_PROJECT_PATH}:${CI_COMMIT_TAG}-${CI_COMMIT_SHORT_SHA} ${SERVICE_BUILD_ARG} .
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:${CI_COMMIT_TAG}-${CI_COMMIT_SHORT_SHA}
+    - docker logout
+
+
+.deploy_tpl:
+  stage: deploy
+  image: alpine/k8s:1.24.15
+  script:
+    - |
+      kubectl version --output=yaml;
+      kubectl config set-cluster k8s --server=$K8S_API_URL --insecure-skip-tls-verify=true;
+      kubectl config set-credentials k8s --token=$K8S_API_TOKEN;
+      kubectl config set-context k8s --cluster k8s --user k8s --namespace=$K8S_NAMESPACE;
+    - kubectl config use-context k8s
+    - cat k8s.yml | envsubst | kubectl apply -f -              
+
+.project_env:
+  when: always
+
+build_dev:
+  extends:
+    - .pipeline_obk_np_capp                                
+    - .project_env     
+    - .build_tpl
+  environment:
+    name: dev
+  variables:
+    SERVICE_BUILD_ARG: --build-arg SERVICE_PORT=${SERVICE_PORT}
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-dev/ 
+
+deploy_dev:
+  variables:
+    FQDN: ${FQDN_DEV}
+  dependencies:
+    - build_dev
+  extends:
+    - .pipeline_obk_np_capp                               
+    - .project_env 
+    - .deploy_tpl                     
+  environment:
+    name: dev 
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-dev/ 
+
+build_sit:
+  extends:
+    - .pipeline_obk_np_capp                                
+    - .project_env  
+    - .build_tpl
+  variables:
+    SERVICE_BUILD_ARG: --build-arg SERVICE_PORT=${SERVICE_PORT}
+  environment:
+    name: sit
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-sit/ 
+
+deploy_sit:
+  variables:
+    FQDN: ${FQDN_SIT}
+  dependencies:
+    - build_sit
+  extends:
+    - .pipeline_obk_np_capp                                
+    - .project_env 
+    - .deploy_tpl    
+  environment:
+    name: sit                 
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-sit/ 
+
+build_uat:
+  extends:
+    - .pipeline_obk_np_capp                                
+    - .project_env     
+    - .build_tpl
+  variables:
+    SERVICE_BUILD_ARG: --build-arg SERVICE_PORT=${SERVICE_PORT}
+  environment:
+    name: uat
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-uat/ 
+
+deploy_uat:
+  variables:
+    FQDN: ${FQDN_UAT}
+  dependencies:
+    - build_uat
+  extends:
+    - .pipeline_obk_np_capp                              
+    - .project_env
+    - .deploy_tpl
+  environment:
+    name: uat
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^.*-uat/

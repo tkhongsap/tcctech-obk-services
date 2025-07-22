@@ -1,0 +1,14 @@
+0 8 * * * /root/curl_script.sh "https://obkoperation.tccproptech.com/api/v1/Attendant/import" '{"attendanceType":"checkin","shiftName":"socDay","deviceKeys":["E03C1CB15CCC5601"]}'
+0 20 * * * /root/curl_script.sh "https://obkoperation.tccproptech.com/api/v1/Attendant/import" '{"attendanceType":"checkin","shiftName":"socNight","deviceKeys":["E03C1CB15CCC5601"]}'
+10 21 * * * /root/curl_script.sh "https://obkoperation.tccproptech.com/api/v1/Attendant/import" '{"attendanceType":"checkout","shiftName":"socDay","deviceKeys":["E03C1CB1747C5601"]}'
+10 9 * * * /root/curl_script.sh "https://obkoperation.tccproptech.com/api/v1/Attendant/import" '{"attendanceType":"checkout","shiftName":"socNight","deviceKeys":["E03C1CB1747C5601"]}'
+
+
+30 20 * * * /root/curl_script.sh "https://obkoperation.tccproptech.com/api/operation/v1/report/Attendant?ShiftName=socNight"
+30 9 * * * /root/curl_script.sh "https://obkoperation.tccproptech.com/api/operation/v1/report/CheckInCheckOut?ShiftName=socNight"
+30 8 * * * /root/curl_script.sh "https://obkoperation.tccproptech.com/api/operation/v1/report/Attendant?ShiftName=socDay"
+30 21 * * * /root/curl_script.sh "https://obkoperation.tccproptech.com/api/operation/v1/report/CheckInCheckOut?ShiftName=socDay"
+
+
+0 6 * * * /root/curl_script.sh "https://obkoperation.tccproptech.com/api/v1/SchedulePlan/process" '{"keyCloakUserId":"9f8144ca-1be1-4c88-aef3-1a2b98177640","startDate" : "2024-09-05","endDate": "2024-09-05","totalDays": 0,"isCrons": true,"shift": "socDay"}'
+0 18 * * * /root/curl_script.sh "https://obkoperation.tccproptech.com/api/v1/SchedulePlan/process" '{"keyCloakUserId":"9f8144ca-1be1-4c88-aef3-1a2b98177640","startDate" : "2024-09-05","endDate": "2024-09-05","totalDays": 0,"isCrons": true,"shift": "socNight"}'

@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: moblie-sync-case
+  namespace: obk-production
+spec:
+  schedule: "*/2 * * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                curl --location 'https://obkoperation.tccproptech.com/obk/api/v1/operation/mobile/Case/SyncCase' --header 'accept: text/plain' --header 'Content-Type: application/json' --data '{"lastMinute": 3}'
+          restartPolicy: OnFailure

@@ -1,0 +1,43 @@
+name: Sit Manual Backend Deployment
+on:
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.branch }}
+  cancel-in-progress: true
+jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: get-changes
+        with:
+          filters: |
+            ob-iam:
+              - 'backend/ob-iam/**'
+            ob-document:
+              - 'backend/ob-document/**'
+            ob-notification:
+              - 'backend/ob-notification/**'
+            ob-websocket:
+              - 'backend/ob-websocket/**'
+      - id: set-matrix
+        run: |
+          echo "::set-output name=matrix::$(echo '${{ steps.get-changes.outputs.changes }}')"
+  run-matrix:
+    permissions:
+      id-token: write # need this for OIDC
+      contents: read
+    needs: set-matrix
+    strategy:
+      matrix:
+        service: ${{ fromJson(needs.set-matrix.outputs.matrix) }}
+    uses: ./.github/workflows/backend_push.yaml
+    with:
+      service: ${{ matrix.service }}
+      env: sit
+    secrets:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

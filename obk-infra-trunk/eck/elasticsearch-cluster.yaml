@@ -1,0 +1,125 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elastic-cluster
+spec:
+  version: 8.6.2
+  volumeClaimDeletePolicy: DeleteOnScaledownOnly
+  nodeSets:
+  - name: masters
+    count: 1
+    config:
+      node.roles: ["master"]
+    podTemplate:
+      spec:
+        priorityClassName: elastic-cluster-high-priority
+        containers:
+        - name: elasticsearch
+          resources:
+            limits:
+              cpu: 2
+              memory: 3Gi
+            requests:
+              cpu: 1
+              memory: 2Gi
+        initContainers:
+        - name: sysctl
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+        # affinity:
+        #   nodeAffinity:
+        #     requiredDuringSchedulingIgnoredDuringExecution:
+        #       nodeSelectorTerms:
+        #         - matchExpressions:
+        #           - key: node.kubernetes.io/instance-type
+        #             operator: In
+        #             values: ["t3.xlarge"]
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
+  - name: data
+    count: 1
+    config:
+      node.roles: ["data", "ingest"]
+    podTemplate:
+      spec:
+        priorityClassName: elastic-cluster-high-priority
+        containers:
+        - name: elasticsearch
+          resources:
+            limits:
+              cpu: 2
+              memory: 4Gi
+            requests:
+              cpu: 1
+              memory: 2Gi
+        initContainers:
+        - name: sysctl
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+        # affinity:
+        #   nodeAffinity:
+        #     requiredDuringSchedulingIgnoredDuringExecution:
+        #       nodeSelectorTerms:
+        #         - matchExpressions:
+        #           - key: node.kubernetes.io/instance-type
+        #             operator: In
+        #             values: ["t3.xlarge"]
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
+  - name: data-warm
+    count: 1
+    config:
+      node.roles: ["data", "data_warm"]
+    podTemplate:
+      spec:
+        priorityClassName: elastic-cluster-high-priority
+        containers:
+        - name: elasticsearch
+          resources:
+            limits:
+              cpu: 1.5
+              memory: 3Gi
+            requests:
+              cpu: 1
+              memory: 2Gi
+        initContainers:
+        - name: sysctl
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+        # affinity:
+        #   nodeAffinity:
+        #     requiredDuringSchedulingIgnoredDuringExecution:
+        #       nodeSelectorTerms:
+        #         - matchExpressions:
+        #           - key: node.kubernetes.io/instance-type
+        #             operator: In
+        #             values: ["t3.xlarge"]
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi

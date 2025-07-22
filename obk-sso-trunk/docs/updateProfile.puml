@@ -1,0 +1,13 @@
+@startuml
+
+App ->> Backend: update profile
+Backend ->> SSO: PATCH: token + "updated profile"
+SSO -->> Backend: token expired
+Backend ->> SSO: refresh token
+SSO -->> Backend: valid, accessToken, refreshToken
+Backend ->> SSO: PATCH: token + "updated profile"
+SSO -->> Backend: 200
+Backend ->> Backend: Internal process (update profile)
+Backend -->> App: 200
+
+@enduml

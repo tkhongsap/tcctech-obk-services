@@ -1,0 +1,54 @@
+[
+    {
+        "merchant_name": {
+            "value": "ร้านค้า (FOOD STREET)",
+            "confidence": 0.945
+        },
+        "transaction_date": {
+            "value": "2025-01-31",
+            "confidence": 0.986
+        },
+        "transaction_time": {
+            "value": "11:57:00",
+            "confidence": 0.988
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "หลง ข้าวผัดปู",
+                    "confidence": 0.701
+                }
+            },
+            {
+                "description": {
+                    "value": "ข้าวผัดแหนม",
+                    "confidence": 0.981
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.985
+                },
+                "total_price": {
+                    "value": 100.0,
+                    "confidence": 0.987
+                }
+            }
+        ],
+        "total": {
+            "value": 100.0,
+            "confidence": 0.985
+        },
+        "tax_id": {
+            "value": "ID:0105563049786",
+            "confidence": 0.423
+        },
+        "receipt_no": {
+            "value": "68013100373",
+            "confidence": 0.523
+        },
+        "address": null,
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "4bb01cd8018a920675f67f08ee5e98742abab7387d26ffde0335cf7246effc44"
+    }
+]

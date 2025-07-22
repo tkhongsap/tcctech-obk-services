@@ -1,0 +1,11 @@
+ob_iam:
+  otp:
+    error:
+      wrong_provider_code: "INTERNAL_SERVER_ERROR"
+      wrong_provider_message: "request/body/identity/provider must be equal to one of the allowed values: phone, email, sso"
+      wrong_verify_otp_code: "INTERNAL_SERVER_ERROR"
+      wrong_verify_otp_message: "Invalid OTP"
+  login:
+    error:
+      login_failed_code: "UNAUTHORIZED"
+      login_failed_message: "login failed"

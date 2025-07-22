@@ -1,0 +1,363 @@
+{
+  "general": {
+    "lastUpdated": "Lasted updated",
+    "updatedBy": "Updated by",
+    "id": "ID",
+    "action": "Action",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "publish": "Publish",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "details": "Details",
+    "cancelChange": "Cancel changes"
+  },
+  "pages": {
+    "login": {
+      "title": "Melden Sie sich bei Ihrem Konto an",
+      "signin": "Einloggen",
+      "signup": "Anmelden",
+      "divider": "oder",
+      "fields": {
+        "email": "Email",
+        "password": "Passwort"
+      },
+      "errors": {
+        "validEmail": "Ungültige E-Mail-Adresse"
+      },
+      "buttons": {
+        "submit": "Anmeldung",
+        "forgotPassword": "Passwort vergessen?",
+        "noAccount": "Sie haben kein Konto?",
+        "rememberMe": "Erinnere dich an mich"
+      }
+    },
+    "forgotPassword": {
+      "title": "Haben Sie Ihr Passwort vergessen?",
+      "fields": {
+        "email": "Email"
+      },
+      "errors": {
+        "validEmail": "Ungültige E-Mail-Adresse"
+      },
+      "buttons": {
+        "submit": "Anweisungen zum Zurücksetzen senden"
+      }
+    },
+    "register": {
+      "title": "Registrieren Sie sich für Ihr Konto",
+      "fields": {
+        "email": "Email",
+        "password": "Passwort"
+      },
+      "errors": {
+        "validEmail": "Ungültige E-Mail-Adresse"
+      },
+      "buttons": {
+        "submit": "Registrieren",
+        "haveAccount": "Ein Konto haben?"
+      }
+    },
+    "updatePassword": {
+      "title": "Kennwort aktualisieren",
+      "fields": {
+        "password": "Neues Passwort",
+        "confirmPassword": "Bestätige neues Passwort"
+      },
+      "errors": {
+        "confirmPasswordNotMatch": "Passwörter stimmen nicht überein"
+      },
+      "buttons": {
+        "submit": "Aktualisieren"
+      }
+    },
+    "error": {
+      "info": "Sie haben vergessen, {{action}} component zu {{resource}} hinzufügen.",
+      "404": "Leider existiert diese Seite nicht.",
+      "resource404": "Haben Sie die {{resource}} resource erstellt?",
+      "backHome": "Zurück"
+    }
+  },
+  "actions": {
+    "list": "Aufführen",
+    "create": "Erstellen",
+    "edit": "Bearbeiten",
+    "show": "Zeigen"
+  },
+  "buttons": {
+    "create": "Erstellen",
+    "save": "Speichern",
+    "logout": "Abmelden",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "cancel": "Abbrechen",
+    "confirm": "Sicher?",
+    "filter": "Filter",
+    "clear": "Löschen",
+    "refresh": "Erneuern",
+    "show": "Zeigen",
+    "undo": "Undo",
+    "import": "Importieren",
+    "clone": "Klon",
+    "notAccessTitle": "Sie haben keine zugriffsberechtigung"
+  },
+  "warnWhenUnsavedChanges": "Nicht gespeicherte Änderungen werden nicht übernommen.",
+  "notifications": {
+    "success": "Erfolg",
+    "error": "Fehler (status code: {{statusCode}})",
+    "undoable": "Sie haben {{seconds}} Sekunden Zeit für Undo.",
+    "createSuccess": "{{resource}} erfolgreich erstellt.",
+    "createError": "Fehler beim Erstellen {{resource}} (status code: {{statusCode}})",
+    "deleteSuccess": "{{resource}} erfolgreich gelöscht.",
+    "deleteError": "Fehler beim Löschen {{resource}} (status code: {{statusCode}})",
+    "editSuccess": "{{resource}} erfolgreich bearbeitet.",
+    "editError": "Fehler beim Bearbeiten {{resource}} (status code: {{statusCode}})",
+    "importProgress": "{{processed}}/{{total}} importiert"
+  },
+  "loading": "Wird geladen",
+  "tags": {
+    "clone": "Klon"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "blog_posts": {
+    "blog_posts": "Blogbeiträge",
+    "fields": {
+      "id": "Id",
+      "title": "Titel",
+      "content": "Inhalt",
+      "status": "Status",
+      "createdAt": "Erstellt am",
+      "category": "Kategorien"
+    },
+    "titles": {
+      "create": "Erstellen",
+      "edit": "Bearbeiten",
+      "list": "Einträge",
+      "show": "Eintrag zeigen"
+    }
+  },
+  "user_activity": {
+    "title": {
+      "table": "Account activity"
+    },
+    "table": {
+      "fields": {
+        "date_time": "Date and time",
+        "request_id": "Request ID",
+        "platform": "Platform",
+        "activity_type": "Activity type",
+        "details": "Details"
+      }
+    }
+  },
+  "categories": {
+    "categories": "Kategorien",
+    "fields": {
+      "id": "Id",
+      "title": "Titel",
+      "createdAt": "Erstellt am"
+    },
+    "titles": {
+      "create": "Erstellen",
+      "edit": "Bearbeiten",
+      "list": "Einträge",
+      "show": "Eintrag zeigen"
+    }
+  },
+  "documentTitle": {
+    "default": "refine",
+    "suffix": " | refine",
+    "blog_posts": {
+      "list": "Blogbeiträge | refine",
+      "show": "#{{id}} Show Blogeintrag | refine",
+      "edit": "#{{id}} Edit Blogeintrag | refine",
+      "create": "Create new Blogeintrag | refine",
+      "clone": "#{{id}} Clone Blogeintrag | refine"
+    },
+    "categories": {
+      "list": "Kategorien | refine",
+      "show": "#{{id}} Zeigen Kategorien | refine",
+      "edit": "#{{id}} Bearbeiten Kategorien | refine",
+      "create": "Neue Kategorie Erstellen | refine",
+      "clone": "#{{id}} Klon Kategorie | refine"
+    }
+  },
+  "table": {
+    "actions": "Aktionen"
+  },
+  "pagination": {
+    "go": "Gehen Sie zur Seite",
+    "show": "Zeigen"
+  },
+  "users": {
+    "fields": {
+      "id": "Id",
+      "title": "Title",
+      "role": "Role",
+      "email": "Email",
+      "phoneNumber": "Phone number",
+      "status": "Status",
+      "company": "Company"
+    }
+  },
+  "legals": {
+    "fields": {
+      "id": "ID",
+      "version": "Version",
+      "updatedAt": "Lasted update",
+      "updatedBy": "Updated by",
+      "createdAt": "Created At"
+    }
+  },
+  "faqs": {
+    "fields": {
+      "id": "ID",
+      "category": "Category",
+      "question": "Number of Questions",
+      "updatedAt": "Lasted update",
+      "updatedBy": "Updated by",
+      "status": "Status",
+      "version": "Version"
+    },
+    "titles": {
+      "create": "Create new FAQ category",
+      "edit": "Edit FAQ category"
+    }
+  },
+  "appVersion": {
+    "fields": {
+      "id": "ID",
+      "version": "Version",
+      "updatedAt": "Lasted update",
+      "updatedBy": "Updated by",
+      "system": "System",
+      "type": "Update type"
+    }
+  },
+  "appMaintenance": {
+    "title": {
+      "currentStatus": "Current status",
+      "title": "Title",
+      "description": "Description",
+      "maintenanceScreen": "App maintenance screen",
+      "selectDateTime": "Please select the end date and end time.",
+      "screen": "App maintenance screen"
+    },
+    "button": {
+      "maintenanceNow": "Maintenance now",
+      "edit": "Edit",
+      "endMaintenance": "End the maintanance",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "publish": "Publish"
+    },
+    "text": {
+      "lastUpdated": "Last updated",
+      "updatedBy": "Updated by",
+      "createdAt": "Start date and time"
+    },
+    "modal": {
+      "confirm": {
+        "title": "Are you sure you want to set {{platform}} app maintenance to start 'immediately'?"
+      },
+      "end": {
+        "title": "Are you sure you want to end {{platform}} app maintenance?"
+      },
+      "setting": {
+        "title": "{{platform}} app maintenance"
+      }
+    },
+    "fields": {
+      "date": "End date",
+      "time": "End time"
+    }
+  },
+  "sustainability": {
+    "fields": {
+      "sustainability": "Sustainability",
+      "en": "EN",
+      "th": "TH",
+      "cn": "CN",
+      "preview": "Preview",
+      "updatedAt": "Lasted update",
+      "updatedBy": "Updated by",
+      "status": "Status"
+    }
+  },
+  "accessLocalInformation": {
+    "title": "Access Local Information",
+    "editTitle": "Edit Access Local Information",
+    "fields": {
+      "id": "ID",
+      "category": "Category",
+      "content": "Content",
+      "url": "Url",
+      "updatedAt": "Lasted update",
+      "updatedBy": "Updated by",
+      "action": "Actions"
+    }
+  },
+  "storeWhitelist": {
+    "title": "Store white list",
+    "button": {
+      "create": "Create new store",
+      "delete": "Delete store"
+    },
+    "fields": {
+      "taxId": "Tax ID",
+      "storeName": "Store name",
+      "companyName": "Company name",
+      "property": "Property",
+      "unitNo": "Unit No",
+      "address": "Address",
+      "building": "Building",
+      "hasTaxId": "Has tax id?",
+      "receiptAddressInObk": "Receipt address in Obk?"
+    },
+    "error": "Missing Fields: The required fields are empty or contain invalid data; please check your input."
+  },
+  "property": {
+    "title": "Property Name",
+    "button": {
+      "create": "Create new Mall Property",
+      "delete": "Delete property"
+    },
+    "fields": {
+      "name": "Name",
+      "address": "Addresses",
+      "keyword": "Keywords"
+    }
+  },
+  "docsType": {
+    "title": "Document Type",
+    "button": {
+      "create": "Create new document type",
+      "delete": "Delete document type"
+    },
+    "fields": {
+      "keyword": "Keyword",
+      "type": "Type"
+    }
+  },
+  "campaignManagement": {
+    "title": "Campaign management",
+    "tier": "Tier",
+    "parkingFeeRedemption": "Parking fee redemption",
+    "timeStamps": "Last update <updatedAt>{{updated_time}}</updatedAt>   Updated By <updatedBy>{{updated_by}}</updatedBy>",
+    "totalSpendRange": "Total spend range",
+    "redeemHour": "Redeemable hours",
+    "rateCode": "Rate Code",
+    "totalSpendMoreThan": "Total spend more than",
+    "errorMesaage": "Missing Fields: Required fields are empty or contain invalid data; please check your input."
+  },
+  "errorMessage": {
+    "Insufficient info": "<p>Receipts Scans with incomplete or unclear information will be rejected.</p><p>For long receipts, please advise the user to fold them at the portion describing the products purchased before uploading them.</p><p>Please ensure that the receipt image submitted is clear and that the following information has been captured:</p><ul><li>Mall Name</li><li>Shop Name</li><li>Unit Number</li><li>Transaction Date &amp; Time</li><li>Receipt Number</li><li>Transaction Amount</li></ul>",
+    "Ineligible store": "<p>The scanned receipt is not from the list of participating shops, malls, or partners.</p><p>Receipts from service providers such as electricity, telecommunications, water bills, or bank service fees are not eligible.</p><p>If you think the shop should be eligible, please reach out to L1 to enlist the new shop/unit/partner.</p>",
+    "Invalid date": "<p>Receipt Transaction Date must be the same as the Submission Date.</p>",
+    "Duplicate receipt": "<p>This receipt has been used/duplicated. </p>",
+    "Invalid receipt or invoice": "<p>The document scan is not an original receipt or invoice.</p><p>Banking Transaction Slip or Pro-forma receipts are not accepted.</p>",
+    "Contact Staff": "<p>There is an error with the OCR backend system.</p><p>Please raise this issue with the Helpdesk and assist the customer in processing the receipt manually.</p>"
+  }
+}

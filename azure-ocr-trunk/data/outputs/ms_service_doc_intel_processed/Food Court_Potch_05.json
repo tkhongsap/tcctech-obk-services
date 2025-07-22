@@ -1,0 +1,62 @@
+[
+    {
+        "merchant_name": {
+            "value": "ร้านค้า (FOOD STREET)",
+            "confidence": 0.968
+        },
+        "transaction_date": {
+            "value": "2025-01-22",
+            "confidence": 0.988
+        },
+        "transaction_time": {
+            "value": "11:56:00",
+            "confidence": 0.99
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "ข้าวผัดหมูกรอบ",
+                    "confidence": 0.981
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.987
+                },
+                "total_price": {
+                    "value": 90.0,
+                    "confidence": 0.989
+                }
+            },
+            {
+                "description": {
+                    "value": "ไข่ดาว",
+                    "confidence": 0.984
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.987
+                },
+                "total_price": {
+                    "value": 15.0,
+                    "confidence": 0.989
+                }
+            }
+        ],
+        "total": {
+            "value": 105.0,
+            "confidence": 0.986
+        },
+        "tax_id": {
+            "value": "ID:0105563049786",
+            "confidence": 0.841
+        },
+        "receipt_no": {
+            "value": "68012200325",
+            "confidence": 0.546
+        },
+        "address": null,
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "a4362f595aff4f9fef1d830b2028f96da01af9bf2e06cd470d4bdc8a8610e4d8"
+    }
+]

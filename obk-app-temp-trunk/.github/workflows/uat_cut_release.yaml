@@ -1,0 +1,108 @@
+name: SIT Cut Release
+
+on:
+  push:
+    tags:
+      - "*.*.*-uat"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.branch }}
+  cancel-in-progress: true
+defaults:
+  run:
+    working-directory: "./app/OneBangkok"
+jobs:
+  deploy_android:
+    defaults:
+      run:
+        working-directory: "./app/OneBangkok"
+    runs-on: ubuntu-latest
+    env:
+      GIT_PRIVATE_KEY: ${{ secrets.GIT_PRIVATE_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Install Node Modules
+        run: |
+          yarn install
+      - name: "Create env file"
+        run: |
+          touch .env.uat
+          echo GATEWAY_BASEURL=${{ vars.GATEWAY_SIT_BASEURL }} >> .env.uat
+          echo WEBSOCKET_BASEURL=${{ vars.WEBSOCKET_SIT_BASEURL }} >> .env.uat
+          echo OB_BMS_URL=${{ vars.OB_BMS_SIT_URL }} >> .env.uat
+          echo WEB_VIEW_URL=${{ vars.SIT_WEB_VIEW_URL }} >> .env.uat
+          echo OB_IAM_URL=${{ vars.OB_IAM_UAT_URL }} >> .env.uat
+          echo OB_DOCUMENT_URL=${{ vars.OB_DOCUMENT_UAT_URL }} >> .env.uat
+          echo OB_NOTI_URL=${{ vars.OB_NOTI_UAT_URL }} >> .env.uat
+          echo UPLOAD_IMAGE_URL=${{ vars.UPLOAD_IMAGE_UAT_URL }} >> .env.uat
+          echo S3_TRANSLATION_BUCKET_URL=${{ vars.S3_TRANSLATION_BUCKET_URL }} >> .env.uat
+          echo OB_ENV='uat' >> .env.uat
+          cat .env.uat
+      - name: "Get Current tag"
+        id: current-tag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+      - name: Install bundle
+        run: |
+          cd android
+          bundle install
+      - name: Decode Keystore File
+        uses: timheuer/base64-to-file@v1
+        id: android_keystore
+        with:
+          fileName: "dev.keystore"
+          encodedString: ${{ secrets.ANDROID_KEY_STORE_FILE }}
+      - name: Run Fastlane
+        run: |
+          cd android
+          bundle exec fastlane uat
+        env:
+          KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          RELEASE_VERSION: ${{ steps.current-tag.outputs.tag }}
+#  deploy_ios:
+#    defaults:
+#      run:
+#        working-directory: "./app/OneBangkok"
+#    runs-on: macos-latest
+#    env:
+#      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+#      MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+#      APP_STORE_CONNECT_API_KEY_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY_ID }}
+#      APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ISSUER_ID }}
+#      APP_STORE_CONNECT_API_KEY_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_KEY }}
+#      GIT_PRIVATE_KEY: ${{ secrets.GIT_PRIVATE_KEY }}
+#      GIT_BASIC_AUTH_SIT: ${{ secrets.GIT_BASIC_AUTH_SIT }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Install Node Modules
+#        run: |
+#          yarn install
+#      - name: "Create env file"
+#        run: |
+#          touch .env.sit
+#          echo GATEWAY_BASEURL=${{ vars.GATEWAY_SIT_BASEURL }} >> .env.sit
+#          echo WEBSOCKET_BASEURL=${{ vars.WEBSOCKET_SIT_BASEURL }} >> .env.sit
+#          echo OB_BMS_URL=${{ vars.OB_BMS_SIT_URL }} >> .env.sit
+#          echo WEB_VIEW_URL=${{ vars.SIT_WEB_VIEW_URL }} >> .env.sit
+#          cat .env.sit
+#      - name: "Get Current tag"
+#        id: current-tag
+#        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+#      - name: Install IOS Fastlane and Dependencies
+#        run: |
+#          cd ios
+#          gem install bundler
+#          bundle install
+#          pod install
+#      - name: Run Fastlane
+#        run: |
+#          cd ios
+#          bundle exec fastlane sit --env sit
+#        env:
+#          RELEASE_VERSION: ${{ steps.current-tag.outputs.tag }}

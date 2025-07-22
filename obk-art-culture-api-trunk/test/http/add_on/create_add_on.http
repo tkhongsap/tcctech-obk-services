@@ -1,0 +1,25 @@
+POST http://localhost:8080/api/add-on?locale=th
+content-type: application/json
+
+{
+    "programId": 2,
+    "type": "video",
+    "title": "The Mastaba AR by Christo and Jeanne-Claude 3 th !!",
+    "description": "Planned before Christo's death in May 2020, this is an opportunity to share the last public work realised in Christo's lifetime with a global audience and celebrate the memory of his and Jeanne-Claude's visionary projects.",
+    "thumbnail": "https://www.bkkmenu.com/files/2018/09/PenthouseDinner__00012.jpg",
+    "coverImage": "https://www.bkkmenu.com/files/2018/09/PenthouseDinner__00012.jpg",
+    "tags": ["XXX", "YYY", "ZZZ"],
+    "audioLink": null,
+    "videoLink": null,
+    "partners": [
+        {
+            "id": 1
+        },
+        {
+            "id": 2
+        },
+        {
+            "id": 3
+        }
+    ]
+}

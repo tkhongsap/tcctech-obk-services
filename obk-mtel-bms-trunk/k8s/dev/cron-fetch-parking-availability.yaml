@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-bms-fetch-parking-availability-data
+  labels:
+    app: ob-bms-fetch-parking-availability-data
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
+  schedule: '*/5 * * * *' # Run every 5 min
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: ob-bms-fetch-parking-availability-data
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: bash
+              image: curlimages/curl:7.70.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - 'curl -X GET https://bms.glorymtel.xyz/integrations/fs/parking -H "accept: application/json" -H "x-permissions: eyJwZXJtaXNzaW9uIjogWyAgeyAidmFsdWUiOiB7InJlc291cmNlX3R5cGUiOiAiZnMiLCAiYWN0aW9ucyI6IFsiKiJdIH0gfV19"'

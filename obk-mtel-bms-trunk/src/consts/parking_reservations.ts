@@ -1,0 +1,3 @@
+export const PKR_REFERENCES_LENGTH = 4;
+export const PKR_REFERENCES_START = '1';
+export const PKR_REFERENCES_FORMAT_DATE = 'YYYYMMDD';

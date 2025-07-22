@@ -1,0 +1,67 @@
+[
+    {
+        "merchant_name": {
+            "value": "JIM THOMPSON",
+            "confidence": 0.972
+        },
+        "transaction_date": {
+            "value": "2025-01-21",
+            "confidence": 0.987
+        },
+        "transaction_time": {
+            "value": "12:44:00",
+            "confidence": 0.988
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "Ma Muang Cheesecake",
+                    "confidence": 0.98
+                },
+                "total_price": {
+                    "value": 250.0,
+                    "confidence": 0.988
+                }
+            },
+            {
+                "description": {
+                    "value": "Complimentary",
+                    "confidence": 0.425
+                },
+                "total_price": {
+                    "value": 0.0,
+                    "confidence": 0.987
+                }
+            },
+            {
+                "description": {
+                    "value": "Service Charge (10%)",
+                    "confidence": 0.978
+                },
+                "total_price": {
+                    "value": 25.0,
+                    "confidence": 0.987
+                }
+            }
+        ],
+        "total": {
+            "value": 294.25,
+            "confidence": 0.985
+        },
+        "tax_id": {
+            "value": "0105494000264",
+            "confidence": 0.995
+        },
+        "receipt_no": {
+            "value": "E010030002A8725",
+            "confidence": 0.677
+        },
+        "address": {
+            "value": "THE STOREYS BUILDING,\n199 WIRELESS ROAD, LUMPHINI,\nPATUMWAN, BANGKOK 10330",
+            "confidence": 0.985
+        },
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "89da85203b75d2147309a6e92c249a71bc76b043627cf7f86084f54bba5dda42"
+    }
+]

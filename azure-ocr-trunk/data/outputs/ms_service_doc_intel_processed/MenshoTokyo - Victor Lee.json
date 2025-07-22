@@ -1,0 +1,65 @@
+[
+    {
+        "merchant_name": {
+            "value": "Mensho Tokyo",
+            "confidence": 0.977
+        },
+        "transaction_date": {
+            "value": "2017-01-25",
+            "confidence": 0.987
+        },
+        "transaction_time": {
+            "value": "12:14:00",
+            "confidence": 0.988
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "Signature",
+                    "confidence": 0.983
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 560.0,
+                    "confidence": 0.989
+                }
+            },
+            {
+                "description": {
+                    "value": "CALPIS Soda",
+                    "confidence": 0.982
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.986
+                },
+                "total_price": {
+                    "value": 65.0,
+                    "confidence": 0.988
+                }
+            }
+        ],
+        "total": {
+            "value": 735.63,
+            "confidence": 0.985
+        },
+        "tax_id": {
+            "value": "0105560137718",
+            "confidence": 0.988
+        },
+        "receipt_no": {
+            "value": "P63U1",
+            "confidence": 0.771
+        },
+        "address": {
+            "value": "The Story Tower,\nRoom No. 2108, 1st Floor,\n199 Witthayu Rd, Khwaeng Lumphini,\nPathumwan Bangkok 10330",
+            "confidence": 0.981
+        },
+        "discount": 4,
+        "status": true,
+        "hashed_receipt": "10a2acdf7ae0012e941499c1d03f384c9b97bde868aafe1af64435b67c5d1f45"
+    }
+]

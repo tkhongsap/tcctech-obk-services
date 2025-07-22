@@ -1,0 +1,9 @@
+@startuml
+
+App ->> Backend: delete account
+Backend ->> SSO: delete account (soft delete and hard delete after 30 days)
+SSO -->> Backend: 204 delete success
+Backend ->> Backend: internal process (soft delete and interval dialy check soft delete to hard delete)
+Backend -->> App: 204
+
+@enduml

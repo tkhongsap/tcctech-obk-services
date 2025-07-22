@@ -1,0 +1,192 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../db/client"
+  binaryTargets = ["linux-musl-openssl-3.0.x", "debian-openssl-1.1.x", "darwin-arm64"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ParkingDetailStatus {
+  ACTIVE
+  DISPUTE
+}
+
+enum ReceiptStatus {
+  DECLINED
+  SUCCESS
+  PENDING
+  DISPUTE
+  REDEEMED
+  PROCESSING
+  DUPLICATED
+}
+
+enum RedeemType {
+  COUPON
+  REDEEM
+}
+
+model ParkingDetail {
+  id           String              @id @default(dbgenerated("uuid_generate_v4()"))
+  uid          String              @unique
+  record_id    String?             @unique
+  meta         Json?               @default("{}") @db.Json
+  account_id   String?
+  username     String?
+  email        String?
+  phone        String?
+  plate_no     String
+  total_amount Decimal             @db.Decimal(10, 2) @default(0)
+  status       ParkingDetailStatus
+  rate_details Json?               @default("{}") @db.Json
+  created_at   DateTime            @default(now())
+  updated_at   DateTime            @default(now()) @updatedAt
+  redeemed_at  DateTime?
+  receipts     Receipt[]
+  redeems      Redeem[]
+
+  @@map("parking_details")
+}
+
+model Redeem {
+  id                String          @id @default(dbgenerated("uuid_generate_v4()"))
+  uid               String
+  parking_detail    ParkingDetail   @relation(fields: [parking_detail_id], references: [id])
+  parking_detail_id String
+  type              RedeemType
+  created_at        DateTime        @default(now())
+  updated_at        DateTime        @default(now()) @updatedAt
+  ReceiptRedeem     ReceiptRedeem[]
+
+  @@map("redeems")
+}
+
+model ReceiptRedeem {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()"))
+  redeem     Redeem   @relation(fields: [redeem_id], references: [id])
+  redeem_id  String
+  receipt    Receipt  @relation(fields: [receipt_id], references: [id])
+  receipt_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  @@map("receipt_redeems")
+}
+
+model RecordIdSequence {
+  date_prefix String @id
+  counter     Int
+
+  @@map("record_id_sequences")
+}
+
+model Receipt {
+  id                String          @id @default(dbgenerated("uuid_generate_v4()"))
+  uid               String?
+  message           String?
+  total             Decimal?        @db.Decimal(10, 2)
+  parking_detail    ParkingDetail   @relation(fields: [parking_detail_id], references: [id])
+  parking_detail_id String
+  image_url         String
+  status            ReceiptStatus
+  created_at        DateTime        @default(now())
+  updated_at        DateTime        @default(now()) @updatedAt
+  redeemed_at       DateTime?
+  created_by        String
+  updated_by        String
+  merchant_name     String?
+  transaction_date  String? // Format: YYYY-MM-DD
+  transaction_time  String? // Format: HH:mm
+  tax_id            String?
+  receipt_no        String?
+  address           String?
+  unit_no           String?
+  mall_name         String?
+  content           Json?
+  items             Item[]
+  receiptRedeems    ReceiptRedeem[]
+
+  @@map("receipts")
+}
+
+model Item {
+  id          String  @id @default(dbgenerated("uuid_generate_v4()"))
+  receipt     Receipt @relation(fields: [receipt_id], references: [id])
+  receipt_id  String
+  description String
+  quantity    Int?
+  total_price Decimal? @db.Decimal(10, 2)
+
+  @@map("items")
+}
+
+model StoreWhitelist {
+  id                     String    @id @default(dbgenerated("uuid_generate_v4()"))
+  tax_id                 String?
+  store_name             String
+  company_name           String
+  property_id            String
+  unit_no                String?
+  address                String?
+  building               String?
+  has_tax_id             Boolean
+  receipt_address_in_obk Boolean
+  updated_by             String?
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @default(now()) @updatedAt
+  deleted_at             DateTime?
+
+  property Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+
+  @@map("store_whitelists")
+}
+
+model Property {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()"))
+  name      String   @unique
+  keywords  String[] @default([])
+  addresses String[] @default([])
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+
+  store_whitelists StoreWhitelist[]
+
+  @@map("properties")
+}
+
+model DocumentType {
+  id      String @id @default(dbgenerated("uuid_generate_v4()"))
+  keyword String
+  type    String
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+
+  @@map("document_types")
+}
+
+model Campaign {
+  id          String @id @default(dbgenerated("uuid_generate_v4()"))
+  sequence    Int    @unique
+  price_min   Float
+  price_max   Float?
+  redeem_hour Int
+  rate_code   String
+
+  updated_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now()) @updatedAt
+  deleted_at DateTime?
+
+  @@map("campaign")
+}

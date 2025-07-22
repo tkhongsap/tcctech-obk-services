@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model account {
+  id         String   @id @default(uuid()) @map(name: "id")
+  created_at DateTime @default(now()) @map(name: "created_at")
+  updated_at DateTime @updatedAt @map(name: "updated_at")
+
+  identities identity[]
+  token      token[]
+  profile    profile[]
+}
+
+model identity {
+  id          String    @id @default(uuid()) @map(name: "id")
+  identifier  String    @map(name: "identifier")
+  provider    String    @map(name: "provider")
+  verified_at DateTime? @map(name: "verified_at")
+  linked_at   DateTime? @map(name: "linked_at")
+  unlinked_at DateTime? @map(name: "unlinked_at")
+  account_id  String    @map(name: "account_id")
+  created_at  DateTime  @default(now()) @map(name: "created_at")
+  updated_at  DateTime  @updatedAt @map(name: "updated_at")
+
+  account      account        @relation(fields: [account_id], references: [id])
+  identity_sso identity_sso[]
+}
+
+model token {
+  id           String    @id @default(uuid()) @map(name: "id")
+  token        String    @default(uuid()) @map(name: "token")
+  account_id   String    @map(name: "account_id")
+  expired_date DateTime? @map(name: "expired_date")
+  type         String    @map(name: "type")
+  created_at   DateTime  @default(now()) @map(name: "created_at")
+  updated_at   DateTime  @updatedAt @map(name: "updated_at")
+
+  account account @relation(fields: [account_id], references: [id])
+}
+
+model profile {
+  id          String   @id @default(uuid()) @map(name: "id")
+  account_id  String   @map(name: "account_id")
+  gender      String   @map(name: "gender")
+  title       String   @map(name: "title")
+  first_name  String   @map(name: "first_name")
+  middle_name String   @map(name: "middle_name")
+  last_name   String   @map(name: "last_name")
+  dob         DateTime @map(name: "dob")
+  created_at  DateTime @default(now()) @map(name: "created_at")
+  updated_at  DateTime @updatedAt @map(name: "updated_at")
+
+  account account @relation(fields: [account_id], references: [id])
+}
+
+model identity_sso {
+  id          String   @id @default(uuid()) @map(name: "id")
+  uid         String   @map(name: "uid")
+  type        String   @map(name: "type")
+  identity_id String   @map(name: "identity_id")
+  created_at  DateTime @default(now()) @map(name: "created_at")
+  updated_at  DateTime @updatedAt @map(name: "updated_at")
+
+  identity identity @relation(fields: [identity_id], references: [id])
+}

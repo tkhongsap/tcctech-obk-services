@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ob-doc-disable-whathappening-overdue
+  namespace: obk-production
+spec:
+  schedule: "0 1 * * *"
+  timeZone: "Asia/Bangkok"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl-script
+            image: curlimages/curl:latest 
+            command: ["sh", "-c"]
+            args:
+              - |
+                curl --location --request POST 'https://obk-prod.tccproptech.com/ob-document/whathappening/processDisableOverdue'
+          restartPolicy: OnFailure

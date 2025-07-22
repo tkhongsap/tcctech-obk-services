@@ -1,0 +1,82 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: one-bangkok
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-1:418772626632:certificate/eadca680-d876-431c-91f2-d2691c5db2a3
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  rules:
+    - host: sit.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-gw
+                port:
+                  number: 80
+    - host: iam-sit.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-iam
+                port:
+                  number: 80
+    - host: document-sit.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-document
+                port:
+                  number: 80
+    - host: notification-sit.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-notification
+                port:
+                  number: 80
+    - host: bms-sit.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-bms
+                port:
+                  number: 80
+    - host: ws-sit.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-websocket
+                port:
+                  number: 80
+    - host: v2-iam-sit.glorymtel.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ob-iam-v2
+                port:
+                  number: 80

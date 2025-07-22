@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS programs_add_ons;

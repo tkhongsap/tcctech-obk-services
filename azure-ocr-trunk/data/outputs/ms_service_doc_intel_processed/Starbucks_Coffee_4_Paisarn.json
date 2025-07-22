@@ -1,0 +1,75 @@
+[
+    {
+        "merchant_name": {
+            "value": "Starbucks Coffee",
+            "confidence": 0.978
+        },
+        "transaction_date": {
+            "value": "2025-01-21",
+            "confidence": 0.986
+        },
+        "transaction_time": {
+            "value": "08:47:00",
+            "confidence": 0.987
+        },
+        "items": [
+            {
+                "description": {
+                    "value": "CRAB STICK SALAD",
+                    "confidence": 0.981
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.987
+                },
+                "total_price": {
+                    "value": 90.0,
+                    "confidence": 0.988
+                }
+            },
+            {
+                "description": {
+                    "value": "G.PINEAPP CB",
+                    "confidence": 0.983
+                },
+                "quantity": {
+                    "value": 1,
+                    "confidence": 0.987
+                },
+                "total_price": {
+                    "value": 165.0,
+                    "confidence": 0.988
+                }
+            },
+            {
+                "description": {
+                    "value": ">1 TO GO",
+                    "confidence": 0.981
+                },
+                "total_price": {
+                    "value": 0.0,
+                    "confidence": 0.988
+                }
+            }
+        ],
+        "total": {
+            "value": 255.0,
+            "confidence": 0.984
+        },
+        "tax_id": {
+            "value": "0105541008688(VAT",
+            "confidence": 0.953
+        },
+        "receipt_no": {
+            "value": "0100028951",
+            "confidence": 0.669
+        },
+        "address": {
+            "value": "14577 One Bangkok - R1, B1 fl.",
+            "confidence": 0.984
+        },
+        "discount": 0,
+        "status": true,
+        "hashed_receipt": "393305d5ccb99317e686e39adc070095fd3e47032311be61eb9d6991aa55f974"
+    }
+]

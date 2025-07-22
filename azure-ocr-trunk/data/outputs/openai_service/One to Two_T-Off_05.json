@@ -1,0 +1,46 @@
+{
+    "merchant_name": {
+        "value": "One Two Two Coffee Company",
+        "confidence": 0.95
+    },
+    "transaction_date": {
+        "value": "2023-01-23",
+        "confidence": 0.95
+    },
+    "transaction_time": {
+        "value": "17:17:00",
+        "confidence": 0.95
+    },
+    "items": [
+        {
+            "item": {
+                "value": "CAPPUCINO HOT",
+                "confidence": 0.9
+            },
+            "quantity": {
+                "value": 1,
+                "confidence": 0.9
+            },
+            "price": {
+                "value": 65.0,
+                "confidence": 0.9
+            }
+        }
+    ],
+    "total": {
+        "value": 60.75,
+        "confidence": 0.95
+    },
+    "total_amount": {
+        "value": 65.0,
+        "confidence": 0.95
+    },
+    "tax_id": {
+        "value": "TAX#",
+        "confidence": 0.0
+    },
+    "receipt_no": {
+        "value": "No#76",
+        "confidence": 0.9
+    }
+}
