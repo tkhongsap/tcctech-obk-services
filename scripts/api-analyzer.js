@@ -225,6 +225,46 @@ class APIAnalyzer {
     }
 
     /**
+     * Extract Express.js parameters from route definition
+     */
+    extractExpressParams(content, startIndex) {
+        const params = [];
+        
+        // Extract route parameters like :id, :userId
+        const routeSection = content.substring(startIndex, startIndex + 500);
+        const routeParamMatches = routeSection.match(/:(\w+)/g);
+        if (routeParamMatches) {
+            for (const match of routeParamMatches) {
+                const paramName = match.substring(1);
+                params.push({
+                    name: paramName,
+                    type: 'string',
+                    required: true,
+                    location: 'path'
+                });
+            }
+        }
+        
+        // Extract query parameters from req.query usage
+        const queryMatches = routeSection.match(/req\.query\.(\w+)/g);
+        if (queryMatches) {
+            for (const match of queryMatches) {
+                const paramName = match.replace('req.query.', '');
+                if (!params.find(p => p.name === paramName)) {
+                    params.push({
+                        name: paramName,
+                        type: 'string',
+                        required: false,
+                        location: 'query'
+                    });
+                }
+            }
+        }
+        
+        return params;
+    }
+
+    /**
      * Extract response information
      */
     extractResponses(content, startIndex) {
