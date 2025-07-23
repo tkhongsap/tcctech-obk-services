@@ -52,15 +52,15 @@
   - [x] 3.6 Generate impact scores for critical service dependencies
   - [x] 3.7 Write tests for risk assessment algorithms
 
-- [ ] 4.0 Report Generation and Output
-  - [ ] 4.1 Create JSON output generator for raw analysis data
-  - [ ] 4.2 Build Markdown report generator with formatted results
-  - [ ] 4.3 Generate ranked list of most frequently used APIs
-  - [ ] 4.4 Create bottleneck identification report with risk levels
-  - [ ] 4.5 Build summary report with key findings and recommendations
-  - [ ] 4.6 Implement dual-directory output (both `output/` and `analysis-summary/`)
-  - [ ] 4.7 Add report templates and formatting for readability
-  - [ ] 4.8 Write tests for report generation functionality
+- [x] 4.0 Report Generation and Output
+  - [x] 4.1 Create JSON output generator for raw analysis data
+  - [x] 4.2 Build Markdown report generator with formatted results
+  - [x] 4.3 Generate ranked list of most frequently used APIs
+  - [x] 4.4 Create bottleneck identification report with risk levels
+  - [x] 4.5 Build summary report with key findings and recommendations
+  - [x] 4.6 Implement dual-directory output (both `output/` and `analysis-summary/`)
+  - [x] 4.7 Add report templates and formatting for readability
+  - [x] 4.8 Write tests for report generation functionality
 
 - [ ] 5.0 Configuration and Integration
   - [ ] 5.1 Create configuration system for analysis parameters and thresholds
