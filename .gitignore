@@ -6,9 +6,57 @@
 # source code, documentation, and structured analysis results.
 
 # =============================================================================
-# SERVICE DIRECTORIES & EXTRACTED REPOS
+# SERVICE DIRECTORIES & EXTRACTED REPOS (ALL 37 SERVICES)
 # =============================================================================
-# Individual service repositories (these are data sources, not part of our tool)
+# Individual service repositories - these are data sources, not part of our analysis tool
+# Explicitly listing all 37 service directories to prevent accidental commits
+
+# OBK Services (26 services)
+obk-app-temp-trunk/
+obk-app-universal-link-trunk/
+obk-art-culture-api-trunk/
+obk-booking-trunk/
+obk-campaign-web-trunk/
+obk-cms-trunk/
+obk-indoor-navigation-trunk/
+obk-infra-trunk/
+obk-marcom-trunk/
+obk-mtel-bms-trunk/
+obk-mtel-bus-trunk/
+obk-mtel-document-trunk/
+obk-mtel-iam-trunk/
+obk-mtel-notification-trunk/
+obk-mtel-websocket-trunk/
+obk-operation-app-trunk/
+obk-operation-backend-dev/
+obk-parking-payment-dev/
+obk-parking-trunk/
+obk-pms-trunk/
+obk-predict-location-main/
+obk-residential-ipad-trunk/
+obk-sso-trunk/
+obk-sustainable-trunk/
+obk-wifi-auth-web-trunk/
+obk-wiremock-trunk/
+
+# One Bangkok Services (2 services)
+onebangkok-trunk/
+one-bangkok-app-trunk/
+
+# TCCT Services (1 service)
+tcct-serviceabstraction-dev/
+
+# Infrastructure Services (8 services)
+automate-trunk/
+azure-ocr-trunk/
+crontab-trunk/
+flutter-login-trunk/
+keycloak-trunk/
+MapGeoJsonTool-trunk/
+redirect-onebangkok-trunk/
+resize-service-trunk/
+
+# Wildcard patterns for future services
 obk-*/
 tcct-*/
 onebangkok-*/
