@@ -25,14 +25,14 @@
 
 ## Tasks
 
-- [ ] 1.0 Directory Discovery and File Parsing
-  - [ ] 1.1 Create directory scanner to discover all services in `/analysis` directory
-  - [ ] 1.2 Implement parser for api-inventory.md files to extract API endpoints
-  - [ ] 1.3 Implement parser for dependency-map.json files to extract service relationships  
-  - [ ] 1.4 Create data validation to handle missing or malformed files
-  - [ ] 1.5 Build normalized data structure for storing parsed service information
-  - [ ] 1.6 Add error handling and logging for parsing issues
-  - [ ] 1.7 Write tests for directory scanning and file parsing functionality
+- [x] 1.0 Directory Discovery and File Parsing
+  - [x] 1.1 Create directory scanner to discover all services in `/analysis` directory
+  - [x] 1.2 Implement parser for api-inventory.md files to extract API endpoints
+  - [x] 1.3 Implement parser for dependency-map.json files to extract service relationships  
+  - [x] 1.4 Create data validation to handle missing or malformed files
+  - [x] 1.5 Build normalized data structure for storing parsed service information
+  - [x] 1.6 Add error handling and logging for parsing issues
+  - [x] 1.7 Write tests for directory scanning and file parsing functionality
 
 - [ ] 2.0 API Usage Analysis Engine
   - [ ] 2.1 Implement API endpoint extraction and normalization across services

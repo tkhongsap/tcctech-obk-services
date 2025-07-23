@@ -3,152 +3,129 @@ const path = require('path');
 
 /**
  * Directory Scanner for API Analysis
- * Discovers all services in /analysis directory and identifies file types
+ * Discovers all services in the /analysis directory and their documentation files
  */
 class DirectoryScanner {
-  constructor(analysisDir = './analysis') {
-    this.analysisDir = analysisDir;
-    this.requiredFiles = [
+  constructor(analysisPath = 'analysis') {
+    this.analysisPath = analysisPath;
+    this.supportedFiles = [
       'api-inventory.md',
-      'dependency-map.json', 
-      'openapi.yaml'
+      'dependency-map.json',
+      'openapi.yaml',
+      'openapi.yml'
     ];
   }
 
   /**
-   * Discover all service directories in the analysis folder
-   * @returns {Promise<Array>} Array of service directory objects
+   * Discover all services in the analysis directory
+   * @returns {Promise<Array>} Array of service objects with their file paths
    */
   async discoverServices() {
     try {
       const services = [];
-      const entries = await fs.readdir(this.analysisDir, { withFileTypes: true });
+      const analysisDir = await this.getAnalysisDirectory();
+      
+      if (!analysisDir) {
+        throw new Error(`Analysis directory '${this.analysisPath}' not found`);
+      }
+
+      const entries = await fs.readdir(analysisDir, { withFileTypes: true });
       
       for (const entry of entries) {
         if (entry.isDirectory()) {
-          const servicePath = path.join(this.analysisDir, entry.name);
-          const serviceInfo = await this.analyzeServiceDirectory(servicePath, entry.name);
-          services.push(serviceInfo);
+          const servicePath = path.join(analysisDir, entry.name);
+          const serviceInfo = await this.scanService(entry.name, servicePath);
+          
+          if (serviceInfo.files.length > 0) {
+            services.push(serviceInfo);
+          }
         }
       }
 
-      console.log(`Discovered ${services.length} services in ${this.analysisDir}`);
       return services;
     } catch (error) {
-      console.error('Error discovering services:', error.message);
-      throw error;
+      throw new Error(`Failed to discover services: ${error.message}`);
     }
   }
 
   /**
-   * Analyze a single service directory for required files
-   * @param {string} servicePath - Path to service directory
+   * Scan a specific service directory for documentation files
    * @param {string} serviceName - Name of the service
-   * @returns {Promise<Object>} Service analysis object
+   * @param {string} servicePath - Path to the service directory
+   * @returns {Promise<Object>} Service information object
    */
-  async analyzeServiceDirectory(servicePath, serviceName) {
+  async scanService(serviceName, servicePath) {
     const serviceInfo = {
       name: serviceName,
       path: servicePath,
-      files: {},
-      missingFiles: [],
-      isComplete: true
+      files: {}
     };
 
     try {
       const files = await fs.readdir(servicePath);
       
-      // Check for required files
-      for (const requiredFile of this.requiredFiles) {
-        const filePath = path.join(servicePath, requiredFile);
-        
-        if (files.includes(requiredFile)) {
+      for (const file of files) {
+        if (this.supportedFiles.includes(file)) {
+          const filePath = path.join(servicePath, file);
           const stats = await fs.stat(filePath);
-          serviceInfo.files[requiredFile] = {
-            exists: true,
+          
+          serviceInfo.files[file] = {
             path: filePath,
             size: stats.size,
             modified: stats.mtime
           };
-        } else {
-          serviceInfo.files[requiredFile] = { exists: false };
-          serviceInfo.missingFiles.push(requiredFile);
-          serviceInfo.isComplete = false;
         }
       }
-
-      // Check for additional analysis files
-      const additionalFiles = files.filter(file => 
-        file.endsWith('-analysis.json') || 
-        file.endsWith('-api-documentation.csv')
-      );
-      
-      serviceInfo.additionalFiles = additionalFiles;
-
     } catch (error) {
-      console.error(`Error analyzing service ${serviceName}:`, error.message);
-      serviceInfo.error = error.message;
-      serviceInfo.isComplete = false;
+      console.warn(`Warning: Could not scan service ${serviceName}: ${error.message}`);
     }
 
     return serviceInfo;
   }
 
   /**
-   * Get summary statistics of discovered services
-   * @param {Array} services - Array of service objects
-   * @returns {Object} Summary statistics
+   * Get the analysis directory path
+   * @returns {Promise<string|null>} Path to analysis directory or null if not found
    */
-  getSummary(services) {
-    const summary = {
-      total: services.length,
-      complete: services.filter(s => s.isComplete).length,
-      incomplete: services.filter(s => !s.isComplete).length,
-      missingFiles: {},
-      frameworks: {}
-    };
-
-    // Count missing files
-    services.forEach(service => {
-      service.missingFiles.forEach(file => {
-        summary.missingFiles[file] = (summary.missingFiles[file] || 0) + 1;
-      });
-    });
-
-    summary.completionRate = ((summary.complete / summary.total) * 100).toFixed(1);
-    
-    return summary;
+  async getAnalysisDirectory() {
+    try {
+      const stats = await fs.stat(this.analysisPath);
+      return stats.isDirectory() ? this.analysisPath : null;
+    } catch (error) {
+      return null;
+    }
   }
 
   /**
-   * Generate detailed report of service discovery
-   * @returns {Promise<Object>} Complete discovery report
+   * Get summary statistics of discovered services
+   * @returns {Promise<Object>} Summary statistics
    */
-  async generateReport() {
+  async getDiscoverySummary() {
     const services = await this.discoverServices();
-    const summary = this.getSummary(services);
     
-    const report = {
-      timestamp: new Date().toISOString(),
-      analysisDirectory: this.analysisDir,
-      summary,
-      services: services.sort((a, b) => a.name.localeCompare(b.name))
+    const summary = {
+      totalServices: services.length,
+      servicesWithApiInventory: 0,
+      servicesWithDependencyMap: 0,
+      servicesWithOpenAPI: 0,
+      fileTypeCounts: {}
     };
 
-    console.log('\n=== Service Discovery Summary ===');
-    console.log(`Total Services: ${summary.total}`);
-    console.log(`Complete Services: ${summary.complete}`);
-    console.log(`Incomplete Services: ${summary.incomplete}`);
-    console.log(`Completion Rate: ${summary.completionRate}%`);
-    
-    if (Object.keys(summary.missingFiles).length > 0) {
-      console.log('\nMissing Files:');
-      Object.entries(summary.missingFiles).forEach(([file, count]) => {
-        console.log(`  ${file}: ${count} services missing`);
-      });
-    }
+    this.supportedFiles.forEach(fileType => {
+      summary.fileTypeCounts[fileType] = 0;
+    });
 
-    return report;
+    services.forEach(service => {
+      Object.keys(service.files).forEach(fileName => {
+        if (fileName === 'api-inventory.md') summary.servicesWithApiInventory++;
+        if (fileName === 'dependency-map.json') summary.servicesWithDependencyMap++;
+        if (fileName.startsWith('openapi.')) summary.servicesWithOpenAPI++;
+        
+        summary.fileTypeCounts[fileName] = (summary.fileTypeCounts[fileName] || 0) + 1;
+      });
+    });
+
+    return summary;
   }
 }
 
@@ -157,14 +134,24 @@ module.exports = DirectoryScanner;
 // CLI execution
 if (require.main === module) {
   const scanner = new DirectoryScanner();
-  scanner.generateReport()
-    .then(report => {
-      console.log('\nFull report generated successfully');
+  scanner.discoverServices()
+    .then(services => {
+      console.log('\n=== Service Discovery Summary ===');
+      console.log(`Total Services: ${services.length}`);
+      console.log(`Services with API Inventory: ${services.filter(s => s.files['api-inventory.md']).length}`);
+      console.log(`Services with Dependency Map: ${services.filter(s => s.files['dependency-map.json']).length}`);
+      console.log(`Services with OpenAPI: ${services.filter(s => Object.keys(s.files).some(f => f.startsWith('openapi.'))).length}`);
+      
+      console.log('\nFile Type Counts:');
+      Object.entries(scanner.supportedFiles).forEach(([fileType, count]) => {
+        console.log(`  ${fileType}: ${count} services`);
+      });
+
       // Optional: save report to file
       // fs.writeFile('output/discovery-report.json', JSON.stringify(report, null, 2));
     })
     .catch(error => {
-      console.error('Error generating report:', error);
+      console.error('Error discovering services:', error);
       process.exit(1);
     });
 } 
