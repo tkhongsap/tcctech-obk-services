@@ -43,14 +43,14 @@
   - [x] 2.6 Add dependency pattern analysis to identify unusual service behaviors
   - [x] 2.7 Write comprehensive tests for analysis algorithms
 
-- [ ] 3.0 Dependency Risk Assessment
-  - [ ] 3.1 Build dependency graph from service relationship data
-  - [ ] 3.2 Implement risk scoring based on dependency counts and patterns
-  - [ ] 3.3 Create circular dependency detection algorithm
-  - [ ] 3.4 Flag services with high dependency risks (10+ external calls)
-  - [ ] 3.5 Identify APIs used by 3+ services as potential bottlenecks
-  - [ ] 3.6 Generate impact scores for critical service dependencies
-  - [ ] 3.7 Write tests for risk assessment algorithms
+- [x] 3.0 Dependency Risk Assessment
+  - [x] 3.1 Build dependency graph from service relationship data
+  - [x] 3.2 Implement risk scoring based on dependency counts and patterns
+  - [x] 3.3 Create circular dependency detection algorithm
+  - [x] 3.4 Flag services with high dependency risks (10+ external calls)
+  - [x] 3.5 Identify APIs used by 3+ services as potential bottlenecks
+  - [x] 3.6 Generate impact scores for critical service dependencies
+  - [x] 3.7 Write tests for risk assessment algorithms
 
 - [ ] 4.0 Report Generation and Output
   - [ ] 4.1 Create JSON output generator for raw analysis data
