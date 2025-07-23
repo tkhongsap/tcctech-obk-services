@@ -1,0 +1,78 @@
+---
+alwaysApply: true
+---
+# API Documentation Task List Management
+
+Guidelines for managing task lists for API documentation and inventory systems with per-service processing
+
+## Task Implementation for API Analysis
+- **Proceed through infrastructure tasks first** Complete all setup tasks (1.0-4.0) before starting service processing
+- **Service-by-service processing** Process exactly ONE service at a time for task 5.0+
+- **Completion protocol for Infrastructure Tasks (1.0-4.0):**  
+  1. When you finish a **sub‑task**, immediately mark it as completed by changing `[ ]` to `[x]`
+  2. If **all** subtasks underneath a parent task are now `[x]`, follow this sequence:
+    - **Skip test execution**: This is read-only static analysis - no tests required
+    - **Stage changes**: `git add .`
+    - **Clean up**: Remove any temporary files and temporary code before committing
+    - **Commit**: Use a descriptive commit message with conventional format
+  3. Once all subtasks are marked completed and changes committed, mark the **parent task** as completed
+
+- **Completion protocol for Service Processing (5.0+):**
+  1. **Process ONE service completely** before moving to the next
+  2. For each service:
+    - Run analysis: `node scripts/api-analyzer.js [service-name]`
+    - Generate docs: `node scripts/output-generator.js output/[service-name]-analysis.json [service-name]`
+    - **Immediate commit**: `git add . && git commit -m "docs: API analysis for [service-name]" && git push`
+    - **Update task list**: Mark service as `[x]` in the service checklist
+    - **Update progress**: Increment completion count (e.g., 2/37 COMPLETED)
+  3. **Continue automatically** to next service without user approval
+  4. **Only stop** if errors occur or manual intervention needed
+
+## Service Processing Automation
+- **No user approval required** between services once processing starts
+- **Automatic progression** through the service list
+- **Error handling**: Stop and report if any service fails analysis
+- **Progress tracking**: Update task list after each service completion
+
+## Task List Maintenance for API Analysis
+
+1. **Update the task list as you work:**
+   - Mark infrastructure sub-tasks as completed (`[x]`) immediately
+   - Mark individual services as completed (`[x]`) in the service checklist
+   - Update progress counters (e.g., "PROGRESS: 5/37 COMPLETED")
+
+2. **Maintain the "Relevant Files" section:**
+   - List every script, template, and output file created or modified
+   - Give each file a one‑line description of its purpose in the API analysis
+
+3. **Service tracking specifics:**
+   - Mark completed services with metrics: `[x] service-name - Framework - X endpoints, Y schemas, Z dependencies ✓`
+   - Update "NEXT TARGET" marker to the next service to be processed
+   - Maintain framework groupings and progress visibility
+
+## AI Instructions for API Documentation
+
+When working with API documentation task lists, the AI must:
+
+1. **For Infrastructure Tasks (1.0-4.0):**
+   - Complete all sub-tasks before moving to service processing
+   - Mark sub-tasks as `[x]` immediately upon completion
+   - Commit after each parent task completion
+
+2. **For Service Processing (5.0+):**
+   - Process services one at a time in the order listed
+   - Complete full analysis cycle per service (analyze → generate → commit → update task list)
+   - Update service checklist and progress counters immediately
+   - Continue automatically to next service
+
+3. **Error Handling:**
+   - Stop processing if any service analysis fails
+   - Report specific errors and suggested fixes
+   - Resume processing from the failed service after fixes
+
+4. **Progress Transparency:**
+   - Always show current progress (X/37 completed)
+   - Clearly indicate which service is being processed
+   - Update completion metrics for each service
+
+## Apply this process to process API documentation tasks from: $ARGUMENTS

@@ -10,11 +10,11 @@ This feature will provide comprehensive analysis of API usage patterns across al
 
 ## Goals
 
-1. **Identify Performance Bottlenecks**: Analyze API usage patterns to identify services or endpoints that may cause performance issues
-2. **Optimize API Dependencies**: Map and analyze service-to-service dependencies to reduce coupling and improve resilience
-3. **Support Scaling Decisions**: Provide data-driven insights for capacity planning and infrastructure scaling
-4. **Risk Assessment**: Identify high-dependency APIs that could become single points of failure
-5. **Architecture Improvement**: Generate actionable recommendations for system architecture enhancements
+1. **Identify Frequently Used APIs**: Analyze API usage patterns across all services to identify the most commonly referenced endpoints
+2. **Map Cross-Service Dependencies**: Identify APIs that appear in multiple services indicating shared dependencies or potential bottlenecks
+3. **Highlight Performance Risks**: Flag APIs with high dependency counts that could become system bottlenecks
+4. **Generate Actionable Reports**: Create clear, structured reports listing most commonly used APIs and high-risk dependencies
+5. **Support Optimization Decisions**: Provide data-driven insights for infrastructure prioritization and system improvements
 
 ## User Stories
 
@@ -37,46 +37,40 @@ This feature will provide comprehensive analysis of API usage patterns across al
 ## Functional Requirements
 
 ### Core Analysis Engine
-1. **The system must process all existing service analysis data** from the `/analysis` directory containing 33+ services
-2. **The system must extract and normalize API endpoint information** from api-inventory.md files across all services
-3. **The system must parse dependency maps** from dependency-map.json files to understand service relationships
-4. **The system must analyze OpenAPI specifications** to understand endpoint complexity and data schemas
-5. **The system must identify cross-service API calls** by matching endpoint patterns across dependency maps
+1. **The system must scan the `/analysis` directory** to discover all service documentation
+2. **The system must parse api-inventory.md files** from each service to extract API endpoint information
+3. **The system must parse dependency-map.json files** to understand service-to-service relationships
+4. **The system must cross-reference API endpoints** across all services to identify usage patterns
+5. **The system must track API frequency** by counting how many services reference each endpoint
 
-### Data Processing & Analysis
-6. **The system must calculate API usage frequency** across all services to identify most commonly referenced endpoints
-7. **The system must identify shared dependencies** by finding APIs referenced by multiple services
-8. **The system must analyze dependency depth** to identify services with complex dependency chains
-9. **The system must detect potential bottlenecks** by identifying APIs with high fan-in (many services depend on them)
-10. **The system must categorize APIs** by framework (Express.js, NestJS, etc.) and complexity
+### Dependency Analysis
+6. **The system must identify shared APIs** by finding endpoints referenced by multiple services
+7. **The system must calculate dependency counts** for each API endpoint across all services
+8. **The system must flag high-dependency APIs** where 3+ services depend on the same endpoint
+9. **The system must detect potential bottlenecks** by analyzing fan-in patterns for critical services
+10. **The system must categorize services by framework** (Express.js, NestJS, etc.) for pattern analysis
 
 ### Risk Assessment
-11. **The system must identify high-risk dependencies** where multiple critical services depend on a single API
-12. **The system must calculate dependency impact scores** based on number of dependent services and their criticality
-13. **The system must flag services with no endpoints** or minimal API exposure for architecture review
-14. **The system must identify circular dependencies** between services
+11. **The system must identify high-risk dependencies** where multiple services depend on a single API
+12. **The system must calculate impact scores** based on number of dependent services
+13. **The system must flag services with unusual patterns** (too many/too few dependencies)
+14. **The system must detect circular dependencies** between services
 
-### Reporting & Visualization
-15. **The system must generate a comprehensive API usage report** listing most frequently called APIs with usage statistics
-16. **The system must create dependency visualization charts** showing service relationships and API call patterns
-17. **The system must produce bottleneck identification reports** highlighting performance risk areas
-18. **The system must generate architectural improvement recommendations** with specific action items
-19. **The system must provide exportable data** in JSON, CSV, and Markdown formats
-
-### Multi-Format Output
-20. **The system must create an interactive dashboard** for real-time exploration of API usage patterns
-21. **The system must generate static reports** suitable for documentation and presentation
-22. **The system must provide programmatic API access** to analysis results for integration with other tools
+### Reporting
+15. **The system must generate a ranked list** of most frequently referenced APIs across all services
+16. **The system must create a bottleneck report** highlighting APIs with highest dependency counts
+17. **The system must produce a summary report** with key findings and recommendations
+18. **The system must export results** in JSON and Markdown formats for further analysis
+19. **The system must provide raw data exports** for custom analysis and tooling
 
 ## Non-Goals (Out of Scope)
 
-- **Real-time API monitoring**: This analysis focuses on static documentation, not live traffic monitoring
-- **Performance testing**: No load testing or runtime performance measurement
-- **Code execution**: No running of services or test scripts during analysis
-- **API modification**: Analysis only, no automatic API changes or optimizations
-- **Authentication analysis**: Focus on structural patterns, not security implementation details
-- **Database schema analysis**: Limited to API-level data schemas only
-- **Historical trend analysis**: Single-point-in-time analysis based on current documentation
+- **Interactive dashboards**: Focus on analysis and reports first, UI can be added later
+- **Real-time monitoring**: This analysis is based on static documentation only
+- **Performance testing**: No actual API testing or load measurement
+- **Automatic code changes**: Analysis only, no modifications to services
+- **Historical tracking**: Single-point-in-time analysis based on current documentation
+- **External API analysis**: Focus only on internal service-to-service APIs
 
 ## Design Considerations
 
@@ -122,21 +116,21 @@ This feature will provide comprehensive analysis of API usage patterns across al
 ## Success Metrics
 
 ### Quantitative Metrics
-- **API Coverage**: Successfully analyze 100% of services in `/analysis` directory
-- **Dependency Accuracy**: Correctly identify 95%+ of cross-service API calls
-- **Processing Speed**: Complete full analysis in under 5 minutes
-- **Export Completeness**: Generate all required output formats without errors
+- **Coverage**: Successfully analyze 100% of services in `/analysis` directory
+- **Accuracy**: Correctly identify 95%+ of cross-service API references
+- **Performance**: Complete analysis of all services in under 2 minutes
+- **Completeness**: Generate all required reports without missing data
 
-### Qualitative Metrics
-- **Actionability**: Architecture team can identify 3+ optimization opportunities from analysis
-- **Clarity**: Development teams can understand their service dependencies without additional explanation
-- **Decision Support**: 80% of architectural decisions reference analysis data
-- **Time Savings**: Reduce manual dependency analysis time by 90%
+### Actionable Insights
+- **Top APIs**: Identify the 10 most frequently referenced APIs across services
+- **Bottleneck Identification**: Flag 5+ potential bottleneck APIs for optimization
+- **Risk Assessment**: Identify services with high dependency risks (10+ external API calls)
+- **Framework Patterns**: Categorize services by framework and identify optimization opportunities
 
-### Business Impact Metrics
-- **Performance Improvements**: Enable identification of optimization opportunities worth 10%+ performance gains
-- **Risk Reduction**: Identify and help mitigate 5+ potential single points of failure
-- **Architecture Quality**: Support decisions that improve overall system maintainability score
+### Business Impact
+- **Optimization Targets**: Provide clear priorities for API optimization efforts
+- **Risk Mitigation**: Identify potential single points of failure in the system
+- **Resource Planning**: Support infrastructure scaling decisions with dependency data
 
 ## Open Questions
 
