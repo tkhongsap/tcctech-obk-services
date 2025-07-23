@@ -10,7 +10,7 @@
 
 ## Technology Stack
 
-- **Framework**: Node.js {{FRAMEWORK_VERSION}}
+- **Framework**: Node.js 
 - **Language**: JavaScript/TypeScript
 - **Dependencies**: 0 packages
 - **External APIs**: 0

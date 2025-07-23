@@ -16,6 +16,945 @@
   ],
   "paths": {},
   "components": {
-    "schemas": {}
+    "schemas": {
+      "Props": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "text"
+          },
+          "onClick": {
+            "type": "string",
+            "description": "onClick"
+          },
+          "href": {
+            "type": "string",
+            "description": "href"
+          },
+          "showIcon": {
+            "type": "boolean",
+            "description": "showIcon"
+          },
+          "textPos": {
+            "type": "string",
+            "description": "textPos"
+          },
+          "iconPos": {
+            "type": "string",
+            "description": "iconPos"
+          },
+          "prefetch": {
+            "type": "string",
+            "description": "prefetch"
+          }
+        },
+        "required": [
+          "text"
+        ]
+      },
+      "itemInput": {
+        "type": "object",
+        "properties": {
+          "logo": {
+            "type": "string",
+            "description": "logo"
+          },
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "slug": {
+            "type": "string",
+            "description": "slug"
+          }
+        },
+        "required": [
+          "logo",
+          "name",
+          "slug"
+        ]
+      },
+      "GetOauthTokenOutput": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "data"
+          },
+          "error": {
+            "type": "string",
+            "description": "error"
+          }
+        }
+      },
+      "GetParkingDetailResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "status"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          },
+          "exeption": {
+            "type": "string",
+            "description": "exeption"
+          },
+          "logId": {
+            "type": "string",
+            "description": "logId"
+          },
+          "ticketNo": {
+            "type": "string",
+            "description": "ticketNo"
+          },
+          "ticketUid": {
+            "type": "string",
+            "description": "ticketUid"
+          },
+          "plateNo": {
+            "type": "string",
+            "description": "plateNo"
+          },
+          "exitStatus": {
+            "type": "number",
+            "description": "exitStatus"
+          },
+          "terminalInId": {
+            "type": "number",
+            "description": "terminalInId"
+          },
+          "terminalInName": {
+            "type": "string",
+            "description": "terminalInName"
+          },
+          "memberTypeId": {
+            "type": "number",
+            "description": "memberTypeId"
+          },
+          "memberTypeName": {
+            "type": "string",
+            "description": "memberTypeName"
+          },
+          "vehicleTypeId": {
+            "type": "number",
+            "description": "vehicleTypeId"
+          },
+          "vehicleTypeName": {
+            "type": "string",
+            "description": "vehicleTypeName"
+          },
+          "entryDateTime": {
+            "type": "string",
+            "description": "entryDateTime"
+          },
+          "logDateTime": {
+            "type": "string",
+            "description": "logDateTime"
+          },
+          "isCardLost": {
+            "type": "boolean",
+            "description": "isCardLost"
+          },
+          "parkHH": {
+            "type": "number",
+            "description": "parkHH"
+          },
+          "parkMM": {
+            "type": "number",
+            "description": "parkMM"
+          },
+          "rateHH": {
+            "type": "number",
+            "description": "rateHH"
+          },
+          "freeHH": {
+            "type": "number",
+            "description": "freeHH"
+          },
+          "rateCode": {
+            "type": "string",
+            "description": "rateCode"
+          },
+          "rateDetailTH": {
+            "type": "string",
+            "description": "rateDetailTH"
+          },
+          "rateDetailEN": {
+            "type": "string",
+            "description": "rateDetailEN"
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "tenantId"
+          },
+          "tenantName": {
+            "type": "string",
+            "description": "tenantName"
+          },
+          "subTotal": {
+            "type": "number",
+            "description": "subTotal"
+          },
+          "discount": {
+            "type": "number",
+            "description": "discount"
+          },
+          "parkFee": {
+            "type": "number",
+            "description": "parkFee"
+          },
+          "cardLostFine": {
+            "type": "number",
+            "description": "cardLostFine"
+          },
+          "overNightFine": {
+            "type": "number",
+            "description": "overNightFine"
+          },
+          "total": {
+            "type": "number",
+            "description": "total"
+          },
+          "isInv": {
+            "type": "boolean",
+            "description": "isInv"
+          },
+          "invRateHH": {
+            "type": "number",
+            "description": "invRateHH"
+          },
+          "invFee": {
+            "type": "number",
+            "description": "invFee"
+          },
+          "isPayAtKiosk": {
+            "type": "boolean",
+            "description": "isPayAtKiosk"
+          },
+          "lastDateTimePaymentAtKiosk": {
+            "type": "string",
+            "description": "lastDateTimePaymentAtKiosk"
+          },
+          "payAtKioskAll": {
+            "type": "number",
+            "description": "payAtKioskAll"
+          },
+          "timeUsedInMinute": {
+            "type": "number",
+            "description": "timeUsedInMinute"
+          },
+          "durationInMinute": {
+            "type": "number",
+            "description": "durationInMinute"
+          },
+          "remainInMinute": {
+            "type": "number",
+            "description": "remainInMinute"
+          }
+        },
+        "required": [
+          "status",
+          "message",
+          "exeption",
+          "logId",
+          "ticketNo",
+          "ticketUid",
+          "plateNo",
+          "exitStatus",
+          "terminalInId",
+          "terminalInName",
+          "memberTypeId",
+          "memberTypeName",
+          "vehicleTypeId",
+          "vehicleTypeName",
+          "entryDateTime",
+          "logDateTime",
+          "isCardLost",
+          "parkHH",
+          "parkMM",
+          "rateHH",
+          "freeHH",
+          "rateCode",
+          "rateDetailTH",
+          "rateDetailEN",
+          "tenantId",
+          "tenantName",
+          "subTotal",
+          "discount",
+          "parkFee",
+          "cardLostFine",
+          "overNightFine",
+          "total",
+          "isInv",
+          "invRateHH",
+          "invFee",
+          "isPayAtKiosk",
+          "lastDateTimePaymentAtKiosk",
+          "payAtKioskAll",
+          "timeUsedInMinute",
+          "durationInMinute",
+          "remainInMinute"
+        ]
+      },
+      "Oauth2TokenResponse": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "access_token"
+          },
+          "expires_in": {
+            "type": "number",
+            "description": "expires_in"
+          },
+          "token_type": {
+            "type": "string",
+            "description": "token_type"
+          }
+        },
+        "required": [
+          "access_token",
+          "expires_in",
+          "token_type"
+        ]
+      },
+      "GetPromptPayInput": {
+        "type": "object",
+        "properties": {
+          "invoiceNo": {
+            "type": "string",
+            "description": "invoiceNo"
+          },
+          "description": {
+            "type": "string",
+            "description": "description"
+          },
+          "amount": {
+            "type": "number",
+            "description": "amount"
+          },
+          "subCode": {
+            "type": "string",
+            "description": "subCode"
+          }
+        },
+        "required": [
+          "invoiceNo",
+          "description",
+          "amount"
+        ]
+      },
+      "GetPromptPayResponse": {
+        "type": "object",
+        "properties": {
+          "respCode": {
+            "type": "string",
+            "description": "respCode"
+          },
+          "respDesc": {
+            "type": "string",
+            "description": "respDesc"
+          },
+          "qrImage": {
+            "type": "string",
+            "description": "qrImage"
+          },
+          "transactionNo": {
+            "type": "string",
+            "description": "transactionNo"
+          },
+          "qrTimeOut": {
+            "type": "number",
+            "description": "qrTimeOut"
+          },
+          "qrId": {
+            "type": "string",
+            "description": "qrId"
+          }
+        },
+        "required": [
+          "respCode",
+          "respDesc",
+          "qrImage",
+          "transactionNo",
+          "qrTimeOut",
+          "qrId"
+        ]
+      },
+      "GetTrueMoneyInput": {
+        "type": "object",
+        "properties": {
+          "invoiceNo": {
+            "type": "string",
+            "description": "invoiceNo"
+          },
+          "description": {
+            "type": "string",
+            "description": "description"
+          },
+          "amount": {
+            "type": "number",
+            "description": "amount"
+          }
+        },
+        "required": [
+          "invoiceNo",
+          "description",
+          "amount"
+        ]
+      },
+      "GetTrueMoneyResponse": {
+        "type": "object",
+        "properties": {
+          "respCode": {
+            "type": "string",
+            "description": "respCode"
+          },
+          "respDesc": {
+            "type": "string",
+            "description": "respDesc"
+          },
+          "qrImage": {
+            "type": "string",
+            "description": "qrImage"
+          },
+          "transactionNo": {
+            "type": "string",
+            "description": "transactionNo"
+          },
+          "qrTimeOut": {
+            "type": "number",
+            "description": "qrTimeOut"
+          },
+          "qrId": {
+            "type": "string",
+            "description": "qrId"
+          }
+        },
+        "required": [
+          "respCode",
+          "respDesc",
+          "qrImage",
+          "transactionNo",
+          "qrTimeOut",
+          "qrId"
+        ]
+      },
+      "GetInquiryPaymentTransactionRqBody": {
+        "type": "object",
+        "properties": {
+          "transactionNo": {
+            "type": "string",
+            "description": "transactionNo"
+          },
+          "type": {
+            "type": "string",
+            "description": "type"
+          },
+          "logId": {
+            "type": "string",
+            "description": "logId"
+          },
+          "subCode": {
+            "type": "string",
+            "description": "subCode"
+          }
+        },
+        "required": [
+          "transactionNo",
+          "type",
+          "logId"
+        ]
+      },
+      "GetInquiryPaymentTransactionResponse": {
+        "type": "object",
+        "properties": {
+          "transactionNo": {
+            "type": "string",
+            "description": "transactionNo"
+          },
+          "invoiceNo": {
+            "type": "string",
+            "description": "invoiceNo"
+          },
+          "transactionDate": {
+            "type": "string",
+            "description": "transactionDate"
+          },
+          "merchantId": {
+            "type": "string",
+            "description": "merchantId"
+          },
+          "merchantName": {
+            "type": "string",
+            "description": "merchantName"
+          },
+          "paymentChannel": {
+            "type": "string",
+            "description": "paymentChannel"
+          },
+          "amount": {
+            "type": "number",
+            "description": "amount"
+          },
+          "paidAmount": {
+            "type": "string",
+            "description": "paidAmount"
+          },
+          "fee": {
+            "type": "number",
+            "description": "fee"
+          },
+          "feeVat": {
+            "type": "number",
+            "description": "feeVat"
+          },
+          "balance": {
+            "type": "number",
+            "description": "balance"
+          },
+          "transactionStatusId": {
+            "type": "number",
+            "description": "transactionStatusId"
+          },
+          "description": {
+            "type": "string",
+            "description": "description"
+          },
+          "deviceProfileId": {
+            "type": "string",
+            "description": "deviceProfileId"
+          }
+        },
+        "required": [
+          "transactionNo",
+          "invoiceNo",
+          "transactionDate",
+          "merchantId",
+          "merchantName",
+          "paymentChannel",
+          "amount",
+          "paidAmount",
+          "fee",
+          "feeVat",
+          "balance",
+          "transactionStatusId",
+          "description",
+          "deviceProfileId"
+        ]
+      },
+      "GetReceiptDetail": {
+        "type": "object",
+        "properties": {
+          "trn_Log_ID_Payment": {
+            "type": "number",
+            "description": "trn_Log_ID_Payment"
+          },
+          "trn_Log_ID": {
+            "type": "string",
+            "description": "trn_Log_ID"
+          },
+          "trn_Date": {
+            "type": "string",
+            "description": "trn_Date"
+          },
+          "trn_Terminal_ID": {
+            "type": "string",
+            "description": "trn_Terminal_ID"
+          },
+          "trn_User_ID": {
+            "type": "string",
+            "description": "trn_User_ID"
+          },
+          "trn_Shift_Running_No": {
+            "type": "number",
+            "description": "trn_Shift_Running_No"
+          },
+          "trn_Shift_Date": {
+            "type": "string",
+            "description": "trn_Shift_Date"
+          },
+          "trn_Operation": {
+            "type": "string",
+            "description": "trn_Operation"
+          },
+          "trn_Direction": {
+            "type": "string",
+            "description": "trn_Direction"
+          },
+          "trn_Shift_Type": {
+            "type": "string",
+            "description": "trn_Shift_Type"
+          },
+          "trn_Log_Date": {
+            "type": "string",
+            "description": "trn_Log_Date"
+          },
+          "trn_Ent_Date": {
+            "type": "string",
+            "description": "trn_Ent_Date"
+          },
+          "trn_Ent_Terminal_ID": {
+            "type": "string",
+            "description": "trn_Ent_Terminal_ID"
+          },
+          "trn_Vehicle_Type": {
+            "type": "string",
+            "description": "trn_Vehicle_Type"
+          },
+          "trn_Card_UID": {
+            "type": "string",
+            "description": "trn_Card_UID"
+          },
+          "trn_Ticket_No": {
+            "type": "string",
+            "description": "trn_Ticket_No"
+          },
+          "trn_Ticket_Type": {
+            "type": "string",
+            "description": "trn_Ticket_Type"
+          },
+          "trn_Mem_Code": {
+            "type": "string",
+            "description": "trn_Mem_Code"
+          },
+          "trn_Mem_Type": {
+            "type": "string",
+            "description": "trn_Mem_Type"
+          },
+          "trn_Mem_Credit": {
+            "type": "string",
+            "description": "trn_Mem_Credit"
+          },
+          "trn_Car_Char": {
+            "type": "string",
+            "description": "trn_Car_Char"
+          },
+          "trn_Car_No": {
+            "type": "string",
+            "description": "trn_Car_No"
+          },
+          "trn_Car_Prv": {
+            "type": "string",
+            "description": "trn_Car_Prv"
+          },
+          "trn_Rate_HH": {
+            "type": "number",
+            "description": "trn_Rate_HH"
+          },
+          "trn_Park_HH": {
+            "type": "number",
+            "description": "trn_Park_HH"
+          },
+          "trn_Park_MM": {
+            "type": "number",
+            "description": "trn_Park_MM"
+          },
+          "trn_Piad_Lost": {
+            "type": "string",
+            "description": "trn_Piad_Lost"
+          },
+          "trn_Piad_Overnight": {
+            "type": "string",
+            "description": "trn_Piad_Overnight"
+          },
+          "trn_SubCharge": {
+            "type": "number",
+            "description": "trn_SubCharge"
+          },
+          "trn_SubTotal": {
+            "type": "number",
+            "description": "trn_SubTotal"
+          },
+          "trn_Discount": {
+            "type": "number",
+            "description": "trn_Discount"
+          },
+          "trn_Charge": {
+            "type": "number",
+            "description": "trn_Charge"
+          },
+          "trn_Total": {
+            "type": "number",
+            "description": "trn_Total"
+          },
+          "trn_Cash": {
+            "type": "number",
+            "description": "trn_Cash"
+          },
+          "trn_Refund": {
+            "type": "string",
+            "description": "trn_Refund"
+          },
+          "trn_Piad_Card": {
+            "type": "string",
+            "description": "trn_Piad_Card"
+          },
+          "trn_Piad_1": {
+            "type": "string",
+            "description": "trn_Piad_1"
+          },
+          "trn_Piad_2": {
+            "type": "string",
+            "description": "trn_Piad_2"
+          },
+          "trn_Piad_CP": {
+            "type": "string",
+            "description": "trn_Piad_CP"
+          },
+          "trn_Piad_Cp_Detail": {
+            "type": "string",
+            "description": "trn_Piad_Cp_Detail"
+          },
+          "trn_Rate_Code": {
+            "type": "number",
+            "description": "trn_Rate_Code"
+          },
+          "trn_Rate_LogID": {
+            "type": "string",
+            "description": "trn_Rate_LogID"
+          },
+          "trn_Bill_No": {
+            "type": "string",
+            "description": "trn_Bill_No"
+          },
+          "trn_Tax_No": {
+            "type": "string",
+            "description": "trn_Tax_No"
+          },
+          "trn_Piad_Remark": {
+            "type": "string",
+            "description": "trn_Piad_Remark"
+          },
+          "trn_Remark": {
+            "type": "string",
+            "description": "trn_Remark"
+          },
+          "trn_MSG": {
+            "type": "string",
+            "description": "trn_MSG"
+          },
+          "trn_Exit_Status": {
+            "type": "string",
+            "description": "trn_Exit_Status"
+          },
+          "trn_Ref_Log": {
+            "type": "string",
+            "description": "trn_Ref_Log"
+          },
+          "trn_TaxInv_Ref": {
+            "type": "string",
+            "description": "trn_TaxInv_Ref"
+          },
+          "trn_IsInv": {
+            "type": "number",
+            "description": "trn_IsInv"
+          },
+          "trn_Inv_Pay": {
+            "type": "number",
+            "description": "trn_Inv_Pay"
+          },
+          "trn_Inv_Rate_HH": {
+            "type": "number",
+            "description": "trn_Inv_Rate_HH"
+          },
+          "trn_Vat_Rate": {
+            "type": "number",
+            "description": "trn_Vat_Rate"
+          },
+          "trn_Vat": {
+            "type": "number",
+            "description": "trn_Vat"
+          },
+          "trn_Amount": {
+            "type": "number",
+            "description": "trn_Amount"
+          },
+          "trn_Lot_No": {
+            "type": "string",
+            "description": "trn_Lot_No"
+          },
+          "trn_Estamp_User": {
+            "type": "string",
+            "description": "trn_Estamp_User"
+          },
+          "trn_Estamp_Date": {
+            "type": "string",
+            "description": "trn_Estamp_Date"
+          },
+          "trn_Estamp_Station": {
+            "type": "string",
+            "description": "trn_Estamp_Station"
+          },
+          "trn_Status": {
+            "type": "number",
+            "description": "trn_Status"
+          },
+          "trn_Pooling_Date": {
+            "type": "string",
+            "description": "trn_Pooling_Date"
+          },
+          "trn_Fee_Type_Detail_Id": {
+            "type": "string",
+            "description": "trn_Fee_Type_Detail_Id"
+          },
+          "trn_Fee_Type_Detail_Name": {
+            "type": "string",
+            "description": "trn_Fee_Type_Detail_Name"
+          },
+          "trn_Fee_Percent": {
+            "type": "string",
+            "description": "trn_Fee_Percent"
+          },
+          "trn_Fee_Amont": {
+            "type": "string",
+            "description": "trn_Fee_Amont"
+          },
+          "trn_CreateTime": {
+            "type": "string",
+            "description": "trn_CreateTime"
+          },
+          "trn_IsVoid": {
+            "type": "number",
+            "description": "trn_IsVoid"
+          },
+          "trn_SaleTransactionId": {
+            "type": "string",
+            "description": "trn_SaleTransactionId"
+          },
+          "trn_SaleTaxNo": {
+            "type": "string",
+            "description": "trn_SaleTaxNo"
+          },
+          "void_reason_Id": {
+            "type": "string",
+            "description": "void_reason_Id"
+          }
+        },
+        "required": [
+          "trn_Log_ID_Payment",
+          "trn_Log_ID",
+          "trn_Date",
+          "trn_Terminal_ID",
+          "trn_User_ID",
+          "trn_Shift_Running_No",
+          "trn_Shift_Date",
+          "trn_Operation",
+          "trn_Direction",
+          "trn_Shift_Type",
+          "trn_Log_Date",
+          "trn_Ent_Date",
+          "trn_Ent_Terminal_ID",
+          "trn_Vehicle_Type",
+          "trn_Card_UID",
+          "trn_Ticket_No",
+          "trn_Ticket_Type",
+          "trn_Mem_Code",
+          "trn_Mem_Type",
+          "trn_Mem_Credit",
+          "trn_Car_Char",
+          "trn_Car_No",
+          "trn_Car_Prv",
+          "trn_Rate_HH",
+          "trn_Park_HH",
+          "trn_Park_MM",
+          "trn_Piad_Lost",
+          "trn_Piad_Overnight",
+          "trn_SubCharge",
+          "trn_SubTotal",
+          "trn_Discount",
+          "trn_Charge",
+          "trn_Total",
+          "trn_Cash",
+          "trn_Refund",
+          "trn_Piad_Card",
+          "trn_Piad_1",
+          "trn_Piad_2",
+          "trn_Piad_CP",
+          "trn_Piad_Cp_Detail",
+          "trn_Rate_Code",
+          "trn_Rate_LogID",
+          "trn_Bill_No",
+          "trn_Tax_No",
+          "trn_Piad_Remark",
+          "trn_Remark",
+          "trn_MSG",
+          "trn_Exit_Status",
+          "trn_Ref_Log",
+          "trn_TaxInv_Ref",
+          "trn_IsInv",
+          "trn_Inv_Pay",
+          "trn_Inv_Rate_HH",
+          "trn_Vat_Rate",
+          "trn_Vat",
+          "trn_Amount",
+          "trn_Lot_No",
+          "trn_Estamp_User",
+          "trn_Estamp_Date",
+          "trn_Estamp_Station",
+          "trn_Status",
+          "trn_Pooling_Date",
+          "trn_Fee_Type_Detail_Id",
+          "trn_Fee_Type_Detail_Name",
+          "trn_Fee_Percent",
+          "trn_Fee_Amont",
+          "trn_CreateTime",
+          "trn_IsVoid",
+          "trn_SaleTransactionId",
+          "trn_SaleTaxNo",
+          "void_reason_Id"
+        ]
+      },
+      "GetReceiptImageResponse": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "string",
+            "description": "image"
+          }
+        },
+        "required": [
+          "image"
+        ]
+      },
+      "GetAlldataDetailsReceiptBody": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "type"
+          },
+          "logId": {
+            "type": "string",
+            "description": "logId"
+          }
+        },
+        "required": [
+          "type",
+          "logId"
+        ]
+      },
+      "item": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "color": {
+            "type": "string",
+            "description": "color"
+          }
+        },
+        "required": [
+          "name",
+          "color"
+        ]
+      }
+    }
   }
 }

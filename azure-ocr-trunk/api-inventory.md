@@ -10,7 +10,7 @@
 
 ## Technology Stack
 
-- **Framework**: FastAPI {{FRAMEWORK_VERSION}}
+- **Framework**: FastAPI 0.115.12
 - **Language**: Python
 - **Dependencies**: 11 packages
 - **External APIs**: 0

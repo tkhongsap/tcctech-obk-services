@@ -10,7 +10,7 @@
 
 ## Technology Stack
 
-- **Framework**: Express.js {{FRAMEWORK_VERSION}}
+- **Framework**: Express.js ^4.21.2
 - **Language**: JavaScript/TypeScript
 - **Dependencies**: 2 packages
 - **External APIs**: 0

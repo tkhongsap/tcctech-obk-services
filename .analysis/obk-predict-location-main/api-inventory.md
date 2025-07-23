@@ -10,7 +10,7 @@
 
 ## Technology Stack
 
-- **Framework**: Python {{FRAMEWORK_VERSION}}
+- **Framework**: Python 
 - **Language**: Python
 - **Dependencies**: 0 packages
 - **External APIs**: 0

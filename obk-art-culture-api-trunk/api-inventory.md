@@ -10,7 +10,7 @@
 
 ## Technology Stack
 
-- **Framework**: Fiber {{FRAMEWORK_VERSION}}
+- **Framework**: Fiber 1.21
 - **Language**: Go
 - **Dependencies**: 44 packages
 - **External APIs**: 0

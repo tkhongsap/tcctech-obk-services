@@ -10,7 +10,7 @@
 
 ## Technology Stack
 
-- **Framework**: unknown {{FRAMEWORK_VERSION}}
+- **Framework**: unknown 
 - **Language**: unknown
 - **Dependencies**: 3 packages
 - **External APIs**: 3

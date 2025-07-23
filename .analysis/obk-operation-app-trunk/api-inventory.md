@@ -10,7 +10,7 @@
 
 ## Technology Stack
 
-- **Framework**: Flutter {{FRAMEWORK_VERSION}}
+- **Framework**: Flutter 
 - **Language**: Dart
 - **Dependencies**: 0 packages
 - **External APIs**: 0

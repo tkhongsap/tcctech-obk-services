@@ -36,6 +36,1641 @@
     }
   },
   "components": {
-    "schemas": {}
+    "schemas": {
+      "LoggingContext": {
+        "type": "object",
+        "properties": {
+          "traceId": {
+            "type": "string",
+            "description": "traceId"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "accountId"
+          }
+        }
+      },
+      "BaseIndexQuery": {
+        "type": "object",
+        "properties": {
+          "order_by": {
+            "type": "string",
+            "description": "order_by"
+          },
+          "order_direction": {
+            "type": "string",
+            "description": "order_direction"
+          },
+          "page_number": {
+            "type": "number",
+            "description": "page_number"
+          },
+          "page_size": {
+            "type": "number",
+            "description": "page_size"
+          },
+          "filter_by": {
+            "type": "string",
+            "description": "filter_by"
+          },
+          "filter_key": {
+            "type": "string",
+            "description": "filter_key"
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "description": "total"
+          },
+          "total_page": {
+            "type": "number",
+            "description": "total_page"
+          },
+          "page_number": {
+            "type": "number",
+            "description": "page_number"
+          },
+          "page_size": {
+            "type": "number",
+            "description": "page_size"
+          }
+        },
+        "required": [
+          "total",
+          "total_page",
+          "page_number",
+          "page_size"
+        ]
+      },
+      "CampaignResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "sequence": {
+            "type": "number",
+            "description": "sequence"
+          },
+          "price_min": {
+            "type": "number",
+            "description": "price_min"
+          },
+          "price_max": {
+            "type": "string",
+            "description": "price_max"
+          },
+          "redeem_hour": {
+            "type": "number",
+            "description": "redeem_hour"
+          },
+          "rate_code": {
+            "type": "string",
+            "description": "rate_code"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "created_at"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "updated_at"
+          },
+          "deleted_at": {
+            "type": "string",
+            "description": "deleted_at"
+          }
+        },
+        "required": [
+          "id",
+          "sequence",
+          "price_min",
+          "price_max",
+          "redeem_hour",
+          "rate_code",
+          "created_at",
+          "updated_at",
+          "deleted_at"
+        ]
+      },
+      "CampaignSequenceResponse": {
+        "type": "object",
+        "properties": {
+          "1": {
+            "type": "string",
+            "description": "1"
+          },
+          "2": {
+            "type": "string",
+            "description": "2"
+          },
+          "3": {
+            "type": "string",
+            "description": "3"
+          },
+          "4": {
+            "type": "string",
+            "description": "4"
+          },
+          "data": {
+            "type": "string",
+            "description": "data"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "created_at"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "updated_at"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "updated_by"
+          }
+        },
+        "required": [
+          "data",
+          "1",
+          "2",
+          "3",
+          "4",
+          "created_at",
+          "updated_at",
+          "updated_by"
+        ]
+      },
+      "BaseCampaignBody": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "price_min": {
+            "type": "number",
+            "description": "price_min"
+          },
+          "redeem_hour": {
+            "type": "number",
+            "description": "redeem_hour"
+          },
+          "rate_code": {
+            "type": "string",
+            "description": "rate_code"
+          }
+        },
+        "required": [
+          "price_min",
+          "redeem_hour",
+          "rate_code"
+        ]
+      },
+      "UpsertCampaignBody": {
+        "type": "object",
+        "properties": {
+          "1": {
+            "type": "string",
+            "description": "1"
+          },
+          "2": {
+            "type": "string",
+            "description": "2"
+          },
+          "3": {
+            "type": "string",
+            "description": "3"
+          },
+          "4": {
+            "type": "string",
+            "description": "4"
+          }
+        },
+        "required": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "UpsertCampaign": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "data"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "updated_by"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "ConfigStoreWhitelistQuery": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "tax_id": {
+            "type": "string",
+            "description": "tax_id"
+          },
+          "store_name": {
+            "type": "string",
+            "description": "store_name"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "company_name"
+          },
+          "property_name": {
+            "type": "string",
+            "description": "property_name"
+          },
+          "property_id": {
+            "type": "string",
+            "description": "property_id"
+          },
+          "unit_no": {
+            "type": "string",
+            "description": "unit_no"
+          },
+          "address": {
+            "type": "string",
+            "description": "address"
+          },
+          "building": {
+            "type": "string",
+            "description": "building"
+          },
+          "has_tax_id": {
+            "type": "boolean",
+            "description": "has_tax_id"
+          },
+          "receipt_address_in_obk": {
+            "type": "boolean",
+            "description": "receipt_address_in_obk"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "updated_at"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "created_at"
+          },
+          "sort_key": {
+            "type": "string",
+            "description": "sort_key"
+          },
+          "sort_direction": {
+            "type": "string",
+            "description": "sort_direction"
+          }
+        }
+      },
+      "AddConfigStoreWhitelist": {
+        "type": "object",
+        "properties": {
+          "tax_id": {
+            "type": "string",
+            "description": "tax_id"
+          },
+          "store_name": {
+            "type": "string",
+            "description": "store_name"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "company_name"
+          },
+          "property_id": {
+            "type": "string",
+            "description": "property_id"
+          },
+          "unit_no": {
+            "type": "string",
+            "description": "unit_no"
+          },
+          "address": {
+            "type": "string",
+            "description": "address"
+          },
+          "building": {
+            "type": "string",
+            "description": "building"
+          },
+          "has_tax_id": {
+            "type": "boolean",
+            "description": "has_tax_id"
+          },
+          "receipt_address_in_obk": {
+            "type": "boolean",
+            "description": "receipt_address_in_obk"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "updated_by"
+          }
+        },
+        "required": [
+          "store_name",
+          "company_name",
+          "property_id",
+          "has_tax_id",
+          "receipt_address_in_obk"
+        ]
+      },
+      "PropertyQuery": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "name"
+          }
+        }
+      },
+      "UpdateConfigStoreWhitelist": {
+        "type": "object",
+        "properties": {
+          "tax_id": {
+            "type": "string",
+            "description": "tax_id"
+          },
+          "store_name": {
+            "type": "string",
+            "description": "store_name"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "company_name"
+          },
+          "property_id": {
+            "type": "string",
+            "description": "property_id"
+          },
+          "unit_no": {
+            "type": "string",
+            "description": "unit_no"
+          },
+          "address": {
+            "type": "string",
+            "description": "address"
+          },
+          "building": {
+            "type": "string",
+            "description": "building"
+          },
+          "has_tax_id": {
+            "type": "boolean",
+            "description": "has_tax_id"
+          },
+          "receipt_address_in_obk": {
+            "type": "boolean",
+            "description": "receipt_address_in_obk"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "updated_by"
+          }
+        }
+      },
+      "StoreWhitelistResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "updated_at"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "created_at"
+          },
+          "tax_id": {
+            "type": "string",
+            "description": "tax_id"
+          },
+          "store_name": {
+            "type": "string",
+            "description": "store_name"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "company_name"
+          },
+          "unit_no": {
+            "type": "string",
+            "description": "unit_no"
+          },
+          "address": {
+            "type": "string",
+            "description": "address"
+          },
+          "building": {
+            "type": "string",
+            "description": "building"
+          },
+          "has_tax_id": {
+            "type": "boolean",
+            "description": "has_tax_id"
+          },
+          "receipt_address_in_obk": {
+            "type": "boolean",
+            "description": "receipt_address_in_obk"
+          },
+          "property": {
+            "type": "string",
+            "description": "property"
+          },
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "keywords": {
+            "type": "string",
+            "description": "keywords"
+          },
+          "addresses": {
+            "type": "string",
+            "description": "addresses"
+          }
+        },
+        "required": [
+          "id",
+          "updated_at",
+          "created_at",
+          "tax_id",
+          "store_name",
+          "company_name",
+          "unit_no",
+          "address",
+          "building",
+          "has_tax_id",
+          "receipt_address_in_obk",
+          "property",
+          "id",
+          "name",
+          "keywords",
+          "addresses"
+        ]
+      },
+      "propertiesResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "keywords": {
+            "type": "string",
+            "description": "keywords"
+          },
+          "addresses": {
+            "type": "string",
+            "description": "addresses"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "keywords",
+          "addresses"
+        ]
+      },
+      "PropertyBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "keywords": {
+            "type": "string",
+            "description": "keywords"
+          },
+          "addresses": {
+            "type": "string",
+            "description": "addresses"
+          }
+        },
+        "required": [
+          "name",
+          "keywords",
+          "addresses"
+        ]
+      },
+      "ConfigDocsTypeResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "keyword": {
+            "type": "string",
+            "description": "keyword"
+          },
+          "type": {
+            "type": "string",
+            "description": "type"
+          }
+        },
+        "required": [
+          "id",
+          "keyword",
+          "type"
+        ]
+      },
+      "ConfigDocsTypeBody": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "keyword"
+          },
+          "type": {
+            "type": "string",
+            "description": "type"
+          }
+        },
+        "required": [
+          "keyword",
+          "type"
+        ]
+      },
+      "AddParkingTicketQuery": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "platform": {
+            "type": "string",
+            "description": "platform"
+          },
+          "id_type": {
+            "type": "string",
+            "description": "id_type"
+          }
+        },
+        "required": [
+          "id",
+          "platform",
+          "id_type"
+        ]
+      },
+      "AddParkingTicketResponse": {
+        "type": "object",
+        "properties": {
+          "parkingDetailId": {
+            "type": "string",
+            "description": "parkingDetailId"
+          }
+        },
+        "required": [
+          "parkingDetailId"
+        ]
+      },
+      "ParkingAccountDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "username": {
+            "type": "string",
+            "description": "username"
+          },
+          "email": {
+            "type": "string",
+            "description": "email"
+          },
+          "phone": {
+            "type": "string",
+            "description": "phone"
+          }
+        },
+        "required": [
+          "id",
+          "username",
+          "email",
+          "phone"
+        ]
+      },
+      "GetParkingDetailResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "record_id": {
+            "type": "string",
+            "description": "record_id"
+          },
+          "parking_ticket": {
+            "type": "string",
+            "description": "parking_ticket"
+          },
+          "license_plate": {
+            "type": "string",
+            "description": "license_plate"
+          },
+          "account_detail": {
+            "type": "string",
+            "description": "account_detail"
+          },
+          "total_amount": {
+            "type": "string",
+            "description": "total_amount"
+          },
+          "receipts": {
+            "type": "string",
+            "description": "receipts"
+          },
+          "redeemed_at": {
+            "type": "string",
+            "description": "redeemed_at"
+          },
+          "rate_detail": {
+            "type": "string",
+            "description": "rate_detail"
+          },
+          "en": {
+            "type": "string",
+            "description": "en"
+          },
+          "th": {
+            "type": "string",
+            "description": "th"
+          }
+        },
+        "required": [
+          "id",
+          "record_id",
+          "parking_ticket",
+          "license_plate",
+          "account_detail",
+          "total_amount",
+          "receipts",
+          "redeemed_at",
+          "rate_detail",
+          "en",
+          "th"
+        ]
+      },
+      "GetParkingDetailsIndexResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "record_id": {
+            "type": "string",
+            "description": "record_id"
+          },
+          "parking_ticket_id": {
+            "type": "string",
+            "description": "parking_ticket_id"
+          },
+          "plate_no": {
+            "type": "string",
+            "description": "plate_no"
+          },
+          "account_detail": {
+            "type": "string",
+            "description": "account_detail"
+          },
+          "total_amount": {
+            "type": "string",
+            "description": "total_amount"
+          },
+          "redeemed_at": {
+            "type": "string",
+            "description": "redeemed_at"
+          },
+          "status": {
+            "type": "string",
+            "description": "status"
+          }
+        },
+        "required": [
+          "id",
+          "record_id",
+          "parking_ticket_id",
+          "plate_no",
+          "account_detail",
+          "total_amount",
+          "redeemed_at",
+          "status"
+        ]
+      },
+      "GetParkingDetailIndexQuery": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "description": "startDate"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "endDate"
+          },
+          "status": {
+            "type": "string",
+            "description": "status"
+          }
+        }
+      },
+      "ParkingDetailRedeemBody": {
+        "type": "object",
+        "properties": {
+          "parking_detail_id": {
+            "type": "string",
+            "description": "parking_detail_id"
+          },
+          "type": {
+            "type": "string",
+            "description": "type"
+          }
+        },
+        "required": [
+          "parking_detail_id",
+          "type"
+        ]
+      },
+      "RateDetail": {
+        "type": "object",
+        "properties": {
+          "en": {
+            "type": "string",
+            "description": "en"
+          },
+          "th": {
+            "type": "string",
+            "description": "th"
+          }
+        },
+        "required": [
+          "en",
+          "th"
+        ]
+      },
+      "RedeemParkingDetailResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "plate_number": {
+            "type": "string",
+            "description": "plate_number"
+          },
+          "ticket_number": {
+            "type": "string",
+            "description": "ticket_number"
+          },
+          "vehicle_type": {
+            "type": "string",
+            "description": "vehicle_type"
+          },
+          "total_fee": {
+            "type": "number",
+            "description": "total_fee"
+          },
+          "parked_at": {
+            "type": "string",
+            "description": "parked_at"
+          },
+          "rate_detail": {
+            "type": "string",
+            "description": "rate_detail"
+          },
+          "member_type_id": {
+            "type": "number",
+            "description": "member_type_id"
+          },
+          "vehicle_type_id": {
+            "type": "number",
+            "description": "vehicle_type_id"
+          },
+          "sub_code": {
+            "type": "string",
+            "description": "sub_code"
+          }
+        },
+        "required": [
+          "id",
+          "plate_number",
+          "ticket_number",
+          "vehicle_type",
+          "total_fee",
+          "parked_at",
+          "rate_detail",
+          "member_type_id",
+          "vehicle_type_id"
+        ]
+      },
+      "CreateReceiptBody": {
+        "type": "object",
+        "properties": {
+          "parkingDetailId": {
+            "type": "string",
+            "description": "parkingDetailId"
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "imageUrl"
+          },
+          "email": {
+            "type": "string",
+            "description": "email"
+          }
+        },
+        "required": [
+          "parkingDetailId",
+          "imageUrl"
+        ]
+      },
+      "Receipt": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "total": {
+            "type": "string",
+            "description": "total"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "created_at"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "updated_at"
+          },
+          "status": {
+            "type": "string",
+            "description": "status"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "image_url"
+          },
+          "merchant_name": {
+            "type": "string",
+            "description": "merchant_name"
+          },
+          "transaction_date": {
+            "type": "string",
+            "description": "transaction_date"
+          },
+          "Format": {
+            "type": "string",
+            "description": "Format"
+          },
+          "transaction_time": {
+            "type": "string",
+            "description": "transaction_time"
+          },
+          "items": {
+            "type": "string",
+            "description": "items"
+          },
+          "tax_id": {
+            "type": "string",
+            "description": "tax_id"
+          },
+          "receipt_no": {
+            "type": "string",
+            "description": "receipt_no"
+          },
+          "addres": {
+            "type": "string",
+            "description": "addres"
+          },
+          "unit_no": {
+            "type": "string",
+            "description": "unit_no"
+          },
+          "mall_name": {
+            "type": "string",
+            "description": "mall_name"
+          },
+          "hashed_receipt": {
+            "type": "string",
+            "description": "hashed_receipt"
+          },
+          "redeemed_at": {
+            "type": "string",
+            "description": "redeemed_at"
+          }
+        },
+        "required": [
+          "id",
+          "total",
+          "created_at",
+          "updated_at",
+          "status",
+          "image_url",
+          "Format",
+          "Format",
+          "items"
+        ]
+      },
+      "Item": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "description"
+          },
+          "quantity": {
+            "type": "number",
+            "description": "quantity"
+          },
+          "total_price": {
+            "type": "string",
+            "description": "total_price"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "UpdateReceiptBody": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "merchant_name": {
+            "type": "string",
+            "description": "merchant_name"
+          },
+          "transaction_date": {
+            "type": "string",
+            "description": "transaction_date"
+          },
+          "Format": {
+            "type": "string",
+            "description": "Format"
+          },
+          "transaction_time": {
+            "type": "string",
+            "description": "transaction_time"
+          },
+          "items": {
+            "type": "string",
+            "description": "items"
+          },
+          "total": {
+            "type": "string",
+            "description": "total"
+          },
+          "tax_id": {
+            "type": "string",
+            "description": "tax_id"
+          },
+          "receipt_no": {
+            "type": "string",
+            "description": "receipt_no"
+          },
+          "address": {
+            "type": "string",
+            "description": "address"
+          },
+          "unit_no": {
+            "type": "string",
+            "description": "unit_no"
+          },
+          "mall_name": {
+            "type": "string",
+            "description": "mall_name"
+          },
+          "hashed_receipt": {
+            "type": "string",
+            "description": "hashed_receipt"
+          },
+          "status": {
+            "type": "string",
+            "description": "status"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          }
+        },
+        "required": [
+          "id",
+          "merchant_name",
+          "transaction_date",
+          "Format",
+          "transaction_time",
+          "Format",
+          "items",
+          "total",
+          "tax_id",
+          "receipt_no",
+          "address",
+          "unit_no",
+          "mall_name",
+          "hashed_receipt",
+          "status",
+          "message"
+        ]
+      },
+      "GetAllReceiptQuery": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "receipt_hashed_id": {
+            "type": "string",
+            "description": "receipt_hashed_id"
+          },
+          "user_id": {
+            "type": "string",
+            "description": "user_id"
+          },
+          "status": {
+            "type": "string",
+            "description": "status"
+          },
+          "content": {
+            "type": "string",
+            "description": "content"
+          },
+          "redeemed_at": {
+            "type": "string",
+            "description": "redeemed_at"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "created_at"
+          },
+          "total": {
+            "type": "string",
+            "description": "total"
+          },
+          "parking_id": {
+            "type": "string",
+            "description": "parking_id"
+          }
+        }
+      },
+      "GetAllReceiptResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "receipt_hashed_id": {
+            "type": "string",
+            "description": "receipt_hashed_id"
+          },
+          "user_id": {
+            "type": "string",
+            "description": "user_id"
+          },
+          "status": {
+            "type": "string",
+            "description": "status"
+          },
+          "content": {
+            "type": "string",
+            "description": "content"
+          },
+          "redeemed_at": {
+            "type": "string",
+            "description": "redeemed_at"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "created_at"
+          },
+          "total": {
+            "type": "string",
+            "description": "total"
+          },
+          "parking_id": {
+            "type": "string",
+            "description": "parking_id"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "total",
+          "parking_id"
+        ]
+      },
+      "GetParkingDetailByPersonIDDataResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "status"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          },
+          "exeption": {
+            "type": "string",
+            "description": "exeption"
+          },
+          "logId": {
+            "type": "string",
+            "description": "logId"
+          },
+          "ticketNo": {
+            "type": "string",
+            "description": "ticketNo"
+          },
+          "ticketUid": {
+            "type": "string",
+            "description": "ticketUid"
+          },
+          "plateNo": {
+            "type": "string",
+            "description": "plateNo"
+          },
+          "entryDateTime": {
+            "type": "string",
+            "description": "entryDateTime"
+          },
+          "logDateTime": {
+            "type": "string",
+            "description": "logDateTime"
+          },
+          "exitStatus": {
+            "type": "number",
+            "description": "exitStatus"
+          },
+          "terminalInId": {
+            "type": "number",
+            "description": "terminalInId"
+          },
+          "terminalInName": {
+            "type": "string",
+            "description": "terminalInName"
+          },
+          "memberTypeId": {
+            "type": "number",
+            "description": "memberTypeId"
+          },
+          "memberTypeName": {
+            "type": "string",
+            "description": "memberTypeName"
+          },
+          "vehicleTypeId": {
+            "type": "number",
+            "description": "vehicleTypeId"
+          },
+          "vehicleTypeName": {
+            "type": "string",
+            "description": "vehicleTypeName"
+          },
+          "rateCode": {
+            "type": "string",
+            "description": "rateCode"
+          },
+          "rateDetailTH": {
+            "type": "string",
+            "description": "rateDetailTH"
+          },
+          "rateDetailEN": {
+            "type": "string",
+            "description": "rateDetailEN"
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "tenantId"
+          },
+          "tenantName": {
+            "type": "string",
+            "description": "tenantName"
+          },
+          "isCardLost": {
+            "type": "boolean",
+            "description": "isCardLost"
+          },
+          "parkHH": {
+            "type": "number",
+            "description": "parkHH"
+          },
+          "parkMM": {
+            "type": "number",
+            "description": "parkMM"
+          },
+          "rateHH": {
+            "type": "number",
+            "description": "rateHH"
+          },
+          "freeHH": {
+            "type": "number",
+            "description": "freeHH"
+          },
+          "subTotal": {
+            "type": "number",
+            "description": "subTotal"
+          },
+          "discount": {
+            "type": "number",
+            "description": "discount"
+          },
+          "parkFee": {
+            "type": "number",
+            "description": "parkFee"
+          },
+          "cardLostFine": {
+            "type": "number",
+            "description": "cardLostFine"
+          },
+          "overNightFine": {
+            "type": "number",
+            "description": "overNightFine"
+          },
+          "total": {
+            "type": "number",
+            "description": "total"
+          },
+          "isInv": {
+            "type": "boolean",
+            "description": "isInv"
+          },
+          "invRateHH": {
+            "type": "number",
+            "description": "invRateHH"
+          },
+          "invFee": {
+            "type": "number",
+            "description": "invFee"
+          },
+          "isPayAtKiosk": {
+            "type": "boolean",
+            "description": "isPayAtKiosk"
+          },
+          "lastDateTimePaymentAtKiosk": {
+            "type": "string",
+            "description": "lastDateTimePaymentAtKiosk"
+          },
+          "payAtKioskAll": {
+            "type": "number",
+            "description": "payAtKioskAll"
+          },
+          "durationInMinute": {
+            "type": "number",
+            "description": "durationInMinute"
+          },
+          "timeUsedInMinute": {
+            "type": "number",
+            "description": "timeUsedInMinute"
+          },
+          "remainInMinute": {
+            "type": "number",
+            "description": "remainInMinute"
+          }
+        },
+        "required": [
+          "status",
+          "message",
+          "exeption",
+          "logId",
+          "ticketNo",
+          "ticketUid",
+          "plateNo",
+          "entryDateTime",
+          "logDateTime",
+          "exitStatus",
+          "terminalInId",
+          "terminalInName",
+          "memberTypeId",
+          "memberTypeName",
+          "vehicleTypeId",
+          "vehicleTypeName",
+          "rateCode",
+          "rateDetailTH",
+          "rateDetailEN",
+          "tenantId",
+          "tenantName",
+          "isCardLost",
+          "parkHH",
+          "parkMM",
+          "rateHH",
+          "freeHH",
+          "subTotal",
+          "discount",
+          "parkFee",
+          "cardLostFine",
+          "overNightFine",
+          "total",
+          "isInv",
+          "invRateHH",
+          "invFee",
+          "isPayAtKiosk",
+          "lastDateTimePaymentAtKiosk",
+          "payAtKioskAll",
+          "durationInMinute",
+          "timeUsedInMinute",
+          "remainInMinute"
+        ]
+      },
+      "ReceiptItem": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "description"
+          },
+          "quantity": {
+            "type": "string",
+            "description": "quantity"
+          },
+          "total_price": {
+            "type": "string",
+            "description": "total_price"
+          }
+        },
+        "required": [
+          "description",
+          "quantity",
+          "total_price"
+        ]
+      },
+      "ReceiptData": {
+        "type": "object",
+        "properties": {
+          "merchant_name": {
+            "type": "string",
+            "description": "merchant_name"
+          },
+          "transaction_date": {
+            "type": "string",
+            "description": "transaction_date"
+          },
+          "format": {
+            "type": "string",
+            "description": "format"
+          },
+          "transaction_time": {
+            "type": "string",
+            "description": "transaction_time"
+          },
+          "HH": {
+            "type": "string",
+            "description": "HH"
+          },
+          "items": {
+            "type": "string",
+            "description": "items"
+          },
+          "total": {
+            "type": "string",
+            "description": "total"
+          },
+          "tax_id": {
+            "type": "string",
+            "description": "tax_id"
+          },
+          "receipt_no": {
+            "type": "string",
+            "description": "receipt_no"
+          },
+          "status": {
+            "type": "string",
+            "description": "status"
+          },
+          "address": {
+            "type": "string",
+            "description": "address"
+          },
+          "unit_no": {
+            "type": "string",
+            "description": "unit_no"
+          },
+          "mall_name": {
+            "type": "string",
+            "description": "mall_name"
+          },
+          "remarks": {
+            "type": "string",
+            "description": "remarks"
+          },
+          "hashed_receipt": {
+            "type": "string",
+            "description": "hashed_receipt"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          }
+        },
+        "required": [
+          "merchant_name",
+          "transaction_date",
+          "format",
+          "transaction_time",
+          "HH",
+          "items",
+          "total",
+          "tax_id",
+          "receipt_no",
+          "status",
+          "address",
+          "unit_no",
+          "mall_name",
+          "remarks",
+          "hashed_receipt",
+          "message"
+        ]
+      },
+      "ReceiptDataErrorResponse": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "description": "detail"
+          },
+          "status": {
+            "type": "string",
+            "description": "status"
+          },
+          "http_status": {
+            "type": "number",
+            "description": "http_status"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          },
+          "step": {
+            "type": "string",
+            "description": "step"
+          },
+          "extracted_data": {
+            "type": "string",
+            "description": "extracted_data"
+          }
+        },
+        "required": [
+          "detail",
+          "status",
+          "http_status",
+          "message",
+          "step"
+        ]
+      },
+      "getOauth2Response": {
+        "type": "object",
+        "properties": {
+          "token_type": {
+            "type": "string",
+            "description": "token_type"
+          },
+          "access_token": {
+            "type": "string",
+            "description": "access_token"
+          },
+          "expires_in": {
+            "type": "number",
+            "description": "expires_in"
+          }
+        },
+        "required": [
+          "token_type",
+          "access_token",
+          "expires_in"
+        ]
+      },
+      "RequirePermission": {
+        "type": "object",
+        "properties": {
+          "resource": {
+            "type": "string",
+            "description": "resource"
+          },
+          "action": {
+            "type": "string",
+            "description": "action"
+          }
+        },
+        "required": [
+          "resource",
+          "action"
+        ]
+      },
+      "EventReceiptApprovedPayload": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "account_id"
+          },
+          "receipt_id": {
+            "type": "string",
+            "description": "receipt_id"
+          },
+          "total_spending": {
+            "type": "string",
+            "description": "total_spending"
+          }
+        },
+        "required": [
+          "account_id",
+          "receipt_id",
+          "total_spending"
+        ]
+      },
+      "EventReceiptDeclinedPayload": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "account_id"
+          },
+          "receipt_id": {
+            "type": "string",
+            "description": "receipt_id"
+          },
+          "total_spending": {
+            "type": "string",
+            "description": "total_spending"
+          },
+          "reason_en": {
+            "type": "string",
+            "description": "reason_en"
+          },
+          "reason_th": {
+            "type": "string",
+            "description": "reason_th"
+          }
+        },
+        "required": [
+          "account_id",
+          "receipt_id",
+          "total_spending",
+          "reason_en",
+          "reason_th"
+        ]
+      },
+      "LogObject": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "title"
+          },
+          "body": {
+            "type": "string",
+            "description": "body"
+          },
+          "key": {
+            "type": "string",
+            "description": "key"
+          }
+        },
+        "required": [
+          "key"
+        ]
+      }
+    }
   }
 }

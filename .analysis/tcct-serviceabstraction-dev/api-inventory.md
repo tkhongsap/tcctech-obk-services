@@ -10,7 +10,7 @@
 
 ## Technology Stack
 
-- **Framework**: .NET {{FRAMEWORK_VERSION}}
+- **Framework**: .NET 
 - **Language**: C#
 - **Dependencies**: 31 packages
 - **External APIs**: 0

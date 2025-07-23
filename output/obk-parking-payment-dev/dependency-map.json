@@ -4,11 +4,1161 @@
     "path": "obk-parking-payment-dev",
     "framework": "Next.js",
     "language": "JavaScript/TypeScript",
-    "analyzed_at": "2025-07-22T22:25:34.064Z"
+    "baseUrl": "http://localhost:6000",
+    "analyzed_at": "2025-07-23T01:08:40.740Z"
   },
   "api_inventory": {
     "endpoints": [],
-    "schemas": [],
+    "schemas": [
+      {
+        "name": "Props",
+        "type": "typescript_type",
+        "file": "src/app/info/[id]/components/MainDetail.tsx",
+        "fields": [
+          {
+            "name": "data",
+            "type": "GetParkingDetailResponse",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "itemInput",
+        "type": "typescript_interface",
+        "file": "src/app/info/[id]/payMethod/page.tsx",
+        "fields": [
+          {
+            "name": "logo",
+            "type": "StaticImageData",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "slug",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Props",
+        "type": "typescript_type",
+        "file": "src/components/BottomAction.tsx",
+        "fields": [
+          {
+            "name": "text",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "onClick",
+            "type": "() => void",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "href",
+            "type": "Object",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "showIcon",
+            "type": "boolean",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "textPos",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "iconPos",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "prefetch",
+            "type": "null | boolean",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetOauthTokenOutput",
+        "type": "typescript_interface",
+        "file": "src/services/GetOauthToken.tsx",
+        "fields": [
+          {
+            "name": "data",
+            "type": "Oauth2TokenResponse",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetParkingDetailResponse",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "status",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "exeption",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "logId",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "ticketNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "ticketUid",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "plateNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "exitStatus",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "terminalInId",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "terminalInName",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "memberTypeId",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "memberTypeName",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "vehicleTypeId",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "vehicleTypeName",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "entryDateTime",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "logDateTime",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "isCardLost",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parkHH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parkMM",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rateHH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "freeHH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rateCode",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rateDetailTH",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rateDetailEN",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "tenantId",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "tenantName",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "subTotal",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "discount",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parkFee",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "cardLostFine",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "overNightFine",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "isInv",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "invRateHH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "invFee",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "isPayAtKiosk",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "lastDateTimePaymentAtKiosk",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "payAtKioskAll",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "timeUsedInMinute",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "durationInMinute",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "remainInMinute",
+            "type": "number",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Oauth2TokenResponse",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "access_token",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "expires_in",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "token_type",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetPromptPayInput",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "invoiceNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "subCode",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetPromptPayResponse",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "respCode",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "respDesc",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "qrImage",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "transactionNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "qrTimeOut",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "qrId",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetTrueMoneyInput",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "invoiceNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetTrueMoneyResponse",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "respCode",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "respDesc",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "qrImage",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "transactionNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "qrTimeOut",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "qrId",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetInquiryPaymentTransactionRqBody",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "transactionNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "logId",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "subCode",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetInquiryPaymentTransactionResponse",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "transactionNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "invoiceNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "transactionDate",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "merchantId",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "merchantName",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "paymentChannel",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "paidAmount",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "fee",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "feeVat",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "balance",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "transactionStatusId",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "deviceProfileId",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetReceiptDetail",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "trn_Log_ID_Payment",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Log_ID",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Date",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Terminal_ID",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_User_ID",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Shift_Running_No",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Shift_Date",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Operation",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Direction",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Shift_Type",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Log_Date",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Ent_Date",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Ent_Terminal_ID",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Vehicle_Type",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Card_UID",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Ticket_No",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Ticket_Type",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Mem_Code",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Mem_Type",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Mem_Credit",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Car_Char",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Car_No",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Car_Prv",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Rate_HH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Park_HH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Park_MM",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Piad_Lost",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Piad_Overnight",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_SubCharge",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_SubTotal",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Discount",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Charge",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Total",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Cash",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Refund",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Piad_Card",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Piad_1",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Piad_2",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Piad_CP",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Piad_Cp_Detail",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Rate_Code",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Rate_LogID",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Bill_No",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Tax_No",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Piad_Remark",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Remark",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_MSG",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Exit_Status",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Ref_Log",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_TaxInv_Ref",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_IsInv",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Inv_Pay",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Inv_Rate_HH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Vat_Rate",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Vat",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Amount",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Lot_No",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Estamp_User",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Estamp_Date",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Estamp_Station",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Status",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Pooling_Date",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Fee_Type_Detail_Id",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Fee_Type_Detail_Name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Fee_Percent",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_Fee_Amont",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_CreateTime",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_IsVoid",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_SaleTransactionId",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "trn_SaleTaxNo",
+            "type": "any",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "void_reason_Id",
+            "type": "any",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetReceiptImageResponse",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "image",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetAlldataDetailsReceiptBody",
+        "type": "typescript_interface",
+        "file": "src/types/Service.ts",
+        "fields": [
+          {
+            "name": "type",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "logId",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "item",
+        "type": "typescript_interface",
+        "file": "src/types/config/smart_parking_color.ts",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "color",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      }
+    ],
     "summary": {
       "methods": {},
       "has_authentication": false,
@@ -96,5 +1246,5 @@
       }
     ]
   },
-  "generated_at": "2025-07-22T23:53:53.083Z"
+  "generated_at": "2025-07-23T01:34:45.192Z"
 }

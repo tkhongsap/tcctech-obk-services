@@ -16,6 +16,773 @@
   ],
   "paths": {},
   "components": {
-    "schemas": {}
+    "schemas": {
+      "TermConProps": {
+        "type": "object",
+        "properties": {
+          "stage": {
+            "type": "string",
+            "description": "stage"
+          }
+        },
+        "required": [
+          "stage"
+        ]
+      },
+      "itemInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "url": {
+            "type": "string",
+            "description": "url"
+          }
+        },
+        "required": [
+          "name",
+          "url"
+        ]
+      },
+      "IFormInput": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "Dialog": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "title"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "ShowDialog": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "title"
+          },
+          "type": {
+            "type": "string",
+            "description": "type"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          }
+        },
+        "required": [
+          "title",
+          "type"
+        ]
+      },
+      "ButtonProps": {
+        "type": "object",
+        "properties": {
+          "asChild": {
+            "type": "boolean",
+            "description": "asChild"
+          }
+        }
+      },
+      "FormItemContextValue": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "AuthLoginPostBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "AuthLoginPostResponse": {
+        "type": "object",
+        "properties": {
+          "authToken": {
+            "type": "string",
+            "description": "authToken"
+          }
+        },
+        "required": [
+          "authToken"
+        ]
+      },
+      "AuthMeGetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "created_at"
+          },
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "email": {
+            "type": "string",
+            "description": "email"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "name",
+          "email"
+        ]
+      },
+      "SurveyGetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "id"
+          },
+          "survey_code": {
+            "type": "string",
+            "description": "survey_code"
+          },
+          "allow_multiple_responses": {
+            "type": "boolean",
+            "description": "allow_multiple_responses"
+          },
+          "expire_date": {
+            "type": "string",
+            "description": "expire_date"
+          },
+          "title": {
+            "type": "string",
+            "description": "title"
+          },
+          "description": {
+            "type": "string",
+            "description": "description"
+          },
+          "question": {
+            "type": "string",
+            "description": "question"
+          },
+          "btn_submit": {
+            "type": "string",
+            "description": "btn_submit"
+          },
+          "created_at": {
+            "type": "number",
+            "description": "created_at"
+          },
+          "last_update_at": {
+            "type": "string",
+            "description": "last_update_at"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          }
+        },
+        "required": [
+          "id",
+          "survey_code",
+          "allow_multiple_responses",
+          "expire_date",
+          "title",
+          "description",
+          "question",
+          "btn_submit",
+          "created_at",
+          "last_update_at"
+        ]
+      },
+      "Question": {
+        "type": "object",
+        "properties": {
+          "questions": {
+            "type": "string",
+            "description": "questions"
+          }
+        },
+        "required": [
+          "questions"
+        ]
+      },
+      "QuestionItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "id"
+          },
+          "type": {
+            "type": "string",
+            "description": "type"
+          },
+          "options": {
+            "type": "string",
+            "description": "options"
+          },
+          "question": {
+            "type": "string",
+            "description": "question"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "options",
+          "question"
+        ]
+      },
+      "SurveyPostBody": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "account_id"
+          },
+          "answer": {
+            "type": "string",
+            "description": "answer"
+          },
+          "start_time": {
+            "type": "string",
+            "description": "start_time"
+          }
+        },
+        "required": [
+          "account_id",
+          "answer"
+        ]
+      },
+      "SurveyPostResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "id"
+          },
+          "survey_code": {
+            "type": "string",
+            "description": "survey_code"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "account_id"
+          },
+          "answer": {
+            "type": "string",
+            "description": "answer"
+          },
+          "created_at": {
+            "type": "number",
+            "description": "created_at"
+          }
+        },
+        "required": [
+          "id",
+          "survey_code",
+          "account_id",
+          "answer",
+          "created_at"
+        ]
+      },
+      "Answer": {
+        "type": "object",
+        "properties": {
+          "questionId": {
+            "type": "number",
+            "description": "questionId"
+          },
+          "answer": {
+            "type": "string",
+            "description": "answer"
+          }
+        },
+        "required": [
+          "questionId",
+          "answer"
+        ]
+      },
+      "QrInfoPostBody": {
+        "type": "object",
+        "properties": {
+          "ref_code": {
+            "type": "string",
+            "description": "ref_code"
+          }
+        },
+        "required": [
+          "ref_code"
+        ]
+      },
+      "QrInfoPostResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "id"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "account_id"
+          },
+          "ref_code": {
+            "type": "string",
+            "description": "ref_code"
+          },
+          "coupon_code": {
+            "type": "string",
+            "description": "coupon_code"
+          },
+          "coupon_use": {
+            "type": "boolean",
+            "description": "coupon_use"
+          },
+          "use_date": {
+            "type": "string",
+            "description": "use_date"
+          },
+          "expire_date": {
+            "type": "number",
+            "description": "expire_date"
+          },
+          "created_at": {
+            "type": "number",
+            "description": "created_at"
+          },
+          "last_update_at": {
+            "type": "number",
+            "description": "last_update_at"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          }
+        },
+        "required": [
+          "id",
+          "account_id",
+          "ref_code",
+          "coupon_code",
+          "coupon_use",
+          "use_date",
+          "expire_date",
+          "created_at",
+          "last_update_at"
+        ]
+      },
+      "CouponGetBody": {
+        "type": "object",
+        "properties": {
+          "ref_code": {
+            "type": "string",
+            "description": "ref_code"
+          }
+        },
+        "required": [
+          "ref_code"
+        ]
+      },
+      "CouponGetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "id"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "account_id"
+          },
+          "ref_code": {
+            "type": "string",
+            "description": "ref_code"
+          },
+          "coupon_code": {
+            "type": "string",
+            "description": "coupon_code"
+          },
+          "coupon_use": {
+            "type": "boolean",
+            "description": "coupon_use"
+          },
+          "use_date": {
+            "type": "string",
+            "description": "use_date"
+          },
+          "expire_date": {
+            "type": "number",
+            "description": "expire_date"
+          },
+          "created_at": {
+            "type": "number",
+            "description": "created_at"
+          },
+          "last_update_at": {
+            "type": "number",
+            "description": "last_update_at"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          }
+        },
+        "required": [
+          "id",
+          "account_id",
+          "ref_code",
+          "coupon_code",
+          "coupon_use",
+          "use_date",
+          "expire_date",
+          "created_at",
+          "last_update_at"
+        ]
+      },
+      "CouponPostBody": {
+        "type": "object",
+        "properties": {
+          "ref_code": {
+            "type": "string",
+            "description": "ref_code"
+          }
+        },
+        "required": [
+          "ref_code"
+        ]
+      },
+      "CouponPostResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "id"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "account_id"
+          },
+          "ref_code": {
+            "type": "string",
+            "description": "ref_code"
+          },
+          "coupon_code": {
+            "type": "string",
+            "description": "coupon_code"
+          },
+          "coupon_use": {
+            "type": "boolean",
+            "description": "coupon_use"
+          },
+          "use_date": {
+            "type": "number",
+            "description": "use_date"
+          },
+          "expire_date": {
+            "type": "number",
+            "description": "expire_date"
+          },
+          "created_at": {
+            "type": "number",
+            "description": "created_at"
+          },
+          "last_update_at": {
+            "type": "number",
+            "description": "last_update_at"
+          },
+          "message": {
+            "type": "string",
+            "description": "message"
+          }
+        },
+        "required": [
+          "id",
+          "account_id",
+          "ref_code",
+          "coupon_code",
+          "coupon_use",
+          "use_date",
+          "expire_date",
+          "created_at",
+          "last_update_at"
+        ]
+      },
+      "ActivityPostBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "data": {
+            "type": "string",
+            "description": "data"
+          },
+          "language": {
+            "type": "string",
+            "description": "language"
+          },
+          "account_id": {
+            "type": "string",
+            "description": "account_id"
+          }
+        },
+        "required": [
+          "name",
+          "data",
+          "account_id"
+        ]
+      },
+      "ActivityPostResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "id"
+          },
+          "api_name": {
+            "type": "string",
+            "description": "api_name"
+          },
+          "method": {
+            "type": "string",
+            "description": "method"
+          },
+          "parameter": {
+            "type": "string",
+            "description": "parameter"
+          },
+          "result_value": {
+            "type": "string",
+            "description": "result_value"
+          },
+          "created_at": {
+            "type": "number",
+            "description": "created_at"
+          }
+        },
+        "required": [
+          "id",
+          "api_name",
+          "method",
+          "parameter",
+          "result_value",
+          "created_at"
+        ]
+      },
+      "DynamicContentGetResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "name"
+          },
+          "language": {
+            "type": "string",
+            "description": "language"
+          },
+          "header": {
+            "type": "string",
+            "description": "header"
+          },
+          "description": {
+            "type": "string",
+            "description": "description"
+          },
+          "footer": {
+            "type": "string",
+            "description": "footer"
+          },
+          "button": {
+            "type": "string",
+            "description": "button"
+          },
+          "created_at": {
+            "type": "number",
+            "description": "created_at"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "language",
+          "header",
+          "description",
+          "footer",
+          "button",
+          "created_at"
+        ]
+      },
+      "Header": {
+        "type": "object",
+        "properties": {
+          "header": {
+            "type": "string",
+            "description": "header"
+          }
+        },
+        "required": [
+          "header"
+        ]
+      },
+      "HeaderOrFooter": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "title"
+          },
+          "subtitle": {
+            "type": "string",
+            "description": "subtitle"
+          },
+          "description": {
+            "type": "string",
+            "description": "description"
+          }
+        },
+        "required": [
+          "title",
+          "subtitle",
+          "description"
+        ]
+      },
+      "Description": {
+        "type": "object",
+        "properties": {
+          "sessions": {
+            "type": "string",
+            "description": "sessions"
+          }
+        },
+        "required": [
+          "sessions"
+        ]
+      },
+      "Sessions": {
+        "type": "object",
+        "properties": {
+          "session1": {
+            "type": "string",
+            "description": "session1"
+          },
+          "session2": {
+            "type": "string",
+            "description": "session2"
+          },
+          "session3": {
+            "type": "string",
+            "description": "session3"
+          }
+        },
+        "required": [
+          "session1",
+          "session2",
+          "session3"
+        ]
+      },
+      "SessionsItem": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "description"
+          }
+        },
+        "required": [
+          "description"
+        ]
+      },
+      "Footer": {
+        "type": "object",
+        "properties": {
+          "footer": {
+            "type": "string",
+            "description": "footer"
+          }
+        },
+        "required": [
+          "footer"
+        ]
+      },
+      "Button": {
+        "type": "object",
+        "properties": {
+          "footer": {
+            "type": "string",
+            "description": "footer"
+          }
+        },
+        "required": [
+          "footer"
+        ]
+      },
+      "Footer1": {
+        "type": "object",
+        "properties": {
+          "button1": {
+            "type": "string",
+            "description": "button1"
+          },
+          "button2": {
+            "type": "string",
+            "description": "button2"
+          },
+          "button3": {
+            "type": "string",
+            "description": "button3"
+          }
+        },
+        "required": [
+          "button1",
+          "button2",
+          "button3"
+        ]
+      }
+    }
   }
 }

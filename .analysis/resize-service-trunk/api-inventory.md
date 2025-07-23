@@ -10,7 +10,7 @@
 
 ## Technology Stack
 
-- **Framework**: Next.js {{FRAMEWORK_VERSION}}
+- **Framework**: Next.js 15.2.3
 - **Language**: JavaScript/TypeScript
 - **Dependencies**: 14 packages
 - **External APIs**: 0

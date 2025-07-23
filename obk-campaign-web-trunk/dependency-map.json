@@ -4,11 +4,931 @@
     "path": "obk-campaign-web-trunk",
     "framework": "Next.js",
     "language": "JavaScript/TypeScript",
-    "analyzed_at": "2025-07-22T22:25:07.735Z"
+    "baseUrl": null,
+    "analyzed_at": "2025-07-23T01:03:57.937Z"
   },
   "api_inventory": {
     "endpoints": [],
-    "schemas": [],
+    "schemas": [
+      {
+        "name": "TermConProps",
+        "type": "typescript_type",
+        "file": "src/app/[locale]/(campaign)/evShutterService/page.tsx",
+        "fields": [
+          {
+            "name": "stage",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "itemInput",
+        "type": "typescript_interface",
+        "file": "src/app/[locale]/cms/home/page.tsx",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "IFormInput",
+        "type": "typescript_interface",
+        "file": "src/app/[locale]/cms/login/page.tsx",
+        "fields": [
+          {
+            "name": "email",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "password",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Dialog",
+        "type": "typescript_interface",
+        "file": "src/app/[locale]/cms/scanqr/page.tsx",
+        "fields": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ShowDialog",
+        "type": "typescript_type",
+        "file": "src/components/UseCouponResultDialog.tsx",
+        "fields": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ButtonProps",
+        "type": "typescript_interface",
+        "file": "src/components/ui/button.tsx",
+        "fields": [
+          {
+            "name": "asChild",
+            "type": "boolean",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "FormItemContextValue",
+        "type": "typescript_type",
+        "file": "src/components/ui/form.tsx",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "AuthLoginPostBody",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "email",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "password",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "AuthLoginPostResponse",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "authToken",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "AuthMeGetResponse",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "SurveyGetResponse",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "survey_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "allow_multiple_responses",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "expire_date",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "null | string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "question",
+            "type": "Question",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "btn_submit",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "last_update_at",
+            "type": "null | number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Question",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "questions",
+            "type": "QuestionItem[]",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "QuestionItem",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "options",
+            "type": "string[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "question",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "SurveyPostBody",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "account_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "answer",
+            "type": "Answer[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "start_time",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "SurveyPostResponse",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "survey_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "account_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "answer",
+            "type": "Answer[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "number",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Answer",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "questionId",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "answer",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "QrInfoPostBody",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "ref_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "QrInfoPostResponse",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "account_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "ref_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "coupon_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "coupon_use",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "use_date",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "expire_date",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "last_update_at",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "CouponGetBody",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "ref_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "CouponGetResponse",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "account_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "ref_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "coupon_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "coupon_use",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "use_date",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "expire_date",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "last_update_at",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "CouponPostBody",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "ref_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "CouponPostResponse",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "account_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "ref_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "coupon_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "coupon_use",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "use_date",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "expire_date",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "last_update_at",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ActivityPostBody",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "data",
+            "type": "{",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "language",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "account_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ActivityPostResponse",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "api_name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "method",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parameter",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "result_value",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "number",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "DynamicContentGetResponse",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "language",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "header",
+            "type": "Header",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "Description",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "footer",
+            "type": "Footer",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "button",
+            "type": "Button",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "number",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Header",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "header",
+            "type": "HeaderOrFooter",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "HeaderOrFooter",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "subtitle",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Description",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "sessions",
+            "type": "Sessions",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Sessions",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "session1",
+            "type": "SessionsItem",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "session2",
+            "type": "SessionsItem",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "session3",
+            "type": "SessionsItem",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "SessionsItem",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Footer",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "footer",
+            "type": "HeaderOrFooter",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Button",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "footer",
+            "type": "Footer1",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Footer1",
+        "type": "typescript_interface",
+        "file": "src/types/services.ts",
+        "fields": [
+          {
+            "name": "button1",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "button2",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "button3",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      }
+    ],
     "summary": {
       "methods": {},
       "has_authentication": false,
@@ -166,5 +1086,5 @@
       }
     ]
   },
-  "generated_at": "2025-07-22T23:53:21.416Z"
+  "generated_at": "2025-07-23T01:35:04.411Z"
 }

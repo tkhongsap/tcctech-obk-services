@@ -10,7 +10,7 @@
 
 ## Technology Stack
 
-- **Framework**: NestJS {{FRAMEWORK_VERSION}}
+- **Framework**: NestJS ^11.0.1
 - **Language**: JavaScript/TypeScript
 - **Dependencies**: 36 packages
 - **External APIs**: 0

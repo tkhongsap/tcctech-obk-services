@@ -50,6 +50,46 @@ class OutputGenerator {
     }
 
     /**
+     * Extract framework version from dependencies
+     */
+    getFrameworkVersion(data) {
+        if (!data.dependencies || !data.dependencies.packages) {
+            return '';
+        }
+
+        const framework = data.service.framework;
+        const packages = data.dependencies.packages;
+
+        // Framework version mapping
+        const frameworkPackageMap = {
+            'Express.js': ['express'],
+            'FastAPI': ['fastapi'],
+            'Next.js': ['next'],
+            'NestJS': ['@nestjs/core'],
+            'React': ['react'],
+            'Flutter': ['flutter'],
+            'Fiber': ['github.com/gofiber/fiber'],
+            'ASP.NET Core': ['Microsoft.AspNetCore'],
+            'Node.js': ['node']
+        };
+
+        const packageNames = frameworkPackageMap[framework] || [framework.toLowerCase()];
+        
+        for (const packageName of packageNames) {
+            const pkg = packages.find(p => 
+                p.name === packageName || 
+                p.name.includes(packageName) ||
+                packageName.includes(p.name)
+            );
+            if (pkg && pkg.version) {
+                return pkg.version;
+            }
+        }
+
+        return '';
+    }
+
+    /**
      * Generate Markdown documentation
      */
     async generateMarkdown() {
@@ -62,6 +102,7 @@ class OutputGenerator {
         const templateData = {
             SERVICE_NAME: data.service.name,
             FRAMEWORK: data.service.framework,
+            FRAMEWORK_VERSION: this.getFrameworkVersion(data),
             LANGUAGE: data.service.language,
             ANALYSIS_DATE: new Date(data.service.analyzed_at).toLocaleDateString(),
             TOTAL_ENDPOINTS: data.api.total_endpoints,

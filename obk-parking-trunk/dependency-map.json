@@ -4,7 +4,8 @@
     "path": "obk-parking-trunk",
     "framework": "Express.js",
     "language": "JavaScript/TypeScript",
-    "analyzed_at": "2025-07-22T22:19:55.200Z"
+    "baseUrl": null,
+    "analyzed_at": "2025-07-23T01:08:40.847Z"
   },
   "api_inventory": {
     "endpoints": [
@@ -19,7 +20,2076 @@
         "authentication": null
       }
     ],
-    "schemas": [],
+    "schemas": [
+      {
+        "name": "LoggingContext",
+        "type": "typescript_interface",
+        "file": "src/context/logging_context.ts",
+        "fields": [
+          {
+            "name": "traceId",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "accountId",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "BaseIndexQuery",
+        "type": "typescript_interface",
+        "file": "src/controllers/base_controller.interfaces.ts",
+        "fields": [
+          {
+            "name": "order_by",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "order_direction",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "page_number",
+            "type": "number",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "page_size",
+            "type": "number",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "filter_by",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "filter_key",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Pagination",
+        "type": "typescript_interface",
+        "file": "src/controllers/base_controller.ts",
+        "fields": [
+          {
+            "name": "total",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total_page",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "page_number",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "page_size",
+            "type": "number",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "CampaignResponse",
+        "type": "typescript_type",
+        "file": "src/controllers/campaign_controller.interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "sequence",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "price_min",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "price_max",
+            "type": "number | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "redeem_hour",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rate_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "Date",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "Date",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "deleted_at",
+            "type": "Date | null",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "CampaignSequenceResponse",
+        "type": "typescript_type",
+        "file": "src/controllers/campaign_controller.interface.ts",
+        "fields": [
+          {
+            "name": "data",
+            "type": "{",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "1",
+            "type": "CampaignResponse",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "2",
+            "type": "CampaignResponse",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "3",
+            "type": "CampaignResponse",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "4",
+            "type": "CampaignResponse",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "Date | string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "Date | string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "updated_by",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "BaseCampaignBody",
+        "type": "typescript_type",
+        "file": "src/controllers/campaign_controller.interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "price_min",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "redeem_hour",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rate_code",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "UpsertCampaignBody",
+        "type": "typescript_type",
+        "file": "src/controllers/campaign_controller.interface.ts",
+        "fields": [
+          {
+            "name": "1",
+            "type": "CampaignBody",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "2",
+            "type": "CampaignBody",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "3",
+            "type": "CampaignBody",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "4",
+            "type": "FinalCampaignBody",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "UpsertCampaign",
+        "type": "typescript_type",
+        "file": "src/controllers/campaign_controller.interface.ts",
+        "fields": [
+          {
+            "name": "data",
+            "type": "UpsertCampaignBody",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "updated_by",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ConfigStoreWhitelistQuery",
+        "type": "typescript_interface",
+        "file": "src/controllers/config_controller.interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "tax_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "store_name",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "company_name",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "property_name",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "property_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "unit_no",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "address",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "building",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "has_tax_id",
+            "type": "boolean",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "receipt_address_in_obk",
+            "type": "boolean",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "Date",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "sort_key",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "sort_direction",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "AddConfigStoreWhitelist",
+        "type": "typescript_interface",
+        "file": "src/controllers/config_controller.interface.ts",
+        "fields": [
+          {
+            "name": "tax_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "store_name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "company_name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "property_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "unit_no",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "address",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "building",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "has_tax_id",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "receipt_address_in_obk",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "updated_by",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "PropertyQuery",
+        "type": "typescript_interface",
+        "file": "src/controllers/config_controller.interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "UpdateConfigStoreWhitelist",
+        "type": "typescript_type",
+        "file": "src/controllers/config_controller.interface.ts",
+        "fields": [
+          {
+            "name": "tax_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "store_name",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "company_name",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "property_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "unit_no",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "address",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "building",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "has_tax_id",
+            "type": "boolean",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "receipt_address_in_obk",
+            "type": "boolean",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "updated_by",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "StoreWhitelistResponse",
+        "type": "typescript_type",
+        "file": "src/controllers/config_controller.interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "Date",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "Date",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "tax_id",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "store_name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "company_name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "unit_no",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "address",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "building",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "has_tax_id",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "receipt_address_in_obk",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "property",
+            "type": "{",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "keywords",
+            "type": "string[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "addresses",
+            "type": "string[]",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "propertiesResponse",
+        "type": "typescript_type",
+        "file": "src/controllers/config_controller.interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "keywords",
+            "type": "string[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "addresses",
+            "type": "string[]",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "PropertyBody",
+        "type": "typescript_type",
+        "file": "src/controllers/config_controller.interface.ts",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "keywords",
+            "type": "string[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "addresses",
+            "type": "string[]",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ConfigDocsTypeResponse",
+        "type": "typescript_type",
+        "file": "src/controllers/config_controller.interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "keyword",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ConfigDocsTypeBody",
+        "type": "typescript_type",
+        "file": "src/controllers/config_controller.interface.ts",
+        "fields": [
+          {
+            "name": "keyword",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "AddParkingTicketQuery",
+        "type": "typescript_interface",
+        "file": "src/controllers/parking_detail_controller.interfaces.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "platform",
+            "type": "AddParkingTicketType",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "id_type",
+            "type": "AddParkingTicketIdType",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "AddParkingTicketResponse",
+        "type": "typescript_interface",
+        "file": "src/controllers/parking_detail_controller.interfaces.ts",
+        "fields": [
+          {
+            "name": "parkingDetailId",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ParkingAccountDetail",
+        "type": "typescript_interface",
+        "file": "src/controllers/parking_detail_controller.interfaces.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "username",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "phone",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetParkingDetailResponse",
+        "type": "typescript_interface",
+        "file": "src/controllers/parking_detail_controller.interfaces.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "record_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parking_ticket",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "license_plate",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "account_detail",
+            "type": "ParkingAccountDetail",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total_amount",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "receipts",
+            "type": "Receipt[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "redeemed_at",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rate_detail",
+            "type": "{",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "en",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "th",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetParkingDetailsIndexResponse",
+        "type": "typescript_interface",
+        "file": "src/controllers/parking_detail_controller.interfaces.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "record_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parking_ticket_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "plate_no",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "account_detail",
+            "type": "ParkingAccountDetail",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total_amount",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "redeemed_at",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "status",
+            "type": "ParkingDetailStatus",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetParkingDetailIndexQuery",
+        "type": "typescript_interface",
+        "file": "src/controllers/parking_detail_controller.interfaces.ts",
+        "fields": [
+          {
+            "name": "startDate",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "endDate",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "status",
+            "type": "ParkingDetailStatus",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ParkingDetailRedeemBody",
+        "type": "typescript_interface",
+        "file": "src/controllers/parking_detail_controller.interfaces.ts",
+        "fields": [
+          {
+            "name": "parking_detail_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "type",
+            "type": "RedeemType",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "RateDetail",
+        "type": "typescript_type",
+        "file": "src/controllers/parking_detail_controller.interfaces.ts",
+        "fields": [
+          {
+            "name": "en",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "th",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "RedeemParkingDetailResponse",
+        "type": "typescript_type",
+        "file": "src/controllers/parking_detail_controller.interfaces.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "plate_number",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "ticket_number",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "vehicle_type",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total_fee",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parked_at",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rate_detail",
+            "type": "RateDetail",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "member_type_id",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "vehicle_type_id",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "sub_code",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "CreateReceiptBody",
+        "type": "typescript_interface",
+        "file": "src/controllers/receipts_controller_interface.ts",
+        "fields": [
+          {
+            "name": "parkingDetailId",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "imageUrl",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Receipt",
+        "type": "typescript_interface",
+        "file": "src/controllers/receipts_controller_interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "status",
+            "type": "ReceiptStatus",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "image_url",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "merchant_name",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "transaction_date",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "Format",
+            "type": "YYYY-MM-DD",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "transaction_time",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "Format",
+            "type": "HH:mm (local time GMT+7)",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "items",
+            "type": "Item[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "tax_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "receipt_no",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "addres",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "unit_no",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "mall_name",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "hashed_receipt",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "redeemed_at",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "Item",
+        "type": "typescript_interface",
+        "file": "src/controllers/receipts_controller_interface.ts",
+        "fields": [
+          {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "quantity",
+            "type": "number",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "total_price",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "UpdateReceiptBody",
+        "type": "typescript_interface",
+        "file": "src/controllers/receipts_controller_interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "merchant_name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "transaction_date",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "Format",
+            "type": "YYYY-MM-DD",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "transaction_time",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "Format",
+            "type": "HH:mm (local time GMT+7)",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "items",
+            "type": "Item[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "tax_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "receipt_no",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "address",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "unit_no",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "mall_name",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "hashed_receipt",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "status",
+            "type": "ReceiptStatus",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetAllReceiptQuery",
+        "type": "typescript_interface",
+        "file": "src/controllers/receipts_controller_interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "receipt_hashed_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "user_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "status",
+            "type": "ReceiptStatus",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "content",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "redeemed_at",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "total",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "parking_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetAllReceiptResponse",
+        "type": "typescript_interface",
+        "file": "src/controllers/receipts_controller_interface.ts",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "receipt_hashed_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "user_id",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "status",
+            "type": "ReceiptStatus",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "content",
+            "type": "Receipt",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "redeemed_at",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "total",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parking_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "GetParkingDetailByPersonIDDataResponse",
+        "type": "typescript_interface",
+        "file": "src/libs/fs_parking_client.ts",
+        "fields": [
+          {
+            "name": "status",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "exeption",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "logId",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "ticketNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "ticketUid",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "plateNo",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "entryDateTime",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "logDateTime",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "exitStatus",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "terminalInId",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "terminalInName",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "memberTypeId",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "memberTypeName",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "vehicleTypeId",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "vehicleTypeName",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rateCode",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rateDetailTH",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rateDetailEN",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "tenantId",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "tenantName",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "isCardLost",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parkHH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parkMM",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "rateHH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "freeHH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "subTotal",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "discount",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "parkFee",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "cardLostFine",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "overNightFine",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "isInv",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "invRateHH",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "invFee",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "isPayAtKiosk",
+            "type": "boolean",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "lastDateTimePaymentAtKiosk",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "payAtKioskAll",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "durationInMinute",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "timeUsedInMinute",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "remainInMinute",
+            "type": "number",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ReceiptItem",
+        "type": "typescript_interface",
+        "file": "src/libs/ocr_client.ts",
+        "fields": [
+          {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "quantity",
+            "type": "number | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total_price",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ReceiptData",
+        "type": "typescript_interface",
+        "file": "src/libs/ocr_client.ts",
+        "fields": [
+          {
+            "name": "merchant_name",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "transaction_date",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "format",
+            "type": "YYYY-MM-DD",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "transaction_time",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "HH",
+            "type": "mm:ss",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "items",
+            "type": "ReceiptItem[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "tax_id",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "receipt_no",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "address",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "unit_no",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "mall_name",
+            "type": "string | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "remarks",
+            "type": "string[]",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "hashed_receipt",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ReceiptDataErrorResponse",
+        "type": "typescript_interface",
+        "file": "src/libs/ocr_client.ts",
+        "fields": [
+          {
+            "name": "detail",
+            "type": "{",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "http_status",
+            "type": "number",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "step",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "extracted_data",
+            "type": "ReceiptData",
+            "required": false,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "getOauth2Response",
+        "type": "typescript_interface",
+        "file": "src/libs/tcc_client.ts",
+        "fields": [
+          {
+            "name": "token_type",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "access_token",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "expires_in",
+            "type": "number",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "RequirePermission",
+        "type": "typescript_interface",
+        "file": "src/middlewares/authorizer.ts",
+        "fields": [
+          {
+            "name": "resource",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "action",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "EventReceiptApprovedPayload",
+        "type": "typescript_interface",
+        "file": "src/services/ocr_service.ts",
+        "fields": [
+          {
+            "name": "account_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "receipt_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total_spending",
+            "type": "Decimal | null",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "EventReceiptDeclinedPayload",
+        "type": "typescript_interface",
+        "file": "src/services/ocr_service.ts",
+        "fields": [
+          {
+            "name": "account_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "receipt_id",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "total_spending",
+            "type": "Decimal | null",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "reason_en",
+            "type": "string",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "reason_th",
+            "type": "string",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "LogObject",
+        "type": "typescript_interface",
+        "file": "src/utils/logging.ts",
+        "fields": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "body",
+            "type": "string",
+            "required": false,
+            "default": null
+          },
+          {
+            "name": "key",
+            "type": "string]: any",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      }
+    ],
     "summary": {
       "methods": {
         "GET": 1
@@ -269,5 +2339,5 @@
       }
     ]
   },
-  "generated_at": "2025-07-22T23:53:54.281Z"
+  "generated_at": "2025-07-23T01:29:52.088Z"
 }
