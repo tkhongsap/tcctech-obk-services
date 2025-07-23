@@ -1,96 +1,135 @@
 # =============================================================================
-# SERVICE DIRECTORIES (EXCLUDE FROM INDEXING)
+# COMPREHENSIVE CURSOR IGNORE FOR API ANALYSIS PROJECT
 # =============================================================================
-# These are the actual service codebases being analyzed, not the analysis tool
-# Excluding them improves Cursor performance and focuses on development files
+# Exclude all large directories and unnecessary files from Cursor indexing
+# to improve performance and focus on relevant development files only
 
-# All OBK service directories
+# =============================================================================
+# GIT AND SYSTEM DIRECTORIES (CRITICAL - EXCLUDE IMMEDIATELY)
+# =============================================================================
+.git/
+.cursor/
+.claude/
+
+# =============================================================================
+# EXPLICIT SERVICE DIRECTORY EXCLUSIONS (ALL 37 SERVICES)
+# =============================================================================
+# Complete list of ALL service directories found in workspace
+# (Explicitly listing all 37 to ensure comprehensive exclusion)
+
+# OBK Services (26 services)
+obk-app-temp-trunk/
+obk-app-universal-link-trunk/
+obk-art-culture-api-trunk/
+obk-booking-trunk/
+obk-campaign-web-trunk/
+obk-cms-trunk/
+obk-indoor-navigation-trunk/
+obk-infra-trunk/
+obk-marcom-trunk/
+obk-mtel-bms-trunk/
+obk-mtel-bus-trunk/
+obk-mtel-document-trunk/
+obk-mtel-iam-trunk/
+obk-mtel-notification-trunk/
+obk-mtel-websocket-trunk/
+obk-operation-app-trunk/
+obk-operation-backend-dev/
+obk-parking-payment-dev/
+obk-parking-trunk/
+obk-pms-trunk/
+obk-predict-location-main/
+obk-residential-ipad-trunk/
+obk-sso-trunk/
+obk-sustainable-trunk/
+obk-wifi-auth-web-trunk/
+obk-wiremock-trunk/
+
+# One Bangkok Services (2 services)
+onebangkok-trunk/
+one-bangkok-app-trunk/
+
+# TCCT Services (1 service)
+tcct-serviceabstraction-dev/
+
+# Infrastructure Services (8 services)
+automate-trunk/
+azure-ocr-trunk/
+crontab-trunk/
+flutter-login-trunk/
+keycloak-trunk/
+MapGeoJsonTool-trunk/
+redirect-onebangkok-trunk/
+resize-service-trunk/
+
+# Wildcard patterns for future services
 obk-*/
+tcct-*/
 onebangkok-*/
 one-bangkok-*/
 
-# Other service directories
-tcct-*/
-resize-service-*/
-redirect-*/
-keycloak-*/
-flutter-*/
-crontab-*/
-automate-*/
-MapGeoJsonTool-*/
-azure-*/
+# =============================================================================
+# GENERATED OUTPUT DIRECTORIES
+# =============================================================================
+output/
+analysis-summary/
+logs/
+data/
+ai-docs/
 dashboard/
+templates/
 
 # =============================================================================
-# NODE.JS DEPENDENCIES AND PACKAGE FILES
+# NODE.JS DEPENDENCIES AND PACKAGES
 # =============================================================================
 node_modules/
+jspm_packages/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-.npm
-.yarn-integrity
+pnpm-debug.log*
+.npm/
 .yarn/
+.yarn-integrity
 .pnp.*
 
 # =============================================================================
-# RUNTIME AND TEMPORARY FILES
-# =============================================================================
-*.pid
-*.seed
-*.pid.lock
-.DS_Store
-Thumbs.db
-
-# =============================================================================
-# COVERAGE AND TEST OUTPUT
-# =============================================================================
-coverage/
-.nyc_output
-.coverage/
-*.lcov
-test-results/
-test-output/
-.jest/
-
-# =============================================================================
-# BUILD OUTPUTS AND ARTIFACTS
+# BUILD AND CACHE DIRECTORIES
 # =============================================================================
 dist/
 build/
 lib/
 out/
-
-# =============================================================================
-# CACHE DIRECTORIES (INCLUDING CUSTOM CACHE)
-# =============================================================================
 .cache/
 .eslintcache
 .parcel-cache/
 .next/
 .nuxt/
-.vuepress/dist
+.vuepress/dist/
 .serverless/
 .fusebox/
+coverage/
+.nyc_output/
+test-results/
+test-output/
+.jest/
 
 # =============================================================================
-# API ANALYSIS TOOL OUTPUTS
+# TYPESCRIPT AND BUILD CACHE
 # =============================================================================
-output/
-analysis-summary/
-logs/
-*.log
+*.tsbuildinfo
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
 
 # =============================================================================
-# ENVIRONMENT AND CONFIGURATION FILES
+# ENVIRONMENT AND CONFIG FILES
 # =============================================================================
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env.*.local
+.env.*
+!.env.example
 
 # =============================================================================
 # IDE AND EDITOR FILES
@@ -103,6 +142,7 @@ logs/
 .project
 .classpath
 .settings/
+.history/
 
 # =============================================================================
 # SYSTEM FILES
@@ -112,39 +152,62 @@ logs/
 ._*
 .Spotlight-V100
 .Trashes
+.DocumentRevisions-V100
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDouble
+.LSOverride
+.fseventsd
 ehthumbs.db
 Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
 # =============================================================================
-# TEMPORARY ANALYSIS DATA
+# TEMPORARY AND RUNTIME FILES
 # =============================================================================
 temp/
 tmp/
 *.tmp
 *.temp
+*.pid
+*.seed
+*.pid.lock
+*.log
+*.log.*
 
 # =============================================================================
-# LARGE GENERATED FILES
+# LARGE BINARY AND MEDIA FILES
 # =============================================================================
-*.json.gz
-*.csv.gz
 *.zip
 *.tar.gz
 *.tgz
+*.rar
+*.7z
+*.mp3
+*.mp4
+*.wav
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.pdf
+*.psd
+*.ai
+*.sketch
+*.fig
 
 # =============================================================================
-# DOCUMENTATION BUILD OUTPUTS
+# DATABASE AND DATA FILES
 # =============================================================================
-docs/build/
-site/
-
-# =============================================================================
-# PYTHON CACHE (IF ANY PYTHON SCRIPTS)
-# =============================================================================
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-shm
+*.db-wal
 
 # =============================================================================
 # BACKUP FILES
@@ -153,61 +216,32 @@ __pycache__/
 *.backup
 *.old
 *.orig
+*.rej
 
 # =============================================================================
-# OS GENERATED FILES
+# PYTHON CACHE (IF ANY)
 # =============================================================================
-.fseventsd
-.DocumentRevisions-V100
-.TemporaryItems
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-.AppleDouble
-.LSOverride
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
 
 # =============================================================================
-# LARGE ANALYSIS DATASETS
-# =============================================================================
-data/
-datasets/
-*.db
-*.sqlite
-*.sqlite3
-
-# =============================================================================
-# REPORTS THAT MIGHT BE VERY LARGE
+# REPORTS AND ARCHIVES
 # =============================================================================
 reports/
 archives/
+docs/build/
+site/
+_site/
 
 # =============================================================================
-# DEPENDENCY DIRECTORIES
+# KEEP ONLY THESE ESSENTIAL FILES:
 # =============================================================================
-jspm_packages/
-
+# - scripts/ directory (our API analysis tool)
+# - config/ directory (configuration files)
+# - tasks/ directory (PRD and task documentation)
+# - analysis/ directory (structured service documentation)
+# - *.md files (documentation)
+# - package.json and other config files
 # =============================================================================
-# OPTIONAL CACHE AND HISTORY
-# =============================================================================
-.npm
-.node_repl_history
-.yarn-integrity
-
-# =============================================================================
-# TYPESCRIPT AND BUILD CACHE
-# =============================================================================
-*.tsbuildinfo
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
-
-# =============================================================================
-# FRAMEWORK SPECIFIC BUILD OUTPUTS
-# =============================================================================
-.cache
-.parcel-cache
-.next
-.nuxt
-dist
-.out
-.storybook-out
