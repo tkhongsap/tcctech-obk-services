@@ -1,550 +1,380 @@
 #!/usr/bin/env node
 
 const DirectoryScanner = require('./directory-scanner');
-const MarkdownParser = require('./markdown-parser');
-const JsonParser = require('./json-parser');
-const YamlParser = require('./yaml-parser');
-const { DataModelFactory } = require('./data-models');
-const ErrorHandler = require('./error-handler');
-const Logger = require('./logger');
+const FileParser = require('./file-parser');
+const DependencyAnalyzer = require('./dependency-analyzer');
+const { ServiceInfo, AnalysisResult } = require('./data-models');
+const { logger } = require('./logger');
 
 /**
- * API Analysis Engine
- * Main engine for extracting and analyzing API endpoints from service data
+ * Main API Analyzer
+ * Orchestrates the complete analysis process from directory scanning to final results
  */
-class ApiAnalyzer {
+class APIAnalyzer {
   constructor(options = {}) {
-    this.options = {
-      analysisDirectory: options.analysisDirectory || './analysis',
-      outputDirectory: options.outputDirectory || './output',
-      logLevel: options.logLevel || 'info',
-      includeFrameworks: options.includeFrameworks || [],
-      excludeServices: options.excludeServices || [],
-      ...options
-    };
-
-    this.logger = new Logger({
-      logLevel: this.options.logLevel,
-      logDirectory: './logs',
-      sessionId: `analysis-${Date.now()}`
-    });
-
-    this.errorHandler = new ErrorHandler({
-      logLevel: this.options.logLevel,
-      throwOnCritical: false
-    });
-
-    // Initialize parsers
-    this.parsers = {
-      markdown: new MarkdownParser(),
-      json: new JsonParser(),
-      yaml: new YamlParser()
-    };
-
-    this.scanner = new DirectoryScanner(this.options.analysisDirectory);
-
-    // Analysis results
-    this.services = new Map();
-    this.endpoints = new Map();
-    this.analysisResults = {
-      totalServices: 0,
-      processedServices: 0,
-      totalEndpoints: 0,
-      uniqueEndpoints: 0,
-      frameworks: new Set(),
-      languages: new Set(),
-      errors: [],
-      warnings: []
-    };
+    this.analysisPath = options.analysisPath || 'analysis';
+    this.outputPath = options.outputPath || 'output';
+    this.logger = logger.forService('APIAnalyzer');
+    
+    // Initialize components
+    this.directoryScanner = new DirectoryScanner(this.analysisPath);
+    this.fileParser = new FileParser();
+    this.dependencyAnalyzer = new DependencyAnalyzer();
+    
+    this.results = new AnalysisResult();
   }
 
   /**
-   * Run complete API analysis
-   * @returns {Promise<Object>} Analysis results
+   * Run complete API usage analysis
+   * @returns {Promise<AnalysisResult>} Analysis results
    */
   async analyze() {
-    this.logger.info('Starting API analysis', 'analyzer');
+    const timer = this.logger.startTimer('complete-analysis');
     
     try {
-      // Step 1: Discover services
-      await this.discoverServices();
-      
-      // Step 2: Process each service
-      await this.processServices();
-      
-      // Step 3: Extract and analyze endpoints
-      await this.extractEndpoints();
-      
-      // Step 4: Generate analysis summary
-      const summary = this.generateSummary();
-      
-      this.logger.info('API analysis completed successfully', 'analyzer', {
-        services: this.analysisResults.processedServices,
-        endpoints: this.analysisResults.totalEndpoints
+      this.logger.info('Starting API usage analysis', { analysisPath: this.analysisPath });
+
+      // Phase 1: Discovery
+      const services = await this.discoverServices();
+      this.logger.info('Service discovery completed', { serviceCount: services.length });
+
+      // Phase 2: Parsing
+      const parsedServices = await this.parseServices(services);
+      this.logger.info('Service parsing completed', { 
+        parsedCount: parsedServices.length,
+        errorCount: this.results.errors.length
       });
 
-      return summary;
+      // Phase 3: Normalization
+      const normalizedServices = await this.normalizeServices(parsedServices);
+      this.logger.info('Service normalization completed', { 
+        normalizedCount: normalizedServices.length 
+      });
+
+      // Phase 4: Analysis
+      const analysisResults = await this.performAnalysis(normalizedServices);
+      this.logger.info('Dependency analysis completed', { 
+        totalAPIs: analysisResults.apiFrequency.size,
+        crossServiceAPIs: analysisResults.crossServiceAPIs.size
+      });
+
+      // Update final results
+      this.results.analysis = analysisResults;
+      this.results.updateSummary();
+
+      const duration = timer('completed');
+      this.logger.info('Complete API analysis finished', { 
+        duration: `${duration}ms`,
+        services: normalizedServices.length,
+        totalAPIs: analysisResults.apiFrequency.size
+      });
+
+      return this.results;
 
     } catch (error) {
-      this.errorHandler.handleError(error, 'analyzer', 'error');
+      timer('failed');
+      this.logger.error('API analysis failed', {}, error);
       throw error;
-    } finally {
-      await this.logger.endSession();
     }
   }
 
   /**
    * Discover all services in the analysis directory
-   * @returns {Promise<void>}
+   * @returns {Promise<Array>} Array of discovered services
    */
   async discoverServices() {
-    this.logger.info('Discovering services', 'discovery');
+    this.logger.info('Discovering services in analysis directory');
     
     try {
-      const discoveredServices = await this.scanner.discoverServices();
-      this.analysisResults.totalServices = discoveredServices.length;
-      this.logger.setTotalServices(discoveredServices.length);
-
-      // Filter services based on options
-      const filteredServices = discoveredServices.filter(service => {
-        // Exclude services in excludeServices list
-        if (this.options.excludeServices.includes(service.name)) {
-          this.logger.skipService(service.name, 'Excluded by configuration');
-          return false;
-        }
-
-        // Check if service has required files
-        if (!service.isComplete) {
-          this.logger.warn(`Service ${service.name} is incomplete`, 'discovery', {
-            missingFiles: service.missingFiles
-          });
-        }
-
-        return true;
-      });
-
-      this.logger.info(`Discovered ${filteredServices.length} services for analysis`, 'discovery');
+      const services = await this.directoryScanner.discoverServices();
       
-      // Store services for processing
-      filteredServices.forEach(service => {
-        this.services.set(service.name, {
-          ...service,
-          analysisData: null,
-          processed: false
-        });
+      if (services.length === 0) {
+        throw new Error(`No services found in ${this.analysisPath} directory`);
+      }
+
+      this.logger.info('Services discovered successfully', {
+        count: services.length,
+        services: services.map(s => s.name)
       });
 
+      return services;
     } catch (error) {
-      this.errorHandler.handleError(error, 'discovery', 'error');
+      this.logger.error('Service discovery failed', {}, error);
       throw error;
     }
   }
 
   /**
-   * Process each discovered service
-   * @returns {Promise<void>}
+   * Parse all discovered service files
+   * @param {Array} services - Services to parse
+   * @returns {Promise<Array>} Array of parsed service data
    */
-  async processServices() {
-    this.logger.info('Processing services', 'processing');
+  async parseServices(services) {
+    this.logger.info('Starting service file parsing', { serviceCount: services.length });
+    
+    const parsedServices = [];
+    let successCount = 0;
+    let errorCount = 0;
 
-    for (const [serviceName, serviceInfo] of this.services) {
-      await this.processService(serviceName, serviceInfo);
+    for (const service of services) {
+      try {
+        const serviceData = await this.parseServiceFiles(service);
+        parsedServices.push(serviceData);
+        successCount++;
+        
+        this.logger.debug('Service parsed successfully', { 
+          service: service.name,
+          filesProcessed: Object.keys(service.files).length
+        });
+      } catch (error) {
+        errorCount++;
+        this.results.errors.push({
+          service: service.name,
+          error: error.message,
+          type: 'parsing-error'
+        });
+        
+        this.logger.error('Service parsing failed', { service: service.name }, error);
+      }
     }
-  }
 
-  /**
-   * Process a single service
-   * @param {string} serviceName - Name of the service
-   * @param {Object} serviceInfo - Service information
-   * @returns {Promise<void>}
-   */
-  async processService(serviceName, serviceInfo) {
-    this.logger.startService(serviceName, { 
-      path: serviceInfo.path,
-      hasFiles: Object.keys(serviceInfo.files).length
+    this.logger.info('Service parsing completed', { 
+      total: services.length,
+      successful: successCount,
+      errors: errorCount
     });
 
-    try {
-      const parsedData = {
-        markdown: null,
-        json: null,
-        yaml: null
-      };
+    return parsedServices;
+  }
 
-      // Parse markdown file (api-inventory.md)
-      if (serviceInfo.files['api-inventory.md']?.exists) {
-        try {
-          const startTime = Date.now();
-          parsedData.markdown = await this.parsers.markdown.parseApiInventory(
-            serviceInfo.files['api-inventory.md'].path
-          );
-          this.logger.performance('markdown-parsing', Date.now() - startTime, { service: serviceName });
-          this.logger.serviceStep(serviceName, 'parse-markdown', { 
-            endpoints: parsedData.markdown.endpoints?.length || 0,
-            schemas: parsedData.markdown.schemas?.length || 0
-          });
-        } catch (error) {
-          this.errorHandler.handleError(error, `${serviceName}-markdown`, 'error');
-          this.logger.serviceStep(serviceName, 'parse-markdown', { error: error.message });
+  /**
+   * Parse files for a single service
+   * @param {Object} service - Service information from directory scanner
+   * @returns {Promise<Object>} Parsed service data
+   */
+  async parseServiceFiles(service) {
+    const serviceLogger = this.logger.forService(service.name);
+    const parsedData = {
+      serviceName: service.name,
+      path: service.path,
+      files: {},
+      errors: [],
+      warnings: []
+    };
+
+    // Parse each file type
+    for (const [fileName, fileInfo] of Object.entries(service.files)) {
+      try {
+        serviceLogger.debug('Parsing file', { fileName, size: fileInfo.size });
+        
+        const parsed = await this.fileParser.parseFile(fileInfo.path, fileName);
+        
+        if (parsed.type === 'error') {
+          parsedData.errors.push(...parsed.errors);
+          parsedData.warnings.push(...parsed.warnings);
+        } else {
+          parsedData.files[fileName] = parsed;
+          
+          if (parsed.validation && !parsed.validation.isValid) {
+            parsedData.errors.push(...parsed.validation.errors);
+            parsedData.warnings.push(...parsed.validation.warnings);
+          }
         }
+      } catch (error) {
+        const errorMsg = `Failed to parse ${fileName}: ${error.message}`;
+        parsedData.errors.push(errorMsg);
+        serviceLogger.error('File parsing failed', { fileName }, error);
       }
+    }
 
-      // Parse JSON file (dependency-map.json)
-      if (serviceInfo.files['dependency-map.json']?.exists) {
-        try {
-          const startTime = Date.now();
-          parsedData.json = await this.parsers.json.parseDependencyMap(
-            serviceInfo.files['dependency-map.json'].path
-          );
-          this.logger.performance('json-parsing', Date.now() - startTime, { service: serviceName });
-          this.logger.serviceStep(serviceName, 'parse-json', {
-            endpoints: parsedData.json.apiInventory?.endpoints?.length || 0,
-            dependencies: parsedData.json.metadata?.totalDependencies || 0
-          });
-        } catch (error) {
-          this.errorHandler.handleError(error, `${serviceName}-json`, 'error');
-          this.logger.serviceStep(serviceName, 'parse-json', { error: error.message });
-        }
-      }
+    return parsedData;
+  }
 
-      // Parse YAML file (openapi.yaml)
-      if (serviceInfo.files['openapi.yaml']?.exists) {
-        try {
-          const startTime = Date.now();
-          parsedData.yaml = await this.parsers.yaml.parseOpenApiYaml(
-            serviceInfo.files['openapi.yaml'].path
-          );
-          this.logger.performance('yaml-parsing', Date.now() - startTime, { service: serviceName });
-          this.logger.serviceStep(serviceName, 'parse-yaml', {
-            paths: parsedData.yaml.metadata?.totalPaths || 0,
-            operations: parsedData.yaml.metadata?.totalOperations || 0
-          });
-        } catch (error) {
-          this.errorHandler.handleError(error, `${serviceName}-yaml`, 'error');
-          this.logger.serviceStep(serviceName, 'parse-yaml', { error: error.message });
-        }
-      }
+  /**
+   * Normalize parsed service data into ServiceInfo objects
+   * @param {Array} parsedServices - Parsed service data
+   * @returns {Promise<Array<ServiceInfo>>} Array of normalized ServiceInfo objects
+   */
+  async normalizeServices(parsedServices) {
+    this.logger.info('Normalizing service data', { serviceCount: parsedServices.length });
+    
+    const normalizedServices = [];
 
-      // Create unified service analysis model
-      const models = [];
-      if (parsedData.markdown) models.push(DataModelFactory.createServiceAnalysis(parsedData.markdown, 'markdown'));
-      if (parsedData.json) models.push(DataModelFactory.createServiceAnalysis(parsedData.json, 'json'));
-      if (parsedData.yaml) models.push(DataModelFactory.createServiceAnalysis(parsedData.yaml, 'yaml'));
-
-      let unifiedModel = null;
-      if (models.length > 0) {
-        unifiedModel = models.length === 1 ? models[0] : DataModelFactory.mergeServiceAnalyses(models);
-        this.logger.serviceStep(serviceName, 'create-model', {
-          sources: models.length,
-          endpoints: unifiedModel.endpoints.length,
-          isValid: unifiedModel.validation.isValid
+    for (const parsedService of parsedServices) {
+      try {
+        const serviceInfo = await this.normalizeServiceData(parsedService);
+        normalizedServices.push(serviceInfo);
+        this.results.addService(serviceInfo);
+        
+        this.logger.debug('Service normalized', {
+          service: serviceInfo.serviceName,
+          endpoints: serviceInfo.endpoints.length,
+          dependencies: serviceInfo.dependencies.length
         });
+      } catch (error) {
+        this.results.errors.push({
+          service: parsedService.serviceName,
+          error: error.message,
+          type: 'normalization-error'
+        });
+        
+        this.logger.error('Service normalization failed', { 
+          service: parsedService.serviceName 
+        }, error);
       }
+    }
 
-      // Store analysis data
-      serviceInfo.analysisData = {
-        raw: parsedData,
-        unified: unifiedModel,
-        processedAt: new Date().toISOString()
+    this.logger.info('Service normalization completed', { 
+      normalizedCount: normalizedServices.length 
+    });
+
+    return normalizedServices;
+  }
+
+  /**
+   * Normalize a single service's parsed data
+   * @param {Object} parsedService - Parsed service data
+   * @returns {Promise<ServiceInfo>} Normalized ServiceInfo object
+   */
+  async normalizeServiceData(parsedService) {
+    const serviceInfo = new ServiceInfo(parsedService.serviceName, parsedService.path);
+
+    // Process API inventory data
+    const apiInventory = parsedService.files['api-inventory.md'];
+    if (apiInventory && apiInventory.type === 'api-inventory') {
+      serviceInfo.setFramework(apiInventory.framework);
+      serviceInfo.metadata = { ...serviceInfo.metadata, ...apiInventory.metadata };
+      
+      // Add endpoints
+      apiInventory.endpoints.forEach(endpoint => {
+        serviceInfo.addEndpoint(endpoint);
+      });
+
+      // Add dependencies from API inventory
+      apiInventory.dependencies.forEach(dependency => {
+        serviceInfo.addDependency(dependency);
+      });
+
+      // Add external APIs
+      apiInventory.externalAPIs.forEach(externalAPI => {
+        serviceInfo.addExternalAPI(externalAPI);
+      });
+    }
+
+    // Process dependency map data
+    const dependencyMap = parsedService.files['dependency-map.json'];
+    if (dependencyMap && dependencyMap.type === 'dependency-map') {
+      // Add or update dependencies from dependency map
+      dependencyMap.dependencies.forEach(dependency => {
+        serviceInfo.addDependency(dependency);
+      });
+
+      // Store consumer information
+      if (dependencyMap.consumers) {
+        serviceInfo.consumers = dependencyMap.consumers;
+      }
+    }
+
+    // Process OpenAPI data
+    const openAPIFile = parsedService.files['openapi.yaml'] || parsedService.files['openapi.yml'];
+    if (openAPIFile && openAPIFile.type === 'openapi') {
+      // Add endpoints from OpenAPI spec
+      openAPIFile.endpoints.forEach(endpoint => {
+        serviceInfo.addEndpoint(endpoint);
+      });
+
+      // Update metadata
+      serviceInfo.metadata = { 
+        ...serviceInfo.metadata, 
+        ...openAPIFile.metadata 
       };
-      serviceInfo.processed = true;
+    }
 
-      // Update global tracking
-      if (unifiedModel) {
-        this.analysisResults.frameworks.add(unifiedModel.service.framework);
-        this.analysisResults.languages.add(unifiedModel.service.language);
-      }
+    // Set validation results
+    serviceInfo.validation.errors = parsedService.errors;
+    serviceInfo.validation.warnings = parsedService.warnings;
+    serviceInfo.validation.isValid = parsedService.errors.length === 0;
 
-      this.analysisResults.processedServices++;
-      this.logger.completeService(serviceName, { success: true });
+    return serviceInfo;
+  }
 
+  /**
+   * Perform dependency analysis on normalized services
+   * @param {Array<ServiceInfo>} services - Normalized services
+   * @returns {Promise<Object>} Analysis results
+   */
+  async performAnalysis(services) {
+    this.logger.info('Starting dependency analysis');
+    
+    try {
+      const analysisResults = this.dependencyAnalyzer.analyzeAPIUsage(services);
+      
+      this.logger.info('Dependency analysis completed successfully', {
+        totalAPIs: analysisResults.apiFrequency.size,
+        crossServiceAPIs: analysisResults.crossServiceAPIs.size,
+        frameworks: Object.keys(analysisResults.frameworkDistribution).length
+      });
+
+      return analysisResults;
     } catch (error) {
-      this.errorHandler.handleError(error, serviceName, 'error');
-      this.logger.completeService(serviceName, { success: false, error: error.message });
-      this.analysisResults.errors.push({
-        service: serviceName,
-        error: error.message,
-        timestamp: new Date().toISOString()
-      });
+      this.logger.error('Dependency analysis failed', {}, error);
+      throw error;
     }
   }
 
   /**
-   * Extract endpoints from all processed services
-   * @returns {Promise<void>}
+   * Get analysis summary
+   * @returns {Object} Summary of analysis results
    */
-  async extractEndpoints() {
-    this.logger.info('Extracting endpoints from processed services', 'extraction');
-
-    const startTime = Date.now();
-    let totalEndpoints = 0;
-    const endpointSignatures = new Set();
-
-    for (const [serviceName, serviceInfo] of this.services) {
-      if (!serviceInfo.processed || !serviceInfo.analysisData?.unified) {
-        continue;
-      }
-
-      const service = serviceInfo.analysisData.unified;
-      
-      // Extract endpoints with service context
-      service.endpoints.forEach(endpoint => {
-        const endpointData = {
-          id: `${serviceName}_${endpoint.id}`,
-          serviceName,
-          serviceFramework: service.service.framework,
-          serviceLanguage: service.service.language,
-          ...endpoint,
-          extractedAt: new Date().toISOString()
-        };
-
-        // Store endpoint
-        this.endpoints.set(endpointData.id, endpointData);
-        
-        // Track unique signatures
-        const signature = endpoint.getSignature();
-        endpointSignatures.add(signature);
-        
-        totalEndpoints++;
-      });
-
-      this.logger.debug(`Extracted ${service.endpoints.length} endpoints from ${serviceName}`, 'extraction');
-    }
-
-    this.analysisResults.totalEndpoints = totalEndpoints;
-    this.analysisResults.uniqueEndpoints = endpointSignatures.size;
-
-    this.logger.performance('endpoint-extraction', Date.now() - startTime);
-    this.logger.info(`Extracted ${totalEndpoints} endpoints (${endpointSignatures.size} unique signatures)`, 'extraction');
-  }
-
-  /**
-   * Get endpoint by ID
-   * @param {string} endpointId - Endpoint ID
-   * @returns {Object|null} Endpoint data
-   */
-  getEndpoint(endpointId) {
-    return this.endpoints.get(endpointId) || null;
-  }
-
-  /**
-   * Get all endpoints for a service
-   * @param {string} serviceName - Service name
-   * @returns {Array} Array of endpoints
-   */
-  getServiceEndpoints(serviceName) {
-    const endpoints = [];
-    for (const [endpointId, endpoint] of this.endpoints) {
-      if (endpoint.serviceName === serviceName) {
-        endpoints.push(endpoint);
-      }
-    }
-    return endpoints;
-  }
-
-  /**
-   * Get endpoints by HTTP method
-   * @param {string} method - HTTP method (GET, POST, etc.)
-   * @returns {Array} Array of endpoints
-   */
-  getEndpointsByMethod(method) {
-    const endpoints = [];
-    for (const [endpointId, endpoint] of this.endpoints) {
-      if (endpoint.method === method.toUpperCase()) {
-        endpoints.push(endpoint);
-      }
-    }
-    return endpoints;
-  }
-
-  /**
-   * Search endpoints by path pattern
-   * @param {string|RegExp} pattern - Path pattern to search
-   * @returns {Array} Array of matching endpoints
-   */
-  searchEndpoints(pattern) {
-    const endpoints = [];
-    const regex = pattern instanceof RegExp ? pattern : new RegExp(pattern, 'i');
-    
-    for (const [endpointId, endpoint] of this.endpoints) {
-      if (regex.test(endpoint.path) || regex.test(endpoint.description)) {
-        endpoints.push(endpoint);
-      }
-    }
-    return endpoints;
-  }
-
-  /**
-   * Get framework statistics
-   * @returns {Object} Framework usage statistics
-   */
-  getFrameworkStats() {
-    const stats = {};
-    for (const [serviceName, serviceInfo] of this.services) {
-      if (serviceInfo.analysisData?.unified) {
-        const framework = serviceInfo.analysisData.unified.service.framework;
-        if (framework) {
-          stats[framework] = (stats[framework] || 0) + 1;
-        }
-      }
-    }
-    return stats;
-  }
-
-  /**
-   * Get endpoint complexity analysis
-   * @returns {Object} Complexity statistics
-   */
-  getComplexityAnalysis() {
-    const complexityStats = {
-      low: 0,      // 1-3
-      medium: 0,   // 4-6
-      high: 0,     // 7-10
-      total: 0,
-      average: 0
-    };
-
-    let totalComplexity = 0;
-    
-    for (const [endpointId, endpoint] of this.endpoints) {
-      const complexity = endpoint.complexity || 1;
-      totalComplexity += complexity;
-      
-      if (complexity <= 3) complexityStats.low++;
-      else if (complexity <= 6) complexityStats.medium++;
-      else complexityStats.high++;
-      
-      complexityStats.total++;
-    }
-
-    complexityStats.average = complexityStats.total > 0 
-      ? Math.round((totalComplexity / complexityStats.total) * 100) / 100 
-      : 0;
-
-    return complexityStats;
-  }
-
-  /**
-   * Generate analysis summary
-   * @returns {Object} Complete analysis summary
-   */
-  generateSummary() {
-    const summary = {
-      metadata: {
-        analyzedAt: new Date().toISOString(),
-        analysisDirectory: this.options.analysisDirectory,
-        sessionId: this.logger.session.id
-      },
+  getSummary() {
+    return {
+      timestamp: this.results.timestamp,
       services: {
-        total: this.analysisResults.totalServices,
-        processed: this.analysisResults.processedServices,
-        failed: this.analysisResults.errors.length,
-        frameworks: Array.from(this.analysisResults.frameworks),
-        languages: Array.from(this.analysisResults.languages)
+        total: this.results.summary.totalServices,
+        successful: this.results.summary.totalServices - this.results.errors.length,
+        errors: this.results.errors.length,
+        warnings: this.results.warnings.length
       },
-      endpoints: {
-        total: this.analysisResults.totalEndpoints,
-        unique: this.analysisResults.uniqueEndpoints,
-        byMethod: this.getMethodDistribution(),
-        complexity: this.getComplexityAnalysis()
+      apis: {
+        total: this.results.summary.totalEndpoints,
+        crossService: this.results.analysis?.crossServiceAPIs?.size || 0,
+        bottlenecks: this.results.analysis?.patterns?.bottleneckAPIs?.length || 0
       },
-      frameworks: this.getFrameworkStats(),
-      errors: this.analysisResults.errors,
-      warnings: this.analysisResults.warnings,
-      performance: this.logger.getProgress().performance
+      frameworks: this.results.summary.frameworks,
+      risks: {
+        circularDependencies: this.results.analysis?.patterns?.circularDependencies?.length || 0,
+        highDependencyServices: this.results.analysis?.patterns?.highDependencyServices?.length || 0,
+        unusedServices: this.results.analysis?.patterns?.unusedServices?.length || 0
+      }
     };
-
-    return summary;
   }
 
   /**
-   * Get HTTP method distribution
-   * @returns {Object} Method distribution statistics
+   * Export results to JSON
+   * @returns {Object} Complete analysis results
    */
-  getMethodDistribution() {
-    const distribution = {};
-    for (const [endpointId, endpoint] of this.endpoints) {
-      const method = endpoint.method;
-      distribution[method] = (distribution[method] || 0) + 1;
-    }
-    return distribution;
-  }
-
-  /**
-   * Export endpoints to JSON
-   * @param {string} outputPath - Output file path
-   * @returns {Promise<void>}
-   */
-  async exportEndpoints(outputPath) {
-    const fs = require('fs').promises;
-    const path = require('path');
-    
-    const endpointsArray = Array.from(this.endpoints.values());
-    const exportData = {
-      metadata: {
-        exportedAt: new Date().toISOString(),
-        totalEndpoints: endpointsArray.length,
-        version: '1.0.0'
-      },
-      endpoints: endpointsArray
-    };
-
-    await fs.mkdir(path.dirname(outputPath), { recursive: true });
-    await fs.writeFile(outputPath, JSON.stringify(exportData, null, 2));
-    
-    this.logger.info(`Exported ${endpointsArray.length} endpoints to ${outputPath}`, 'export');
-  }
-
-  /**
-   * Export analysis summary
-   * @param {string} outputPath - Output file path
-   * @returns {Promise<void>}
-   */
-  async exportSummary(outputPath) {
-    const fs = require('fs').promises;
-    const path = require('path');
-    
-    const summary = this.generateSummary();
-    
-    await fs.mkdir(path.dirname(outputPath), { recursive: true });
-    await fs.writeFile(outputPath, JSON.stringify(summary, null, 2));
-    
-    this.logger.info(`Exported analysis summary to ${outputPath}`, 'export');
+  exportResults() {
+    return this.results.toJSON();
   }
 }
 
-module.exports = ApiAnalyzer;
+module.exports = APIAnalyzer;
 
 // CLI execution
 if (require.main === module) {
-  const analyzer = new ApiAnalyzer({
-    analysisDirectory: process.argv[2] || './analysis',
-    logLevel: 'info'
-  });
+  const analyzer = new APIAnalyzer();
   
   analyzer.analyze()
-    .then(summary => {
-      console.log('\n=== API Analysis Complete ===');
-      console.log(`Services: ${summary.services.processed}/${summary.services.total}`);
-      console.log(`Endpoints: ${summary.endpoints.total} (${summary.endpoints.unique} unique)`);
-      console.log(`Frameworks: ${summary.services.frameworks.join(', ')}`);
-      console.log(`Languages: ${summary.services.languages.join(', ')}`);
+    .then(results => {
+      console.log('\n=== API Usage Analysis Complete ===');
+      console.log(JSON.stringify(analyzer.getSummary(), null, 2));
       
-      if (summary.errors.length > 0) {
-        console.log(`\nErrors: ${summary.errors.length}`);
-        summary.errors.forEach(error => {
-          console.log(`  - ${error.service}: ${error.error}`);
-        });
-      }
-      
-      // Export results
-      return Promise.all([
-        analyzer.exportEndpoints('./output/endpoints.json'),
-        analyzer.exportSummary('./output/analysis-summary.json')
-      ]);
+      // Save results
+      const fs = require('fs').promises;
+      return fs.writeFile('output/api-usage-analysis.json', JSON.stringify(analyzer.exportResults(), null, 2));
     })
     .then(() => {
-      console.log('\nResults exported to ./output/');
+      console.log('\nResults saved to output/api-usage-analysis.json');
       process.exit(0);
     })
     .catch(error => {

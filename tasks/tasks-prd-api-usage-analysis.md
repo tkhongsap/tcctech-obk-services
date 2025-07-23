@@ -34,14 +34,14 @@
   - [x] 1.6 Add error handling and logging for parsing issues
   - [x] 1.7 Write tests for directory scanning and file parsing functionality
 
-- [ ] 2.0 API Usage Analysis Engine
-  - [ ] 2.1 Implement API endpoint extraction and normalization across services
-  - [ ] 2.2 Create frequency counting algorithm to track API usage across services
-  - [ ] 2.3 Build cross-reference system to identify shared APIs between services
-  - [ ] 2.4 Implement framework categorization (Express.js, NestJS, etc.)
-  - [ ] 2.5 Create algorithm to detect potential API bottlenecks (high fan-in)
-  - [ ] 2.6 Add dependency pattern analysis to identify unusual service behaviors
-  - [ ] 2.7 Write comprehensive tests for analysis algorithms
+- [x] 2.0 API Usage Analysis Engine
+  - [x] 2.1 Implement API endpoint extraction and normalization across services
+  - [x] 2.2 Create frequency counting algorithm to track API usage across services
+  - [x] 2.3 Build cross-reference system to identify shared APIs between services
+  - [x] 2.4 Implement framework categorization (Express.js, NestJS, etc.)
+  - [x] 2.5 Create algorithm to detect potential API bottlenecks (high fan-in)
+  - [x] 2.6 Add dependency pattern analysis to identify unusual service behaviors
+  - [x] 2.7 Write comprehensive tests for analysis algorithms
 
 - [ ] 3.0 Dependency Risk Assessment
   - [ ] 3.1 Build dependency graph from service relationship data
