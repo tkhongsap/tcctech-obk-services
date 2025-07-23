@@ -4,7 +4,8 @@
     "path": "azure-ocr-trunk",
     "framework": "FastAPI",
     "language": "Python",
-    "analyzed_at": "2025-07-22T22:19:32.863Z"
+    "baseUrl": "http://localhost:6379",
+    "analyzed_at": "2025-07-22T23:39:28.251Z"
   },
   "api": {
     "total_endpoints": 7,
@@ -176,7 +177,54 @@
         "authentication": null
       }
     ],
-    "schemas": []
+    "schemas": [
+      {
+        "name": "SubErrorResponse",
+        "type": "pydantic_model",
+        "file": "src/utils/response.py",
+        "fields": [
+          {
+            "name": "status",
+            "type": "str",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "http_status",
+            "type": "int",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "message",
+            "type": "str",
+            "required": true,
+            "default": null
+          },
+          {
+            "name": "step",
+            "type": "str",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      },
+      {
+        "name": "ErrorResponse",
+        "type": "pydantic_model",
+        "file": "src/utils/response.py",
+        "fields": [
+          {
+            "name": "detail",
+            "type": "dict",
+            "required": true,
+            "default": null
+          }
+        ],
+        "description": null
+      }
+    ]
   },
   "dependencies": {
     "total": 11,

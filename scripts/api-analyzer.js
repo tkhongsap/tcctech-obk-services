@@ -18,6 +18,7 @@ class APIAnalyzer {
         this.dependencies = [];
         this.framework = 'unknown';
         this.language = 'unknown';
+        this.baseUrl = null;
     }
 
     /**
@@ -31,11 +32,14 @@ class APIAnalyzer {
             // Detect framework and language
             await this.detectFramework();
             
+            // Detect service base URL
+            await this.detectBaseUrl();
+            
             // Extract API endpoints
             await this.extractEndpoints();
             
-            // Extract schemas and models
-            // await this.extractSchemas(); // Skip for performance - focus on endpoint detection
+            // Extract schemas and models for payload information
+            await this.extractSchemas();
             
             // Detect external dependencies
             await this.extractDependencies();
@@ -90,6 +94,67 @@ class APIAnalyzer {
         }
         
         console.log(`🏗️  Framework: ${this.framework} (${this.language})`);
+    }
+
+    /**
+     * Detect service base URL from configuration files
+     */
+    async detectBaseUrl() {
+        try {
+            // Try docker-compose files
+            const dockerComposeFiles = this.findFiles(this.servicePath, /docker-compose\.ya?ml$/);
+            for (const filePath of dockerComposeFiles) {
+                const content = fs.readFileSync(filePath, 'utf8');
+                const portMatch = content.match(/ports:\s*-\s*["']?(\d+):(\d+)["']?/);
+                if (portMatch) {
+                    this.baseUrl = `http://localhost:${portMatch[1]}`;
+                    console.log(`🌐 Base URL detected: ${this.baseUrl}`);
+                    return;
+                }
+            }
+
+            // Try package.json for Node.js services
+            if (this.framework.includes('Node.js') || this.framework.includes('Express') || this.framework.includes('Next.js')) {
+                const packageJsonPath = path.join(this.servicePath, 'package.json');
+                if (fs.existsSync(packageJsonPath)) {
+                    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+                    if (packageJson.scripts?.dev?.includes('--port')) {
+                        const portMatch = packageJson.scripts.dev.match(/--port[=\s](\d+)/);
+                        if (portMatch) {
+                            this.baseUrl = `http://localhost:${portMatch[1]}`;
+                            console.log(`🌐 Base URL detected: ${this.baseUrl}`);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            // Try .env files
+            const envFiles = this.findFiles(this.servicePath, /\.env$/);
+            for (const filePath of envFiles) {
+                const content = fs.readFileSync(filePath, 'utf8');
+                const portMatch = content.match(/PORT\s*=\s*(\d+)/);
+                const urlMatch = content.match(/BASE_URL\s*=\s*(.+)/);
+                if (urlMatch) {
+                    this.baseUrl = urlMatch[1].trim().replace(/['"]/g, '');
+                    console.log(`🌐 Base URL detected: ${this.baseUrl}`);
+                    return;
+                }
+                if (portMatch) {
+                    this.baseUrl = `http://localhost:${portMatch[1]}`;
+                    console.log(`🌐 Base URL detected: ${this.baseUrl}`);
+                    return;
+                }
+            }
+
+            // Default based on service name patterns
+            if (this.serviceName.includes('api') || this.serviceName.includes('backend') || this.serviceName.includes('service')) {
+                this.baseUrl = `http://localhost:3000`; // Common default
+                console.log(`🌐 Base URL defaulted: ${this.baseUrl}`);
+            }
+        } catch (error) {
+            console.log(`⚠️  Could not detect base URL: ${error.message}`);
+        }
     }
 
     /**
@@ -332,19 +397,23 @@ class APIAnalyzer {
                             fullPath = `/${controllerName.toLowerCase()}/${actionName.toLowerCase()}`;
                         }
                         
-                        // Extract parameters from method signature
-                        const methodContent = content.substring(match.index, match.index + 500);
+                        // Extract parameters from method signature and context
+                        const methodStartIndex = Math.max(0, match.index - 500);
+                        const methodContent = content.substring(methodStartIndex, match.index + 1000);
                         const parameters = this.extractDotNetParameters(methodContent);
                         
                         // Extract response types
                         const responses = this.extractDotNetResponses(methodContent);
+                        
+                        // Extract rich description from Swagger annotations and comments
+                        const description = this.extractDotNetDescription(methodContent, actionName, method, fullPath);
                         
                         const endpoint = {
                             method: method.toUpperCase(),
                             path: fullPath,
                             actionName: actionName,
                             controllerName: controllerName,
-                            description: `${method.toUpperCase()} ${fullPath}`,
+                            description: description,
                             file: relativePath,
                             parameters: parameters,
                             responses: responses,
@@ -460,6 +529,41 @@ class APIAnalyzer {
         }
         
         return null;
+    }
+
+    /**
+     * Extract rich description from .NET method annotations and comments
+     */
+    extractDotNetDescription(methodContent, actionName, method, fullPath) {
+        // Try to extract from SwaggerOperation attribute
+        const swaggerMatch = methodContent.match(/\[SwaggerOperation\(\s*Summary\s*=\s*["']([^"']*)["']/);
+        if (swaggerMatch) {
+            return swaggerMatch[1];
+        }
+
+        // Try to extract from XML documentation comments
+        const xmlCommentMatch = methodContent.match(/\/\/\/\s*<summary>\s*([^<]*)\s*<\/summary>/);
+        if (xmlCommentMatch) {
+            return xmlCommentMatch[1].trim();
+        }
+
+        // Try to extract from inline comments above method
+        const commentMatch = methodContent.match(/\/\/\s*(.+)\s*\n.*?\[Http/);
+        if (commentMatch) {
+            return commentMatch[1].trim();
+        }
+
+        // Generate descriptive name from action name
+        if (actionName) {
+            const readable = actionName
+                .replace(/([A-Z])/g, ' $1')
+                .replace(/^./, str => str.toUpperCase())
+                .trim();
+            return `${readable} - ${method.toUpperCase()} ${fullPath}`;
+        }
+
+        // Fallback
+        return `${method.toUpperCase()} ${fullPath}`;
     }
 
     /**
@@ -1607,6 +1711,7 @@ class APIAnalyzer {
                 path: this.servicePath,
                 framework: this.framework,
                 language: this.language,
+                baseUrl: this.baseUrl,
                 analyzed_at: new Date().toISOString()
             },
             api: {

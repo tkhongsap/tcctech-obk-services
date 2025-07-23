@@ -169,6 +169,27 @@
 
 ## Data Schemas
 
+### SubErrorResponse
+
+**File**: `src/utils/response.py`
+
+#### Fields
+- **status** (`str`) - Required
+- **http_status** (`int`) - Required
+- **message** (`str`) - Required
+- **step** (`str`) - Required
+
+---
+
+### ErrorResponse
+
+**File**: `src/utils/response.py`
+
+#### Fields
+- **detail** (`dict`) - Required
+
+---
+
 
 
 ## External Dependencies
@@ -196,7 +217,7 @@
 - ✅ **HTTP Methods**: GET, POST
 - ✅ **Authentication**: No
 - ✅ **Documentation**: Yes
-- ✅ **Schemas**: 0
+- ✅ **Schemas**: 2
 - ✅ **Dependencies**: 11
 
 ---

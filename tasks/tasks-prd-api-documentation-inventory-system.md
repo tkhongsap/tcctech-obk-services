@@ -26,7 +26,7 @@
 - Generated documentation should follow consistent formatting across all folders
 - Use structured JSON/YAML for data interchange between analysis components
 - Maintain strict folder processing checklist to ensure all 37+ folders are covered
-- Each folder should have its own api-inventory.md, openapi.yaml, and dependency-map.json files
+- Each folder should have its own api-inventory.md, openapi.yaml, dependency-map.json, and comprehensive CSV documentation files
 - **Analysis Organization**: All analysis results stored in `.analysis/[service-name]/` directory structure for easy future reference
 - Progress tracking is essential: always know which folder is currently being processed and how many remain
 - **READ-ONLY OPERATION**: No code execution, no testing, no service startup - only file reading and analysis
@@ -56,6 +56,7 @@
   - `api-inventory.md` (human-readable documentation)
   - `openapi.yaml` (API specification)
   - `dependency-map.json` (dependency tracking)
+  - `[service-name]-api-documentation.csv` (comprehensive CSV with full API details)
 - Ensure git commit successful before proceeding
 
 ## Tasks
@@ -222,4 +223,22 @@ git add . && git commit -m "docs: API analysis for [service-name]" && git push
   - [ ] 5.4.5 Build export capabilities for filtered results and custom reports
   - [ ] 5.4.6 Create responsive design for various screen sizes and devices
   - [ ] 5.4.7 Generate final master documentation consolidating all 37+ folders
-  - [ ] 5.4.8 Perform final validation that all folders have been processed and documented 
+  - [ ] 5.4.8 Perform final validation that all folders have been processed and documented
+
+- [ ] 6.0 Enhanced CSV Documentation Generation **[NEW REQUIREMENT]**
+  - [x] 6.1 Create comprehensive CSV generator script with detailed API information
+  - [x] 6.2 Integrate CSV generation into output pipeline with all required fields:
+    - Service name (e.g., "azure-ocr-trunk")
+    - Full API URL (base URL + endpoint path)
+    - HTTP method (GET, POST, PUT, DELETE, etc.)
+    - Endpoint path
+    - Request payload examples and schemas
+    - Rich descriptions from code comments and Swagger annotations
+    - Response examples and status codes
+    - Authentication requirements
+    - Controller/file information
+  - [x] 6.3 Enhance API analyzer with base URL detection from configuration files
+  - [x] 6.4 Improve description extraction from Swagger annotations, XML comments, and inline comments
+  - [ ] 6.5 **REPROCESS ALL SERVICES** - Re-run enhanced analysis on all 37 services to generate CSV files
+  - [ ] 6.6 Validate CSV files contain comprehensive API documentation for business stakeholders
+  - [ ] 6.7 Generate final summary report showing CSV generation coverage across all services

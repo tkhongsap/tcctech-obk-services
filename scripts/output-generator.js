@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { generateCSVFromAnalysis } = require('./csv-generator.js');
 
 /**
  * Output Generator - Creates documentation from analysis data
@@ -32,7 +33,8 @@ class OutputGenerator {
             const outputs = {
                 markdown: await this.generateMarkdown(),
                 openapi: await this.generateOpenAPI(),
-                json: await this.generateJSON()
+                json: await this.generateJSON(),
+                csv: await this.generateCSV()
             };
             
             // Save files to service directory
@@ -320,6 +322,18 @@ class OutputGenerator {
     }
 
     /**
+     * Generate comprehensive CSV documentation
+     */
+    async generateCSV() {
+        console.log('📊 Generating CSV documentation...');
+        
+        const { CSVGenerator } = require('./csv-generator.js');
+        const generator = new CSVGenerator(this.analysisData);
+        
+        return generator.generateCSV();
+    }
+
+    /**
      * Save all outputs to service directory
      */
     async saveToServiceDirectory(outputs) {
@@ -342,6 +356,11 @@ class OutputGenerator {
         fs.writeFileSync(jsonPath, outputs.json);
         console.log(`  ✅ Saved: ${jsonPath}`);
         
+        // Save CSV documentation
+        const csvPath = path.join(serviceDir, `${this.serviceName}-api-documentation.csv`);
+        fs.writeFileSync(csvPath, outputs.csv);
+        console.log(`  ✅ Saved: ${csvPath}`);
+        
         // Also save to .analysis directory (primary location)
         const analysisDir = path.join(process.cwd(), '.analysis', this.serviceName);
         fs.mkdirSync(analysisDir, { recursive: true });
@@ -349,6 +368,7 @@ class OutputGenerator {
         fs.writeFileSync(path.join(analysisDir, 'api-inventory.md'), outputs.markdown);
         fs.writeFileSync(path.join(analysisDir, 'openapi.yaml'), outputs.openapi);
         fs.writeFileSync(path.join(analysisDir, 'dependency-map.json'), outputs.json);
+        fs.writeFileSync(path.join(analysisDir, `${this.serviceName}-api-documentation.csv`), outputs.csv);
         
         console.log(`  ✅ Copied to: ${analysisDir}`);
         
@@ -359,6 +379,7 @@ class OutputGenerator {
         fs.writeFileSync(path.join(outputDir, 'api-inventory.md'), outputs.markdown);
         fs.writeFileSync(path.join(outputDir, 'openapi.yaml'), outputs.openapi);
         fs.writeFileSync(path.join(outputDir, 'dependency-map.json'), outputs.json);
+        fs.writeFileSync(path.join(outputDir, `${this.serviceName}-api-documentation.csv`), outputs.csv);
         
         console.log(`  ✅ Legacy backup: ${outputDir}`);
     }
