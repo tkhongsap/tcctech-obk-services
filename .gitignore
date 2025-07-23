@@ -1,24 +1,147 @@
 # =============================================================================
-# COMPREHENSIVE .GITIGNORE FOR SERVICE DOCUMENTATION & ANALYSIS PROJECT
+# COMPREHENSIVE .GITIGNORE FOR API USAGE ANALYSIS PROJECT
 # =============================================================================
-# This project focuses on documenting, inventorying, and analyzing services
-# We exclude build artifacts, dependencies, and runtime files to keep the 
-# repository focused on source code and documentation.
+# This project contains an API analysis tool for analyzing microservice usage patterns
+# We exclude generated outputs, dependencies, and runtime files while keeping
+# source code, documentation, and structured analysis results.
 
-# Operating System Files
+# =============================================================================
+# SERVICE DIRECTORIES & EXTRACTED REPOS
+# =============================================================================
+# Individual service repositories (these are data sources, not part of our tool)
+obk-*/
+tcct-*/
+onebangkok-*/
+one-bangkok-*/
+resize-service-*/
+redirect-*/
+keycloak-*/
+flutter-*/
+crontab-*/
+automate-*/
+MapGeoJsonTool-*/
+azure-*/
+
+# Extracted repository archives
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# =============================================================================
+# API ANALYSIS TOOL OUTPUTS (GENERATED FILES)
+# =============================================================================
+# Generated analysis reports (recreated on each run)
+output/
+analysis-summary/
+
+# Logs and runtime files
+logs/
+*.log
+*.log.*
+
+# Cache directories
+.cache/
+.api-analysis-cache/
+temp/
+tmp/
+
+# =============================================================================
+# SECURITY & CREDENTIALS (CRITICAL - NEVER COMMIT)
+# =============================================================================
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+.env.*
+!.env.example
+secrets.json
+credentials.json
+*.credentials
+auth.json
+*.auth
+private.json
+config.local.js
+config.local.json
+
+# =============================================================================
+# NODE.JS DEPENDENCIES & BUILD ARTIFACTS
+# =============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.npm
+.yarn/
+.pnp/
+.pnp.js
+.yarn-integrity
+
+# Build outputs
+dist/
+build/
+out/
+lib/
+
+# Test coverage
+coverage/
+.nyc_output/
+.jest/
+test-results/
+test-output/
+
+# TypeScript
+*.tsbuildinfo
+
+# Cache directories
+.eslintcache
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist/
+.serverless/
+.fusebox/
+
+# =============================================================================
+# OPERATING SYSTEM FILES
+# =============================================================================
+# macOS
 .DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
-Thumbs.db
-*~
-*.tmp
-*.temp
-Desktop.ini
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDouble
+.LSOverride
+Icon?
 
-# IDE and Editor Files
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# IDE AND EDITOR FILES
+# =============================================================================
 .vscode/
 .idea/
 *.swp
@@ -37,183 +160,40 @@ Desktop.ini
 *.ipr
 *.iws
 
-# Security & Credentials (CRITICAL - NEVER COMMIT)
-*.key
-*.pem
-*.p12
-*.pfx
-.env*
-!.env.example
-secrets.json
-appsettings.Development.json
-appsettings.Local.json
-config.json
-credentials.json
-*.credentials
-auth.json
-*.auth
-private.json
+# =============================================================================
+# RUNTIME AND TEMPORARY FILES
+# =============================================================================
+*.pid
+*.seed
+*.pid.lock
+.lock-wscript
 
-# Node.js & TypeScript Dependencies & Build Artifacts
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-.npm
-.yarn/
-.pnp/
-.pnp.js
-dist/
-build/
-out/
-coverage/
-.nyc_output/
-*.tsbuildinfo
-.eslintcache
-.parcel-cache/
-.next/
-.nuxt/
-.vuepress/dist/
-.serverless/
-.cache/
+# Temporary files
+*.tmp
+*.temp
 .temp/
 
-# .NET & C# Build Artifacts
-bin/
-obj/
-*.user
-*.suo
-*.cache
-*.dll
-*.pdb
-*.exe
-*.msi
-.vs/
-packages/
-TestResults/
-BenchmarkDotNet.Artifacts/
-*.nupkg
-*.snupkg
-*.binlog
-.dotnet/
-.localhistory/
+# Backup files
+*.backup
+*.bak
+*.old
+*.orig
+*.rej
 
-# Java & Maven/Gradle
-target/
-*.war
-*.jar
-*.class
-.gradle/
-build/
-gradle-app.setting
-!gradle-wrapper.jar
-.gradletasknamecache
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Go
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-*.test
-*.out
-go.work
-
-# Rust
-target/
-Cargo.lock
-**/*.rs.bk
-*.pdb
-
-# Ruby
-*.gem
-*.rbc
-/.config
-/coverage/
-/InstalledFiles
-/pkg/
-/spec/reports/
-/spec/examples.txt
-/test/tmp/
-/test/version_tmp/
-/tmp/
-.bundle/
-vendor/bundle
-
-# PHP
-/vendor/
-composer.phar
-composer.lock
-.env.local.php
-.env.*.local
-
-# Database Files
+# =============================================================================
+# DATABASE FILES
+# =============================================================================
 *.db
 *.sqlite
 *.sqlite3
 *.db-journal
 *.db-shm
 *.db-wal
-*.mdf
-*.ldf
 
-# Logs and Runtime Files
-logs/
-*.log
-*.log.*
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-.pnpm-debug.log*
-
-# Build and Deployment Artifacts
-*.tar.gz
-*.tgz
-*.zip
-*.rar
-*.7z
-release/
-releases/
-publish/
-
-# Source Repository Archives (extracted GitLab repos - keep originals for reference)
-# Note: Original zip files contain the source repositories and may be kept for backup/reference
-
-# Media Files & Binary Assets (not needed for documentation/analysis)
+# =============================================================================
+# LARGE BINARY FILES (NOT NEEDED FOR ANALYSIS)
+# =============================================================================
+# Media files
 *.mp3
 *.mp4
 *.wav
@@ -228,11 +208,8 @@ publish/
 *.ogg
 *.wma
 *.flac
-*.3gp
-*.mkv
-*.ogv
 
-# Image Assets (large binary files not essential for code analysis)
+# Image files (keep small ones like icons)
 *.psd
 *.ai
 *.sketch
@@ -241,40 +218,40 @@ publish/
 *.tiff
 *.tif
 *.bmp
-*.ico
-*.icns
 *.dmg
 *.app
 *.deb
 *.rpm
 
-# Font Files
+# Font files
 *.ttf
 *.otf
 *.woff
 *.woff2
 *.eot
 
-# Large Data Files
-*.csv
-*.xlsx
-*.xls
-*.ppt
-*.pptx
-*.doc
-*.docx
+# Compressed archives
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tgz
 
-# Documentation Generation Artifacts (keep source docs, exclude generated)
+# =============================================================================
+# DOCUMENTATION BUILD ARTIFACTS
+# =============================================================================
+# Keep source docs (.md files), exclude generated docs
 *.pdf
 *.docx
-analysis-output/
-temp-docs/
 site/
 _site/
 .jekyll-cache/
 .jekyll-metadata
+docs/build/
 
-# DevOps & Containers
+# =============================================================================
+# DEVOPS & DEPLOYMENT
+# =============================================================================
 .docker/
 docker-compose.override.yml
 .terraform/
@@ -284,63 +261,115 @@ docker-compose.override.yml
 .vagrant/
 Vagrantfile.local
 
-# Cloud & Deployment
+# Cloud deployment
 .serverless/
 .amplify/
 .firebase/
 .vercel/
 .netlify/
 
-# Testing
-.coverage
-htmlcov/
-.tox/
-.nox/
-.pytest_cache/
-junit.xml
-coverage.xml
+# =============================================================================
+# LANGUAGE-SPECIFIC BUILD ARTIFACTS
+# =============================================================================
 
-# Backup and Temporary Files
-*.backup
-*.bak
-*.old
-*.orig
-*.rej
-*~
-*.swp
-*.swo
-.#*
-#*#
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.pdb
+*.exe
+*.msi
+packages/
+TestResults/
+*.nupkg
+*.snupkg
 
-# OS Generated Files
-.fseventsd
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-.AppleDouble
-.LSOverride
-Icon?
+# Java
+target/
+*.war
+*.jar
+*.class
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
 
-# Windows
-[Dd]esktop.ini
-$RECYCLE.BIN/
-*.cab
-*.msix
-*.msm
-*.msp
-*.lnk
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.venv/
+venv/
+env/
+ENV/
 
-# Linux
-*~
-.fuse_hidden*
-.directory
-.Trash-*
-.nfs*
+# Go
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Rust
+target/
+Cargo.lock
+**/*.rs.bk
+
+# Ruby
+*.gem
+*.rbc
+/.config
+/pkg/
+/spec/reports/
+/test/tmp/
+.bundle/
+vendor/bundle
+
+# PHP
+/vendor/
+composer.phar
+composer.lock
+.env.local.php
 
 # =============================================================================
-# KEEP THESE FILES FOR DOCUMENTATION & ANALYSIS:
-# - Source code files (*.cs, *.js, *.ts, *.py, etc.)
-# - Project files (*.csproj, package.json, requirements.txt, etc.)
-# - Configuration files (appsettings.json, web.config, etc.)
-# - Documentation files (README.md, *.md, etc.)
-# - Schema files (*.sql, *.json, *.yaml, etc.)
+# ANALYSIS DATA TO KEEP IN GIT
 # =============================================================================
+# These files should be committed as they represent structured analysis results:
+# - analysis/ directory (contains processed service documentation)
+# - scripts/ directory (our analysis tool source code)  
+# - config/ directory (configuration files)
+# - tasks/ directory (PRDs and task documentation)
+# - *.md files (documentation)
+# - package.json, *.js source files
+# - Small CSV files with analysis data (< 1MB)
+
+# =============================================================================
+# EXCEPTIONS (FILES TO KEEP)
+# =============================================================================
+# Keep small analysis CSV files (exclude the pattern from binary exclusion)
+!analysis/**/*.csv
+!scripts/**/*.csv
+!**/api-inventory.csv
+!**/dependency-analysis.csv
+
+# Keep configuration examples
+!.env.example
+!config.example.js
