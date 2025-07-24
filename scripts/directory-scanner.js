@@ -14,6 +14,8 @@ class DirectoryScanner {
       'openapi.yaml',
       'openapi.yml'
     ];
+    // Pattern for analysis JSON files (e.g., obk-mtel-iam-trunk-analysis.json)
+    this.analysisFilePattern = /-analysis\.json$/;
   }
 
   /**
@@ -65,7 +67,8 @@ class DirectoryScanner {
       const files = await fs.readdir(servicePath);
       
       for (const file of files) {
-        if (this.supportedFiles.includes(file)) {
+        // Check if it's a supported file or an analysis JSON file
+        if (this.supportedFiles.includes(file) || this.analysisFilePattern.test(file)) {
           const filePath = path.join(servicePath, file);
           const stats = await fs.stat(filePath);
           

@@ -11,7 +11,8 @@ class FileParser {
       'api-inventory.md',
       'dependency-map.json',
       'openapi.yaml',
-      'openapi.yml'
+      'openapi.yml',
+      '-analysis.json'  // Add support for service analysis JSON files
     ];
   }
 
@@ -59,7 +60,12 @@ class FileParser {
           parsedData = this.parseOpenAPI(content, filePath);
           break;
         default:
-          throw new Error(`Unsupported file type: ${fileType}`);
+          // Check if it's an analysis JSON file
+          if (fileType.endsWith('-analysis.json')) {
+            parsedData = this.parseAnalysisJSON(content, filePath);
+          } else {
+            throw new Error(`Unsupported file type: ${fileType}`);
+          }
       }
 
       // Validate parsed data
@@ -414,6 +420,79 @@ class FileParser {
   }
 
   /**
+   * Parse service analysis JSON file containing comprehensive endpoint data
+   * @param {string} content - JSON content
+   * @param {string} filePath - File path for error reporting
+   * @returns {Object} Parsed analysis data
+   */
+  parseAnalysisJSON(content, filePath) {
+    try {
+      const data = JSON.parse(content);
+      
+      const result = {
+        type: 'service-analysis',
+        filePath,
+        serviceName: data.service?.name || this.extractServiceName(filePath),
+        framework: data.service?.framework || 'unknown',
+        endpoints: [],
+        dependencies: [],
+        externalAPIs: [],
+        metadata: {
+          language: data.service?.language,
+          analyzedAt: data.service?.analyzed_at,
+          totalEndpoints: data.api?.total_endpoints || 0
+        }
+      };
+
+      // Extract comprehensive endpoint data
+      if (data.api && data.api.endpoints && Array.isArray(data.api.endpoints)) {
+        result.endpoints = data.api.endpoints.map(endpoint => ({
+          method: endpoint.method || 'GET',
+          path: endpoint.path || '',
+          description: endpoint.description || '',
+          file: endpoint.file || '',
+          parameters: endpoint.parameters || [],
+          responses: endpoint.responses || [],
+          authentication: endpoint.authentication || null,
+          type: 'internal'
+        }));
+      }
+
+      // Extract external API dependencies
+      if (data.dependencies && data.dependencies.external_apis && Array.isArray(data.dependencies.external_apis)) {
+        result.externalAPIs = data.dependencies.external_apis.map(api => ({
+          url: api.url || api.name || '',
+          type: 'external',
+          description: api.description || ''
+        }));
+      }
+
+      // Extract package dependencies
+      if (data.dependencies && data.dependencies.packages && Array.isArray(data.dependencies.packages)) {
+        result.dependencies = data.dependencies.packages.map(pkg => ({
+          name: pkg.name,
+          version: pkg.version || '',
+          type: 'package'
+        }));
+      }
+
+      // Extract internal service dependencies
+      if (data.dependencies && data.dependencies.internal_services && Array.isArray(data.dependencies.internal_services)) {
+        data.dependencies.internal_services.forEach(service => {
+          result.dependencies.push({
+            service: service.name || service,
+            type: 'service-dependency'
+          });
+        });
+      }
+
+      return result;
+    } catch (error) {
+      throw new Error(`Invalid JSON in analysis file: ${error.message}`);
+    }
+  }
+
+  /**
    * Extract service name from file path
    * @param {string} filePath - File path
    * @returns {string} Service name
@@ -447,6 +526,10 @@ class FileParser {
 
     if (parsedData.type === 'dependency-map' && (!parsedData.dependencies || parsedData.dependencies.length === 0)) {
       validation.warnings.push('No dependencies found');
+    }
+
+    if (parsedData.type === 'service-analysis' && (!parsedData.endpoints || parsedData.endpoints.length === 0)) {
+      validation.warnings.push('No API endpoints found in analysis data');
     }
 
     return validation;
