@@ -1,0 +1,226 @@
+{
+  "timestamp": "2025-07-24T04:02:56.645Z",
+  "overview": {
+    "total_frameworks": 10,
+    "total_services": 37,
+    "total_endpoints": 697
+  },
+  "framework_analysis": {
+    "Node.js": {
+      "service_count": 5,
+      "percentage": "13.5",
+      "total_endpoints": 1,
+      "endpoint_percentage": "0.1",
+      "avg_endpoints_per_service": "0.2",
+      "complexity_score": 0,
+      "services": [
+        "MapGeoJsonTool-trunk",
+        "obk-app-temp-trunk",
+        "obk-indoor-navigation-trunk",
+        "obk-infra-trunk",
+        "one-bangkok-app-trunk"
+      ]
+    },
+    "unknown": {
+      "service_count": 11,
+      "percentage": "29.7",
+      "total_endpoints": 3,
+      "endpoint_percentage": "0.4",
+      "avg_endpoints_per_service": "0.3",
+      "complexity_score": 0,
+      "services": [
+        "automate-trunk",
+        "crontab-trunk",
+        "keycloak-trunk",
+        "obk-booking-trunk",
+        "obk-cms-trunk",
+        "obk-marcom-trunk",
+        "obk-pms-trunk",
+        "obk-residential-ipad-trunk",
+        "obk-sustainable-trunk",
+        "onebangkok-trunk",
+        "redirect-onebangkok-trunk"
+      ]
+    },
+    "FastAPI": {
+      "service_count": 1,
+      "percentage": "2.7",
+      "total_endpoints": 7,
+      "endpoint_percentage": "1.0",
+      "avg_endpoints_per_service": "7.0",
+      "complexity_score": 3,
+      "services": [
+        "azure-ocr-trunk"
+      ]
+    },
+    "Flutter": {
+      "service_count": 2,
+      "percentage": "5.4",
+      "total_endpoints": 0,
+      "endpoint_percentage": "0.0",
+      "avg_endpoints_per_service": "0.0",
+      "complexity_score": 0,
+      "services": [
+        "flutter-login-trunk",
+        "obk-operation-app-trunk"
+      ]
+    },
+    "Next.js": {
+      "service_count": 5,
+      "percentage": "13.5",
+      "total_endpoints": 6,
+      "endpoint_percentage": "0.9",
+      "avg_endpoints_per_service": "1.2",
+      "complexity_score": 4,
+      "services": [
+        "obk-app-universal-link-trunk",
+        "obk-campaign-web-trunk",
+        "obk-parking-payment-dev",
+        "obk-wifi-auth-web-trunk",
+        "resize-service-trunk"
+      ]
+    },
+    "Fiber": {
+      "service_count": 1,
+      "percentage": "2.7",
+      "total_endpoints": 0,
+      "endpoint_percentage": "0.0",
+      "avg_endpoints_per_service": "0.0",
+      "complexity_score": 9,
+      "services": [
+        "obk-art-culture-api-trunk"
+      ]
+    },
+    "Express.js": {
+      "service_count": 8,
+      "percentage": "21.6",
+      "total_endpoints": 22,
+      "endpoint_percentage": "3.2",
+      "avg_endpoints_per_service": "2.8",
+      "complexity_score": 8,
+      "services": [
+        "obk-mtel-bms-trunk",
+        "obk-mtel-bus-trunk",
+        "obk-mtel-document-trunk",
+        "obk-mtel-iam-trunk",
+        "obk-mtel-notification-trunk",
+        "obk-mtel-websocket-trunk",
+        "obk-parking-trunk",
+        "obk-wiremock-trunk"
+      ]
+    },
+    ".NET": {
+      "service_count": 2,
+      "percentage": "5.4",
+      "total_endpoints": 658,
+      "endpoint_percentage": "94.4",
+      "avg_endpoints_per_service": "329.0",
+      "complexity_score": 40,
+      "services": [
+        "obk-operation-backend-dev",
+        "tcct-serviceabstraction-dev"
+      ]
+    },
+    "Python": {
+      "service_count": 1,
+      "percentage": "2.7",
+      "total_endpoints": 0,
+      "endpoint_percentage": "0.0",
+      "avg_endpoints_per_service": "0.0",
+      "complexity_score": 0,
+      "services": [
+        "obk-predict-location-main"
+      ]
+    },
+    "NestJS": {
+      "service_count": 1,
+      "percentage": "2.7",
+      "total_endpoints": 0,
+      "endpoint_percentage": "0.0",
+      "avg_endpoints_per_service": "0.0",
+      "complexity_score": 7,
+      "services": [
+        "obk-sso-trunk"
+      ]
+    }
+  },
+  "consolidation_recommendations": [
+    {
+      "action": "MIGRATE",
+      "framework": "FastAPI",
+      "reason": "Only 1 services using FastAPI",
+      "target_framework": ".NET",
+      "effort": "MEDIUM"
+    },
+    {
+      "action": "MIGRATE",
+      "framework": "Flutter",
+      "reason": "Only 2 services using Flutter",
+      "target_framework": ".NET",
+      "effort": "MEDIUM"
+    },
+    {
+      "action": "MIGRATE",
+      "framework": "Fiber",
+      "reason": "Only 1 services using Fiber",
+      "target_framework": ".NET",
+      "effort": "MEDIUM"
+    },
+    {
+      "action": "MIGRATE",
+      "framework": "Python",
+      "reason": "Only 1 services using Python",
+      "target_framework": ".NET",
+      "effort": "MEDIUM"
+    },
+    {
+      "action": "MIGRATE",
+      "framework": "NestJS",
+      "reason": "Only 1 services using NestJS",
+      "target_framework": ".NET",
+      "effort": "MEDIUM"
+    }
+  ],
+  "migration_complexity": {
+    "Node.js": {
+      "complexity_score": 10,
+      "effort_level": "LOW"
+    },
+    "unknown": {
+      "complexity_score": 22,
+      "effort_level": "MEDIUM"
+    },
+    "FastAPI": {
+      "complexity_score": 3,
+      "effort_level": "LOW"
+    },
+    "Flutter": {
+      "complexity_score": 4,
+      "effort_level": "LOW"
+    },
+    "Next.js": {
+      "complexity_score": 11,
+      "effort_level": "LOW"
+    },
+    "Fiber": {
+      "complexity_score": 2,
+      "effort_level": "LOW"
+    },
+    "Express.js": {
+      "complexity_score": 18,
+      "effort_level": "LOW"
+    },
+    ".NET": {
+      "complexity_score": 70,
+      "effort_level": "HIGH"
+    },
+    "Python": {
+      "complexity_score": 2,
+      "effort_level": "LOW"
+    },
+    "NestJS": {
+      "complexity_score": 2,
+      "effort_level": "LOW"
+    }
+  }
+}

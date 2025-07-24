@@ -1,0 +1,183 @@
+{
+  "timestamp": "2025-07-24T04:02:56.646Z",
+  "methodology": "Services ranked by endpoint count, dependency impact, and framework criticality",
+  "critical_services": [
+    {
+      "service_name": "tcct-serviceabstraction-dev",
+      "framework": ".NET",
+      "endpoints_count": 352,
+      "dependencies_count": 62,
+      "criticality_score": 816,
+      "risk_factors": [
+        "Very high endpoint count",
+        "Critical framework"
+      ],
+      "impact_if_down": "System-wide outage"
+    },
+    {
+      "service_name": "obk-operation-backend-dev",
+      "framework": ".NET",
+      "endpoints_count": 306,
+      "dependencies_count": 88,
+      "criticality_score": 750,
+      "risk_factors": [
+        "Very high endpoint count",
+        "High dependency count",
+        "Critical framework"
+      ],
+      "impact_if_down": "System-wide outage"
+    },
+    {
+      "service_name": "obk-mtel-iam-trunk",
+      "framework": "Express.js",
+      "endpoints_count": 1,
+      "dependencies_count": 116,
+      "criticality_score": 118,
+      "risk_factors": [
+        "High dependency count"
+      ],
+      "impact_if_down": "Integration failures"
+    },
+    {
+      "service_name": "obk-mtel-bms-trunk",
+      "framework": "Express.js",
+      "endpoints_count": 1,
+      "dependencies_count": 102,
+      "criticality_score": 104,
+      "risk_factors": [
+        "High dependency count"
+      ],
+      "impact_if_down": "Integration failures"
+    },
+    {
+      "service_name": "obk-mtel-notification-trunk",
+      "framework": "Express.js",
+      "endpoints_count": 1,
+      "dependencies_count": 94,
+      "criticality_score": 96,
+      "risk_factors": [
+        "High dependency count"
+      ],
+      "impact_if_down": "Integration failures"
+    }
+  ],
+  "bottleneck_services": [
+    {
+      "service_name": "tcct-serviceabstraction-dev",
+      "bottleneck_type": "High API Traffic",
+      "metric_value": 352,
+      "recommendation": "Implement API gateway and rate limiting"
+    },
+    {
+      "service_name": "obk-operation-backend-dev",
+      "bottleneck_type": "High API Traffic",
+      "metric_value": 306,
+      "recommendation": "Implement API gateway and rate limiting"
+    },
+    {
+      "service_name": "obk-mtel-iam-trunk",
+      "bottleneck_type": "High Dependencies",
+      "metric_value": 116,
+      "recommendation": "Review and optimize dependencies"
+    },
+    {
+      "service_name": "obk-mtel-bms-trunk",
+      "bottleneck_type": "High Dependencies",
+      "metric_value": 102,
+      "recommendation": "Review and optimize dependencies"
+    },
+    {
+      "service_name": "obk-mtel-notification-trunk",
+      "bottleneck_type": "High Dependencies",
+      "metric_value": 94,
+      "recommendation": "Review and optimize dependencies"
+    },
+    {
+      "service_name": "obk-parking-trunk",
+      "bottleneck_type": "High Dependencies",
+      "metric_value": 94,
+      "recommendation": "Review and optimize dependencies"
+    },
+    {
+      "service_name": "obk-mtel-document-trunk",
+      "bottleneck_type": "High Dependencies",
+      "metric_value": 90,
+      "recommendation": "Review and optimize dependencies"
+    },
+    {
+      "service_name": "obk-art-culture-api-trunk",
+      "bottleneck_type": "High Dependencies",
+      "metric_value": 88,
+      "recommendation": "Review and optimize dependencies"
+    },
+    {
+      "service_name": "obk-mtel-bus-trunk",
+      "bottleneck_type": "High Dependencies",
+      "metric_value": 86,
+      "recommendation": "Review and optimize dependencies"
+    }
+  ],
+  "single_points_of_failure": [],
+  "optimization_priorities": [
+    {
+      "priority": 1,
+      "service_name": "tcct-serviceabstraction-dev",
+      "focus_area": "API Performance",
+      "effort_estimate": "HIGH"
+    },
+    {
+      "priority": 2,
+      "service_name": "obk-operation-backend-dev",
+      "focus_area": "API Performance",
+      "effort_estimate": "HIGH"
+    },
+    {
+      "priority": 3,
+      "service_name": "obk-mtel-iam-trunk",
+      "focus_area": "Dependency Management",
+      "effort_estimate": "MEDIUM"
+    },
+    {
+      "priority": 4,
+      "service_name": "obk-mtel-bms-trunk",
+      "focus_area": "Dependency Management",
+      "effort_estimate": "MEDIUM"
+    },
+    {
+      "priority": 5,
+      "service_name": "obk-mtel-notification-trunk",
+      "focus_area": "Dependency Management",
+      "effort_estimate": "MEDIUM"
+    },
+    {
+      "priority": 6,
+      "service_name": "obk-parking-trunk",
+      "focus_area": "Dependency Management",
+      "effort_estimate": "MEDIUM"
+    },
+    {
+      "priority": 7,
+      "service_name": "obk-mtel-document-trunk",
+      "focus_area": "Dependency Management",
+      "effort_estimate": "MEDIUM"
+    },
+    {
+      "priority": 8,
+      "service_name": "obk-art-culture-api-trunk",
+      "focus_area": "Dependency Management",
+      "effort_estimate": "MEDIUM"
+    },
+    {
+      "priority": 9,
+      "service_name": "obk-mtel-bus-trunk",
+      "focus_area": "Dependency Management",
+      "effort_estimate": "MEDIUM"
+    },
+    {
+      "priority": 10,
+      "service_name": "obk-mtel-websocket-trunk",
+      "focus_area": "Dependency Management",
+      "effort_estimate": "MEDIUM"
+    }
+  ]
+}
