@@ -36,7 +36,7 @@ class DirectoryScanner {
           const servicePath = path.join(analysisDir, entry.name);
           const serviceInfo = await this.scanService(entry.name, servicePath);
           
-          if (serviceInfo.files.length > 0) {
+          if (Object.keys(serviceInfo.files).length > 0) {
             services.push(serviceInfo);
           }
         }

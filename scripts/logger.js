@@ -171,7 +171,9 @@ class Logger {
       info: (message, context = {}) => 
         this.info(message, { service: serviceName, ...context }),
       debug: (message, context = {}) => 
-        this.debug(message, { service: serviceName, ...context })
+        this.debug(message, { service: serviceName, ...context }),
+      startTimer: (operation) => 
+        this.startTimer(`${serviceName}:${operation}`)
     };
   }
 }

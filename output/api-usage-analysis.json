@@ -1,0 +1,4867 @@
+{
+  "metadata": {
+    "generatedAt": "2025-07-24T02:26:17.468Z",
+    "version": "1.0.0",
+    "reportType": "api-usage-analysis"
+  },
+  "summary": {
+    "timestamp": "2025-07-24T02:25:32.513Z",
+    "services": {
+      "total": 37,
+      "successful": 37,
+      "errors": 0,
+      "warnings": 0
+    },
+    "apis": {
+      "total": 8,
+      "crossService": 0,
+      "bottlenecks": 0
+    },
+    "frameworks": {
+      "unknown": 37
+    },
+    "risks": {
+      "circularDependencies": 0,
+      "highDependencyServices": 0,
+      "unusedServices": 0
+    }
+  },
+  "analysis": {},
+  "services": [
+    {
+      "serviceName": "MapGeoJsonTool-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "automate-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "azure-ocr-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "crontab-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "flutter-login-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "keycloak-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-app-temp-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-app-universal-link-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-art-culture-api-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-booking-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-campaign-web-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-cms-trunk",
+      "framework": "unknown",
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/external-camera-list**",
+          "description": "",
+          "type": "internal",
+          "parameters": [],
+          "responses": [],
+          "tags": []
+        },
+        {
+          "method": "POST",
+          "path": "/api/image-uploader/proxy-upload**",
+          "description": "",
+          "type": "internal",
+          "parameters": [],
+          "responses": [],
+          "tags": []
+        },
+        {
+          "method": "GET",
+          "path": "/api/receipt-fetching-time**",
+          "description": "",
+          "type": "internal",
+          "parameters": [],
+          "responses": [],
+          "tags": []
+        }
+      ],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "external_api",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "external_api",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "external_api",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-indoor-navigation-trunk",
+      "framework": "unknown",
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/https://smart-1.dft.go.th/Api/RegisterFile/TestSaveWifi**",
+          "description": "",
+          "type": "internal",
+          "parameters": [],
+          "responses": [],
+          "tags": []
+        }
+      ],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "external_api",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [
+        {
+          "url": "https://smart-1.dft.go.th/Api/RegisterFile/TestSaveWifi**",
+          "name": "smart-1.dft.go.th",
+          "description": "",
+          "type": "external",
+          "domain": "smart-1.dft.go.th"
+        }
+      ],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-infra-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-marcom-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-mtel-bms-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-mtel-bus-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-mtel-document-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-mtel-iam-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-mtel-notification-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-mtel-websocket-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-operation-app-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-operation-backend-dev",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-parking-payment-dev",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-parking-trunk",
+      "framework": "unknown",
+      "endpoints": [
+        {
+          "method": "NULL`) - REQUIRED\n\n---\n\n### BASECAMPAIGNBODY\n\n**FILE**: `SRC/CONTROLLERS/CAMPAIGN_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - OPTIONAL\n- **PRICE_MIN** (`NUMBER`) - REQUIRED\n- **REDEEM_HOUR** (`NUMBER`) - REQUIRED\n- **RATE_CODE** (`STRING`) - REQUIRED\n\n---\n\n### UPSERTCAMPAIGNBODY\n\n**FILE**: `SRC/CONTROLLERS/CAMPAIGN_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **1** (`CAMPAIGNBODY`) - REQUIRED\n- **2** (`CAMPAIGNBODY`) - REQUIRED\n- **3** (`CAMPAIGNBODY`) - REQUIRED\n- **4** (`FINALCAMPAIGNBODY`) - REQUIRED\n\n---\n\n### UPSERTCAMPAIGN\n\n**FILE**: `SRC/CONTROLLERS/CAMPAIGN_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **DATA** (`UPSERTCAMPAIGNBODY`) - REQUIRED\n- **UPDATED_BY** (`STRING`) - OPTIONAL\n\n---\n\n### CONFIGSTOREWHITELISTQUERY\n\n**FILE**: `SRC/CONTROLLERS/CONFIG_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - OPTIONAL\n- **TAX_ID** (`STRING`) - OPTIONAL\n- **STORE_NAME** (`STRING`) - OPTIONAL\n- **COMPANY_NAME** (`STRING`) - OPTIONAL\n- **PROPERTY_NAME** (`STRING`) - OPTIONAL\n- **PROPERTY_ID** (`STRING`) - OPTIONAL\n- **UNIT_NO** (`STRING`) - OPTIONAL\n- **ADDRESS** (`STRING`) - OPTIONAL\n- **BUILDING** (`STRING`) - OPTIONAL\n- **HAS_TAX_ID** (`BOOLEAN`) - OPTIONAL\n- **RECEIPT_ADDRESS_IN_OBK** (`BOOLEAN`) - OPTIONAL\n- **UPDATED_AT** (`DATE`) - OPTIONAL\n- **CREATED_AT** (`STRING`) - OPTIONAL\n- **SORT_KEY** (`STRING`) - OPTIONAL\n- **SORT_DIRECTION** (`STRING`) - OPTIONAL\n\n---\n\n### ADDCONFIGSTOREWHITELIST\n\n**FILE**: `SRC/CONTROLLERS/CONFIG_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **TAX_ID** (`STRING`) - OPTIONAL\n- **STORE_NAME** (`STRING`) - REQUIRED\n- **COMPANY_NAME** (`STRING`) - REQUIRED\n- **PROPERTY_ID** (`STRING`) - REQUIRED\n- **UNIT_NO** (`STRING`) - OPTIONAL\n- **ADDRESS** (`STRING`) - OPTIONAL\n- **BUILDING** (`STRING`) - OPTIONAL\n- **HAS_TAX_ID** (`BOOLEAN`) - REQUIRED\n- **RECEIPT_ADDRESS_IN_OBK** (`BOOLEAN`) - REQUIRED\n- **UPDATED_BY** (`STRING`) - OPTIONAL\n\n---\n\n### PROPERTYQUERY\n\n**FILE**: `SRC/CONTROLLERS/CONFIG_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - OPTIONAL\n- **NAME** (`STRING`) - OPTIONAL\n\n---\n\n### UPDATECONFIGSTOREWHITELIST\n\n**FILE**: `SRC/CONTROLLERS/CONFIG_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **TAX_ID** (`STRING`) - OPTIONAL\n- **STORE_NAME** (`STRING`) - OPTIONAL\n- **COMPANY_NAME** (`STRING`) - OPTIONAL\n- **PROPERTY_ID** (`STRING`) - OPTIONAL\n- **UNIT_NO** (`STRING`) - OPTIONAL\n- **ADDRESS** (`STRING`) - OPTIONAL\n- **BUILDING** (`STRING`) - OPTIONAL\n- **HAS_TAX_ID** (`BOOLEAN`) - OPTIONAL\n- **RECEIPT_ADDRESS_IN_OBK** (`BOOLEAN`) - OPTIONAL\n- **UPDATED_BY** (`STRING`) - OPTIONAL\n\n---\n\n### STOREWHITELISTRESPONSE\n\n**FILE**: `SRC/CONTROLLERS/CONFIG_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **UPDATED_AT** (`DATE`) - REQUIRED\n- **CREATED_AT** (`DATE`) - REQUIRED\n- **TAX_ID** (`STRING",
+          "path": "/null`) - Required\n- **store_name** (`string`) - Required\n- **company_name** (`string`) - Required\n- **unit_no** (`string",
+          "description": "null`) - Required\n- **address** (`string",
+          "type": "internal",
+          "parameters": [],
+          "responses": [],
+          "tags": []
+        },
+        {
+          "method": "NULL`) - REQUIRED\n- **HAS_TAX_ID** (`BOOLEAN`) - REQUIRED\n- **RECEIPT_ADDRESS_IN_OBK** (`BOOLEAN`) - REQUIRED\n- **PROPERTY** (`{`) - REQUIRED\n- **ID** (`STRING`) - REQUIRED\n- **NAME** (`STRING`) - REQUIRED\n- **KEYWORDS** (`STRING[]`) - REQUIRED\n- **ADDRESSES** (`STRING[]`) - REQUIRED\n\n---\n\n### PROPERTIESRESPONSE\n\n**FILE**: `SRC/CONTROLLERS/CONFIG_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **NAME** (`STRING`) - REQUIRED\n- **KEYWORDS** (`STRING[]`) - REQUIRED\n- **ADDRESSES** (`STRING[]`) - REQUIRED\n\n---\n\n### PROPERTYBODY\n\n**FILE**: `SRC/CONTROLLERS/CONFIG_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **NAME** (`STRING`) - REQUIRED\n- **KEYWORDS** (`STRING[]`) - REQUIRED\n- **ADDRESSES** (`STRING[]`) - REQUIRED\n\n---\n\n### CONFIGDOCSTYPERESPONSE\n\n**FILE**: `SRC/CONTROLLERS/CONFIG_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **KEYWORD** (`STRING`) - REQUIRED\n- **TYPE** (`STRING`) - REQUIRED\n\n---\n\n### CONFIGDOCSTYPEBODY\n\n**FILE**: `SRC/CONTROLLERS/CONFIG_CONTROLLER.INTERFACE.TS`\n\n#### FIELDS\n- **KEYWORD** (`STRING`) - REQUIRED\n- **TYPE** (`STRING`) - REQUIRED\n\n---\n\n### ADDPARKINGTICKETQUERY\n\n**FILE**: `SRC/CONTROLLERS/PARKING_DETAIL_CONTROLLER.INTERFACES.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **PLATFORM** (`ADDPARKINGTICKETTYPE`) - REQUIRED\n- **ID_TYPE** (`ADDPARKINGTICKETIDTYPE`) - REQUIRED\n\n---\n\n### ADDPARKINGTICKETRESPONSE\n\n**FILE**: `SRC/CONTROLLERS/PARKING_DETAIL_CONTROLLER.INTERFACES.TS`\n\n#### FIELDS\n- **PARKINGDETAILID** (`STRING`) - REQUIRED\n\n---\n\n### PARKINGACCOUNTDETAIL\n\n**FILE**: `SRC/CONTROLLERS/PARKING_DETAIL_CONTROLLER.INTERFACES.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **USERNAME** (`STRING`) - REQUIRED\n- **EMAIL** (`STRING`) - REQUIRED\n- **PHONE** (`STRING`) - REQUIRED\n\n---\n\n### GETPARKINGDETAILRESPONSE\n\n**FILE**: `SRC/CONTROLLERS/PARKING_DETAIL_CONTROLLER.INTERFACES.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **RECORD_ID** (`STRING`) - REQUIRED\n- **PARKING_TICKET** (`STRING`) - REQUIRED\n- **LICENSE_PLATE** (`STRING`) - REQUIRED\n- **ACCOUNT_DETAIL** (`PARKINGACCOUNTDETAIL`) - REQUIRED\n- **TOTAL_AMOUNT** (`STRING`) - REQUIRED\n- **RECEIPTS** (`RECEIPT[]`) - REQUIRED\n- **REDEEMED_AT** (`STRING`) - REQUIRED\n- **RATE_DETAIL** (`{`) - REQUIRED\n- **EN** (`STRING`) - REQUIRED\n- **TH** (`STRING`) - REQUIRED\n\n---\n\n### GETPARKINGDETAILSINDEXRESPONSE\n\n**FILE**: `SRC/CONTROLLERS/PARKING_DETAIL_CONTROLLER.INTERFACES.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **RECORD_ID** (`STRING`) - REQUIRED\n- **PARKING_TICKET_ID** (`STRING`) - REQUIRED\n- **PLATE_NO** (`STRING`) - REQUIRED\n- **ACCOUNT_DETAIL** (`PARKINGACCOUNTDETAIL`) - REQUIRED\n- **TOTAL_AMOUNT** (`STRING`) - REQUIRED\n- **REDEEMED_AT** (`STRING`) - REQUIRED\n- **STATUS** (`PARKINGDETAILSTATUS`) - REQUIRED\n\n---\n\n### GETPARKINGDETAILINDEXQUERY\n\n**FILE**: `SRC/CONTROLLERS/PARKING_DETAIL_CONTROLLER.INTERFACES.TS`\n\n#### FIELDS\n- **STARTDATE** (`STRING`) - OPTIONAL\n- **ENDDATE** (`STRING`) - OPTIONAL\n- **STATUS** (`PARKINGDETAILSTATUS`) - OPTIONAL\n\n---\n\n### PARKINGDETAILREDEEMBODY\n\n**FILE**: `SRC/CONTROLLERS/PARKING_DETAIL_CONTROLLER.INTERFACES.TS`\n\n#### FIELDS\n- **PARKING_DETAIL_ID** (`STRING`) - REQUIRED\n- **TYPE** (`REDEEMTYPE`) - REQUIRED\n\n---\n\n### RATEDETAIL\n\n**FILE**: `SRC/CONTROLLERS/PARKING_DETAIL_CONTROLLER.INTERFACES.TS`\n\n#### FIELDS\n- **EN** (`STRING`) - REQUIRED\n- **TH** (`STRING`) - REQUIRED\n\n---\n\n### REDEEMPARKINGDETAILRESPONSE\n\n**FILE**: `SRC/CONTROLLERS/PARKING_DETAIL_CONTROLLER.INTERFACES.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **PLATE_NUMBER** (`STRING`) - REQUIRED\n- **TICKET_NUMBER** (`STRING`) - REQUIRED\n- **VEHICLE_TYPE** (`STRING`) - REQUIRED\n- **TOTAL_FEE** (`NUMBER`) - REQUIRED\n- **PARKED_AT** (`STRING`) - REQUIRED\n- **RATE_DETAIL** (`RATEDETAIL`) - REQUIRED\n- **MEMBER_TYPE_ID** (`NUMBER`) - REQUIRED\n- **VEHICLE_TYPE_ID** (`NUMBER`) - REQUIRED\n- **SUB_CODE** (`STRING`) - OPTIONAL\n\n---\n\n### CREATERECEIPTBODY\n\n**FILE**: `SRC/CONTROLLERS/RECEIPTS_CONTROLLER_INTERFACE.TS`\n\n#### FIELDS\n- **PARKINGDETAILID** (`STRING`) - REQUIRED\n- **IMAGEURL** (`STRING`) - REQUIRED\n- **EMAIL** (`STRING`) - OPTIONAL\n\n---\n\n### RECEIPT\n\n**FILE**: `SRC/CONTROLLERS/RECEIPTS_CONTROLLER_INTERFACE.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **TOTAL** (`STRING`) - REQUIRED\n- **CREATED_AT** (`STRING`) - REQUIRED\n- **UPDATED_AT** (`STRING`) - REQUIRED\n- **STATUS** (`RECEIPTSTATUS`) - REQUIRED\n- **MESSAGE** (`STRING`) - OPTIONAL\n- **IMAGE_URL** (`STRING`) - REQUIRED\n- **MERCHANT_NAME** (`STRING`) - OPTIONAL\n- **TRANSACTION_DATE** (`STRING`) - OPTIONAL\n- **FORMAT** (`YYYY-MM-DD`) - REQUIRED\n- **TRANSACTION_TIME** (`STRING`) - OPTIONAL\n- **FORMAT** (`HH:MM (LOCAL TIME GMT+7)`) - REQUIRED\n- **ITEMS** (`ITEM[]`) - REQUIRED\n- **TAX_ID** (`STRING`) - OPTIONAL\n- **RECEIPT_NO** (`STRING`) - OPTIONAL\n- **ADDRES** (`STRING`) - OPTIONAL\n- **UNIT_NO** (`STRING`) - OPTIONAL\n- **MALL_NAME** (`STRING`) - OPTIONAL\n- **HASHED_RECEIPT** (`STRING`) - OPTIONAL\n- **REDEEMED_AT** (`STRING`) - OPTIONAL\n\n---\n\n### ITEM\n\n**FILE**: `SRC/CONTROLLERS/RECEIPTS_CONTROLLER_INTERFACE.TS`\n\n#### FIELDS\n- **DESCRIPTION** (`STRING`) - REQUIRED\n- **QUANTITY** (`NUMBER`) - OPTIONAL\n- **TOTAL_PRICE** (`STRING`) - OPTIONAL\n\n---\n\n### UPDATERECEIPTBODY\n\n**FILE**: `SRC/CONTROLLERS/RECEIPTS_CONTROLLER_INTERFACE.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **MERCHANT_NAME** (`STRING`) - REQUIRED\n- **TRANSACTION_DATE** (`STRING`) - REQUIRED\n- **FORMAT** (`YYYY-MM-DD`) - REQUIRED\n- **TRANSACTION_TIME** (`STRING`) - REQUIRED\n- **FORMAT** (`HH:MM (LOCAL TIME GMT+7)`) - REQUIRED\n- **ITEMS** (`ITEM[]`) - REQUIRED\n- **TOTAL** (`STRING`) - REQUIRED\n- **TAX_ID** (`STRING`) - REQUIRED\n- **RECEIPT_NO** (`STRING`) - REQUIRED\n- **ADDRESS** (`STRING`) - REQUIRED\n- **UNIT_NO** (`STRING`) - REQUIRED\n- **MALL_NAME** (`STRING`) - REQUIRED\n- **HASHED_RECEIPT** (`STRING`) - REQUIRED\n- **STATUS** (`RECEIPTSTATUS`) - REQUIRED\n- **MESSAGE** (`STRING`) - REQUIRED\n\n---\n\n### GETALLRECEIPTQUERY\n\n**FILE**: `SRC/CONTROLLERS/RECEIPTS_CONTROLLER_INTERFACE.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - OPTIONAL\n- **RECEIPT_HASHED_ID** (`STRING`) - OPTIONAL\n- **USER_ID** (`STRING`) - OPTIONAL\n- **STATUS** (`RECEIPTSTATUS`) - OPTIONAL\n- **CONTENT** (`STRING`) - OPTIONAL\n- **REDEEMED_AT** (`STRING`) - OPTIONAL\n- **CREATED_AT** (`STRING`) - OPTIONAL\n- **TOTAL** (`STRING`) - OPTIONAL\n- **PARKING_ID** (`STRING`) - OPTIONAL\n\n---\n\n### GETALLRECEIPTRESPONSE\n\n**FILE**: `SRC/CONTROLLERS/RECEIPTS_CONTROLLER_INTERFACE.TS`\n\n#### FIELDS\n- **ID** (`STRING`) - REQUIRED\n- **RECEIPT_HASHED_ID** (`STRING`) - OPTIONAL\n- **USER_ID** (`STRING`) - OPTIONAL\n- **STATUS** (`RECEIPTSTATUS`) - REQUIRED\n- **CONTENT** (`RECEIPT`) - OPTIONAL\n- **REDEEMED_AT** (`STRING`) - OPTIONAL\n- **CREATED_AT** (`STRING`) - OPTIONAL\n- **TOTAL** (`STRING`) - REQUIRED\n- **PARKING_ID** (`STRING`) - REQUIRED\n\n---\n\n### GETPARKINGDETAILBYPERSONIDDATARESPONSE\n\n**FILE**: `SRC/LIBS/FS_PARKING_CLIENT.TS`\n\n#### FIELDS\n- **STATUS** (`STRING`) - REQUIRED\n- **MESSAGE** (`STRING`) - REQUIRED\n- **EXEPTION** (`STRING",
+          "path": "/null`) - Required\n- **logId** (`string`) - Required\n- **ticketNo** (`string`) - Required\n- **ticketUid** (`string`) - Required\n- **plateNo** (`string`) - Required\n- **entryDateTime** (`string`) - Required\n- **logDateTime** (`string`) - Required\n- **exitStatus** (`number`) - Required\n- **terminalInId** (`number`) - Required\n- **terminalInName** (`string`) - Required\n- **memberTypeId** (`number`) - Required\n- **memberTypeName** (`string`) - Required\n- **vehicleTypeId** (`number`) - Required\n- **vehicleTypeName** (`string`) - Required\n- **rateCode** (`string`) - Required\n- **rateDetailTH** (`string`) - Required\n- **rateDetailEN** (`string`) - Required\n- **tenantId** (`string`) - Required\n- **tenantName** (`string`) - Required\n- **isCardLost** (`boolean`) - Required\n- **parkHH** (`number`) - Required\n- **parkMM** (`number`) - Required\n- **rateHH** (`number`) - Required\n- **freeHH** (`number`) - Required\n- **subTotal** (`number`) - Required\n- **discount** (`number`) - Required\n- **parkFee** (`number`) - Required\n- **cardLostFine** (`number`) - Required\n- **overNightFine** (`number`) - Required\n- **total** (`number`) - Required\n- **isInv** (`boolean`) - Required\n- **invRateHH** (`number`) - Required\n- **invFee** (`number`) - Required\n- **isPayAtKiosk** (`boolean`) - Required\n- **lastDateTimePaymentAtKiosk** (`string",
+          "description": "null`) - Required\n- **payAtKioskAll** (`number`) - Required\n- **durationInMinute** (`number`) - Required\n- **timeUsedInMinute** (`number`) - Required\n- **remainInMinute** (`number`) - Required\n\n---\n\n### ReceiptItem\n\n**File**: `src/libs/ocr_client.ts`\n\n#### Fields\n- **description** (`string`) - Required\n- **quantity** (`number",
+          "type": "internal",
+          "parameters": [],
+          "responses": [],
+          "tags": []
+        },
+        {
+          "method": "NULL`) - REQUIRED\n\n---\n\n### RECEIPTDATA\n\n**FILE**: `SRC/LIBS/OCR_CLIENT.TS`\n\n#### FIELDS\n- **MERCHANT_NAME** (`STRING",
+          "path": "/null`) - Required\n- **transaction_date** (`string",
+          "description": "null`) - Required\n- **format** (`YYYY-MM-DD`) - Required\n- **transaction_time** (`string",
+          "type": "internal",
+          "parameters": [],
+          "responses": [],
+          "tags": []
+        },
+        {
+          "method": "NULL`) - REQUIRED\n- **RECEIPT_NO** (`STRING`) - REQUIRED\n- **STATUS** (`STRING`) - REQUIRED\n- **ADDRESS** (`STRING",
+          "path": "/null`) - Required\n- **unit_no** (`string",
+          "description": "null`) - Required\n- **mall_name** (`string",
+          "type": "internal",
+          "parameters": [],
+          "responses": [],
+          "tags": []
+        }
+      ],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-pms-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-predict-location-main",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-residential-ipad-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-sso-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-sustainable-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-wifi-auth-web-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "obk-wiremock-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "one-bangkok-app-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "onebangkok-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "redirect-onebangkok-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "resize-service-trunk",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    },
+    {
+      "serviceName": "tcct-serviceabstraction-dev",
+      "framework": "unknown",
+      "endpoints": [],
+      "dependencies": [
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        },
+        {
+          "serviceName": "",
+          "type": "package",
+          "endpoints": [],
+          "description": "",
+          "strength": "none"
+        }
+      ],
+      "externalAPIs": [],
+      "metadata": {},
+      "validation": {
+        "isValid": true,
+        "errors": [],
+        "warnings": []
+      }
+    }
+  ],
+  "errors": [],
+  "warnings": []
+}

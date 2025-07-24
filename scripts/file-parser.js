@@ -319,12 +319,41 @@ class FileParser {
     try {
       const data = JSON.parse(content);
       
+      // Extract dependencies in normalized format
+      let dependencies = [];
+      if (data.dependencies) {
+        // Handle object structure with packages, external_apis, etc.
+        if (data.dependencies.packages && Array.isArray(data.dependencies.packages)) {
+          dependencies.push(...data.dependencies.packages.map(pkg => ({
+            ...pkg,
+            type: 'package'
+          })));
+        }
+        if (data.dependencies.external_apis && Array.isArray(data.dependencies.external_apis)) {
+          dependencies.push(...data.dependencies.external_apis.map(api => ({
+            ...api,
+            type: 'external_api'
+          })));
+        }
+        if (data.dependencies.internal_services && Array.isArray(data.dependencies.internal_services)) {
+          dependencies.push(...data.dependencies.internal_services.map(service => ({
+            ...service,
+            type: 'internal_service'
+          })));
+        }
+        // Handle case where dependencies is already an array (legacy format)
+        if (Array.isArray(data.dependencies)) {
+          dependencies = data.dependencies;
+        }
+      }
+      
       return {
         type: 'dependency-map',
         filePath,
-        serviceName: this.extractServiceName(filePath),
-        dependencies: data.dependencies || [],
+        serviceName: data.service?.name || this.extractServiceName(filePath),
+        dependencies: dependencies,
         consumers: data.consumers || [],
+        rawData: data,  // Keep original data for reference
         metadata: {
           ...data.metadata,
           lastUpdated: data.lastUpdated || new Date().toISOString()

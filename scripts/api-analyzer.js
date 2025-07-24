@@ -153,7 +153,6 @@ class APIAnalyzer {
    * @returns {Promise<Object>} Parsed service data
    */
   async parseServiceFiles(service) {
-    const serviceLogger = this.logger.forService(service.name);
     const parsedData = {
       serviceName: service.name,
       path: service.path,
@@ -165,7 +164,7 @@ class APIAnalyzer {
     // Parse each file type
     for (const [fileName, fileInfo] of Object.entries(service.files)) {
       try {
-        serviceLogger.debug('Parsing file', { fileName, size: fileInfo.size });
+        this.logger.debug('Parsing file', { serviceName: service.name, fileName, size: fileInfo.size });
         
         const parsed = await this.fileParser.parseFile(fileInfo.path, fileName);
         
@@ -183,7 +182,7 @@ class APIAnalyzer {
       } catch (error) {
         const errorMsg = `Failed to parse ${fileName}: ${error.message}`;
         parsedData.errors.push(errorMsg);
-        serviceLogger.error('File parsing failed', { fileName }, error);
+        this.logger.error('File parsing failed', { serviceName: service.name, fileName }, error);
       }
     }
 
