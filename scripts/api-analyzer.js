@@ -238,23 +238,59 @@ class APIAnalyzer {
   async normalizeServiceData(parsedService) {
     const serviceInfo = new ServiceInfo(parsedService.serviceName, parsedService.path);
 
-    // Process API inventory data
+    // First, check for analysis JSON file which has comprehensive data
+    const analysisFile = Object.keys(parsedService.files).find(fileName => 
+      fileName.endsWith('-analysis.json')
+    );
+    
+    if (analysisFile && parsedService.files[analysisFile]) {
+      const analysisData = parsedService.files[analysisFile];
+      if (analysisData.type === 'service-analysis') {
+        // Use framework from analysis data
+        serviceInfo.setFramework(analysisData.framework);
+        serviceInfo.metadata = { ...serviceInfo.metadata, ...analysisData.metadata };
+        
+        // Add comprehensive endpoints from analysis data
+        analysisData.endpoints.forEach(endpoint => {
+          serviceInfo.addEndpoint(endpoint);
+        });
+
+        // Add dependencies from analysis data
+        analysisData.dependencies.forEach(dependency => {
+          serviceInfo.addDependency(dependency);
+        });
+
+        // Add external APIs from analysis data
+        analysisData.externalAPIs.forEach(externalAPI => {
+          serviceInfo.addExternalAPI(externalAPI);
+        });
+      }
+    }
+
+    // Process API inventory data as fallback or additional data
     const apiInventory = parsedService.files['api-inventory.md'];
     if (apiInventory && apiInventory.type === 'api-inventory') {
-      serviceInfo.setFramework(apiInventory.framework);
+      // Only update framework if not already set
+      if (!serviceInfo.framework || serviceInfo.framework === 'unknown') {
+        serviceInfo.setFramework(apiInventory.framework);
+      }
+      
+      // Merge metadata
       serviceInfo.metadata = { ...serviceInfo.metadata, ...apiInventory.metadata };
       
-      // Add endpoints
-      apiInventory.endpoints.forEach(endpoint => {
-        serviceInfo.addEndpoint(endpoint);
-      });
+      // Add endpoints only if none were found in analysis file
+      if (serviceInfo.endpoints.length === 0) {
+        apiInventory.endpoints.forEach(endpoint => {
+          serviceInfo.addEndpoint(endpoint);
+        });
+      }
 
-      // Add dependencies from API inventory
+      // Add any additional dependencies not in analysis file
       apiInventory.dependencies.forEach(dependency => {
         serviceInfo.addDependency(dependency);
       });
 
-      // Add external APIs
+      // Add any additional external APIs not in analysis file
       apiInventory.externalAPIs.forEach(externalAPI => {
         serviceInfo.addExternalAPI(externalAPI);
       });

@@ -1,6 +1,7 @@
 # API Usage Analysis Report
 
-Generated: 2025-07-24T02:26:17.488Z
+Generated: 2025-07-24T03:16:07.770Z
+Last Updated: 2025-07-24T03:16:07.770Z
 
 ## Executive Summary
 
@@ -9,9 +10,10 @@ This report provides a comprehensive analysis of API usage patterns across 37 se
 ### Key Findings
 
 - **Total Services Analyzed**: 37
-- **Total API Endpoints**: 8
-- **Cross-Service APIs**: 0
-- **Potential Bottlenecks**: 0
+- **Total API Endpoints**: 697
+- **Services with Endpoints**: 10
+- **Framework Distribution**: 10 different frameworks
+- **Total Dependencies**: 1210
 
 ### Service Health
 
@@ -23,42 +25,85 @@ This report provides a comprehensive analysis of API usage patterns across 37 se
 
 | Framework | Service Count | Percentage |
 |-----------|---------------|------------|
-| unknown | 37 | 100% |
+| Node.js | 5 | 14% |\n| unknown | 11 | 30% |\n| FastAPI | 1 | 3% |\n| Flutter | 2 | 5% |\n| Next.js | 5 | 14% |\n| Fiber | 1 | 3% |\n| Express.js | 8 | 22% |\n| .NET | 2 | 5% |\n| Python | 1 | 3% |\n| NestJS | 1 | 3% |
 
-## Most Frequently Used APIs
+## Top Services by Endpoint Count
 
-No API usage data available.
+| Service | Framework | Endpoints | Description |
+|---------|-----------|-----------|-------------|
+| tcct-serviceabstraction-dev | .NET | 352 | C# |\n| obk-operation-backend-dev | .NET | 306 | C# |\n| obk-wiremock-trunk | Express.js | 15 | JavaScript/TypeScript |\n| azure-ocr-trunk | FastAPI | 7 | Python |\n| resize-service-trunk | Next.js | 6 | JavaScript/TypeScript |\n| obk-cms-trunk | unknown | 3 | unknown |\n| obk-indoor-navigation-trunk | Node.js | 1 | JavaScript/TypeScript |\n| obk-mtel-bms-trunk | Express.js | 1 | JavaScript/TypeScript |\n| obk-mtel-bus-trunk | Express.js | 1 | JavaScript/TypeScript |\n| obk-mtel-document-trunk | Express.js | 1 | JavaScript/TypeScript |
+
+## API Endpoint Summary
+
+### Services with Most Endpoints:
+- **tcct-serviceabstraction-dev**: 352 endpoints (.NET)\n- **obk-operation-backend-dev**: 306 endpoints (.NET)\n- **obk-wiremock-trunk**: 15 endpoints (Express.js)\n- **azure-ocr-trunk**: 7 endpoints (FastAPI)\n- **resize-service-trunk**: 6 endpoints (Next.js)
+
+### Framework Analysis:
+- **.NET services** have the highest endpoint density with 658 total endpoints
+- **Express.js/Node.js services** provide 19 endpoints across 8 services
+- **FastAPI/Python services** contribute 7 endpoints
 
 ## Risk Assessment
 
 ### Critical Risks Identified
 
-- **Circular Dependencies**: 0
-- **High Dependency Services**: 0
-- **Unused Services**: 0
+- **Circular Dependencies**: 0 detected
+- **High Dependency Services**: 0 flagged
+- **Unused Services**: 0 identified
 
+### Service Distribution Analysis
+
+- **High-API Services**: 2 services with 50+ endpoints
+- **Medium-API Services**: 1 services with 10-50 endpoints  
+- **Low-API Services**: 7 services with 1-9 endpoints
+- **No-API Services**: 27 services with no detected endpoints
 
 ## Recommendations
 
-Based on the analysis, here are key recommendations for improving the system architecture:
+Based on the analysis of 697 API endpoints across 37 services:
 
-### 1. Optimize High-Usage APIs
+### 1. Focus on High-Endpoint Services
+- **tcct-serviceabstraction-dev** and **obk-operation-backend-dev** contain the majority of endpoints
+- These .NET services should be prioritized for performance optimization and monitoring
+- Consider API gateway patterns for these high-traffic services
 
-### 2. Address Bottlenecks
-- No immediate bottleneck concerns identified
+### 2. Framework Standardization
+- .NET services show the highest API density and comprehensive documentation
+- Consider standardizing API documentation practices across all frameworks
+- Node.js/Express services may need improved API discovery and documentation
 
-### 3. Reduce Dependencies
-- Dependency levels appear to be well-managed
+### 3. Service Architecture
+- 27 services show no endpoints, likely indicating:
+  - Frontend applications without backend APIs
+  - Worker services or scheduled jobs
+  - Services requiring improved API discovery
+  
+### 4. API Gateway Implementation
+- With 697 total endpoints, consider implementing API gateway patterns
+- Focus gateway implementation on the top 10 highest-endpoint services
+- Implement rate limiting and monitoring for critical .NET services
 
-### 4. Framework Standardization
-- Framework usage appears to be well-controlled
+## Technical Implementation Notes
+
+### Analysis Methodology
+- Analysis based on comprehensive service-specific JSON analysis files
+- Endpoints extracted from static code analysis, not runtime discovery
+- Framework detection based on project structure and dependencies
+- Total analysis coverage: 37/37 services (100%)
+
+### Data Sources
+- Primary: `[service-name]-analysis.json` files containing detailed endpoint data
+- Secondary: `api-inventory.md` files for metadata and framework information
+- Tertiary: `dependency-map.json` files for service relationships
 
 ## Conclusion
 
-This analysis provides a foundation for making informed decisions about API optimization, 
-dependency management, and system architecture improvements. Regular monitoring and 
-analysis should be implemented to track improvements and identify new issues.
+This analysis reveals a highly diverse microservices ecosystem with 697 API endpoints distributed across 10 different technology stacks. The .NET services (tcct-serviceabstraction-dev and obk-operation-backend-dev) contain the vast majority of documented endpoints, suggesting they serve as primary service abstraction layers.
+
+The analysis provides a foundation for making informed decisions about API optimization, infrastructure scaling, and service architecture improvements. Regular monitoring of the high-endpoint .NET services should be prioritized.
 
 ---
 
-*Report generated by API Usage Analysis Engine v1.0.0*
+*Report generated by API Usage Analysis Engine v2.0.0*
+*Analysis Date: 2025-07-24T03:16:07.770Z*
+*Total Services: 37 | Total Endpoints: 697 | Frameworks: 10*
